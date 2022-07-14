@@ -6,9 +6,14 @@ import sanity from "../lib/sanity/client";
 import { commissionFormQuery } from "../lib/sanity/queries";
 import CartSummary from "../components/CartSummary";
 import { formatCurrencyString, useShoppingCart } from "use-shopping-cart";
+import { observer } from "mobx-react-lite";
+import { useStore } from "../lib/context";
 
 const Home: NextPage = ({ form }) => {
-  console.log(form);
+  const {
+    uiStore: { formStep },
+  } = useStore();
+
   const { addItem, removeItem } = useShoppingCart();
 
   return (
@@ -55,4 +60,4 @@ export const getStaticProps = async () => {
   };
 };
 
-export default Home;
+export default observer(Home);
