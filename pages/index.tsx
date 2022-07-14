@@ -13,7 +13,7 @@ import Form from "../components/Form/Form";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../lib/context";
 import { useForm } from "react-hook-form";
-import { PortableText } from "@portabletext/react";
+import Description from "../components/Form/Description";
 
 export const FORM_SCREENS = 4;
 
@@ -54,7 +54,7 @@ const Home: NextPage = ({ formData }) => {
       <Head />
 
       <Layout id={formStep}>
-        <PortableText value={description} />
+        <Description value={description} />
         <Form>{formScreen}</Form>
       </Layout>
       <FormPageControls />

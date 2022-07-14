@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FRAMER_TRANSITION_FASTEASE } from "../lib/framer/animations";
 import css from "styled-jsx/css";
 
@@ -8,7 +8,6 @@ const { className, styles } = css.resolve`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     width: 100vw;
     height: 100vh;
   }
@@ -19,30 +18,38 @@ const { className, styles } = css.resolve`
 `;
 
 const variants = {
-  in: {
-    opacity: 1,
+  initial: {
+    opacity: 0,
+    y: 100,
     transition: FRAMER_TRANSITION_FASTEASE,
   },
-  out: {
+  active: {
+    opacity: 1,
+    y: 0,
+    transition: FRAMER_TRANSITION_FASTEASE,
+  },
+  exit: {
     opacity: 0,
+    y: -100,
     transition: FRAMER_TRANSITION_FASTEASE,
   },
 };
 
 const Layout = ({ children, id }) => {
   return (
-    <motion.div
-      key={`layout-${id}`}
-      initial={"out"}
-      animate={"in"}
-      exit={"out"}
-      variants={variants}
-      className={className}
-    >
-      {children}
-
-      {styles}
-    </motion.div>
+    <AnimatePresence exitBeforeEnter>
+      <motion.div
+        key={`layout-${id}`}
+        initial={"initial"}
+        animate={"active"}
+        exit={"exit"}
+        variants={variants}
+        className={className}
+      >
+        {children}
+        {styles}
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
