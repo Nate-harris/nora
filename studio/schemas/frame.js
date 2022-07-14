@@ -10,6 +10,11 @@ export default {
       type: "string",
     },
     {
+      name: "price",
+      title: "Price",
+      type: "number",
+    },
+    {
       name: "templateImage",
       type: "image",
       description: "Picture of the empty frame to use as a selection option",

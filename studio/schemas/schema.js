@@ -21,6 +21,7 @@ import commissionFrameSelection from "./commissionFrameSelection";
 import frame from "./frame";
 import commissionShippingSelection from "./commissionShippingSelection";
 import order from "./order";
+import shippingOption from "./shippingOption";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -46,5 +47,6 @@ export default createSchema({
     frame,
     commissionShippingSelection,
     order,
+    shippingOption,
   ]),
 });

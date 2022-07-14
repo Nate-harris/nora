@@ -4,11 +4,6 @@ export default {
   type: "document",
   fields: [
     {
-      name: "currency",
-      title: "Currency",
-      type: "string",
-    },
-    {
       name: "nameSelection",
       title: "Name Selection",
       description: "Name the user wants",
@@ -21,7 +16,7 @@ export default {
     {
       name: "colorSelection",
       title: "Color Selection",
-      description: "Palette's a user can select from",
+      description: "Palettes a user can select from",
       type: "commissionColorSelection",
       options: {
         collapsed: true,

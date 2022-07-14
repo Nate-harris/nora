@@ -20,7 +20,7 @@ export default {
       type: "array",
       of: [
         {
-          type: "string",
+          type: "shippingOption",
         },
       ],
     },

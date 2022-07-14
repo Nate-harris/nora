@@ -21,10 +21,5 @@ export default {
       type: "array",
       of: [{ type: "reference", to: [{ type: "frame" }] }],
     },
-    {
-      name: "price",
-      title: "Price",
-      type: "number",
-    },
   ],
 };
