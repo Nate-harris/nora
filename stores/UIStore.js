@@ -1,5 +1,5 @@
 import { action, computed, makeObservable, observable } from "mobx";
-
+import { FORM_SCREENS } from "../pages";
 class UIStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -17,6 +17,12 @@ class UIStore {
   }
   @action.bound decrementFormStep() {
     this.formStep = this.formStep - 1;
+  }
+  @computed get isPreviousButtonDisabled() {
+    return this.formStep <= 0;
+  }
+  @computed get isNextButtonDisabled() {
+    return this.formStep + 1 >= FORM_SCREENS;
   }
 }
 
