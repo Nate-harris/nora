@@ -1,26 +1,18 @@
 import { motion } from "framer-motion";
 import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
 import css from "styled-jsx/css";
-import { useForm } from "react-hook-form";
-
+import { observer } from "mobx-react-lite";
+import { useStore } from "../../lib/context";
+import ShippingOption from "./ShippingOption";
 const { className, styles } = css.resolve`
   div {
-    display: grid;
-    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    width: 100%;
-    height: 100%;
+    display: flex;
   }
   @media only screen and (max-width: 768px) {
     div {
-      padding: 0px;
-      display: block;
-      padding: 0 0.625rem;
-      padding-top: 100px;
     }
   }
 `;
-
 const variants = {
   in: {
     opacity: 1,
@@ -32,16 +24,30 @@ const variants = {
   },
 };
 
-export default ({ options }) => {
-  const { register } = useForm();
-
+export default observer(({ options }) => {
+  const {
+    dataStore: { formData, setShipping, updateShippingPrice },
+  } = useStore();
+  const handleChange = (shippingType) => {
+    setShipping(shippingType);
+    const option = options.find((option) => option.type === shippingType);
+    updateShippingPrice(option.price);
+  };
   return (
-    <select {...register("category")}>
-      {options.map((option) => (
-        <option key={option.type} value={option.type}>
-          {option.type}
-        </option>
+    <div
+      className={className}
+      onChange={handleChange}
+      value={formData.shipping}
+    >
+      {options.map((option, i) => (
+        <ShippingOption
+          key={option.type}
+          i={i}
+          onClick={() => handleChange(option.type)}
+          {...option}
+        />
       ))}
-    </select>
+      {styles}
+    </div>
   );
-};
+});

@@ -9,55 +9,29 @@ import FormPaletteSelect from "../components/Palette/FormPaletteSelect";
 import FormFrameSelect from "../components/Frame/FormFrameSelect";
 import FormShippingSelect from "../components/Shipping/FormShippingSelect";
 import FormPageControls from "../components/Controls/FormPageControls";
+import OrderSummary from "../components/ReviewCommission/OrderSummary";
 import Form from "../components/Form/Form";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../lib/context";
 import { useForm } from "react-hook-form";
-import Description from "../components/Form/Description";
-
+import { useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+import CartSummary from "../components/CartSummary";
+import PriceTracker from "../components/PriceTracker/PriceTracker";
+import { useShoppingCart } from "use-shopping-cart";
 export const FORM_SCREENS = 4;
 
 const Home: NextPage = ({ formData }) => {
   const {
-    uiStore: { formStep },
+    dataStore: { setCommissionId },
   } = useStore();
-
-  const { handleSubmit } = useForm();
-
-  let formScreen = null;
-  let description = null;
-  switch (formStep) {
-    case 0:
-      formScreen = <FormNameInput />;
-      description = formData?.nameSelection?.description;
-      break;
-    case 1:
-      const { colorSelection } = formData;
-      formScreen = <FormPaletteSelect options={colorSelection?.palettes} />;
-      description = formData?.colorSelection?.description;
-      break;
-    case 2:
-      const { frameSelection } = formData;
-      formScreen = <FormFrameSelect options={frameSelection?.options} />;
-      description = frameSelection?.description;
-      break;
-    case 3:
-      const { shippingSelection } = formData;
-      formScreen = <FormShippingSelect options={shippingSelection?.options} />;
-      description = shippingSelection?.description;
-      break;
-    default:
-  }
 
   return (
     <>
       <Head />
-
-      <Layout id={formStep}>
-        <Description value={description} />
-        <Form>{formScreen}</Form>
-      </Layout>
+      <Form formData={formData} />
       <FormPageControls />
+      <PriceTracker />
     </>
   );
 };
@@ -70,4 +44,4 @@ export const getStaticProps = async () => {
   };
 };
 
-export default observer(Home);
+export default Home;

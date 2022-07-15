@@ -1,8 +1,12 @@
-import { motion } from "framer-motion";
-import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
+import { motion, AnimateSharedLayout } from "framer-motion";
+import {
+  FRAMER_TRANSITION_EASEOUT,
+  FRAMER_TRANSITION_FASTEASE,
+} from "../../lib/framer/animations";
 import css from "styled-jsx/css";
-import { useForm } from "react-hook-form";
-
+import { observer } from "mobx-react-lite";
+import { useStore } from "../../lib/context";
+import Palette from "./Palette";
 const { className, styles } = css.resolve`
   div {
     display: grid;
@@ -32,16 +36,24 @@ const variants = {
   },
 };
 
-export default ({ options }) => {
-  const { register } = useForm();
-
+export default observer(({ options }) => {
+  const {
+    dataStore: { formData, setPalette },
+  } = useStore();
   return (
-    <select {...register("category")}>
-      {options.map((option) => (
-        <option key={option.name} value={option.name}>
-          {option.name}
-        </option>
-      ))}
-    </select>
+    <div onChange={(e) => setPalette(e.target.value)} value={formData.palette}>
+      <AnimateSharedLayout>
+        {options.map((option) => (
+          <Palette
+            key={option.name}
+            {...option}
+            onClick={() =>
+              setPalette({ name: option.name, colors: option.colors })
+            }
+            active={option.name === formData.palette.name}
+          />
+        ))}
+      </AnimateSharedLayout>
+    </div>
   );
-};
+});

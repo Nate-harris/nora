@@ -1,6 +1,11 @@
 import S from "@sanity/desk-tool/structure-builder";
 
-import { GiPalette, GiWoodPile, GiWoodFrame } from "react-icons/gi";
+import {
+  GiPalette,
+  GiWoodPile,
+  GiWoodFrame,
+  GiCommercialAirplane,
+} from "react-icons/gi";
 import { BsGearWideConnected } from "react-icons/bs";
 export const storeSettings = S.listItem()
   .title("Store Settings")
@@ -28,6 +33,10 @@ export const storeSettings = S.listItem()
           .title("Frames")
           .child(S.documentTypeList("frame").title("Frames"))
           .icon(GiWoodFrame),
+        S.listItem()
+          .title("Shipping Options")
+          .child(S.documentTypeList("shippingOption").title("Shipping Options"))
+          .icon(GiCommercialAirplane),
       ])
   )
   .icon(BsGearWideConnected);

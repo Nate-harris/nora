@@ -8,6 +8,7 @@ export default function CartSummary() {
   //setting up some React states for our cart
   const [loading, setLoading] = useState(false);
   const [cartEmpty, setCartEmpty] = useState(true);
+
   // destructuring all the building blocks we get from use-shopping-cart
   const { cartCount, clearCart, cartDetails, redirectToCheckout } =
     useShoppingCart();
@@ -63,6 +64,13 @@ export default function CartSummary() {
       >
         Clear Cart
       </button>
+      <style jsx>{`
+        form {
+          position: fixed;
+          right: 0;
+          top: 0;
+        }
+      `}</style>
     </form>
   );
 }

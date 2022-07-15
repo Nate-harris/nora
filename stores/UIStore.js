@@ -22,7 +22,7 @@ class UIStore {
     return this.formStep <= 0;
   }
   @computed get isNextButtonDisabled() {
-    return this.formStep + 1 >= FORM_SCREENS;
+    return this.formStep + 1 > FORM_SCREENS;
   }
 }
 

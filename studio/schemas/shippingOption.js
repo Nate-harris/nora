@@ -1,7 +1,7 @@
 export default {
   name: "shippingOption",
   title: "Shipping Option",
-  type: "object",
+  type: "document",
   fields: [
     {
       name: "type",

@@ -25,11 +25,6 @@ const ResultPage = () => {
     <div className="page-container">
       Congrats
       <h1>Checkout Payment Result</h1>
-      <p>
-        With the data below, you can display a custom confirmation message to
-        your customer.
-      </p>
-      <p>For example:</p>
       <hr />
       <h3>
         Thank you, {data?.payment_intent.charges.data[0].billing_details.name}.

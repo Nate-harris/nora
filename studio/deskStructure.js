@@ -12,6 +12,8 @@ export default () =>
       orders,
       ...S.documentTypeListItems().filter(
         (listItem) =>
-          !["commission", "palette", "frame"].includes(listItem.getId())
+          !["commission", "palette", "frame", "shippingOption"].includes(
+            listItem.getId()
+          )
       ),
     ]);

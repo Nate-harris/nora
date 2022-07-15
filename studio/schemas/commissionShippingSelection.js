@@ -20,7 +20,12 @@ export default {
       type: "array",
       of: [
         {
-          type: "shippingOption",
+          type: "reference",
+          to: [
+            {
+              type: "shippingOption",
+            },
+          ],
         },
       ],
     },

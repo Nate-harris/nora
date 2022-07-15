@@ -1,8 +1,13 @@
 :root {
 
   --orange: #e34430;
+  --black: #20231f;
   --white: #fff;
   --font-family-heading: "Dela Gothic One", cursive;
+  --font-family-san-serif: "Inter", "Helvetica Neue", sans-serif;
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 16px;
 
   --spacing-s: 0.3125rem;
   --spacing-m: 0.625rem;
