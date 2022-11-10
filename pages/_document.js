@@ -6,13 +6,11 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="true"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap"
-            rel="stylesheet"
+            rel="preload"
+            href="/fonts/DelaGothicOne-Regular.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin
           />
         </Head>
         <body>

@@ -108,9 +108,7 @@ module.exports = {
     extend: {
       fontFamily: {
         delaGothicOne: ["DelaGothicOne", "sans-serif"],
-        balsamiq: ["Balsamiq", "sans-serif"],
         courierSans: ["Courier Sans", "monospace"],
-        sharpGrotesk: ["SharpGrotesk", "sans-serif"],
         inherit: "inherit",
       },
       maxWidth: {

@@ -3,7 +3,7 @@ import "../styles/app.css";
 import Header from "../components/Header/Header";
 import Menu from "../components/Menu/Menu";
 import { RootStoreProvider } from "../providers/RootStoreProvider";
-import { ThemeProvider } from 'next-themes';
+import { ThemeProvider } from "next-themes";
 import Cart from "../components/Cart";
 
 function App({ Component, pageProps }) {
@@ -13,19 +13,21 @@ function App({ Component, pageProps }) {
     { label: "About", href: "/about" },
   ];
   return (
-    <Cart>
+    <>
       <Menu items={items} />
       <Header />
       <Component {...pageProps} />
-    </Cart>
+    </>
   );
 }
 
 function AppWithProviders(props) {
   return (
     <RootStoreProvider hydrationData={props.pageProps.hydrationData}>
-       <ThemeProvider>
-      <App {...props} />
+      <ThemeProvider>
+        <Cart>
+          <App {...props} />
+        </Cart>
       </ThemeProvider>
     </RootStoreProvider>
   );
