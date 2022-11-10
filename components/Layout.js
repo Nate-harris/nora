@@ -37,7 +37,7 @@ const variants = {
 
 const Layout = ({ children, id }) => {
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence mode="wait">
       <motion.div
         key={`layout-${id}`}
         initial={"initial"}

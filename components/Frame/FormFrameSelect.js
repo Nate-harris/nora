@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { LayoutGroup, motion } from "framer-motion";
 import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
 import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
@@ -51,28 +51,29 @@ export default observer(({ options }) => {
   };
 
   return (
-    <div className="flex flex-col gap-y-16">
-      {options.map((option, index) => (
-        <Frame
-          key={option.type}
-          active={
-            formData.frame !== null && formData.frame.type === option.type
-          }
-          noneSelected={formData.frame === null}
-          onClick={() => handleClick(option)}
-          index={index}
-          {...option}
-        />
-      ))}
+    <>
+      <div className="flex flex-col gap-y-16 pt-64">
+        {options.map((option, index) => (
+          <Frame
+            key={option.type}
+            active={
+              formData.frame !== null && formData.frame.type === option.type
+            }
+            noneSelected={formData.frame === null}
+            onClick={() => handleClick(option)}
+            index={index}
+            {...option}
+          />
+        ))}
+      </div>
       <motion.div
-        layout
         animate={{ opacity: formData.frame !== null ? 1 : 0 }}
-        className="flex justify-center p-12"
+        className="flex justify-center p-24"
       >
         <div className="btn" onClick={clearSelection}>
           Clear Selection
         </div>
       </motion.div>
-    </div>
+    </>
   );
 });

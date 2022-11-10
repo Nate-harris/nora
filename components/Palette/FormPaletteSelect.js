@@ -29,10 +29,11 @@ export default observer(({ options }) => {
   const clearSelection = () => {
     setPalette(null);
   };
+
   return (
     <>
-      <div className="flex flex-col">
-        <div className="flex flex-wrap justify-center max-w-2xl">
+      <div className="flex flex-col pt-64">
+        <div className="flex flex-wrap justify-center gap-12 max-w-2xl rounded-3xl">
           {options.map((option, index) => (
             <Palette
               key={option.name}
@@ -52,7 +53,7 @@ export default observer(({ options }) => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: formData.palette !== null ? 1 : 0 }}
-          className="flex justify-center p-24"
+          className="flex justify-center p-12"
         >
           <div className="btn" onClick={clearSelection}>
             Clear Selection

@@ -18,8 +18,8 @@ const Description = observer(({ value }) => {
   const { formStep } = useUIStore();
   if (!value) return null;
   return (
-    <AnimatePresence>
-      <div className="fixed bottom-0 left-0 right-0 flex justify-center">
+    <div className="fixed bottom-0 left-0 right-0 flex justify-center">
+      <AnimatePresence>
         <motion.div
           layout
           data-step={formStep + 1}
@@ -34,8 +34,8 @@ const Description = observer(({ value }) => {
             <PortableText value={value} />
           </motion.div>
         </motion.div>
-      </div>
-    </AnimatePresence>
+      </AnimatePresence>
+    </div>
   );
 });
 export default Description;

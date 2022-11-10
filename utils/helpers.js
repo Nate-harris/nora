@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
-import { imageBuilder } from "@lib/sanity";
 import Router, { useRouter } from "next/router";
 import queryString from "query-string";
+import { imageBuilder } from "../lib/sanity/client";
 
 /*  ------------------------------ */
 /*  Generic helper functions

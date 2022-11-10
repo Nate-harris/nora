@@ -34,7 +34,7 @@ const StatusBar = observer(() => {
   const steps = ["Name", "Color", "Frame", "Shipping", "Review"];
   return (
     <div className={"fixed left-16 top-1/2 -translate-y-1/2"}>
-      <ul className={cx(styles.ul)}>
+      <ul className={cx("", styles.ul)}>
         {steps.map((step, index) => {
           return <Item key={index} label={step} active={index === formStep} />;
         })}

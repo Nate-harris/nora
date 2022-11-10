@@ -8,10 +8,10 @@
   --purple: #aaa4d0;
   --seaside-oak: #c89d7d;
   --seaside-maple: #f2dcb5;
-  --brown: #4c3d2f;
+  --brown: #63321e;
 
   --frame-dark-border: #8a5036;
-  --frame-dark-bg: #63321e;
+  --frame-dark-bg: #512412;
   --frame-light-border: #f0a57a;
   --frame-light-bg: #d69767;
 
@@ -40,12 +40,18 @@
 
   --pageBG-hsl: 60, 14%, 95%;
   --pageText-hsl: 0, 0%, 0%;
+
+  --headerText: var(--orange);
+  --palette-bg: transparent;
 }
 
 [data-theme="dark"] {
-  --pageBG: #004740;
+  --pageBG: var(--orange);
   --pageText: #ffffff;
 
   --pageBG-hsl: 0, 0%, 0%;
   --pageText-hsl: 60, 14%, 95%;
+
+  --headerText: #ffffff;
+  --palette-bg: #ffffff;
 }

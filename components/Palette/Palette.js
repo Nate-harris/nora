@@ -93,6 +93,9 @@ const containerVariants = {
   },
   visible: ({ index }) => ({
     y: 0,
+    x: 0,
+    height: "auto",
+    opacity: 1,
     transition: {
       ...FRAMER_TRANSITION_FASTEASE,
       delay: 0.05 * index + 0.2,
@@ -106,7 +109,7 @@ const SVG = ({ colors, active, frameColor = FRAME_COLORS.DARK }) => {
   const renderLetters = useCallback(() => {
     return LETTER_PATHS.map((letter, index) => {
       const { hex } = colors[index % (colors.length - 1)];
-      return <motion.path key={index} id={letter.id} d={letter.d} fill={hex} />;
+      return <path key={index} id={letter.id} d={letter.d} fill={hex} />;
     });
   }, [colors]);
 
@@ -138,7 +141,6 @@ const SVG = ({ colors, active, frameColor = FRAME_COLORS.DARK }) => {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 487.89 197.02"
     >
-      <g id="frame"></g>
       <motion.g id="letters" animate={{ scale: hovered ? 0.95 : 1 }}>
         {renderLetters()}
       </motion.g>
@@ -160,7 +162,12 @@ const Palette = ({
   onClick,
 }) => {
   const isLastInOdd = last && total % 2 !== 0;
-
+  console.log(
+    name,
+    active,
+    noneSelected,
+    active ? "active" : noneSelected ? "visible" : "inactive"
+  );
   return (
     <motion.div
       custom={{
@@ -170,7 +177,7 @@ const Palette = ({
       initial={active ? "active" : noneSelected ? "hidden" : "inactive"}
       animate={active ? "active" : noneSelected ? "visible" : "inactive"}
       variants={containerVariants}
-      className="w-350 overflow-hidden"
+      className="w-md sm:w-sm overflow-hidden bg-paletteBG rounded-xl"
       value={name}
       onClick={onClick}
     >

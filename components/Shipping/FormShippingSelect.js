@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { LayoutGroup, motion } from "framer-motion";
 import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
 import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
@@ -28,8 +28,8 @@ export default observer(({ options }) => {
     setShipping(null);
   };
   return (
-    <>
-      <div className={"flex justify-center gap-8"}>
+    <LayoutGroup>
+      <div className={"flex flex-col justify-center gap-8 pt-64"}>
         {options.map((option, index) => (
           <ShippingOption
             key={option.type}
@@ -42,16 +42,18 @@ export default observer(({ options }) => {
             {...option}
           />
         ))}
+
+        <motion.div
+          layout
+          initial={{ opacity: 0 }}
+          animate={{ opacity: formData.shipping !== null ? 1 : 0 }}
+          className="flex justify-center p-16"
+        >
+          <div className="btn" onClick={clearSelection}>
+            Clear Selection
+          </div>
+        </motion.div>
       </div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: formData.shipping !== null ? 1 : 0 }}
-        className="flex justify-center p-24"
-      >
-        <div className="btn" onClick={clearSelection}>
-          Clear Selection
-        </div>
-      </motion.div>
-    </>
+    </LayoutGroup>
   );
 });

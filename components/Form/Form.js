@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { useShoppingCart } from "use-shopping-cart";
 import { useUIStore } from "../../providers/RootStoreProvider";
 import StatusBar from "../StatusBar/StatusBar";
+import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 
 const { className, styles } = css.resolve`
   form {
@@ -74,6 +75,7 @@ export default observer(({ formData }) => {
       </Layout>
       <Description value={description} />
       <StatusBar />
+      <ThemeSwitcher />
     </>
   );
 });

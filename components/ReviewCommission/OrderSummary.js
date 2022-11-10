@@ -52,12 +52,14 @@ const TextLine = ({ children }) => {
 export default observer(() => {
   const { formData, productPrice } = useDataStore();
   return (
-    <div className="text-16 text-center flex flex-col gap-32">
+    <div className="sm:text-36 text-18 font-light leading-150 text-center flex flex-col gap-32">
       <div>
         A puzzle for{" "}
-        <span className="font-delaGothicOne uppercase">{formData.name}</span>{" "}
+        <span className="font-delaGothicOne uppercase border-6 border-pageText px-8 pb-4">
+          {formData.name}
+        </span>{" "}
         will be{" "}
-        <span className="font-delaGothicOne uppercase">
+        <span className="font-delaGothicOne uppercase whitespace-nowrap">
           {formatCurrencyString({
             value: productPrice,
             currency: "USD",
@@ -76,7 +78,7 @@ export default observer(() => {
 
       <div className="flex justify-center items-center">
         It will have a
-        <span className="font-delaGothicOne uppercase ml-4">
+        <span className="font-delaGothicOne uppercase ml-4 whitespace-nowrap">
           {formData.frame.type}
         </span>
         <img
@@ -87,7 +89,7 @@ export default observer(() => {
       </div>
       <div>
         And it will get to you in{" "}
-        <span className="font-delaGothicOne uppercase">
+        <span className="font-delaGothicOne uppercase whitespace-nowrap">
           {formData.shipping}
         </span>
         .
