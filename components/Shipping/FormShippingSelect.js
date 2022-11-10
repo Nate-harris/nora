@@ -19,15 +19,12 @@ const variants = {
 
 export default observer(({ options }) => {
   const { formData, setShipping, updateShippingPrice } = useDataStore();
-  const { setNextButtonDisabled } = useUIStore();
   const handleChange = (shippingType) => {
-    setNextButtonDisabled(false);
     setShipping(shippingType);
     const option = options.find((option) => option.type === shippingType);
     updateShippingPrice(option.price);
   };
   const clearSelection = () => {
-    setNextButtonDisabled(true);
     setShipping(null);
   };
   return (

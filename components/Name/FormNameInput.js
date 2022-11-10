@@ -23,7 +23,6 @@ export default observer(({ maxNumLetters = 30 }) => {
   const scale = useMotionValue(1);
   const windowSize = useWindowSize();
   const { formData, setName, updateBasePrice } = useDataStore();
-  const { setNextButtonDisabled } = useUIStore();
 
   const PADDING = 300;
 
@@ -44,11 +43,6 @@ export default observer(({ maxNumLetters = 30 }) => {
     const name = e.target.value.replaceAll(/\s/g, "").toUpperCase();
     setName(name);
     const nameNoSpaces = name.replace(/\s/g, "");
-    if (nameNoSpaces.length > 2) {
-      setNextButtonDisabled(false);
-    } else {
-      setNextButtonDisabled(true);
-    }
     updateBasePrice(nameNoSpaces.length * 6000);
   };
 

@@ -36,7 +36,6 @@ const variants = {
 
 export default observer(({ options }) => {
   const { formData, setFrame, updateFramePrice } = useDataStore();
-  const { setNextButtonDisabled } = useUIStore();
   const handleChange = (frame) => {
     setFrame(frame);
     const option = options.find((option) => option.type === frame.type);
@@ -44,12 +43,10 @@ export default observer(({ options }) => {
   };
 
   const handleClick = (option) => {
-    setNextButtonDisabled(false);
     handleChange({ type: option.type, image: option.templateImage });
   };
 
   const clearSelection = () => {
-    setNextButtonDisabled(true);
     setFrame(null);
   };
 

@@ -22,14 +22,11 @@ const variants = {
 
 export default observer(({ options }) => {
   const { formData, setPalette } = useDataStore();
-  const { setNextButtonDisabled } = useUIStore();
 
   const handleClick = (option) => {
-    setNextButtonDisabled(false);
     setPalette({ name: option.name, colors: option.colors });
   };
   const clearSelection = () => {
-    setNextButtonDisabled(true);
     setPalette(null);
   };
   return (
