@@ -1,6 +1,5 @@
 import { sanityClient } from "../lib/sanity/client";
 import { commissionFormQuery } from "../lib/sanity/queries";
-import Head from "../components/Head";
 import FormPageControls from "../components/Controls/FormPageControls";
 import Form from "../components/Form/Form";
 
@@ -11,8 +10,6 @@ export const FORM_SCREENS = 4;
 const OrderPage = ({ formData }) => {
   return (
     <>
-      <Head />
-
       <Form formData={formData} />
       <FormPageControls />
       <PriceTracker />
