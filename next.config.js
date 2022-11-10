@@ -1,7 +1,16 @@
 /** @type {import('next').NextConfig} */
+const withTM = require("next-transpile-modules")(["three"]);
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.(frag|vert)$/,
+      type: "asset/source",
+    });
+    return config;
+  },
   images: {
     domains: ["cdn.sanity.io"],
   },
@@ -13,4 +22,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withTM(nextConfig);

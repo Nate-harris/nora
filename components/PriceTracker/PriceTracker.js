@@ -5,26 +5,7 @@ import css from "styled-jsx/css";
 import { formatCurrencyString } from "use-shopping-cart";
 import { motion } from "framer-motion";
 import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
-const { className, styles } = css.resolve`
-  div {
-    font-family: var(--font-family-heading);
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 2rem;
-    line-height: 1.8rem;
-    position: fixed;
-    padding-bottom: var(--spacing-l);
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-  @media only screen and (max-width: 768px) {
-    div {
-    }
-  }
-`;
+import { useDataStore } from "../../providers/RootStoreProvider";
 
 const variants = {
   active: {
@@ -34,19 +15,19 @@ const variants = {
   },
   inactive: {
     opacity: 0,
-    y: 50,
+    y: -50,
     transition: FRAMER_TRANSITION_FASTEASE,
   },
 };
 
 export default observer(() => {
-  const {
-    dataStore: { productPrice },
-  } = useStore();
+  const { productPrice } = useDataStore();
   return (
     <motion.div
       variants={variants}
-      className={className}
+      className={
+        "fixed top-0 left-0 right-0 flex justify-center items-center text-12 leading-100 p-16 before:content-['Total'] before:px-12 before:py-8 before:mx-8 before:bg-pageText before:text-pageBG before:rounded-full"
+      }
       initial={"inactive"}
       animate={productPrice === 0 ? "inactive" : "active"}
     >
@@ -54,7 +35,6 @@ export default observer(() => {
         value: productPrice,
         currency: "USD",
       })}
-      {styles}
     </motion.div>
   );
 });

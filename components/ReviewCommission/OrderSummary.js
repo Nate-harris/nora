@@ -6,6 +6,7 @@ import { useStore } from "../../lib/context";
 import { formatCurrencyString } from "use-shopping-cart";
 import Palette from "./Palette";
 import imageUrlFor from "../../lib/sanity/imageUrlFor";
+import { useDataStore } from "../../providers/RootStoreProvider";
 const { className, styles } = css.resolve`
   div {
     display: grid;
@@ -49,47 +50,48 @@ const TextLine = ({ children }) => {
 };
 
 export default observer(() => {
-  const {
-    dataStore: { formData, productPrice },
-  } = useStore();
+  const { formData, productPrice } = useDataStore();
   return (
-    <div>
-      <TextLine>
-        A puzzle for {formData.name} will be{" "}
-        {formatCurrencyString({
-          value: productPrice,
-          currency: "USD",
-        })}
-        . <br /> It will use the{" "}
-        <span
-          style={{
-            display: "inline-block",
-            margin: "0 var(--spacing-m)",
-            marginTop: "10px",
-          }}
-        >
-          <Palette colors={formData.palette.colors} width={200} />
+    <div className="text-16 text-center flex flex-col gap-32">
+      <div>
+        A puzzle for{" "}
+        <span className="font-delaGothicOne uppercase">{formData.name}</span>{" "}
+        will be{" "}
+        <span className="font-delaGothicOne uppercase">
+          {formatCurrencyString({
+            value: productPrice,
+            currency: "USD",
+          })}
         </span>
-        palette and have a {formData.frame.type}
-        <span
-          style={{
-            display: "inline-block",
-            margin: "0 var(--spacing-m)",
-            marginTop: "10px",
-          }}
-        >
-          <img src={imageUrlFor(formData.frame.image).width(160)} />
+        .
+      </div>
+
+      <div className="flex justify-center items-center">
+        It will use the
+        <span className="inline-block mx-12">
+          <Palette colors={formData.palette.colors} width={180} />
         </span>
-        frame. It will get to you in {formData.shipping}.
-      </TextLine>
-      <style jsx>{`
-        div {
-          max-width: 500px;
-          font-size: 1.8rem;
-          font-family: var(--font-family-heading);
-          text-align: center;
-        }
-      `}</style>
+        palette
+      </div>
+
+      <div className="flex justify-center items-center">
+        It will have a
+        <span className="font-delaGothicOne uppercase ml-4">
+          {formData.frame.type}
+        </span>
+        <img
+          className="inline-block mx-12"
+          src={imageUrlFor(formData.frame.image).width(120)}
+        />
+        frame.
+      </div>
+      <div>
+        And it will get to you in{" "}
+        <span className="font-delaGothicOne uppercase">
+          {formData.shipping}
+        </span>
+        .
+      </div>
     </div>
   );
 });

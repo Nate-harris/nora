@@ -1,4 +1,4 @@
-import { motion, AnimateSharedLayout } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   FRAMER_TRANSITION_EASEOUT,
   FRAMER_TRANSITION_FASTEASE,
@@ -7,23 +7,7 @@ import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../lib/context";
 import Palette from "./Palette";
-const { className, styles } = css.resolve`
-  div {
-    display: grid;
-    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    width: 100%;
-    height: 100%;
-  }
-  @media only screen and (max-width: 768px) {
-    div {
-      padding: 0px;
-      display: block;
-      padding: 0 0.625rem;
-      padding-top: 100px;
-    }
-  }
-`;
+import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 
 const variants = {
   in: {
@@ -37,23 +21,47 @@ const variants = {
 };
 
 export default observer(({ options }) => {
-  const {
-    dataStore: { formData, setPalette },
-  } = useStore();
+  const { formData, setPalette } = useDataStore();
+  const { setNextButtonDisabled } = useUIStore();
+
+  const handleClick = (option) => {
+    setNextButtonDisabled(false);
+    setPalette({ name: option.name, colors: option.colors });
+  };
+  const clearSelection = () => {
+    setNextButtonDisabled(true);
+    setPalette(null);
+  };
   return (
-    <div onChange={(e) => setPalette(e.target.value)} value={formData.palette}>
-      <AnimateSharedLayout>
-        {options.map((option) => (
-          <Palette
-            key={option.name}
-            {...option}
-            onClick={() =>
-              setPalette({ name: option.name, colors: option.colors })
-            }
-            active={option.name === formData.palette.name}
-          />
-        ))}
-      </AnimateSharedLayout>
-    </div>
+    <>
+      <div className="flex flex-col">
+        <div className="flex flex-wrap justify-center max-w-2xl">
+          {options.map((option, index) => (
+            <Palette
+              key={option.name}
+              onClick={() => handleClick(option)}
+              active={
+                formData.palette !== null &&
+                option.name === formData.palette.name
+              }
+              noneSelected={formData.palette === null}
+              index={index}
+              total={options.length}
+              last={index === options.length - 1}
+              {...option}
+            />
+          ))}
+        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: formData.palette !== null ? 1 : 0 }}
+          className="flex justify-center p-24"
+        >
+          <div className="btn" onClick={clearSelection}>
+            Clear Selection
+          </div>
+        </motion.div>
+      </div>
+    </>
   );
 });

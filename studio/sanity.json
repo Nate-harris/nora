@@ -13,11 +13,15 @@
     "@sanity/default-login",
     "@sanity/desk-tool",
     "barcode-input",
-    "@sanity/color-input"
+    "@sanity/color-input",
+    "color-picker",
+    "note-field"
   ],
   "env": {
     "development": {
-      "plugins": ["@sanity/vision"]
+      "plugins": [
+        "@sanity/vision"
+      ]
     }
   },
   "parts": [

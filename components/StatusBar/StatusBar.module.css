@@ -1,0 +1,7 @@
+.ul {
+  counter-reset: li-count;
+}
+
+.li {
+  counter-increment: li-count;
+}

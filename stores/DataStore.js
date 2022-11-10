@@ -9,9 +9,9 @@ class DataStore {
 
   @observable formData = {
     name: "",
-    frame: "",
-    palette: "",
-    shipping: "",
+    frame: null,
+    palette: null,
+    shipping: null,
     price: 0,
     basePrice: 0,
     framePrice: 0,

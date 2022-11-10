@@ -10,6 +10,7 @@ import { useShoppingCart } from "use-shopping-cart";
 import PriceTracker from "../PriceTracker/PriceTracker";
 import { useCallback, useState } from "react";
 import { fetchPostJSON } from "../../utils/apiHelpers";
+import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 
 const { className, styles } = css.resolve`
   div {
@@ -38,21 +39,37 @@ const variants = {
   },
 };
 
+const useIsNextButtonDisabled = () => {
+  const { formStep } = useUIStore();
+  const { formData } = useDataStore();
+  switch (formStep) {
+    case 0:
+      return formData.name.length <= 3;
+    case 1:
+      return formData.palette === null;
+    case 2:
+      return formData.frame === null;
+    case 3:
+      return formData.shipping === null;
+  }
+};
+
 const FormPageControls = () => {
   const { addItem, cartDetails, redirectToCheckout, clearCart } =
     useShoppingCart();
   const [loading, setLoading] = useState(false);
 
   const {
-    dataStore: { formData, productPrice },
-    uiStore: {
-      formStep,
-      incrementFormStep,
-      decrementFormStep,
-      isNextButtonDisabled,
-      isPreviousButtonDisabled,
-    },
-  } = useStore();
+    formStep,
+    incrementFormStep,
+    decrementFormStep,
+    noPreviousPage,
+    noNextPage,
+  } = useUIStore();
+
+  const nextButtonDisabled = useIsNextButtonDisabled();
+
+  const { formData, productPrice } = useDataStore();
 
   const handlePreviousButtonPressed = () => {
     decrementFormStep();
@@ -67,7 +84,6 @@ const FormPageControls = () => {
     }
     incrementFormStep();
   };
-
   const handleCheckout = async (event) => {
     setLoading(true);
 
@@ -81,17 +97,18 @@ const FormPageControls = () => {
       console.error(response.message);
       return;
     }
+    console.log("hello");
     //if nothing went wrong, sends user to Stripe checkout
     redirectToCheckout({ sessionId: response.id });
   };
 
   return (
-    <div className={className}>
+    <div className={"fixed bottom-0 right-0 left-0 p-12 flex justify-between"}>
       <Button
         key="previous-button"
         onClick={handlePreviousButtonPressed}
-        label="Previous"
-        disabled={isPreviousButtonDisabled}
+        label="Back"
+        disabled={noPreviousPage}
       />
 
       {formStep < FORM_SCREENS ? (
@@ -99,13 +116,16 @@ const FormPageControls = () => {
           key="next-button"
           onClick={handleNextButtonPressed}
           label="Next"
-          disabled={isNextButtonDisabled}
+          disabled={nextButtonDisabled || noNextPage}
+          className="is-active-control"
         />
       ) : (
         <Button
           key="checkout-button"
           onClick={handleCheckout}
+          loading={loading}
           label="Checkout"
+          className="is-active-control"
         />
       )}
       {styles}

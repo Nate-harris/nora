@@ -22,6 +22,31 @@ import frame from "./frame";
 import commissionShippingSelection from "./commissionShippingSelection";
 import order from "./order";
 import shippingOption from "./shippingOption";
+import landingPage from "./landingPage";
+import galleryPage from "./galleryPage";
+import galleryItem from "./galleryItem";
+
+import gridColumn from "./objects/grid-column";
+import gridSize from "./objects/grid-size";
+import accordion from "./objects/accordion";
+
+import accordions from "./objects/accordions";
+
+import seo from "./objects/seo";
+import freeform from "./objects/freeform";
+import socialLink from "./objects/social-link";
+import horizontalRule from "./objects/horizontal-rule";
+import simplePortableText from "./objects/portable-simple";
+import complexPortableText from "./objects/portable-complex";
+
+import generalSettings from "./documents/settings-general";
+import promoSettings from "./documents/settings-promo";
+import footerSettings from "./documents/settings-footer";
+import seoSettings from "./documents/settings-seo";
+
+import page from "./documents/page";
+import grid from "./modules/grid";
+import gallerySection from "./gallerySection";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -39,14 +64,34 @@ export default createSchema({
     localeBlockContent,
     localeString,
     productVariant,
-    commission,
+
     palette,
     commissionColorSelection,
     commisionNameSelection,
     commissionFrameSelection,
     frame,
     commissionShippingSelection,
-    order,
+
     shippingOption,
+    landingPage,
+    galleryItem,
+    gallerySection,
+    gridColumn,
+    gridSize,
+    seo,
+    socialLink,
+    horizontalRule,
+    simplePortableText,
+    complexPortableText,
+    freeform,
+    accordion,
+    accordions,
+    page,
+    grid,
+
+    generalSettings,
+    promoSettings,
+    footerSettings,
+    seoSettings,
   ]),
 });

@@ -4,6 +4,7 @@ import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../lib/context";
 import Frame from "./Frame";
+import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 const { className, styles } = css.resolve`
   div {
     display: grid;
@@ -34,27 +35,47 @@ const variants = {
 };
 
 export default observer(({ options }) => {
-  const {
-    dataStore: { formData, setFrame, updateFramePrice },
-  } = useStore();
-
+  const { formData, setFrame, updateFramePrice } = useDataStore();
+  const { setNextButtonDisabled } = useUIStore();
   const handleChange = (frame) => {
     setFrame(frame);
     const option = options.find((option) => option.type === frame.type);
     updateFramePrice(option.price);
   };
 
+  const handleClick = (option) => {
+    setNextButtonDisabled(false);
+    handleChange({ type: option.type, image: option.templateImage });
+  };
+
+  const clearSelection = () => {
+    setNextButtonDisabled(true);
+    setFrame(null);
+  };
+
   return (
-    <div>
-      {options.map((option) => (
+    <div className="flex flex-col gap-y-16">
+      {options.map((option, index) => (
         <Frame
           key={option.type}
-          {...option}
-          onClick={() =>
-            handleChange({ type: option.type, image: option.templateImage })
+          active={
+            formData.frame !== null && formData.frame.type === option.type
           }
+          noneSelected={formData.frame === null}
+          onClick={() => handleClick(option)}
+          index={index}
+          {...option}
         />
       ))}
+      <motion.div
+        layout
+        animate={{ opacity: formData.frame !== null ? 1 : 0 }}
+        className="flex justify-center p-12"
+      >
+        <div className="btn" onClick={clearSelection}>
+          Clear Selection
+        </div>
+      </motion.div>
     </div>
   );
 });

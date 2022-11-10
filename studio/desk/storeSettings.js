@@ -6,9 +6,9 @@ import {
   GiWoodFrame,
   GiCommercialAirplane,
 } from "react-icons/gi";
-import { BsGearWideConnected } from "react-icons/bs";
+import { BsGearWideConnected, BsWindow } from "react-icons/bs";
 export const storeSettings = S.listItem()
-  .title("Store Settings")
+  .title("Order Form Settings")
   .id("storeSettings")
   .child(
     S.list()

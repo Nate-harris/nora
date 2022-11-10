@@ -1,26 +1,41 @@
-import { PortableText } from "@portabletext/react";
+import { PortableText, toPlainText } from "@portabletext/react";
+import { AnimatePresence, motion } from "framer-motion";
+import { observer } from "mobx-react-lite";
+import { useStore } from "../../lib/context";
+import { useUIStore } from "../../providers/RootStoreProvider";
 
-import css from "styled-jsx/css";
-
-const { className, styles } = css.resolve`
-  div {
-    font-family: var(--font-family-heading);
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 2rem;
-    line-height: 1.8rem;
-  }
-  @media only screen and (max-width: 768px) {
-    div {
-    }
-  }
-`;
-
-export default ({ value }) => {
-  return (
-    <div className={className}>
-      <PortableText value={value} />
-      {styles}
-    </div>
-  );
+const variants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: { delay: 0.4 },
+  },
 };
+
+const Description = observer(({ value }) => {
+  const { formStep } = useUIStore();
+  if (!value) return null;
+  return (
+    <AnimatePresence>
+      <div className="fixed bottom-0 left-0 right-0 flex justify-center">
+        <motion.div
+          layout
+          data-step={formStep + 1}
+          className={`my-12 py-8 pr-16 bg-pageText text-pageBG rounded-full flex items-center before:content-[attr(data-step)] before:bg-pageBG before:text-pageText before:h-24 before:w-24 before:flex before:items-center before:justify-center before:rounded-full before:ml-16 before:mr-8`}
+        >
+          <motion.div
+            key={toPlainText(value)}
+            initial="hidden"
+            animate="visible"
+            variants={variants}
+          >
+            <PortableText value={value} />
+          </motion.div>
+        </motion.div>
+      </div>
+    </AnimatePresence>
+  );
+});
+export default Description;

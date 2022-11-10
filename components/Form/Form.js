@@ -10,6 +10,8 @@ import Description from "../Form/Description";
 import Layout from "../Layout";
 import { useEffect } from "react";
 import { useShoppingCart } from "use-shopping-cart";
+import { useUIStore } from "../../providers/RootStoreProvider";
+import StatusBar from "../StatusBar/StatusBar";
 
 const { className, styles } = css.resolve`
   form {
@@ -24,9 +26,7 @@ const { className, styles } = css.resolve`
 `;
 
 export default observer(({ formData }) => {
-  const {
-    uiStore: { formStep },
-  } = useStore();
+  const { formStep } = useUIStore();
 
   const { clearCart } = useShoppingCart();
 
@@ -38,7 +38,10 @@ export default observer(({ formData }) => {
   let description = null;
   switch (formStep) {
     case 0:
-      formScreen = <FormNameInput />;
+      const { nameSelection } = formData;
+      formScreen = (
+        <FormNameInput maxNumLetters={nameSelection?.maxNumLetters} />
+      );
       description = formData?.nameSelection?.description;
       break;
     case 1:
@@ -61,12 +64,16 @@ export default observer(({ formData }) => {
   }
 
   return (
-    <Layout id={formStep}>
+    <>
+      <Layout id={formStep}>
+        <form key="nora-commission-form" className="control">
+          {formScreen}
+        </form>
+
+        {styles}
+      </Layout>
       <Description value={description} />
-      <form key="nora-commission-form" className={className}>
-        {formScreen}
-      </form>
-      {styles}
-    </Layout>
+      <StatusBar />
+    </>
   );
 });
