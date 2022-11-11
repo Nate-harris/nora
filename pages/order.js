@@ -5,8 +5,6 @@ import Form from "../components/Form/Form";
 
 import PriceTracker from "../components/PriceTracker/PriceTracker";
 
-export const FORM_SCREENS = 4;
-
 const OrderPage = ({ formData }) => {
   return (
     <>

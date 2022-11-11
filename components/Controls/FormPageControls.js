@@ -5,28 +5,13 @@ import { useForm } from "react-hook-form";
 import Button from "./Button";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../lib/context";
-import { FORM_SCREENS } from "../../pages";
 import { useShoppingCart } from "use-shopping-cart";
 import PriceTracker from "../PriceTracker/PriceTracker";
 import { useCallback, useState } from "react";
 import { fetchPostJSON } from "../../utils/apiHelpers";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 
-const { className, styles } = css.resolve`
-  div {
-    display: flex;
-    justify-content: space-between;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: var(--spacing-l);
-  }
-  @media only screen and (max-width: 768px) {
-    div {
-    }
-  }
-`;
+const FORM_SCREENS = 4;
 
 const variants = {
   in: {
@@ -101,6 +86,7 @@ const FormPageControls = () => {
     //if nothing went wrong, sends user to Stripe checkout
     redirectToCheckout({ sessionId: response.id });
   };
+  console.log(formStep, FORM_SCREENS);
 
   return (
     <div className={"fixed bottom-0 right-0 left-0 p-12 flex justify-between"}>
@@ -128,7 +114,6 @@ const FormPageControls = () => {
           className="is-active-control"
         />
       )}
-      {styles}
     </div>
   );
 };

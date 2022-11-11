@@ -23,8 +23,6 @@ import commissionShippingSelection from "./commissionShippingSelection";
 import order from "./order";
 import shippingOption from "./shippingOption";
 import landingPage from "./landingPage";
-import galleryPage from "./galleryPage";
-import galleryItem from "./galleryItem";
 
 import gridColumn from "./objects/grid-column";
 import gridSize from "./objects/grid-size";
@@ -46,7 +44,8 @@ import seoSettings from "./documents/settings-seo";
 
 import page from "./documents/page";
 import grid from "./modules/grid";
-import gallerySection from "./gallerySection";
+import galleryItem from "./objects/gallery-item";
+import gallerySection from "./modules/gallery-section";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
