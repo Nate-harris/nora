@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { m } from "framer-motion";
 import cx from "classnames";
 
-import Icon from "@components/icon";
-
 const accordionAnim = {
   open: {
     opacity: 1,
@@ -37,7 +35,9 @@ const Accordion = ({
         >
           {title}
           <div className="accordion--icon">
-            <Icon name="Chevron Down" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox={"0 0 100 100"}>
+              <polygon points="51.5 85.657 8.672 42.828 14.328 37.172 51.5 74.343 88.672 37.172 94.328 42.828 51.5 85.657" />
+            </svg>
           </div>
         </button>
       )}

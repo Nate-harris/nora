@@ -60,7 +60,8 @@ const hamburgerBottomLineVariants = {
 };
 const Icon = observer(() => {
   const { menuOpen } = useUIStore();
-  console.log(menuOpen);
+  const router = useRouter();
+
   return (
     <svg
       className="w-120"
@@ -69,7 +70,12 @@ const Icon = observer(() => {
     >
       <g
         className="transition-all duration-300 ease-in-out"
-        style={{ fill: menuOpen ? "var(--white)" : "var(--headerText)" }}
+        style={{
+          fill:
+            menuOpen || router.asPath !== "/order"
+              ? "var(--white)"
+              : "var(--headerText)",
+        }}
       >
         <path d="M29.46,.77c-.16,3.96-.25,8.19-.25,12.71s.08,8.79,.25,12.74h-12.57L8.39,7.06l.63,19.17H0c.19-4.54,.28-8.79,.28-12.74S.19,5.31,0,.77H12.92l8.53,19.7L20.85,.77h8.6Z" />
         <path d="M36.06,23.08c-2.53-2.33-3.79-5.6-3.79-9.81s1.26-7.42,3.77-9.76c2.52-2.34,6.47-3.51,11.85-3.51s9.37,1.17,11.88,3.51c2.52,2.34,3.77,5.59,3.77,9.76s-1.25,7.51-3.76,9.83c-2.5,2.32-6.47,3.48-11.9,3.48s-9.3-1.16-11.83-3.49Zm17.45-5.16c1.15-.99,1.72-2.54,1.72-4.65s-.57-3.59-1.72-4.6c-1.15-1.01-3.02-1.51-5.62-1.51s-4.44,.5-5.58,1.51c-1.15,1.01-1.72,2.54-1.72,4.6s.57,3.63,1.72,4.63c1.15,1.01,3.01,1.51,5.58,1.51s4.47-.5,5.62-1.49Z" />
@@ -82,7 +88,7 @@ const Icon = observer(() => {
 
 const Hamburger = observer(({ onClick }) => {
   const { menuOpen, toggleMenuOpen } = useUIStore();
-
+  const router = useRouter();
   return (
     <button
       className="bg-transparent w-48"
@@ -96,7 +102,12 @@ const Hamburger = observer(({ onClick }) => {
       >
         <g
           className="transition-all duration-300 ease-in-out"
-          style={{ fill: menuOpen ? "var(--white)" : "var(--headerText)" }}
+          style={{
+            fill:
+              menuOpen || router.asPath !== "/order"
+                ? "var(--white)"
+                : "var(--headerText)",
+          }}
         >
           <motion.path
             animate={menuOpen ? "open" : "closed"}

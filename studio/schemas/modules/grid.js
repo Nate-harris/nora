@@ -18,6 +18,11 @@ export default {
       },
     },
     {
+      name: "backgroundColor",
+      title: "Background Color",
+      type: "color",
+    },
+    {
       title: "Grid Size",
       name: "size",
       type: "number",

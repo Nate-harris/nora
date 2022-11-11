@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useInView } from "react-cool-inview";
 import cx from "classnames";
 
-import { buildSrcSet, buildSrc } from "@lib/helpers";
+import { buildSrcSet, buildSrc } from "../utils/helpers";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
 
 const Photo = ({
   photo,
@@ -18,16 +19,16 @@ const Photo = ({
   className,
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const { observe, inView } = useInView({
-    unobserveOnEnter: true,
-    threshold: 0.1,
+  const ref = useRef();
+  const inView = useInView(ref, {
+    once: true,
   });
 
   // define our aspect ratio if not a background fill
   const aspect =
     typeof width === "number" && typeof height === "number"
       ? (height / width) * 100
-      : 100 / (photo.customRatio || photo.aspectRatio);
+      : 100 / (photo?.customRatio || photo?.aspectRatio);
 
   const aspectCustom =
     layout === "intrinsic" ? { paddingTop: `${aspect}%` } : null;
@@ -58,7 +59,7 @@ const Photo = ({
   }, [isLoaded]);
   if (!photo?.asset) return null;
   return (
-    <figure className={className ? className : null}>
+    <figure ref={ref} className={className ? className : null}>
       <div
         className={cx("ar", {
           "has-fill": layout === "fill" || layout === "contain",
@@ -67,7 +68,6 @@ const Photo = ({
       >
         <picture>
           <img
-            ref={observe}
             width={width}
             height={height}
             src={forceLoad || inView ? src : null}

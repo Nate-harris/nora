@@ -37,12 +37,12 @@
 
   h2,
   .is-h2 {
-    @apply m-0 text-36 font-normal leading-125;
+    @apply m-0 text-36 font-delaGothicOne font-normal leading-125;
   }
 
   h3,
   .is-h3 {
-    @apply m-0 text-18 font-normal leading-125;
+    @apply m-0 text-18 font-delaGothicOne font-normal leading-125;
   }
 
   h4,

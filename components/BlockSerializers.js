@@ -2,8 +2,8 @@ import React from "react";
 import BlockContent from "@sanity/block-content-to-react";
 import cx from "classnames";
 
-import Photo from "@components/photo";
-import CustomLink from "@components/link";
+import Photo from "./Photo";
+import CustomLink from "./CustomLink";
 
 export const blockSerializers = {
   types: {
@@ -60,8 +60,10 @@ export const blockSerializers = {
       // handle all other blocks with the default serializer
       return BlockContent.defaultSerializers.types.block(props);
     },
-    photo: ({ node }) => {
-      return <Photo photo={node} />;
+    photo: ({ value }) => {
+      console.log("value", value);
+
+      return <Photo photo={value} />;
     },
     horizontalRule: () => <hr />,
   },

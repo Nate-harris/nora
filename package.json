@@ -12,6 +12,7 @@
     "@next/font": "^13.0.2",
     "@portabletext/react": "^1.0.6",
     "@react-three/fiber": "^8.7.3",
+    "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^3.3.2",
     "@sanity/image-url": "^1.0.1",
     "@stripe/stripe-js": "^1.32.0",
