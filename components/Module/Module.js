@@ -1,6 +1,5 @@
 import React from "react";
-
-import Grid from "./grid";
+import Grid from "./Grid";
 
 export const Module = ({ index, data }) => {
   if (!data) return null;
