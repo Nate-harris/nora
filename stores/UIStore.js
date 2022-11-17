@@ -30,6 +30,9 @@ class UIStore {
   @computed get noNextPage() {
     return this.formStep + 1 > FORM_SCREENS;
   }
+  @action.bound clearRouteVariables() {
+    this.menuOpen = false;
+  }
 }
 
 export default UIStore;

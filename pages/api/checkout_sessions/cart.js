@@ -2,7 +2,6 @@
 
 import { validateCartItems } from "use-shopping-cart/src/serverUtil";
 import Stripe from "stripe";
-import sanity from "../../../lib/sanity/client";
 import { commissionValidateQuery } from "../../../lib/sanity/queries";
 import { getCommissionPrice } from "../../../lib/sanity/getCommissionPrice";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {

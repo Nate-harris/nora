@@ -32,12 +32,11 @@ const Link = ({ link, children, ...rest }) => {
   } else {
     const isDynamic = getDynamicRoute(link.page?.type);
     const isHome = link.page?.isHome;
-    const isShop = link.page?.isShop;
 
     return (
       <NextLink
         href={
-          isHome || isShop
+          isHome
             ? `/${isShop ? "shop" : ""}`
             : isStatic !== false
             ? `/${isStatic}`

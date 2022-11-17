@@ -43,7 +43,7 @@ export default {
       title: "Page Content",
       name: "modules",
       type: "array",
-      of: [{ type: "grid" }],
+      of: [{ type: "grid" }, { type: "dividerPhoto" }],
       group: "content",
     },
     {

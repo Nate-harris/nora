@@ -5,13 +5,15 @@ import Menu from "../components/Menu/Menu";
 import { RootStoreProvider } from "../providers/RootStoreProvider";
 import { ThemeProvider } from "next-themes";
 import Cart from "../components/Cart";
+import { useRouterEvents } from "../utils/useRouterEvents";
 
 function App({ Component, pageProps }) {
   const items = [
     { label: "Order", href: "/order" },
-    { label: "Gallery", href: "/gallery" },
+    // { label: "Gallery", href: "/gallery" },
     { label: "About", href: "/about" },
   ];
+  useRouterEvents();
   return (
     <>
       <Menu items={items} />

@@ -32,12 +32,12 @@
   /* Headlines */
   h1,
   .is-h1 {
-    @apply m-0 text-48 font-normal leading-125;
+    @apply m-0 text-24 font-normal leading-125;
   }
 
   h2,
   .is-h2 {
-    @apply m-0 text-36 font-delaGothicOne font-normal leading-125;
+    @apply m-0 text-32 font-delaGothicOne font-normal leading-125;
   }
 
   h3,

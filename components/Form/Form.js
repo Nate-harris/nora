@@ -7,7 +7,7 @@ import FormFrameSelect from "../Frame/FormFrameSelect";
 import FormShippingSelect from "../Shipping/FormShippingSelect";
 import OrderSummary from "../ReviewCommission/OrderSummary";
 import Description from "../Form/Description";
-import Layout from "../Layout";
+import Layout from "./Layout";
 import { useEffect } from "react";
 import { useShoppingCart } from "use-shopping-cart";
 import { useUIStore } from "../../providers/RootStoreProvider";

@@ -1,4 +1,5 @@
 import React from "react";
+import DividerPhoto from "./DividerPhoto";
 import Grid from "./Grid";
 
 export const Module = ({ index, data }) => {
@@ -7,6 +8,8 @@ export const Module = ({ index, data }) => {
   switch (_type) {
     case "grid":
       return <Grid index={index} data={data} />;
+    case "dividerPhoto":
+      return <DividerPhoto index={index} data={data} />;
     default:
       return null;
   }

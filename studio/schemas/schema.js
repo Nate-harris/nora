@@ -46,6 +46,7 @@ import page from "./documents/page";
 import grid from "./modules/grid";
 import galleryItem from "./objects/gallery-item";
 import gallerySection from "./modules/gallery-section";
+import dividerPhoto from "./modules/divider-photo";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -87,7 +88,7 @@ export default createSchema({
     accordions,
     page,
     grid,
-
+    dividerPhoto,
     generalSettings,
     promoSettings,
     footerSettings,

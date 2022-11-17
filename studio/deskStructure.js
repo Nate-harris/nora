@@ -15,7 +15,6 @@ export default () =>
       S.divider(),
       settingsMenu,
       S.divider(),
-
       ...S.documentTypeListItems().filter(
         (listItem) =>
           ![

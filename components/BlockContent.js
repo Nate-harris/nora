@@ -5,7 +5,12 @@ import { PortableText } from "@portabletext/react";
 
 const Content = ({ blocks, className }) => {
   if (!blocks) return null;
-  return <PortableText value={blocks} components={blockSerializers} />;
+
+  return (
+    <div className={cx("rc", className, "text-white")}>
+      <PortableText value={blocks} components={blockSerializers} />
+    </div>
+  );
 };
 
 export default Content;
