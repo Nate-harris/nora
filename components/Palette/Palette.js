@@ -67,7 +67,7 @@ const completedVariants = {
     x: 0,
     transition: {
       ...FRAMER_TRANSITION_FASTEASE,
-      delay: 0.05 * i + FRAMER_TRANSITION_EASEOUT.duration,
+      delay: 0.05 * i + FRAMER_TRANSITION_EASEOUT.duration / 2,
     },
   }),
 };

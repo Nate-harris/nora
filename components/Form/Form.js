@@ -13,18 +13,12 @@ import { useShoppingCart } from "use-shopping-cart";
 import { useUIStore } from "../../providers/RootStoreProvider";
 import StatusBar from "../StatusBar/StatusBar";
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
-
-const { className, styles } = css.resolve`
-  form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  @media only screen and (max-width: 768px) {
-    form {
-    }
-  }
-`;
+import { useWindowSize } from "../../utils/helpers";
+import dynamic from "next/dynamic";
+const WoodgrainShaderSketch = dynamic(
+  () => import("../WoodgrainShaderSketch"),
+  { ssr: false }
+);
 
 export default observer(({ formData }) => {
   const { formStep } = useUIStore();
@@ -34,6 +28,8 @@ export default observer(({ formData }) => {
   useEffect(() => {
     clearCart();
   }, []);
+
+  const { width, height } = useWindowSize();
 
   let formScreen = null;
   let description = null;
@@ -70,9 +66,14 @@ export default observer(({ formData }) => {
         <form key="nora-commission-form" className="control">
           {formScreen}
         </form>
-
-        {styles}
       </Layout>
+      <WoodgrainShaderSketch
+        className={"absolute top-0 left-0 right-0 bottom-0 -z-1"}
+        color={"#f2dcb5"}
+        alpha={220}
+        width={width}
+        height={height}
+      />
       <Description value={description} />
       <StatusBar />
       <ThemeSwitcher />

@@ -8,11 +8,6 @@ import Cart from "../components/Cart";
 import { useRouterEvents } from "../utils/useRouterEvents";
 
 function App({ Component, pageProps }) {
-  const items = [
-    { label: "Order", href: "/order" },
-    // { label: "Gallery", href: "/gallery" },
-    { label: "About", href: "/about" },
-  ];
   useRouterEvents();
   return (
     <>

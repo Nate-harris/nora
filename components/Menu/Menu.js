@@ -9,6 +9,14 @@ import {
 } from "../../lib/framer/animations";
 import { useUIStore } from "../../providers/RootStoreProvider";
 import CustomLink from "../CustomLink/CustomLink";
+import dynamic from "next/dynamic";
+import { useWindowSize } from "../../utils/helpers";
+import { useEffect } from "react";
+import { useState } from "react";
+const WoodgrainShaderSketch = dynamic(
+  () => import("../WoodgrainShaderSketch"),
+  { ssr: false }
+);
 
 const containerVariants = {
   visible: {
@@ -20,15 +28,23 @@ const containerVariants = {
     transition: FRAMER_TRANSITION_FASTEREASE,
   },
 };
+
+const INITIAL_DELAY = 0.3;
+const ITEM_STAGGER = 0.15;
 const listItemVariants = {
-  visible: ({ direction, offset }) => ({
+  visible: ({ hasDelay, direction, offset }) => ({
     opacity: 1,
     rotate: direction * 3,
     y: 0,
     transition: {
-      delay: offset * 0.15 + 0.3,
+      delay: hasDelay ? offset * ITEM_STAGGER + INITIAL_DELAY : 0,
     },
   }),
+  hover: {
+    opacity: 1,
+    rotate: 0,
+    y: 0,
+  },
   hidden: {
     opacity: 0,
     rotate: 0,
@@ -38,21 +54,48 @@ const listItemVariants = {
 
 const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
   const { menuOpen } = useUIStore();
-  console.log("MENU", items);
+  const [hasDelay, setHasDelay] = useState(true);
+  const { width, height } = useWindowSize();
+
+  // Don't want the delay for our hover animation so remove it once
+  // we have opened the menu
+  useEffect(() => {
+    if (menuOpen) {
+      setTimeout(() => {
+        setHasDelay(false);
+      }, items.length * ITEM_STAGGER + INITIAL_DELAY);
+    } else {
+      setHasDelay(true);
+    }
+  }, [menuOpen, items.length]);
+
   return (
     <motion.nav
       initial="hidden"
       animate={menuOpen ? "visible" : "hidden"}
       variants={containerVariants}
-      className="fixed left-0 right-0 top-0 bottom-0 z-10 bg-purple flex justify-center items-center"
+      className="fixed left-0 right-0 top-0 bottom-0 z-10 bg-purple flex justify-center items-center overflow-hidden"
     >
+      <WoodgrainShaderSketch
+        className={"absolute top-0 left-0 right-0 bottom-0 -z-1"}
+        color={"#f2dcb5"}
+        alpha={220}
+        width={width}
+        height={height}
+      />
+
       <ul {...rest} className="flex flex-col gap-y-48">
         {menuOpen &&
           items?.map((item, index) => {
             return (
               <motion.li
                 key={index}
-                custom={{ direction: index % 2 === 0 ? 1 : -1, offset: index }}
+                custom={{
+                  hasDelay,
+                  direction: index % 2 === 0 ? 1 : -1,
+                  offset: index,
+                }}
+                whileHover={"hover"}
                 initial="hidden"
                 animate="visible"
                 variants={listItemVariants}
