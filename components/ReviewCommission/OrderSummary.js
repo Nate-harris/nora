@@ -7,6 +7,7 @@ import { formatCurrencyString } from "use-shopping-cart";
 import Palette from "./Palette";
 import imageUrlFor from "../../lib/sanity/imageUrlFor";
 import { useDataStore } from "../../providers/RootStoreProvider";
+import { truncateString } from "../../studio/lib/helpers";
 const { className, styles } = css.resolve`
   div {
     display: grid;
@@ -56,7 +57,7 @@ export default observer(() => {
       <div>
         A puzzle for{" "}
         <span className="font-delaGothicOne uppercase border-6 border-pageText px-8 pb-4">
-          {formData.name}
+          {truncateString(formData.name, 10)}
         </span>{" "}
         will be{" "}
         <span className="font-delaGothicOne uppercase whitespace-nowrap">
@@ -73,12 +74,12 @@ export default observer(() => {
         <span className="inline-block mx-12">
           <Palette colors={formData.palette.colors} width={180} />
         </span>
-        palette
+        palette.
       </div>
 
       <div className="flex justify-center items-center">
         It will have a
-        <span className="font-delaGothicOne uppercase ml-4 whitespace-nowrap">
+        <span className="font-delaGothicOne uppercase ml-16 whitespace-nowrap">
           {formData.frame.type}
         </span>
         <img

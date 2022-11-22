@@ -7,6 +7,7 @@ import { isBrowser, isMobileSafari, useWindowSize } from "../../utils/helpers";
 import { FRAMER_TRANSITION_EASEOUT } from "../../lib/framer/animations";
 import HeadSEO from "../HeadSEO";
 import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 
 const pageTransitionAnim = {
   show: {
@@ -60,7 +61,7 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
           }}
         />
       )}
-
+      <Header data={site.header} isOrderPage={page.isOrderPage} />
       <motion.div
         key={page.id}
         initial="hide"

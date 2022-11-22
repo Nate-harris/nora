@@ -496,6 +496,24 @@
   "resolved" "https://registry.npmjs.org/@portabletext/types/-/types-1.0.3.tgz"
   "version" "1.0.3"
 
+"@reach/observe-rect@1.2.0":
+  "integrity" "sha512-Ba7HmkFgfQxZqqaeIWWkNK0rEhpxVQHIoVyW1YDSkGsGIXzcaW4deC8B0pZrNSSyLTdIk7y+5olKt5+g0GmFIQ=="
+  "resolved" "https://registry.npmjs.org/@reach/observe-rect/-/observe-rect-1.2.0.tgz"
+  "version" "1.2.0"
+
+"@reach/rect@^0.18.0":
+  "integrity" "sha512-Xk8urN4NLn3F70da/DtByMow83qO6DF6vOxpLjuDBqud+kjKgxAU9vZMBSZJyH37+F8mZinRnHyXtlLn5njQOg=="
+  "resolved" "https://registry.npmjs.org/@reach/rect/-/rect-0.18.0.tgz"
+  "version" "0.18.0"
+  dependencies:
+    "@reach/observe-rect" "1.2.0"
+    "@reach/utils" "0.18.0"
+
+"@reach/utils@0.18.0":
+  "integrity" "sha512-KdVMdpTgDyK8FzdKO9SCpiibuy/kbv3pwgfXshTI6tEcQT1OOwj7BAksnzGC0rPz0UholwC+AgkqEl3EJX3M1A=="
+  "resolved" "https://registry.npmjs.org/@reach/utils/-/utils-0.18.0.tgz"
+  "version" "0.18.0"
+
 "@react-three/fiber@^8.7.3":
   "integrity" "sha512-7Pf+G5ElfIlje86RzogEmiy+68/fqiBjHRf/14b7jCIj+H/37rFmELGT37IRCG+seKvWu9xak54d/RMC/LheWQ=="
   "resolved" "https://registry.npmjs.org/@react-three/fiber/-/fiber-8.7.3.tgz"

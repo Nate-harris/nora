@@ -37,6 +37,15 @@ export default {
       description:
         "When activated the header will overlay the first content module with a transparent background and white text until scrolling is engaged.",
       initialValue: false,
+      hidden: ({ parent }) => parent?.isOrderPage,
+      group: "settings",
+    },
+    {
+      title: "Is Order Page?",
+      name: "isOrderPage",
+      type: "boolean",
+      description: "When activated this page will have the order form.",
+      initialValue: false,
       group: "settings",
     },
     {
@@ -44,6 +53,7 @@ export default {
       name: "modules",
       type: "array",
       of: [{ type: "grid" }, { type: "dividerPhoto" }],
+      hidden: ({ parent }) => parent?.isOrderPage,
       group: "content",
     },
     {

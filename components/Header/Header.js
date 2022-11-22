@@ -5,6 +5,7 @@ import cx from "classnames";
 import { useUIStore } from "../../providers/RootStoreProvider";
 import { observer } from "mobx-react-lite";
 import { motion } from "framer-motion";
+import Menu from "../Menu/Menu";
 
 const hamburgerTopLineVariants = {
   open: {
@@ -58,7 +59,7 @@ const hamburgerBottomLineVariants = {
     },
   },
 };
-const Icon = observer(() => {
+const Icon = observer(({ isOrderPage }) => {
   const { menuOpen } = useUIStore();
   const router = useRouter();
 
@@ -74,9 +75,7 @@ const Icon = observer(() => {
             className="transition-all duration-300 ease-in-out"
             style={{
               fill:
-                menuOpen || router.asPath !== "/order"
-                  ? "var(--white)"
-                  : "var(--headerText)",
+                menuOpen || !isOrderPage ? "var(--white)" : "var(--headerText)",
             }}
           >
             <path d="M29.46,.77c-.16,3.96-.25,8.19-.25,12.71s.08,8.79,.25,12.74h-12.57L8.39,7.06l.63,19.17H0c.19-4.54,.28-8.79,.28-12.74S.19,5.31,0,.77H12.92l8.53,19.7L20.85,.77h8.6Z" />
@@ -90,9 +89,10 @@ const Icon = observer(() => {
   );
 });
 
-const Hamburger = observer(({ onClick }) => {
+const Hamburger = observer(({ isOrderPage, onClick }) => {
   const { menuOpen, toggleMenuOpen } = useUIStore();
   const router = useRouter();
+
   return (
     <button
       className="bg-transparent w-48"
@@ -108,9 +108,7 @@ const Hamburger = observer(({ onClick }) => {
           className="transition-all duration-300 ease-in-out"
           style={{
             fill:
-              menuOpen || router.asPath !== "/order"
-                ? "var(--white)"
-                : "var(--headerText)",
+              menuOpen || !isOrderPage ? "var(--white)" : "var(--headerText)",
           }}
         >
           <motion.path
@@ -134,16 +132,17 @@ const Hamburger = observer(({ onClick }) => {
   );
 });
 
-const Header = ({ data = {}, isTransparent, onSetup = () => {} }) => {
+const Header = ({ data = {}, isOrderPage }) => {
   return (
     <>
+      <Menu items={data.menu.items} />
       <header
         className={cx(
           "fixed top-0 right-0 left-0 z-10 p-32 flex justify-between"
         )}
       >
-        <Icon />
-        <Hamburger />
+        <Icon isOrderPage={isOrderPage} />
+        <Hamburger isOrderPage={isOrderPage} />
       </header>
     </>
   );

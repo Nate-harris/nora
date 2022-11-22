@@ -1,18 +1,22 @@
 .btn {
   /* default style button */
-  @apply clean-btn inline-block relative bg-pageBG px-20 py-9 text-center border rounded-sm font-semibold leading-125 transition-colors;
+  @apply clean-btn inline-block relative bg-pageBG px-20 py-9 text-center border rounded-md font-semibold leading-125 transition-colors shadow-md font-delaGothicOne text-24;
 
   /* default: hover */
   &:not(.is-primary):not(.is-white):not(.is-text):not(.is-disabled):not(.is-soldout):not(.is-active-control) {
     &.is-active,
     &:hover {
-      @apply bg-pageText border-pageText text-pageBG;
+      @apply text-orange border-orange;
+      background: hsla(var(--orange-hsl), 0.1);
     }
   }
 
   /* primary style button */
   &.is-primary {
     @apply bg-pageText border-pageText text-pageBG;
+    &:hover {
+      background: hsla(var(--pageText-hsl), 0.025);
+    }
   }
 
   /* text-based button */
@@ -30,13 +34,14 @@
   }
 
   &.is-active-control {
-    @apply bg-green text-white border-transparent;
+    @apply bg-green text-white border-green;
     &:hover {
-      @apply bg-green opacity-90;
+      @apply bg-green text-green opacity-90;
+      background: hsla(var(--green-hsl), 0.2);
     }
 
     &.is-disabled {
-      @apply bg-orange text-white;
+      @apply bg-orange border-orange text-white;
     }
   }
   /* small sized button */
@@ -46,7 +51,7 @@
 
   /* large sized button */
   &.is-large {
-    @apply text-16 leading-125 font-normal px-28;
+    @apply leading-125 font-normal px-28;
   }
 
   /* full width button */
@@ -114,6 +119,11 @@
   /* white style button */
   &.is-white {
     @apply bg-white border-white text-orange;
+
+    &:hover {
+      @apply text-white;
+      background: hsla(var(--white-hsl), 0.2);
+    }
 
     /* disabled button state */
     &.is-disabled,

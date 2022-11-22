@@ -32,9 +32,8 @@ const Frame = ({
   templateImage,
   onClick,
 }) => {
-  const src = imageUrlFor(templateImage).width(500);
+  const src = imageUrlFor(templateImage).width(1080);
   const [hovered, setHovered] = useState(false);
-  console.log(active, noneSelected);
   return (
     <motion.div
       key={type}
@@ -47,12 +46,12 @@ const Frame = ({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <img src={src} alt={`Frame ${type}`} />
+      <img className="w-full max-w-2xl" src={src} alt={`Frame ${type}`} />
       <span
         className={cx(
-          "absolute text-16 transition-all duration-300 font-delaGothicOne uppercase -translate-x-1/2 top-1/2 -translate-y-1/2 p-12 rounded-md",
-          type === "Walnut" && "text-frameDarkBG bg-frameLightBG",
-          type === "Red Oak" && "text-frameLightBG bg-frameDarkBG",
+          "absolute text-24 transition-all duration-300 font-delaGothicOne uppercase shadow-md -translate-x-1/2 top-1/2 -translate-y-1/2 p-12 rounded-md",
+          type === "Walnut" && "text-white bg-orange",
+          type === "Red Oak" && "text-white bg-orange",
           (active || hovered) && "rotate-0",
           !(active || hovered) && "-rotate-90"
         )}

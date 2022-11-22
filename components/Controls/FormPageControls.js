@@ -82,14 +82,13 @@ const FormPageControls = () => {
       console.error(response.message);
       return;
     }
-    console.log("hello");
     //if nothing went wrong, sends user to Stripe checkout
     redirectToCheckout({ sessionId: response.id });
   };
   console.log(formStep, FORM_SCREENS);
 
   return (
-    <div className={"fixed bottom-0 right-0 left-0 p-12 flex justify-between"}>
+    <div className={"fixed bottom-0 right-0 left-0 p-32 flex justify-between"}>
       <Button
         key="previous-button"
         onClick={handlePreviousButtonPressed}

@@ -26,15 +26,20 @@ export default observer(() => {
     <motion.div
       variants={variants}
       className={
-        "fixed top-0 left-0 right-0 flex justify-center items-center text-12 leading-100 p-32 before:content-['Total'] before:px-12 before:py-8 before:mx-8 before:bg-pageText before:text-pageBG before:rounded-lg"
+        "fixed top-0 left-0 right-0 flex justify-center items-center text-12 leading-100 p-24"
       }
       initial={"inactive"}
       animate={productPrice === 0 ? "inactive" : "active"}
     >
-      {formatCurrencyString({
-        value: productPrice,
-        currency: "USD",
-      })}
+      <span className="font-delaGothicOne bg-orange text-white rounded-full shadow-md px-12 pr-16 py-16">
+        <span className="font-courierSans text-white rounded-full shadow-md px-24 py-8 mr-24 bg-pageBG text-pageText">
+          Total
+        </span>
+        {formatCurrencyString({
+          value: productPrice,
+          currency: "USD",
+        })}
+      </span>
     </motion.div>
   );
 });

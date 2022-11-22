@@ -32,8 +32,8 @@ export default observer(({ options }) => {
 
   return (
     <>
-      <div className="flex flex-col pt-64">
-        <div className="flex flex-wrap justify-center gap-12 max-w-2xl rounded-3xl">
+      <div className="w-full min-h-screen h-screen">
+        <div className="py-128 w-full min-h-screen h-screen overflow-scroll">
           {options.map((option, index) => (
             <Palette
               key={option.name}
@@ -49,16 +49,17 @@ export default observer(({ options }) => {
               {...option}
             />
           ))}
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: formData.palette !== null ? 1 : 0 }}
+            className="flex justify-center p-24"
+          >
+            <div className="btn" onClick={clearSelection}>
+              Clear Selection
+            </div>
+          </motion.div>
         </div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: formData.palette !== null ? 1 : 0 }}
-          className="flex justify-center p-12"
-        >
-          <div className="btn" onClick={clearSelection}>
-            Clear Selection
-          </div>
-        </motion.div>
       </div>
     </>
   );

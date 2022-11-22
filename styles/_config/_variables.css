@@ -8,7 +8,7 @@
   --purple: #aaa4d0;
   --seaside-oak: #c89d7d;
   --seaside-maple: #f2dcb5;
-  --brown: #563528;
+  --brown: #2a1710;
 
   --frame-dark-border: #8a5036;
   --frame-dark-bg: #512412;
@@ -32,6 +32,10 @@
 
   --shadow: 0 0 12px rgb(0 0 0 / 24%);
 
+  --orange-hsl: 25, 89%, 54%;
+
+  --green-hsl: 141, 73%, 22%;
+
   --black-hsl: 0, 0%, 0%;
   --white-hsl: 0, 0%, 100%;
 
@@ -46,7 +50,7 @@
 }
 
 [data-theme="dark"] {
-  --pageBG: var(--orange);
+  --pageBG: var(--brown);
   --pageText: #ffffff;
 
   --pageBG-hsl: 0, 0%, 0%;

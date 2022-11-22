@@ -8,6 +8,7 @@ import {
   FRAMER_TRANSITION_FASTEREASE,
 } from "../../lib/framer/animations";
 import { useUIStore } from "../../providers/RootStoreProvider";
+import CustomLink from "../CustomLink/CustomLink";
 
 const containerVariants = {
   visible: {
@@ -37,6 +38,7 @@ const listItemVariants = {
 
 const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
   const { menuOpen } = useUIStore();
+  console.log("MENU", items);
   return (
     <motion.nav
       initial="hidden"
@@ -56,9 +58,11 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
                 variants={listItemVariants}
                 className="text-64 font-delaGothicOne text-center uppercase text-white border-16 px-16 py-8 pb-16 border-white"
               >
-                <Link href={item.href} passHref>
-                  <a>{item.label}</a>
-                </Link>
+                <CustomLink
+                  tabIndex={!hasFocus ? -1 : null}
+                  link={item}
+                  onClick={onClick}
+                />
               </motion.li>
             );
           })}

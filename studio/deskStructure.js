@@ -1,4 +1,5 @@
 import S from "@sanity/desk-tool/structure-builder";
+import { menusMenu } from "./desk/menus";
 import { orders } from "./desk/orders";
 import { pagesMenu } from "./desk/pages";
 import { settingsMenu } from "./desk/settings";
@@ -13,6 +14,8 @@ export default () =>
       S.divider(),
       storeSettings,
       S.divider(),
+      menusMenu,
+      S.divider(),
       settingsMenu,
       S.divider(),
       ...S.documentTypeListItems().filter(
@@ -23,8 +26,9 @@ export default () =>
             "frame",
             "shippingOption",
             "landingPage",
+            "menu",
             "generalSettings",
-
+            "headerSettings",
             "promoSettings",
 
             "footerSettings",

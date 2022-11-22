@@ -52,7 +52,7 @@ export default observer(({ options }) => {
 
   return (
     <>
-      <div className="flex flex-col gap-y-16 pt-64">
+      <div className="flex flex-col gap-y-24 pt-64">
         {options.map((option, index) => (
           <Frame
             key={option.type}

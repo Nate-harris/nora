@@ -5,7 +5,6 @@ import AccordionList from "./AccordionList";
 
 const Grid = ({ data = {} }) => {
   const { size, columns } = data;
-  console.log("data", data);
 
   const getGridSize = (
     breakpoint,
@@ -14,7 +13,6 @@ const Grid = ({ data = {} }) => {
     align = false,
     start = false
   ) => {
-    console.log("here", breakpoint, size, justify, align, start);
     const hasBreakpoint = breakpoint && breakpoint.trim();
     const colSpan = hasBreakpoint
       ? `${breakpoint}:col-span-${size}`
@@ -46,17 +44,7 @@ const Grid = ({ data = {} }) => {
         >
           {columns.map((col, key) => {
             const { sizes, blocks } = col;
-            console.log(
-              "sizesfdsfds",
-              sizes,
-              getGridSize(
-                size.breakpoint,
-                size.width,
-                size.justify,
-                size.align,
-                size.start
-              )
-            );
+
             return (
               <div
                 key={key}

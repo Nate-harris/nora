@@ -1,5 +1,5 @@
 .theme-switch {
-  @apply inline-block -rotate-90;
+  @apply shadow-md absolute right-56 top-1/2 -translate-y-1/2 translate-x-1/2 -rotate-90;
 
   &--toggle {
     @apply clean-btn flex items-center p-8 bg-transparent border rounded-lg;

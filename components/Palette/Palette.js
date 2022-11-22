@@ -67,7 +67,7 @@ const completedVariants = {
     x: 0,
     transition: {
       ...FRAMER_TRANSITION_FASTEASE,
-      delay: 0.05 * i + 0.2,
+      delay: 0.05 * i + FRAMER_TRANSITION_EASEOUT.duration,
     },
   }),
 };
@@ -78,22 +78,23 @@ const containerVariants = {
     transition: FRAMER_TRANSITION_FASTEASE,
   },
   active: ({ direction }) => ({
-    x: `${direction * 50}%`,
     y: 0,
     transition: {
       ...FRAMER_TRANSITION_EASEOUT,
       delay: FRAMER_TRANSITION_EASEOUT.duration,
     },
   }),
-  inactive: {
-    opacity: 0,
-    height: 0,
-    y: 30,
-    transition: FRAMER_TRANSITION_EASEOUT,
-  },
+  inactive: ({ index }) => ({
+    opacity: 0.15,
+    height: "auto",
+    y: 0,
+    transition: {
+      ...FRAMER_TRANSITION_EASEOUT,
+      delay: 0.05 * index,
+    },
+  }),
   visible: ({ index }) => ({
     y: 0,
-    x: 0,
     height: "auto",
     opacity: 1,
     transition: {
@@ -121,8 +122,8 @@ const SVG = ({ colors, active, frameColor = FRAME_COLORS.DARK }) => {
           custom={index}
           key={`completed-${index}`}
           fill={hex}
-          initial={active || hovered ? "visible" : "hidden"}
-          animate={active || hovered ? "visible" : "hidden"}
+          initial={active ? "visible" : "hidden"}
+          animate={active ? "visible" : "hidden"}
           variants={completedVariants}
           width={
             (COMPLETED.length - index) * (FRAME_INNER_WIDTH / COMPLETED.length)
@@ -135,7 +136,7 @@ const SVG = ({ colors, active, frameColor = FRAME_COLORS.DARK }) => {
 
   return (
     <svg
-      className="rounded-xl overflow-hidden"
+      className="rounded-md overflow-hidden"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       xmlns="http://www.w3.org/2000/svg"
@@ -162,22 +163,20 @@ const Palette = ({
   onClick,
 }) => {
   const isLastInOdd = last && total % 2 !== 0;
-  console.log(
-    name,
-    active,
-    noneSelected,
-    active ? "active" : noneSelected ? "visible" : "inactive"
-  );
+
   return (
     <motion.div
+      layout
+      key={`palette-${name}`}
       custom={{
         index,
         direction: isLastInOdd ? 0 : index % 2 === 0 ? 1 : -1,
       }}
+      style={{ pointerEvents: !active && !noneSelected ? "none" : "auto" }}
       initial={active ? "active" : noneSelected ? "hidden" : "inactive"}
       animate={active ? "active" : noneSelected ? "visible" : "inactive"}
       variants={containerVariants}
-      className="w-md sm:w-sm overflow-hidden bg-paletteBG rounded-xl"
+      className="mx-auto w-2xl overflow-hidden"
       value={name}
       onClick={onClick}
     >

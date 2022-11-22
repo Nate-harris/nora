@@ -28,7 +28,16 @@ export const settingsMenu = S.listItem()
           )
           .icon(Gear),
         S.divider(),
-
+        S.listItem()
+          .title("Header")
+          .child(
+            S.editor()
+              .id("headerSettings")
+              .schemaType("headerSettings")
+              .documentId("headerSettings")
+          )
+          .icon(NavigationArrow),
+        S.divider(),
         S.listItem()
           .title("Footer")
           .child(

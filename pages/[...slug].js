@@ -4,19 +4,24 @@ import { useRouter } from "next/router";
 import { Module } from "../components/Module/Module";
 import { getAllDocSlugs, getPage } from "../lib/sanity";
 import Layout from "../components/Layout/Layout";
+import Order from "../components/Order/Order";
+import Header from "../components/Header/Header";
 
 const Page = ({ data }) => {
   const router = useRouter();
 
   const { site, page } = data;
-
   return (
     <>
       {!router.isFallback && (
         <Layout site={site} page={page}>
-          {page.modules?.map((module, key) => (
-            <Module key={key} index={key} data={module} />
-          ))}
+          {page.isOrderPage ? (
+            <Order data={page.data} />
+          ) : (
+            page.modules?.map((module, key) => (
+              <Module key={key} index={key} data={module} />
+            ))
+          )}
         </Layout>
       )}
     </>

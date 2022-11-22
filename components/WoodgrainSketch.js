@@ -58,7 +58,6 @@ const WoodgrainSketch = () => {
     this.dir = p5.createVector(0, 0);
     this.vel = p5.createVector(0, 0);
     this.pos = p5.createVector(x, y);
-    console.log(this.pos);
     this.speed = 0.8;
 
     this.move = function () {

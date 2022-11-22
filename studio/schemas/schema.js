@@ -32,6 +32,8 @@ import accordions from "./objects/accordions";
 
 import seo from "./objects/seo";
 import freeform from "./objects/freeform";
+import navPage from "./objects/nav-page";
+import navLink from "./objects/nav-link";
 import socialLink from "./objects/social-link";
 import horizontalRule from "./objects/horizontal-rule";
 import simplePortableText from "./objects/portable-simple";
@@ -41,9 +43,11 @@ import generalSettings from "./documents/settings-general";
 import promoSettings from "./documents/settings-promo";
 import footerSettings from "./documents/settings-footer";
 import seoSettings from "./documents/settings-seo";
+import headerSettings from "./documents/settings-header";
 
 import page from "./documents/page";
 import grid from "./modules/grid";
+import menu from "./documents/menu";
 import galleryItem from "./objects/gallery-item";
 import gallerySection from "./modules/gallery-section";
 import dividerPhoto from "./modules/divider-photo";
@@ -80,6 +84,8 @@ export default createSchema({
     gridSize,
     seo,
     socialLink,
+    navLink,
+    navPage,
     horizontalRule,
     simplePortableText,
     complexPortableText,
@@ -88,10 +94,12 @@ export default createSchema({
     accordions,
     page,
     grid,
+    menu,
     dividerPhoto,
     generalSettings,
     promoSettings,
     footerSettings,
     seoSettings,
+    headerSettings,
   ]),
 });

@@ -23,7 +23,7 @@ const Description = observer(({ value }) => {
         <motion.div
           layout
           data-step={formStep + 1}
-          className={`my-12 py-8 pr-16 bg-pageText text-pageBG rounded-full flex items-center before:content-[attr(data-step)] before:bg-pageBG before:text-pageText before:h-24 before:w-24 before:flex before:items-center before:justify-center before:rounded-full before:ml-16 before:mr-8`}
+          className={`shadow-md my-38 py-8 pr-18 bg-pageText text-pageBG rounded-full flex items-center before:content-[attr(data-step)] before:text-12 before:shadow-md before:bg-pageBG before:text-pageText before:h-28 before:w-48 before:flex before:items-center before:justify-center before:rounded-full before:mx-12 before:mr-16`}
         >
           <motion.div
             key={toPlainText(value)}

@@ -16,8 +16,6 @@ function App({ Component, pageProps }) {
   useRouterEvents();
   return (
     <>
-      <Menu items={items} />
-      <Header />
       <Component {...pageProps} />
     </>
   );

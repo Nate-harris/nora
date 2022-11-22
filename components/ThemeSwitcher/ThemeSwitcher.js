@@ -40,25 +40,23 @@ const ThemeSwitcher = () => {
   const currentTheme = themes[currentIndex];
 
   return (
-    <div className="fixed right-0 top-0 bottom-0 flex items-center">
-      <div className="theme-switch">
-        <button
-          className="theme-switch--toggle"
-          onClick={() => setTheme(nextTheme.name)}
-          aria-label={`Change theme to ${nextTheme.title}`}
+    <div className="theme-switch">
+      <button
+        className="theme-switch--toggle"
+        onClick={() => setTheme(nextTheme.name)}
+        aria-label={`Change theme to ${nextTheme.title}`}
+      >
+        <svg
+          className="theme-switch--icon"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            className="theme-switch--icon"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d={currentTheme.icon} />
-          </svg>
-          <div className="theme-switch--label">{currentTheme.title}</div>
-        </button>
-      </div>
+          <path d={currentTheme.icon} />
+        </svg>
+        <div className="theme-switch--label">{currentTheme.title}</div>
+      </button>
     </div>
   );
 };

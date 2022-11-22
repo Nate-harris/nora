@@ -20,17 +20,17 @@ const { className, styles } = css.resolve`
 const variants = {
   initial: {
     opacity: 0,
-    y: 100,
+
     transition: FRAMER_TRANSITION_FASTEASE,
   },
   active: {
     opacity: 1,
-    y: 0,
+
     transition: FRAMER_TRANSITION_FASTEASE,
   },
   exit: {
     opacity: 0,
-    y: -100,
+
     transition: FRAMER_TRANSITION_FASTEASE,
   },
 };
