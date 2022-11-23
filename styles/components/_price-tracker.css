@@ -1,0 +1,42 @@
+.price-tracker {
+  @apply fixed z-11 top-0 left-0 right-0 flex justify-center items-start text-12 leading-100 p-24 pointer-events-none;
+  &--overlay {
+    @apply fixed -z-1 top-0 bottom-0 left-0 right-0 bg-black;
+  }
+  &--review {
+    @apply flex flex-col overflow-hidden;
+  }
+  &--container {
+    @apply relative flex items-start gap-12 pointer-events-auto;
+  }
+  &--bubble {
+    @apply font-delaGothicOne bg-orange text-white shadow-md px-12 pr-16 py-16;
+  }
+  &--label {
+    @apply font-courierSans text-white rounded-full shadow-md px-24 py-8 mr-24 bg-pageBG text-pageText;
+  }
+  &--row {
+    @apply py-12 border-b border-dashed border-white flex justify-between items-end;
+    &:first-of-type {
+      @apply border-t mt-36;
+    }
+
+    &--value {
+      @apply font-courierSans;
+    }
+  }
+  &--toggle {
+    @apply font-bold shadow-md h-42 w-42 rounded-full flex justify-center items-center bg-transparent border border-pageText text-pageText;
+    &:hover {
+      @apply border-orange text-orange;
+      background: hsla(var(--orange-hsl), 0.4);
+    }
+    &.is-active {
+      @apply bg-white text-pageText border-white;
+      &:hover {
+        @apply border-orange text-orange;
+        background: hsla(var(--orange-hsl), 0.4);
+      }
+    }
+  }
+}

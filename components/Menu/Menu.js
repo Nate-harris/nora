@@ -74,7 +74,7 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
       initial="hidden"
       animate={menuOpen ? "visible" : "hidden"}
       variants={containerVariants}
-      className="fixed left-0 right-0 top-0 bottom-0 z-10 bg-purple flex justify-center items-center overflow-hidden"
+      className="fixed left-0 right-0 top-0 bottom-0 z-12 bg-purple flex justify-center items-center overflow-hidden"
     >
       <WoodgrainShaderSketch
         className={"absolute top-0 left-0 right-0 bottom-0 -z-1"}
@@ -88,25 +88,27 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
         {menuOpen &&
           items?.map((item, index) => {
             return (
-              <motion.li
+              <CustomLink
                 key={index}
-                custom={{
-                  hasDelay,
-                  direction: index % 2 === 0 ? 1 : -1,
-                  offset: index,
-                }}
-                whileHover={"hover"}
-                initial="hidden"
-                animate="visible"
-                variants={listItemVariants}
-                className="text-64 font-delaGothicOne text-center uppercase text-white border-16 px-16 py-8 pb-16 border-white"
+                tabIndex={!hasFocus ? -1 : null}
+                link={{ ...item, title: null }}
+                onClick={onClick}
               >
-                <CustomLink
-                  tabIndex={!hasFocus ? -1 : null}
-                  link={item}
-                  onClick={onClick}
-                />
-              </motion.li>
+                <motion.li
+                  custom={{
+                    hasDelay,
+                    direction: index % 2 === 0 ? 1 : -1,
+                    offset: index,
+                  }}
+                  whileHover={"hover"}
+                  initial="hidden"
+                  animate="visible"
+                  variants={listItemVariants}
+                  className="text-64 font-delaGothicOne text-center uppercase text-white border-16 px-16 py-8 pb-16 border-white"
+                >
+                  {item.title}
+                </motion.li>
+              </CustomLink>
             );
           })}
       </ul>

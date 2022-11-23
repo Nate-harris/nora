@@ -18,7 +18,7 @@ const variants = {
   },
 };
 
-export default observer(({ maxNumLetters = 30 }) => {
+export default observer(({ pricePerLetter = 3000, maxNumLetters = 30 }) => {
   const inputRef = useRef();
   const spanRef = useRef();
   const scale = useMotionValue(1);
@@ -47,7 +47,7 @@ export default observer(({ maxNumLetters = 30 }) => {
     setName(name);
     const nameNoSpaces = name.replace(/\s/g, "");
     resize(nameNoSpaces);
-    updateBasePrice(nameNoSpaces.length * 6000);
+    updateBasePrice(nameNoSpaces.length * pricePerLetter);
   };
 
   const handleBlur = () => {

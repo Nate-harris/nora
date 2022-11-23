@@ -4,6 +4,7 @@ import cx from "classnames";
 import { getDynamicRoute, getStaticRoute } from "../../studio/lib/helpers";
 
 const CustomLink = ({ link, children, ...rest }) => {
+  console.log("link", link);
   const isLink = !!link.url;
   const isStatic = getStaticRoute(link.page?.type);
 

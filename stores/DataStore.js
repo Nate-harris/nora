@@ -13,6 +13,7 @@ class DataStore {
     palette: null,
     shipping: null,
     price: 0,
+    letterPrice: 0,
     basePrice: 0,
     framePrice: 0,
     shippingPrice: 0,
@@ -41,7 +42,9 @@ class DataStore {
       this.formData.shippingPrice
     );
   }
-
+  @action.bound updateLetterPrice(price) {
+    this.formData.letterPrice = price;
+  }
   @action.bound updateBasePrice(price) {
     this.formData.basePrice = price;
   }

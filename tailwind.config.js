@@ -98,7 +98,7 @@ module.exports = {
         acc[val] = `${val / 100}`;
         return acc;
       }, {}),
-    zIndex: new Array(11)
+    zIndex: new Array(20)
       .fill()
       .map((_, i) => i)
       .reduce((acc, val) => {

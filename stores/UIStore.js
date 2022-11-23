@@ -9,6 +9,7 @@ class UIStore {
 
   @observable formStep = 0;
   @observable menuOpen = false;
+  @observable reviewOpen = false;
 
   @action.bound setFormStep(step) {
     this.formStep = step;
@@ -24,6 +25,11 @@ class UIStore {
     this.menuOpen = !this.menuOpen;
   }
 
+  @action.bound toggleReviewOpen() {
+    console.log("toggleReviewOpen");
+    this.reviewOpen = !this.reviewOpen;
+  }
+
   @computed get noPreviousPage() {
     return this.formStep <= 0;
   }
@@ -32,6 +38,7 @@ class UIStore {
   }
   @action.bound clearRouteVariables() {
     this.menuOpen = false;
+    this.reviewOpen = false;
   }
 }
 

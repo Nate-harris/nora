@@ -10,11 +10,12 @@ import Description from "../Form/Description";
 import Layout from "./Layout";
 import { useEffect } from "react";
 import { useShoppingCart } from "use-shopping-cart";
-import { useUIStore } from "../../providers/RootStoreProvider";
+import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import StatusBar from "../StatusBar/StatusBar";
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 import { useWindowSize } from "../../utils/helpers";
 import dynamic from "next/dynamic";
+import { nameSelection } from "../../lib/sanity/queries";
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
   { ssr: false }
@@ -22,10 +23,12 @@ const WoodgrainShaderSketch = dynamic(
 
 export default observer(({ formData }) => {
   const { formStep } = useUIStore();
+  const { updateLetterPrice } = useDataStore();
 
   const { clearCart } = useShoppingCart();
 
   useEffect(() => {
+    updateLetterPrice(formData?.nameSelection?.price);
     clearCart();
   }, []);
 
@@ -37,7 +40,10 @@ export default observer(({ formData }) => {
     case 0:
       const { nameSelection } = formData;
       formScreen = (
-        <FormNameInput maxNumLetters={nameSelection?.maxNumLetters} />
+        <FormNameInput
+          pricePerLetter={nameSelection?.price}
+          maxNumLetters={nameSelection?.maxNumLetters}
+        />
       );
       description = formData?.nameSelection?.description;
       break;

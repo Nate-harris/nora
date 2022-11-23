@@ -7,9 +7,10 @@ import {
   GiCommercialAirplane,
 } from "react-icons/gi";
 import { BsGearWideConnected, BsWindow } from "react-icons/bs";
+
 export const storeSettings = S.listItem()
   .title("Order Form Settings")
-  .id("storeSettings")
+  .id("orderFormSettings")
   .child(
     S.list()
       .title("Store Settings")
@@ -17,13 +18,14 @@ export const storeSettings = S.listItem()
         S.listItem()
           .title("Commission Form")
           .child(
-            S.document()
-              .views([S.view.form()])
+            S.editor()
               .title("Commission Form")
+              .id("commission")
               .schemaType("commission")
               .documentId("commission")
           )
           .icon(GiWoodPile),
+
         S.listItem()
           .title("Palettes")
           .child(S.documentTypeList("palette").title("Palettes"))
@@ -33,6 +35,7 @@ export const storeSettings = S.listItem()
           .title("Frames")
           .child(S.documentTypeList("frame").title("Frames"))
           .icon(GiWoodFrame),
+
         S.listItem()
           .title("Shipping Options")
           .child(S.documentTypeList("shippingOption").title("Shipping Options"))
