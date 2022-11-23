@@ -16,6 +16,7 @@ import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 import { useWindowSize } from "../../utils/helpers";
 import dynamic from "next/dynamic";
 import { nameSelection } from "../../lib/sanity/queries";
+import { useTheme } from "next-themes";
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
   { ssr: false }
@@ -24,6 +25,7 @@ const WoodgrainShaderSketch = dynamic(
 export default observer(({ formData }) => {
   const { formStep } = useUIStore();
   const { updateLetterPrice } = useDataStore();
+  const { theme } = useTheme();
 
   const { clearCart } = useShoppingCart();
 
@@ -65,7 +67,7 @@ export default observer(({ formData }) => {
     case 4:
       formScreen = <OrderSummary />;
   }
-
+  console.log(theme);
   return (
     <>
       <Layout id={formStep}>
@@ -74,11 +76,11 @@ export default observer(({ formData }) => {
         </form>
       </Layout>
       <WoodgrainShaderSketch
-        className={"absolute top-0 left-0 right-0 bottom-0 -z-1"}
-        color={"#f2dcb5"}
-        alpha={220}
+        className="absolute top-0 left-0 right-0 bottom-0 -z-1"
         width={width}
         height={height}
+        scale={{ current: -2.0 }}
+        alpha={{ current: theme === "dark" ? 0.4 : 0.2 }}
       />
       <Description value={description} />
       <StatusBar />

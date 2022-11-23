@@ -1,9 +1,10 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { animate, motion, useMotionValue } from "framer-motion";
 import { observer } from "mobx-react-lite";
 import {
+  FRAMER_TRANSITION_EASEOUT,
   FRAMER_TRANSITION_FASTEASE,
   FRAMER_TRANSITION_FASTEREASE,
 } from "../../lib/framer/animations";
@@ -52,8 +53,27 @@ const listItemVariants = {
   },
 };
 
+const shaderVariants = {
+  active: {
+    alpha: 1.0,
+    color: "rgb(242, 121, 34)",
+    scale: 10.0,
+  },
+  inactive: {
+    alpha: 0.2,
+    color: "rgb(255,255,255)",
+    scale: 5.0,
+  },
+};
+
 const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
   const { menuOpen } = useUIStore();
+  const [itemHovered, setItemHovered] = useState(false);
+
+  const alpha = useMotionValue(0.25);
+  const shaderColor = useMotionValue("rgb(255, 255, 255)");
+  const scale = useMotionValue(5.0);
+
   const [hasDelay, setHasDelay] = useState(true);
   const { width, height } = useWindowSize();
 
@@ -69,22 +89,57 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
     }
   }, [menuOpen, items.length]);
 
+  useEffect(() => {
+    if (itemHovered) {
+      animate(alpha, shaderVariants.active.alpha, FRAMER_TRANSITION_FASTEREASE);
+      animate(
+        shaderColor,
+        shaderVariants.active.color,
+        FRAMER_TRANSITION_FASTEREASE
+      );
+      animate(scale, shaderVariants.active.scale, {
+        type: "spring",
+        damping: 40,
+        stiffness: 100,
+      });
+    } else {
+      animate(
+        alpha,
+        shaderVariants.inactive.alpha,
+        FRAMER_TRANSITION_FASTEREASE
+      );
+      animate(
+        shaderColor,
+        shaderVariants.inactive.color,
+        FRAMER_TRANSITION_FASTEREASE
+      );
+
+      animate(scale, shaderVariants.inactive.scale, {
+        type: "spring",
+        damping: 40,
+        stiffness: 100,
+      });
+    }
+  }, [itemHovered, alpha, shaderColor, scale]);
+
   return (
     <motion.nav
       initial="hidden"
       animate={menuOpen ? "visible" : "hidden"}
       variants={containerVariants}
-      className="fixed left-0 right-0 top-0 bottom-0 z-12 bg-purple flex justify-center items-center overflow-hidden"
+      className="menu"
     >
       <WoodgrainShaderSketch
-        className={"absolute top-0 left-0 right-0 bottom-0 -z-1"}
-        color={"#f2dcb5"}
-        alpha={220}
+        className="menu--overlay"
         width={width}
         height={height}
+        color={shaderColor}
+        scale={scale}
+        alpha={alpha}
+        offset={{ current: { x: 2.0, y: 1.5 } }}
       />
 
-      <ul {...rest} className="flex flex-col gap-y-48">
+      <ul {...rest} className="menu--container">
         {menuOpen &&
           items?.map((item, index) => {
             return (
@@ -100,11 +155,13 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
                     direction: index % 2 === 0 ? 1 : -1,
                     offset: index,
                   }}
+                  onMouseEnter={() => setItemHovered(true)}
+                  onMouseLeave={() => setItemHovered(false)}
                   whileHover={"hover"}
                   initial="hidden"
                   animate="visible"
                   variants={listItemVariants}
-                  className="text-64 font-delaGothicOne text-center uppercase text-white border-16 px-16 py-8 pb-16 border-white"
+                  className="menu--item"
                 >
                   {item.title}
                 </motion.li>

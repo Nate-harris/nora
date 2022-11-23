@@ -1,5 +1,5 @@
 .price-tracker {
-  @apply fixed z-11 top-0 left-0 right-0 flex justify-center items-start text-12 leading-100 p-24 pointer-events-none;
+  @apply fixed z-9 top-0 left-0 right-0 flex justify-center items-start text-12 leading-100 p-24 pointer-events-none;
   &--overlay {
     @apply fixed -z-1 top-0 bottom-0 left-0 right-0 bg-black;
   }
@@ -32,7 +32,7 @@
       background: hsla(var(--orange-hsl), 0.4);
     }
     &.is-active {
-      @apply bg-white text-pageText border-white;
+      @apply text-pageText border-pageText;
       &:hover {
         @apply border-orange text-orange;
         background: hsla(var(--orange-hsl), 0.4);

@@ -1,23 +1,23 @@
 precision mediump float;
 
 uniform vec2 u_resolution;
+uniform vec3 u_color;
 uniform float u_time;
 uniform float u_percent;
+uniform float u_alpha;
+uniform vec2 u_offset;
+uniform float u_scale;
+uniform float u_rate;
+
 
 varying float vZ;
 
-
-
-
 #define PI 3.14159265358979323846
-
 
 float random (in vec2 st) {
     return fract(cos(dot(st.xy,vec2(-0.400,-2.30))) * 43758.5453123);
 }
 
-// Value noise by Inigo Quilez - iq/2013
-// https://www.shadertoy.com/view/lsf3WH
 float noise(vec2 st) {
     vec2 i = floor(st);
     vec2 f = fract(st);
@@ -29,35 +29,35 @@ float noise(vec2 st) {
 }
 
 mat2 rotate2d(float angle){
-    return mat2(cos(angle),-sin(angle),
-                sin(angle),cos(angle));
+    return mat2(cos(angle),-sin(angle), sin(angle),cos(angle));
 }
 
 float lines(in vec2 pos, float b){
-    float scale = 5.0;
-    pos *= scale+u_time*0.001;
-    return smoothstep(0.0,b,tan(pos.x*PI+u_time*0.8));
+    float scale = u_scale;
+    pos *= scale+u_time*u_rate;
+    return smoothstep(0.0,b,tan(pos.x*PI+u_time));
 }
 
-
 void main(void) {
- vec2 st = gl_FragCoord.xy/u_resolution.xy;
+    
+    vec2 st = gl_FragCoord.xy/u_resolution.xy;
     st.y *= u_resolution.y/u_resolution.x;
 
-    vec2 pos = st.xy*vec2(2.,1.);
+    vec2 pos = st.xy*vec2(u_offset.x,u_offset.y);
 
-  float pattern = pos.x;
-  pos = rotate2d( noise(pos) ) * pos;
-  pattern =  lines(pos,0.);
-  float invertPattern = pow(pattern, -1.);
-
-  vec3 color = vec3(0.827, 0.6549, 0.490);
+    float pattern = pos.x;
+    pos = rotate2d( noise(pos) ) * pos;
+    pattern =  lines(pos,0.);
+    float invertPattern = pow(pattern, -1.);
+    
+    vec3 color = vec3(u_color);
   
-  gl_FragColor = vec4(vec3(invertPattern)*color,1.);
+    gl_FragColor = vec4(vec3(invertPattern)*color,1.);
 
-  if(pattern - u_percent < 0.0) {
-      gl_FragColor.a = 0.0;    
-  } else {
-     gl_FragColor.a = 0.15;    
-  }
+    if(pattern - u_percent < 0.0) {
+        gl_FragColor.a = 0.0;    
+    } else {
+        gl_FragColor.a = u_alpha;    
+    }
+
 }

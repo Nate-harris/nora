@@ -1,0 +1,15 @@
+.menu {
+  @apply fixed left-0 right-0 top-0 bottom-0 z-10 bg-purple flex justify-center items-center overflow-hidden;
+  &--overlay {
+    @apply absolute top-0 left-0 right-0 bottom-0 -z-1;
+  }
+  &--container {
+    @apply flex flex-col gap-y-48;
+  }
+  &--item {
+    @apply text-64 font-delaGothicOne text-center uppercase text-white border-16 px-16 py-8 pb-16 border-white;
+    &:hover {
+      background: hsla(var(--white-hsl), 0.2);
+    }
+  }
+}

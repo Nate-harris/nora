@@ -65,7 +65,7 @@ const Icon = observer(({ isOrderPage }) => {
 
   return (
     <Link href="/">
-      <a>
+      <a className="pointer-events-auto">
         <svg
           className="w-120"
           xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +95,7 @@ const Hamburger = observer(({ isOrderPage, onClick }) => {
 
   return (
     <button
-      className="bg-transparent w-48"
+      className="bg-transparent w-48 pointer-events-auto"
       type="button"
       onClick={toggleMenuOpen}
     >
@@ -138,7 +138,7 @@ const Header = ({ data = {}, isOrderPage }) => {
       <Menu items={data.menu.items} />
       <header
         className={cx(
-          "fixed top-0 right-0 left-0 z-10 p-32 flex justify-between"
+          "fixed top-0 right-0 left-0 z-10 p-32 flex justify-between pointer-events-none"
         )}
       >
         <Icon isOrderPage={isOrderPage} />

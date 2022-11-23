@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import { memo } from "react";
 const Sketch = dynamic(() => import("react-p5").then((mod) => mod.default), {
   ssr: false,
@@ -8,25 +8,26 @@ import { hexToRgb } from "../utils/colors";
 
 const WoodgrainShaderSketch = ({
   className,
-  color = "#ffffff",
-  height = 1400,
+  color = { current: "rgb(255,255,255)" },
+  offset = { current: { x: 2.0, y: 1.0 } },
+  rate = { current: 0.001 },
+  scale = { current: 5.0 },
+  height = 1000,
   width = 1000,
-  alpha = 240,
+  alpha = { current: 0.15 },
 }) => {
-  let shader;
-  let shaderTexture;
-
-  let fillColor = hexToRgb(color);
+  const shaderTexture = useRef(null);
+  const shader = useRef(null);
 
   function preload(p5) {
     // load the shader
-    shader = p5.loadShader(
+    shader.current = p5.loadShader(
       "/shaders/woodgrain/texture.vert",
       "/shaders/woodgrain/texture.frag"
     );
   }
 
-  const setup = useCallback((p5, canvasParentRef) => {
+  const setup = (p5, canvasParentRef) => {
     // disables scaling for retina screens which can create inconsistent scaling between displays
     p5.pixelDensity(1);
     // shaders require WEBGL mode to work
@@ -35,33 +36,43 @@ const WoodgrainShaderSketch = ({
     p5.noStroke();
 
     // initialize the createGraphics layers
-    shaderTexture = p5.createGraphics(width, height, p5.WEBGL);
+    shaderTexture.current = p5.createGraphics(width, height, p5.WEBGL);
 
     // turn off the createGraphics layers stroke
-    shaderTexture.noStroke();
-  }, []);
+    shaderTexture.current.noStroke();
+  };
 
-  const draw = useCallback((p5) => {
+  const draw = (p5) => {
     p5.clear();
     // instead of just setting the active shader we are passing it to the createGraphics layer
-    shaderTexture.shader(shader);
+    shaderTexture.current.shader(shader.current);
 
     // here we're using setUniform() to send our uniform values to the shader
-    shader.setUniform("u_resolution", [width, height]);
-    shader.setUniform("u_time", p5.millis() / 1000.0);
-    shader.setUniform("u_percent", 1.0);
+    shader.current.setUniform("u_resolution", [width, height]);
+    shader.current.setUniform("u_offset", [offset.current.x, offset.current.y]);
+    shader.current.setUniform("u_rate", rate.current);
+    shader.current.setUniform("u_scale", scale.current);
+
+    shader.current.setUniform(
+      "u_color",
+      color.current.match(/\d+/g).map((x) => x / 255)
+    );
+    shader.current.setUniform("u_time", p5.millis() / 1000.0);
+    shader.current.setUniform("u_percent", 1.0);
+    shader.current.setUniform("u_alpha", alpha.current);
+
     p5.blendMode(p5.ADD);
 
     // passing the shaderTexture layer geometry to render on
-    shaderTexture.rect(0, 0, width, height);
+    shaderTexture.current.rect(0, 0, width, height);
 
-    p5.texture(shaderTexture);
+    p5.texture(shaderTexture.current);
     p5.rect((-1 * width) / 2, (-1 * height) / 2, width, height);
 
     p5.blendMode(p5.SCREEN);
     p5.translate(0, 0, 0);
     p5.push();
-  }, []);
+  };
 
   return (
     <Sketch className={className} setup={setup} draw={draw} preload={preload} />

@@ -7,6 +7,7 @@ import imageUrlFor from "../../lib/sanity/imageUrlFor";
 import cx from "classnames";
 import { useState } from "react";
 import { formatCurrencyString } from "use-shopping-cart";
+import Photo from "../Photo";
 const variants = {
   hidden: { height: "auto", opacity: 0 },
   inactive: {
@@ -20,7 +21,7 @@ const variants = {
     transition: FRAMER_TRANSITION_FASTEASE,
   },
   hover: {
-    scale: 0.99,
+    scale: 0.95,
   },
 };
 
@@ -34,6 +35,7 @@ const Frame = ({
 }) => {
   const src = imageUrlFor(templateImage).width(1080);
   const [hovered, setHovered] = useState(false);
+  console.log(templateImage);
   return (
     <motion.div
       key={type}
@@ -46,14 +48,18 @@ const Frame = ({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <img className="w-full max-w-2xl" src={src} alt={`Frame ${type}`} />
+      <Photo
+        className={` w-xl pb-[${templateImage.aspectRatio * 100}%]`}
+        photo={templateImage}
+        alt={`Frame ${type}`}
+      />
       <span
         className={cx(
-          "absolute text-24 transition-all duration-300 font-delaGothicOne uppercase shadow-md -translate-x-1/2 top-1/2 -translate-y-1/2 p-12 rounded-md",
+          "absolute text-12 transition-all duration-300 shadow-md -rotate-90 top-1/2 -translate-y-1/2 p-12 px-48 rounded-full",
           type === "Walnut" && "text-white bg-orange",
           type === "Red Oak" && "text-white bg-orange",
-          (active || hovered) && "rotate-0",
-          !(active || hovered) && "-rotate-90"
+          (active || hovered) && "rotate-0 -translate-x-3/4",
+          !(active || hovered) && "-translate-x-0"
         )}
       >
         {type}
