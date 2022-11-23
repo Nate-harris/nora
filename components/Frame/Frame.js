@@ -58,8 +58,8 @@ const Frame = ({
           "absolute text-12 transition-all duration-300 shadow-md -rotate-90 top-1/2 -translate-y-1/2 p-12 px-48 rounded-full",
           type === "Walnut" && "text-white bg-orange",
           type === "Red Oak" && "text-white bg-orange",
-          (active || hovered) && "rotate-0 -translate-x-3/4",
-          !(active || hovered) && "-translate-x-0"
+          (active || hovered) && "opacity-100 -translate-x-3/4",
+          !(active || hovered) && "opacity-0 -translate-x-0"
         )}
       >
         {type}
