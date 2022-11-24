@@ -34,6 +34,7 @@ const GalleryItem = ({ data = {} }) => {
       style={{ backgroundColor: borderColor.hex }}
       className="gallery-section--item"
       onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       <div className="gallery-section--item-overlay">
         <motion.div

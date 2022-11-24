@@ -76,7 +76,7 @@ export default observer(({ formData }) => {
         </form>
       </Layout>
       <WoodgrainShaderSketch
-        className="absolute top-0 left-0 right-0 bottom-0 -z-1"
+        className="hidden md:block absolute top-0 left-0 right-0 bottom-0 -z-1"
         width={width}
         height={height}
         scale={{ current: -2.0 }}

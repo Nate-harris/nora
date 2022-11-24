@@ -18,7 +18,7 @@ const Description = observer(({ value }) => {
   const { formStep } = useUIStore();
   if (!value) return null;
   return (
-    <div className="fixed bottom-0 left-0 right-0 flex justify-center">
+    <div className="hidden md:flex fixed bottom-0 left-0 right-0 justify-center">
       <AnimatePresence>
         <motion.div
           layout

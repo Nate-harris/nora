@@ -90,7 +90,7 @@ const Icon = observer(({ isOrderPage }) => {
   return (
     <Link href="/">
       <a
-        className="pointer-events-auto"
+        className="pointer-events-auto justify-self-center self-center"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >

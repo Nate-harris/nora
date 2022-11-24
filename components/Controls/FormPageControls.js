@@ -10,19 +10,9 @@ import PriceTracker from "../PriceTracker/PriceTracker";
 import { useCallback, useState } from "react";
 import { fetchPostJSON } from "../../utils/apiHelpers";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
+import { useIsSmall } from "../../utils/useMediaQueries";
 
 const FORM_SCREENS = 4;
-
-const variants = {
-  in: {
-    opacity: 1,
-    transition: FRAMER_TRANSITION_FASTEASE,
-  },
-  out: {
-    opacity: 0,
-    transition: FRAMER_TRANSITION_FASTEASE,
-  },
-};
 
 const useIsNextButtonDisabled = () => {
   const { formStep } = useUIStore();
@@ -39,11 +29,24 @@ const useIsNextButtonDisabled = () => {
   }
 };
 
+const variants = {
+  active: {
+    y: 0,
+
+    transition: FRAMER_TRANSITION_FASTEASE,
+  },
+
+  inactive: {
+    y: -60,
+    transition: FRAMER_TRANSITION_FASTEASE,
+  },
+};
+
 const FormPageControls = () => {
   const { addItem, cartDetails, redirectToCheckout, clearCart } =
     useShoppingCart();
   const [loading, setLoading] = useState(false);
-
+  const isSmall = useIsSmall();
   const {
     formStep,
     incrementFormStep,
@@ -85,10 +88,13 @@ const FormPageControls = () => {
     //if nothing went wrong, sends user to Stripe checkout
     redirectToCheckout({ sessionId: response.id });
   };
-  console.log(formStep, FORM_SCREENS);
 
   return (
-    <div className={"fixed bottom-0 right-0 left-0 p-32 flex justify-between"}>
+    <motion.div
+      variants={variants}
+      animate={isSmall && productPrice !== 0 ? "inactive" : "active"}
+      className={"fixed bottom-0 right-0 left-0 p-32 flex justify-between"}
+    >
       <Button
         key="previous-button"
         onClick={handlePreviousButtonPressed}
@@ -113,7 +119,7 @@ const FormPageControls = () => {
           className="is-active-control"
         />
       )}
-    </div>
+    </motion.div>
   );
 };
 export default observer(FormPageControls);

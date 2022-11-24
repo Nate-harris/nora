@@ -16,26 +16,27 @@ import { useRef } from "react";
 import { useRect } from "@reach/rect";
 import cx from "classnames";
 import { truncateString } from "../../studio/lib/helpers";
+import { useIsSmall } from "../../utils/useMediaQueries";
 
 const variants = {
   active: {
     opacity: 1,
     y: 0,
-    padding: "auto",
+
     transition: FRAMER_TRANSITION_FASTEASE,
   },
 
-  inactive: {
+  inactive: ({ direction }) => ({
     opacity: 0,
-    y: -100,
+    y: direction * 100,
     transition: FRAMER_TRANSITION_FASTEASE,
-  },
+  }),
 };
 
 const reviewVariants = {
-  active: (height) => ({
+  active: ({ height, width }) => ({
     height,
-    width: 500,
+    width,
     opacity: 1,
     transition: {
       duration: 0.7,
@@ -112,13 +113,19 @@ export default observer(() => {
     value: formData?.shippingPrice,
     currency: "USD",
   });
+
+  const isSmall = useIsSmall();
   return (
     <>
       <motion.div
+        custom={{
+          direction: isSmall ? 1 : -1,
+        }}
         variants={variants}
         className={"price-tracker"}
         initial={"inactive"}
         animate={productPrice === 0 ? "inactive" : "active"}
+        onClick={toggleReviewOpen}
       >
         <motion.div
           variants={overlayVariants}
@@ -131,16 +138,30 @@ export default observer(() => {
 
         <div className="price-tracker--container">
           <div className="price-tracker--bubble">
-            <div>
-              <span className="price-tracker--label">Total</span>
-              {formatCurrencyString({
-                value: productPrice,
-                currency: "USD",
-              })}
+            <div className="price-tracker--bubble-header">
+              <div className="price-tracker--bubble-header-label">
+                <span className="price-tracker--label">Total</span>
+                {formatCurrencyString({
+                  value: productPrice,
+                  currency: "USD",
+                })}
+              </div>
+              <button
+                onClick={toggleReviewOpen}
+                className={cx(
+                  "price-tracker--mobile-toggle",
+                  reviewOpen && "is-active"
+                )}
+              >
+                {reviewOpen ? "x" : "i"}
+              </button>
             </div>
 
             <motion.div
-              custom={reviewHeight}
+              custom={{
+                height: reviewHeight,
+                width: isSmall ? "100%" : 500,
+              }}
               variants={reviewVariants}
               animate={reviewOpen ? "active" : "inactive"}
               className="price-tracker--review"
