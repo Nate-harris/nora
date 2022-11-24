@@ -49,13 +49,13 @@ const Frame = ({
       onMouseLeave={() => setHovered(false)}
     >
       <Photo
-        className={` w-xl pb-[${templateImage.aspectRatio * 100}%]`}
+        className={`w-sm md:w-xl pb-[${templateImage.aspectRatio * 100}%]`}
         photo={templateImage}
         alt={`Frame ${type}`}
       />
       <span
         className={cx(
-          "absolute text-12 transition-all duration-300 shadow-md -rotate-90 top-1/2 -translate-y-1/2 p-12 px-48 rounded-full",
+          "hidden md:block absolute text-12 transition-all duration-300 shadow-md -rotate-90 top-1/2 -translate-y-1/2 p-12 px-48 rounded-full",
           type === "Walnut" && "text-white bg-orange",
           type === "Red Oak" && "text-white bg-orange",
           (active || hovered) && "opacity-100 -translate-x-3/4",

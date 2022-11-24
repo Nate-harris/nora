@@ -7,6 +7,7 @@ import {
 import css from "styled-jsx/css";
 import cx from "classnames";
 import { useCallback, useState } from "react";
+
 const FRAME_COLORS = {
   LIGHT: "light",
   DARK: "dark",
@@ -291,7 +292,7 @@ const Palette = ({
       initial={active ? "active" : noneSelected ? "hidden" : "inactive"}
       animate={active ? "active" : noneSelected ? "visible" : "inactive"}
       variants={containerVariants}
-      className="mx-auto w-2xl overflow-hidden"
+      className="mx-auto w-sm md:w-2xl overflow-hidden"
       value={name}
       onClick={onClick}
     >

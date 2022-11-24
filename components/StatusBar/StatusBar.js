@@ -28,7 +28,7 @@ const Item = ({ label, active }) => {
     <li className={cx(styles.li, "relative")}>
       <div
         className={cx(
-          "relative flex items-center px-8 my-12 transition-all duration-700 before:shadow-md before:flex before:justify-center before:items-center before:relative before:rounded-full before:h-24 before:w-24 before:content-[counter(li-count)] before:transition-all before:duration-700",
+          "text-8 md:text-12 my-8 md:my-12 relative flex items-center px-8 transition-all duration-700 before:shadow-md before:flex before:justify-center before:items-center before:relative before:rounded-full before:h-16 before:w-16 md:before:h-24 md:before:w-24 before:content-[counter(li-count)] before:transition-all before:duration-700",
           active && "text-pageBG before:bg-pageBG before:text-pageText",
           !active && "text-pageText before:bg-pageText before:text-pageBG"
         )}
@@ -41,7 +41,7 @@ const Item = ({ label, active }) => {
         <motion.div
           style={{ width: itemWidth }}
           layoutId="status"
-          className="shadow-md absolute -z-1 -top-6 -bottom-6 right-0 left-0 rounded-full bg-pageText"
+          className="shadow-md absolute -z-1 -top-4 md:-top-6 -bottom-4 md:-bottom-6 right-0 left-0 rounded-full bg-pageText"
         />
       )}
     </li>
@@ -53,7 +53,7 @@ const StatusBar = observer(() => {
   const steps = ["Name", "Color", "Frame", "Shipping", "Review"];
   return (
     <div
-      className={"fixed left-24 md:left-36 top-180 md:top-1/2 -translate-y-1/2"}
+      className={"fixed left-28 md:left-36 top-150 md:top-1/2 -translate-y-1/2"}
     >
       <ul className={cx("", styles.ul)}>
         {steps.map((step, index) => {
