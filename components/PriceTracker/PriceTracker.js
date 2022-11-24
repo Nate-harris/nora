@@ -93,6 +93,10 @@ export default observer(() => {
     }
   }, [reviewRect]);
 
+  const mobileNamePrice = formatCurrencyString({
+    value: formData.name.length * formData?.letterPrice,
+    currency: "USD",
+  });
   const namePrice = `${formData.name.length} x letters (${formatCurrencyString({
     value: formData?.letterPrice,
     currency: "USD",
@@ -146,15 +150,6 @@ export default observer(() => {
                   currency: "USD",
                 })}
               </div>
-              <button
-                onClick={toggleReviewOpen}
-                className={cx(
-                  "price-tracker--mobile-toggle",
-                  reviewOpen && "is-active"
-                )}
-              >
-                {reviewOpen ? "x" : "i"}
-              </button>
             </div>
 
             <motion.div
@@ -173,7 +168,7 @@ export default observer(() => {
                       {truncateString(formData.name, 10)}
                     </span>
                     <span className="price-tracker--row--value">
-                      {namePrice}
+                      {isSmall ? mobileNamePrice : namePrice}
                     </span>
                   </div>
                 )}

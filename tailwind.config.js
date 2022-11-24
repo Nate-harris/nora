@@ -77,7 +77,7 @@ module.exports = {
         acc[val] = `${val / 10}rem`;
         return acc;
       }, {}),
-    lineHeight: new Array(161)
+    lineHeight: new Array(250)
       .fill()
       .map((_, i) => i)
       .reduce((acc, val) => {

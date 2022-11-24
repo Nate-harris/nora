@@ -6,12 +6,15 @@ import { RootStoreProvider } from "../providers/RootStoreProvider";
 import { ThemeProvider } from "next-themes";
 import Cart from "../components/Cart";
 import { useRouterEvents } from "../utils/useRouterEvents";
+import { MotionConfig } from "framer-motion";
 
 function App({ Component, pageProps }) {
   useRouterEvents();
   return (
     <>
-      <Component {...pageProps} />
+      <MotionConfig reducedMotion="always">
+        <Component {...pageProps} />
+      </MotionConfig>
     </>
   );
 }

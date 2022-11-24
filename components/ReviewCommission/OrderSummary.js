@@ -53,7 +53,7 @@ const TextLine = ({ children }) => {
 export default observer(() => {
   const { formData, productPrice } = useDataStore();
   return (
-    <div className="sm:text-36 text-18 font-light leading-150 text-center flex flex-col gap-32">
+    <div className="sm:text-36 text-18 font-light leading-210 md:leading-150 text-center flex flex-col gap-20 md:gap-32 px-32">
       <div>
         A puzzle for{" "}
         <span className="font-delaGothicOne uppercase border-6 border-pageText px-8 pb-4">
@@ -69,7 +69,7 @@ export default observer(() => {
         .
       </div>
 
-      <div className="flex justify-center items-center">
+      <div>
         It will use the
         <span className="inline-block mx-12">
           <Palette colors={formData.palette.colors} width={180} />
@@ -77,7 +77,7 @@ export default observer(() => {
         palette.
       </div>
 
-      <div className="flex justify-center items-center">
+      <div>
         It will have a
         <span className="font-delaGothicOne uppercase ml-16 whitespace-nowrap">
           {formData.frame.type}
