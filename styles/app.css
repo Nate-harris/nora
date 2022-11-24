@@ -29,6 +29,7 @@
 @import "components/_theme-switch";
 
 @import "modules/_hero";
+@import "modules/_gallery";
 @import "modules/_divider";
 @import "modules/_collection";
 @import "modules/_filters";

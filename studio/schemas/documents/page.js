@@ -52,7 +52,11 @@ export default {
       title: "Page Content",
       name: "modules",
       type: "array",
-      of: [{ type: "grid" }, { type: "dividerPhoto" }],
+      of: [
+        { type: "grid" },
+        { type: "dividerPhoto" },
+        { type: "gallerySection" },
+      ],
       hidden: ({ parent }) => parent?.isOrderPage,
       group: "content",
     },
