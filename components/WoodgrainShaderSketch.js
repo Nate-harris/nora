@@ -10,7 +10,7 @@ const WoodgrainShaderSketch = ({
   className,
   color = { current: "rgb(255,255,255)" },
   offset = { current: { x: 2.0, y: 1.0 } },
-  rate = { current: 0.001 },
+  rate = { current: 0.8 },
   scale = { current: 5.0 },
   height = 1000,
   width = 1000,

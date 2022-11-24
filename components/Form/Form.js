@@ -80,7 +80,8 @@ export default observer(({ formData }) => {
         width={width}
         height={height}
         scale={{ current: -2.0 }}
-        alpha={{ current: theme === "dark" ? 0.4 : 0.2 }}
+        rate={{ current: 0.2 }}
+        alpha={{ current: theme === "dark" ? 0.4 : 0.15 }}
       />
       <Description value={description} />
       <StatusBar />

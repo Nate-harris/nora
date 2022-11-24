@@ -50,25 +50,29 @@ const listItemVariants = {
     opacity: 0,
     rotate: 0,
     y: -12,
+    transition: FRAMER_TRANSITION_FASTEASE,
   },
 };
 
-const shaderVariants = {
-  active: {
-    alpha: 1.0,
-    color: "rgb(242, 121, 34)",
-    scale: 10.0,
+const COLOR_COMBINATIONS = [
+  {
+    background: "rgb(170, 164, 208)",
+    shader: "rgb(242, 121, 34)",
   },
-  inactive: {
-    alpha: 0.2,
-    color: "rgb(255,255,255)",
-    scale: 5.0,
+  {
+    background: "rgb(203, 188, 154)",
+    shader: "rgb(239, 184, 87)",
   },
-};
+  {
+    background: "rgb(120, 190, 227)",
+    shader: "rgb(123, 183, 150)",
+  },
+];
 
 const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
   const { menuOpen } = useUIStore();
   const [itemHovered, setItemHovered] = useState(false);
+  const [colorIndex, setColorIndex] = useState(0);
 
   const alpha = useMotionValue(0.25);
   const shaderColor = useMotionValue("rgb(255, 255, 255)");
@@ -76,7 +80,6 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
 
   const [hasDelay, setHasDelay] = useState(true);
   const { width, height } = useWindowSize();
-
   // Don't want the delay for our hover animation so remove it once
   // we have opened the menu
   useEffect(() => {
@@ -86,44 +89,68 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
       }, items.length * ITEM_STAGGER + INITIAL_DELAY);
     } else {
       setHasDelay(true);
+
+      // Every time menu is closed, wait for exit then cycle to next available color
+      setTimeout(() => {
+        setColorIndex((prev) => (prev + 1) % COLOR_COMBINATIONS.length);
+      }, (FRAMER_TRANSITION_FASTEASE.delay + FRAMER_TRANSITION_FASTEASE.duration) * 1000);
     }
   }, [menuOpen, items.length]);
 
+  const shaderVariants = {
+    active: {
+      alpha: 1.0,
+      color: COLOR_COMBINATIONS[colorIndex].shader,
+      scale: 12.0,
+    },
+    inactive: {
+      alpha: 0.2,
+      color: "rgb(255, 255, 255)",
+      scale: 5.0,
+    },
+  };
+
   useEffect(() => {
     if (itemHovered) {
-      animate(alpha, shaderVariants.active.alpha, FRAMER_TRANSITION_FASTEREASE);
-      animate(
-        shaderColor,
-        shaderVariants.active.color,
-        FRAMER_TRANSITION_FASTEREASE
-      );
+      animate(alpha, shaderVariants.active.alpha, {
+        type: "tween",
+        ease: "easeInOut",
+        delay: 0.2,
+        duration: 0.8,
+      });
+      animate(shaderColor, shaderVariants.active.color, {
+        type: "tween",
+        ease: "easeInOut",
+        delay: 0.2,
+        duration: 0.8,
+      });
       animate(scale, shaderVariants.active.scale, {
-        type: "spring",
-        damping: 40,
-        stiffness: 100,
+        ease: "easeInOut",
+        duration: 1.2,
       });
     } else {
-      animate(
-        alpha,
-        shaderVariants.inactive.alpha,
-        FRAMER_TRANSITION_FASTEREASE
-      );
-      animate(
-        shaderColor,
-        shaderVariants.inactive.color,
-        FRAMER_TRANSITION_FASTEREASE
-      );
-
+      animate(alpha, shaderVariants.inactive.alpha, {
+        type: "tween",
+        ease: "easeInOut",
+        delay: 0.6,
+        duration: 0.8,
+      });
+      animate(shaderColor, shaderVariants.inactive.color, {
+        type: "tween",
+        ease: "easeInOut",
+        delay: 0.6,
+        duration: 0.8,
+      });
       animate(scale, shaderVariants.inactive.scale, {
-        type: "spring",
-        damping: 40,
-        stiffness: 100,
+        ease: "easeInOut",
+        duration: 1.2,
       });
     }
   }, [itemHovered, alpha, shaderColor, scale]);
 
   return (
     <motion.nav
+      style={{ background: COLOR_COMBINATIONS[colorIndex].background }}
       initial="hidden"
       animate={menuOpen ? "visible" : "hidden"}
       variants={containerVariants}
@@ -140,34 +167,33 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
       />
 
       <ul {...rest} className="menu--container">
-        {menuOpen &&
-          items?.map((item, index) => {
-            return (
-              <CustomLink
-                key={index}
-                tabIndex={!hasFocus ? -1 : null}
-                link={{ ...item, title: null }}
-                onClick={onClick}
+        {items?.map((item, index) => {
+          return (
+            <CustomLink
+              key={index}
+              tabIndex={!hasFocus ? -1 : null}
+              link={{ ...item, title: null }}
+              onClick={onClick}
+            >
+              <motion.li
+                custom={{
+                  hasDelay,
+                  direction: index % 2 === 0 ? 1 : -1,
+                  offset: index,
+                }}
+                onMouseEnter={() => setItemHovered(true)}
+                onMouseLeave={() => setItemHovered(false)}
+                whileHover={"hover"}
+                initial="hidden"
+                animate={menuOpen ? "visible" : "hidden"}
+                variants={listItemVariants}
+                className="menu--item"
               >
-                <motion.li
-                  custom={{
-                    hasDelay,
-                    direction: index % 2 === 0 ? 1 : -1,
-                    offset: index,
-                  }}
-                  onMouseEnter={() => setItemHovered(true)}
-                  onMouseLeave={() => setItemHovered(false)}
-                  whileHover={"hover"}
-                  initial="hidden"
-                  animate="visible"
-                  variants={listItemVariants}
-                  className="menu--item"
-                >
-                  {item.title}
-                </motion.li>
-              </CustomLink>
-            );
-          })}
+                {item.title}
+              </motion.li>
+            </CustomLink>
+          );
+        })}
       </ul>
     </motion.nav>
   );

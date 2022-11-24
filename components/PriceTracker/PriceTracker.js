@@ -11,7 +11,7 @@ import {
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import imageUrlFor from "../../lib/sanity/imageUrlFor";
 import Palette from "../ReviewCommission/Palette";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useRect } from "@reach/rect";
 import cx from "classnames";
@@ -32,26 +32,9 @@ const variants = {
   },
 };
 
-const bubbleVariants = {
-  active: {
-    borderRadius: 25,
-    transition: {
-      duration: 0.7,
-      delay: 0,
-    },
-  },
-  inactive: {
-    borderRadius: 25,
-    transition: {
-      duration: 0.2,
-      delay: 1.8,
-    },
-  },
-};
-
 const reviewVariants = {
-  active: {
-    height: "auto",
+  active: (height) => ({
+    height,
     width: 500,
     opacity: 1,
     transition: {
@@ -62,7 +45,7 @@ const reviewVariants = {
         duration: 0.8,
       },
     },
-  },
+  }),
 
   inactive: {
     height: 0,
@@ -73,7 +56,7 @@ const reviewVariants = {
       delay: 0.1,
       opacity: {
         delay: 0,
-        duration: 0.3,
+        duration: 0.25,
       },
     },
   },
@@ -99,6 +82,15 @@ const overlayVariants = {
 export default observer(() => {
   const { reviewOpen, toggleReviewOpen } = useUIStore();
   const { formData, productPrice } = useDataStore();
+
+  const reviewRef = useRef();
+  const reviewRect = useRect(reviewRef);
+  const [reviewHeight, setReviewHeight] = useState(0);
+  useEffect(() => {
+    if (reviewRect) {
+      setReviewHeight(reviewRect.height);
+    }
+  }, [reviewRect]);
 
   const namePrice = `${formData.name.length} x letters (${formatCurrencyString({
     value: formData?.letterPrice,
@@ -133,16 +125,12 @@ export default observer(() => {
           animate={reviewOpen ? "active" : "inactive"}
           className={cx(
             "price-tracker--overlay",
-            !reviewOpen && "pointer-events-none"
+            reviewOpen && "pointer-events-auto"
           )}
         />
 
         <div className="price-tracker--container">
-          <motion.div
-            variants={bubbleVariants}
-            animate={reviewOpen ? "active" : "inactive"}
-            className="price-tracker--bubble"
-          >
+          <div className="price-tracker--bubble">
             <div>
               <span className="price-tracker--label">Total</span>
               {formatCurrencyString({
@@ -152,50 +140,58 @@ export default observer(() => {
             </div>
 
             <motion.div
+              custom={reviewHeight}
               variants={reviewVariants}
               animate={reviewOpen ? "active" : "inactive"}
               className="price-tracker--review"
             >
-              {formData?.name && (
-                <div className="price-tracker--row">
-                  <span className="price-tracker--row--label">
-                    {truncateString(formData.name, 10)}
-                  </span>
-                  <span className="price-tracker--row--value">{namePrice}</span>
-                </div>
-              )}
-              {formData?.palette && (
-                <div className="price-tracker--row">
-                  <span className="price-tracker--row--label">
-                    <Palette colors={formData.palette.colors} width={180} />
-                  </span>
-                  <span className="price-tracker--row--value">
-                    {palettePrice}
-                  </span>
-                </div>
-              )}
-              {formData?.frame && (
-                <div className="price-tracker--row">
-                  <span className="price-tracker--row--label">
-                    <img src={imageUrlFor(formData.frame.image).width(120)} />
-                  </span>
-                  <span className="price-tracker--row--value">
-                    {framePrice}
-                  </span>
-                </div>
-              )}
-              {formData?.shipping && (
-                <div className="price-tracker--row">
-                  <span className="price-tracker--row--label">
-                    {formData.shipping}
-                  </span>
-                  <span className="price-tracker--row--value">
-                    {shippingPrice}
-                  </span>
-                </div>
-              )}
+              <div ref={reviewRef}>
+                {formData?.name && (
+                  <div className="price-tracker--row">
+                    <span className="price-tracker--row--label">
+                      {truncateString(formData.name, 10)}
+                    </span>
+                    <span className="price-tracker--row--value">
+                      {namePrice}
+                    </span>
+                  </div>
+                )}
+                {formData?.palette && (
+                  <div className="price-tracker--row">
+                    <span className="price-tracker--row--label">
+                      <Palette colors={formData.palette.colors} width={180} />
+                    </span>
+                    <span className="price-tracker--row--value">
+                      {palettePrice}
+                    </span>
+                  </div>
+                )}
+                {formData?.frame && (
+                  <div className="price-tracker--row">
+                    <span className="price-tracker--row--label">
+                      <img
+                        className="min-w-[120px]"
+                        src={imageUrlFor(formData.frame.image).width(120)}
+                      />
+                    </span>
+                    <span className="price-tracker--row--value">
+                      {framePrice}
+                    </span>
+                  </div>
+                )}
+                {formData?.shipping && (
+                  <div className="price-tracker--row">
+                    <span className="price-tracker--row--label">
+                      {formData.shipping}
+                    </span>
+                    <span className="price-tracker--row--value">
+                      {shippingPrice}
+                    </span>
+                  </div>
+                )}
+              </div>
             </motion.div>
-          </motion.div>
+          </div>
 
           <button
             onClick={toggleReviewOpen}

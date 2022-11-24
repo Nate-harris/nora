@@ -10,13 +10,13 @@
     @apply relative flex items-start gap-12 pointer-events-auto;
   }
   &--bubble {
-    @apply font-delaGothicOne bg-orange text-white shadow-md px-12 pr-16 py-16;
+    @apply rounded-3xl font-delaGothicOne bg-orange text-white shadow-md px-12 pr-16 py-16;
   }
   &--label {
     @apply font-courierSans text-white rounded-full shadow-md px-24 py-8 mr-24 bg-pageBG text-pageText;
   }
   &--row {
-    @apply py-12 border-b border-dashed border-white flex justify-between items-end;
+    @apply py-12 whitespace-nowrap border-b border-dashed border-white flex justify-between items-end;
     &:first-of-type {
       @apply border-t mt-36;
     }
