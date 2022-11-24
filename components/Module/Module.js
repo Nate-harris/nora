@@ -5,7 +5,6 @@ import Grid from "./Grid";
 
 export const Module = ({ index, data }) => {
   if (!data) return null;
-  console.log(data);
   const { _type } = data;
   switch (_type) {
     case "grid":

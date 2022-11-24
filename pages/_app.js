@@ -7,12 +7,14 @@ import { ThemeProvider } from "next-themes";
 import Cart from "../components/Cart";
 import { useRouterEvents } from "../utils/useRouterEvents";
 import { MotionConfig } from "framer-motion";
+import { useIsSmall } from "../utils/useMediaQueries";
 
 function App({ Component, pageProps }) {
   useRouterEvents();
+  const isSmall = useIsSmall();
   return (
     <>
-      <MotionConfig reducedMotion="always">
+      <MotionConfig reducedMotion={isSmall ? "always" : "user"}>
         <Component {...pageProps} />
       </MotionConfig>
     </>

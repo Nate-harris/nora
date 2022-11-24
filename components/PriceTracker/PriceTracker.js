@@ -129,7 +129,6 @@ export default observer(() => {
         className={"price-tracker"}
         initial={"inactive"}
         animate={productPrice === 0 ? "inactive" : "active"}
-        onClick={toggleReviewOpen}
       >
         <motion.div
           variants={overlayVariants}

@@ -37,6 +37,7 @@ class UIStore {
     return this.formStep + 1 > FORM_SCREENS;
   }
   @action.bound clearRouteVariables() {
+    console.log("clearRouteVariables");
     this.menuOpen = false;
     this.reviewOpen = false;
   }

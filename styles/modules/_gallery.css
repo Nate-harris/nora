@@ -7,6 +7,6 @@
     @apply bg-transparent z-2 absolute inset-36 md:inset-48;
   }
   &--label {
-    @apply overflow-hidden flex justify-center items-center font-delaGothicOne uppercase text-center text-32 md:text-64;
+    @apply overflow-hidden flex justify-center items-center font-delaGothicOne uppercase text-center text-32 md:text-48;
   }
 }
