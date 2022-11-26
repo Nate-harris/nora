@@ -17,7 +17,7 @@
 }
 
 .control {
-  @apply overflow-hidden sm:overflow-visible h-screen w-screen flex flex-col justify-center items-center relative text-left;
+  @apply overflow-hidden sm:overflow-visible min-h-screen w-screen flex flex-col sm:justify-center items-center relative text-left pt-164 sm:pt-0 px-24;
 
   &--group {
     @apply grid gap-y-8 grid-cols-1 sm:grid-cols-2;
@@ -132,7 +132,7 @@
   .xl-input {
     @apply relative leading-100 font-delaGothicOne text-center;
     input[type="text"] {
-      @apply border-16 sm:border-24 p-0 text-64 sm:text-148 text-center pb-10 sm:pb-20;
+      @apply border-16 sm:border-24 p-0 text-54 sm:text-148 text-center pb-10 sm:pb-20;
       caret-color: hsla(var(--orange-hsl), 1);
     }
     span {

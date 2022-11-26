@@ -38,7 +38,7 @@ const GalleryItem = ({ data = {} }) => {
       onMouseLeave={() => setHovered(false)}
     >
       <div className="gallery-section--item-overlay">
-        {includeReveal && (
+        {false && (
           <motion.div
             variants={overlayVariants}
             initial="closed"

@@ -31,7 +31,7 @@ export default observer(({ options }) => {
     <LayoutGroup>
       <div
         className={
-          "flex flex-col justify-center gap-8 pt-64 w-full sm:w-auto p-24"
+          "flex flex-col justify-center gap-8 pt-24 sm:pt-64 w-full sm:w-auto p-24"
         }
       >
         {options.map((option, index) => (

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import cx from "classnames";
-import { useUIStore } from "../../providers/RootStoreProvider";
+import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import { observer } from "mobx-react-lite";
 import { motion } from "framer-motion";
 import Menu from "../Menu/Menu";
@@ -184,6 +184,7 @@ const Hamburger = observer(({ isOrderPage, onClick }) => {
 
 const Header = observer(({ data = {}, isOrderPage }) => {
   const { menuOpen } = useUIStore();
+  const { productPrice } = useDataStore();
   const router = useRouter();
 
   return (
@@ -191,8 +192,8 @@ const Header = observer(({ data = {}, isOrderPage }) => {
       <Menu items={data.menu.items} />
       <header
         className={cx(
-          "fixed top-0 right-0 left-0 z-10 p-32 flex justify-between pointer-events-none transition-all duration-300 ease-in-out",
-          isOrderPage && !menuOpen && "top-52 sm:top-0"
+          "fixed top-0 right-0 left-0 z-10 p-24 sm:p-32 flex justify-between pointer-events-none transition-all duration-300 ease-in-out",
+          isOrderPage && !menuOpen && productPrice !== 0 && "top-64 sm:top-0"
         )}
       >
         <Icon isOrderPage={isOrderPage} />

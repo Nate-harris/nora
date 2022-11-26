@@ -32,7 +32,7 @@ const Item = ({ label, active, onLayout }) => {
     <li className={cx(styles.li, "relative")}>
       <div
         className={cx(
-          "text-12 my-4 md:my-6 mx-2 sm:mx-0 relative flex items-center pl-8 transition-all duration-700 before:shadow-md before:flex before:justify-center before:items-center before:relative before:rounded-full before:text-8 before:sm:text-12 before:h-16 before:w-16 sm:before:h-24 sm:before:w-24 before:content-[counter(li-count)] before:transition-all before:duration-700",
+          "text-12 my-8 md:my-6 mx-2 sm:mx-0 relative flex items-center pl-8 transition-all duration-700 before:shadow-md before:flex before:justify-center before:items-center before:relative before:rounded-full before:text-8 before:sm:text-12 before:h-16 before:w-16 sm:before:h-24 sm:before:w-24 before:content-[counter(li-count)] before:transition-all before:duration-700",
           active && "text-pageBG before:bg-pageBG before:text-pageText",
           !active && "text-pageText before:bg-pageText before:text-pageBG"
         )}
@@ -67,7 +67,7 @@ const StatusBar = observer(() => {
   return (
     <div
       className={
-        "fixed left-24 md:left-12 top-24 sm:top-1/2 right-24 sm:right-auto translate-y-0 sm:-translate-y-1/2"
+        "hidden sm:block fixed left-12 md:left-12 top-12 sm:top-1/2 right-12 sm:right-auto translate-y-0 sm:-translate-y-1/2"
       }
     >
       <div

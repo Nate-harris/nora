@@ -21,6 +21,7 @@ import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
 import BottomDrawer from "./BottomDrawer";
 import TypingTutorial from "./TypingTutorial";
 import { useIsSmall } from "../../utils/useMediaQueries";
+import MobileDescription from "./MobileDescription";
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
   { ssr: false }
@@ -38,7 +39,17 @@ const variants = {
   },
 };
 
-const mobileVariants = {};
+const mobileVariants = {
+  initial: {
+    opacity: 1,
+  },
+  active: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 1,
+  },
+};
 
 export default observer(({ formData }) => {
   const { formStep } = useUIStore();
@@ -103,6 +114,7 @@ export default observer(({ formData }) => {
           exit={"initial"}
           variants={isSmall ? mobileVariants : variants}
         >
+          <MobileDescription value={description} />
           {formScreen}
         </motion.form>
       </AnimatePresence>

@@ -7,6 +7,7 @@ import { motion, useMotionValue } from "framer-motion";
 import {
   FRAMER_TRANSITION_EASEOUT,
   FRAMER_TRANSITION_FASTEASE,
+  FRAMER_TRANSITION_FASTEREASE,
 } from "../../lib/framer/animations";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import imageUrlFor from "../../lib/sanity/imageUrlFor";
@@ -22,14 +23,13 @@ const variants = {
   active: {
     opacity: 1,
     y: 0,
-
-    transition: FRAMER_TRANSITION_FASTEASE,
+    transition: FRAMER_TRANSITION_FASTEREASE,
   },
 
   inactive: ({ direction }) => ({
     opacity: 0,
     y: direction * 100,
-    transition: FRAMER_TRANSITION_FASTEASE,
+    transition: FRAMER_TRANSITION_FASTEREASE,
   }),
 };
 
@@ -123,7 +123,7 @@ const PriceTracker = observer(() => {
     <>
       <motion.div
         custom={{
-          direction: isSmall ? 1 : -1,
+          direction: isSmall ? 0 : -1,
         }}
         variants={variants}
         className={"price-tracker"}
@@ -158,7 +158,6 @@ const PriceTracker = observer(() => {
                 width: isSmall ? "100%" : 500,
               }}
               variants={reviewVariants}
-              initial={"inactive"}
               animate={reviewOpen ? "active" : "inactive"}
               className="price-tracker--review"
             >

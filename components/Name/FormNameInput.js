@@ -78,7 +78,7 @@ export default observer(({ pricePerLetter = 3000, maxNumLetters = 30 }) => {
   }, [windowSize.width]);
 
   return (
-    <p className="xl-input">
+    <p className="xl-input mt-24 sm:mt-0">
       <span ref={spanRef} />
       <motion.input
         style={{ scale }}

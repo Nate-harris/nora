@@ -110,10 +110,10 @@ const FormPageControls = () => {
   };
 
   return (
-    <motion.div
-      variants={variants}
-      animate={isSmall && productPrice !== 0 ? "inactive" : "active"}
-      className={"fixed bottom-0 right-0 left-0 p-32 flex justify-between"}
+    <div
+      className={
+        "fixed bottom-0 right-0 left-0 p-24 sm:p-32 flex justify-between"
+      }
     >
       <Button
         key="previous-button"
@@ -139,7 +139,7 @@ const FormPageControls = () => {
           className="is-active-control"
         />
       )}
-    </motion.div>
+    </div>
   );
 };
 export default observer(FormPageControls);

@@ -32,8 +32,8 @@ export default observer(({ options }) => {
 
   return (
     <>
-      <div className="w-full min-h-screen h-screen">
-        <div className="p-24 py-156 pb-240 w-full min-h-screen h-screen overflow-scroll">
+      <div className="w-full">
+        <div className="p-24 sm:py-156 pb-240 w-full min-h-screen sm:h-screen sm:overflow-scroll">
           {options.map((option, index) => (
             <Palette
               key={option.name}

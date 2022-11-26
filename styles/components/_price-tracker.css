@@ -1,5 +1,5 @@
 .price-tracker {
-  @apply fixed z-9 w-full sm:w-auto bottom-0 sm:bottom-auto sm:top-0 left-0 right-0 flex justify-center items-start text-12 leading-100 p-24 pointer-events-none;
+  @apply fixed z-9 w-full sm:w-auto top-12 sm:top-0 left-0 right-0 flex justify-center items-start text-12 leading-100 p-0 px-12 sm:p-24 pointer-events-none;
   &--overlay {
     @apply fixed -z-1 top-0 bottom-0 left-0 right-0 bg-black;
   }
