@@ -10,6 +10,7 @@ const DividerPhoto = ({ data = {} }) => {
   return (
     <div className="divider">
       <Photo
+        className="divider--photo"
         photo={photo}
         width={1600}
         srcSizes={[800, 1000, 1200, 1600]}

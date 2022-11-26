@@ -20,17 +20,19 @@ const Item = ({ label, active, onLayout }) => {
 
   const itemRef = useRef();
   const itemRect = useRect(itemRef);
+  const isSmall = useIsSmall();
+  const PADDING = isSmall ? 30 : 40;
   useEffect(() => {
     if (itemRect) {
-      const width = itemRect.width + 40;
+      const width = itemRect.width + PADDING;
       itemWidth.set(width);
     }
-  }, [itemRect, itemWidth, onLayout]);
+  }, [itemRect, itemWidth, onLayout, PADDING]);
   return (
     <li className={cx(styles.li, "relative")}>
       <div
         className={cx(
-          "text-12 my-8 md:my-6 mx-0 sm:mx-0 relative flex items-center px-8 transition-all duration-700 before:shadow-md before:flex before:justify-center before:items-center before:relative before:rounded-full before:h-24 before:w-24 sm:before:h-24 sm:before:w-24 before:content-[counter(li-count)] before:transition-all before:duration-700",
+          "text-12 my-4 md:my-6 mx-2 sm:mx-0 relative flex items-center pl-8 transition-all duration-700 before:shadow-md before:flex before:justify-center before:items-center before:relative before:rounded-full before:text-8 before:sm:text-12 before:h-16 before:w-16 sm:before:h-24 sm:before:w-24 before:content-[counter(li-count)] before:transition-all before:duration-700",
           active && "text-pageBG before:bg-pageBG before:text-pageText",
           !active && "text-pageText before:bg-pageText before:text-pageBG"
         )}
@@ -70,7 +72,7 @@ const StatusBar = observer(() => {
     >
       <div
         className={cx(
-          "border border-pageText sm:border-transparent rounded-3xl px-6 py-4 overflow-hidden sm:overflow-auto"
+          "border border-pageText sm:border-transparent rounded-2xl px-6 py-4 overflow-hidden sm:overflow-auto"
         )}
       >
         <motion.ul

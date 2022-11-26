@@ -36,7 +36,7 @@ export default observer(({ pricePerLetter = 3000, maxNumLetters = 30 }) => {
   const DESKTOP_WIDTH = 750;
   const DESKTOP_PADDING = 350;
 
-  const MOBILE_WIDTH = 360;
+  const MOBILE_WIDTH = 320;
   const MOBILE_PADDING = 50;
   const PADDING = isSmall ? MOBILE_PADDING : DESKTOP_PADDING;
 

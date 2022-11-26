@@ -1,3 +1,6 @@
 .divider {
-  @apply relative;
+  @apply relative p-12 sm:p-64 pt-96 sm:pt-128 bg-orange;
+  &--photo {
+    @apply rounded-3xl shadow-md overflow-hidden;
+  }
 }
