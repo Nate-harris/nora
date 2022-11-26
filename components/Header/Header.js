@@ -86,7 +86,6 @@ const Icon = observer(({ isOrderPage }) => {
   const { menuOpen } = useUIStore();
   const router = useRouter();
   const [hovered, setHovered] = useState(false);
-
   return (
     <Link href="/">
       {/*calc(50vw - 12rem + 3.2rem)*/}
@@ -183,13 +182,17 @@ const Hamburger = observer(({ isOrderPage, onClick }) => {
   );
 });
 
-const Header = ({ data = {}, isOrderPage }) => {
+const Header = observer(({ data = {}, isOrderPage }) => {
+  const { menuOpen } = useUIStore();
+  const router = useRouter();
+
   return (
     <>
       <Menu items={data.menu.items} />
       <header
         className={cx(
-          "fixed top-0 right-0 left-0 z-10 p-32 flex justify-between pointer-events-none"
+          "fixed top-0 right-0 left-0 z-10 p-32 flex justify-between pointer-events-none transition-all duration-300 ease-in-out",
+          isOrderPage && !menuOpen && "top-64 sm:top-0"
         )}
       >
         <Icon isOrderPage={isOrderPage} />
@@ -197,6 +200,6 @@ const Header = ({ data = {}, isOrderPage }) => {
       </header>
     </>
   );
-};
+});
 
 export default Header;

@@ -11,24 +11,26 @@ import styles from "./StatusBar.module.css";
 import { useUIStore } from "../../providers/RootStoreProvider";
 import { useRect } from "@reach/rect";
 import { useState, useRef, useEffect } from "react";
+import { useIsSmall } from "../../utils/useMediaQueries";
 
 const cx = classnames.bind(styles);
 
-const Item = ({ label, active }) => {
+const Item = ({ label, active, onLayout }) => {
   const itemWidth = useMotionValue(0);
 
   const itemRef = useRef();
   const itemRect = useRect(itemRef);
   useEffect(() => {
     if (itemRect) {
-      itemWidth.set(itemRect.width + 40);
+      const width = itemRect.width + 40;
+      itemWidth.set(width);
     }
-  }, [itemRect, itemWidth]);
+  }, [itemRect, itemWidth, onLayout]);
   return (
     <li className={cx(styles.li, "relative")}>
       <div
         className={cx(
-          "text-8 md:text-12 my-8 md:my-12 relative flex items-center px-8 transition-all duration-700 before:shadow-md before:flex before:justify-center before:items-center before:relative before:rounded-full before:h-16 before:w-16 md:before:h-24 md:before:w-24 before:content-[counter(li-count)] before:transition-all before:duration-700",
+          "text-12 my-8 md:my-6 mx-0 sm:mx-0 relative flex items-center px-8 transition-all duration-700 before:shadow-md before:flex before:justify-center before:items-center before:relative before:rounded-full before:h-24 before:w-24 sm:before:h-24 sm:before:w-24 before:content-[counter(li-count)] before:transition-all before:duration-700",
           active && "text-pageBG before:bg-pageBG before:text-pageText",
           !active && "text-pageText before:bg-pageText before:text-pageBG"
         )}
@@ -41,7 +43,7 @@ const Item = ({ label, active }) => {
         <motion.div
           style={{ width: itemWidth }}
           layoutId="status"
-          className="shadow-md absolute -z-1 -top-4 md:-top-6 -bottom-4 md:-bottom-6 right-0 left-0 rounded-full bg-pageText"
+          className="shadow-md absolute -z-1 top-0 bottom-0 right-0 left-0 rounded-full bg-pageText"
         />
       )}
     </li>
@@ -50,16 +52,38 @@ const Item = ({ label, active }) => {
 
 const StatusBar = observer(() => {
   const { formStep } = useUIStore();
+
+  const offset = useMotionValue(0);
+  const isSmall = useIsSmall();
+
   const steps = ["Name", "Color", "Frame", "Shipping", "Review"];
+
+  useEffect(() => {
+    offset.set(-1 * formStep * 50);
+  }, [formStep, offset, steps.length]);
+
   return (
     <div
-      className={"fixed left-28 md:left-36 top-150 md:top-1/2 -translate-y-1/2"}
+      className={
+        "fixed left-24 md:left-12 top-24 sm:top-1/2 right-24 sm:right-auto translate-y-0 sm:-translate-y-1/2"
+      }
     >
-      <ul className={cx("", styles.ul)}>
-        {steps.map((step, index) => {
-          return <Item key={index} label={step} active={index === formStep} />;
-        })}
-      </ul>
+      <div
+        className={cx(
+          "border border-pageText sm:border-transparent rounded-3xl px-12 py-4 overflow-hidden sm:overflow-auto"
+        )}
+      >
+        <motion.ul
+          style={{ x: isSmall ? offset : 0 }}
+          className={cx("flex sm:flex-col", styles.ul)}
+        >
+          {steps.map((step, index) => {
+            return (
+              <Item key={index} label={step} active={index === formStep} />
+            );
+          })}
+        </motion.ul>
+      </div>
     </div>
   );
 });

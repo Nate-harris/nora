@@ -31,7 +31,7 @@ const Color = ({ color, width }) => {
         div {
           background-color: ${color};
           height: ${width}px;
-          width: ${width / 2}px;
+          width: ${width / 3}px;
         }
       `}</style>
     </div>
