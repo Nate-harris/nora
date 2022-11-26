@@ -1,6 +1,5 @@
 import { useStore } from "../../lib/context";
 import { observer } from "mobx-react-lite";
-import css from "styled-jsx/css";
 import FormNameInput from "../Name/FormNameInput";
 import FormPaletteSelect from "../Palette/FormPaletteSelect";
 import FormFrameSelect from "../Frame/FormFrameSelect";
@@ -17,10 +16,24 @@ import { useWindowSize } from "../../utils/helpers";
 import dynamic from "next/dynamic";
 import { nameSelection } from "../../lib/sanity/queries";
 import { useTheme } from "next-themes";
+import { AnimatePresence, motion } from "framer-motion";
+import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
   { ssr: false }
 );
+
+const variants = {
+  initial: {
+    opacity: 0,
+  },
+  active: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
+  },
+};
 
 export default observer(({ formData }) => {
   const { formStep } = useUIStore();
@@ -38,8 +51,10 @@ export default observer(({ formData }) => {
 
   let formScreen = null;
   let description = null;
+  let key;
   switch (formStep) {
     case 0:
+      key = "name";
       const { nameSelection } = formData;
       formScreen = (
         <FormNameInput
@@ -50,31 +65,42 @@ export default observer(({ formData }) => {
       description = formData?.nameSelection?.description;
       break;
     case 1:
+      key = "color";
       const { colorSelection } = formData;
       formScreen = <FormPaletteSelect options={colorSelection?.palettes} />;
       description = formData?.colorSelection?.description;
       break;
     case 2:
+      key = "frame";
       const { frameSelection } = formData;
       formScreen = <FormFrameSelect options={frameSelection?.options} />;
       description = frameSelection?.description;
       break;
     case 3:
+      key = "shipping";
       const { shippingSelection } = formData;
       formScreen = <FormShippingSelect options={shippingSelection?.options} />;
       description = shippingSelection?.description;
       break;
     case 4:
+      key = "summary";
       formScreen = <OrderSummary />;
   }
-  console.log(theme);
+  console.log("formStep", formStep);
   return (
     <>
-      <Layout id={formStep}>
-        <form key="nora-commission-form" className="control">
+      <AnimatePresence mode="wait">
+        <motion.form
+          key={key}
+          className="control"
+          initial={"initial"}
+          animate={"active"}
+          exit={"initial"}
+          variants={variants}
+        >
           {formScreen}
-        </form>
-      </Layout>
+        </motion.form>
+      </AnimatePresence>
       <WoodgrainShaderSketch
         className="hidden md:block absolute top-0 left-0 right-0 bottom-0 -z-1"
         width={width}

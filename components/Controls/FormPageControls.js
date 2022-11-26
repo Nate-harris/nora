@@ -11,6 +11,7 @@ import { useCallback, useState } from "react";
 import { fetchPostJSON } from "../../utils/apiHelpers";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import { useIsSmall } from "../../utils/useMediaQueries";
+import { useRef } from "react";
 
 const FORM_SCREENS = 4;
 
@@ -43,6 +44,13 @@ const variants = {
 };
 
 const FormPageControls = () => {
+  // If you spam either button, there is a chance that is messes with
+  // the AnimatePresence wrapping the form components. Since there
+  // is no reason we need to allow someone to click through that fast
+  // set an articifical delay on the button click handlers.
+  const [isThrottled, setIsThrottled] = useState(false);
+  const throttleTimer = useRef(null);
+
   const { addItem, cartDetails, redirectToCheckout, clearCart } =
     useShoppingCart();
   const [loading, setLoading] = useState(false);
@@ -59,12 +67,24 @@ const FormPageControls = () => {
 
   const { formData, productPrice } = useDataStore();
 
+  const throttle = () => {
+    setIsThrottled(true);
+    if (throttleTimer.current !== null) {
+      clearTimeout(throttleTimer.current);
+    }
+    throttleTimer.current = setTimeout(() => {
+      setIsThrottled(false);
+    }, FRAMER_TRANSITION_FASTEASE.duration * 1000);
+  };
+
   const handlePreviousButtonPressed = () => {
+    throttle();
     decrementFormStep();
     clearCart();
   };
 
   const handleNextButtonPressed = () => {
+    throttle();
     if (formStep + 1 === FORM_SCREENS) {
       addItem({ ...formData, price: productPrice });
     } else {
@@ -99,7 +119,7 @@ const FormPageControls = () => {
         key="previous-button"
         onClick={handlePreviousButtonPressed}
         label="Back"
-        disabled={noPreviousPage}
+        disabled={noPreviousPage || isThrottled}
       />
 
       {formStep < FORM_SCREENS ? (
@@ -107,7 +127,7 @@ const FormPageControls = () => {
           key="next-button"
           onClick={handleNextButtonPressed}
           label="Next"
-          disabled={nextButtonDisabled || noNextPage}
+          disabled={nextButtonDisabled || noNextPage || isThrottled}
           className="is-active-control"
         />
       ) : (

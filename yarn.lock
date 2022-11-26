@@ -1705,9 +1705,9 @@
   "version" "4.2.0"
 
 "framer-motion@^7.6.5":
-  "integrity" "sha512-PhS5z9r1OuG6d9xy2B5paYvbWWsOhuPPCawcBwMN3AVzmiXKXZ2Ucizf8SqSE4On5xyCR+A2gmQZhBlYr/Gzjg=="
-  "resolved" "https://registry.npmjs.org/framer-motion/-/framer-motion-7.6.5.tgz"
-  "version" "7.6.5"
+  "integrity" "sha512-Xm1jPB91v6vIr9b+V3q6c96sPzU1jWdvN+Mv4CvIAY23ZIezGNIWxWNGIWj1We0CZ8SSOQkttz8921M10TQjXg=="
+  "resolved" "https://registry.npmjs.org/framer-motion/-/framer-motion-7.6.12.tgz"
+  "version" "7.6.12"
   dependencies:
     "@motionone/dom" "10.13.1"
     "framesync" "6.1.2"

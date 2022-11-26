@@ -89,7 +89,8 @@ const Icon = observer(({ isOrderPage }) => {
 
   return (
     <Link href="/">
-      <a
+      {/*calc(50vw - 12rem + 3.2rem)*/}
+      <motion.a
         className="pointer-events-auto justify-self-center self-center"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -116,7 +117,7 @@ const Icon = observer(({ isOrderPage }) => {
             ))}
           </g>
         </svg>
-      </a>
+      </motion.a>
     </Link>
   );
 });

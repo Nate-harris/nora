@@ -48,7 +48,7 @@ const GalleryItem = ({ data = {} }) => {
           style={{ backgroundColor: panelColor.hex, color: textColor.hex }}
           className="gallery-section--label"
         >
-          {name}
+          <span className="gallery-section--name">{name}</span>
         </motion.div>
       </div>
       <Photo photo={photo} width={1600} srcSizes={[800, 1000, 1200, 1600]} />

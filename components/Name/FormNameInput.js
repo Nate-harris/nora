@@ -6,6 +6,7 @@ import { useStore } from "../../lib/context";
 import { useEffect, useRef } from "react";
 import useWindowSize from "../../utils/useWindowSize";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
+import { useIsSmall } from "../../utils/useMediaQueries";
 
 const variants = {
   in: {
@@ -23,14 +24,15 @@ export default observer(({ pricePerLetter = 3000, maxNumLetters = 30 }) => {
   const spanRef = useRef();
   const scale = useMotionValue(1);
   const windowSize = useWindowSize();
+  const isSmall = useIsSmall();
   const { formData, setName, updateBasePrice } = useDataStore();
 
-  const PADDING = 350;
+  const PADDING = isSmall ? 50 : 350;
 
   const resize = (name) => {
     // Update width
     spanRef.current.textContent = name;
-    const minWidth = name.length > 0 ? 0 : 600;
+    const minWidth = name.length > 0 ? 0 : isSmall ? 300 : 600;
     const actualWidth = spanRef.current.offsetWidth;
     inputRef.current.style.width = Math.max(minWidth, actualWidth) + "px";
 
@@ -40,6 +42,8 @@ export default observer(({ pricePerLetter = 3000, maxNumLetters = 30 }) => {
 
       scale.set(updatedScale);
     }
+    console.log(spanRef);
+    console.log("resize", actualWidth, windowSize);
   };
 
   const handleChange = (e) => {

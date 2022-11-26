@@ -80,7 +80,7 @@ const overlayVariants = {
   },
 };
 
-export default observer(() => {
+const PriceTracker = observer(() => {
   const { reviewOpen, toggleReviewOpen } = useUIStore();
   const { formData, productPrice } = useDataStore();
 
@@ -132,6 +132,7 @@ export default observer(() => {
       >
         <motion.div
           variants={overlayVariants}
+          initial={"inactive"}
           animate={reviewOpen ? "active" : "inactive"}
           className={cx(
             "price-tracker--overlay",
@@ -157,6 +158,7 @@ export default observer(() => {
                 width: isSmall ? "100%" : 500,
               }}
               variants={reviewVariants}
+              initial={"inactive"}
               animate={reviewOpen ? "active" : "inactive"}
               className="price-tracker--review"
             >
@@ -219,3 +221,5 @@ export default observer(() => {
     </>
   );
 });
+
+export default PriceTracker;

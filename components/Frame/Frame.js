@@ -35,7 +35,6 @@ const Frame = ({
 }) => {
   const src = imageUrlFor(templateImage).width(1080);
   const [hovered, setHovered] = useState(false);
-  console.log(templateImage);
   return (
     <motion.div
       key={type}

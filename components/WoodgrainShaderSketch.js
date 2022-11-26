@@ -1,15 +1,15 @@
 import dynamic from "next/dynamic";
+import { useEffect } from "react";
 import { useCallback, useRef } from "react";
 import { memo } from "react";
 const Sketch = dynamic(() => import("react-p5").then((mod) => mod.default), {
   ssr: false,
 });
-import { hexToRgb } from "../utils/colors";
 
 const WoodgrainShaderSketch = ({
   className,
   color = { current: "rgb(255,255,255)" },
-  offset = { current: { x: 2.0, y: 1.0 } },
+  offset = { current: { x: 1.0, y: 1.0 } },
   rate = { current: 0.8 },
   scale = { current: 5.0 },
   height = 1000,
@@ -18,6 +18,7 @@ const WoodgrainShaderSketch = ({
 }) => {
   const shaderTexture = useRef(null);
   const shader = useRef(null);
+  const canvasRef = useRef(null);
 
   function preload(p5) {
     // load the shader
@@ -30,9 +31,12 @@ const WoodgrainShaderSketch = ({
   const setup = (p5, canvasParentRef) => {
     // disables scaling for retina screens which can create inconsistent scaling between displays
     p5.pixelDensity(1);
-    // shaders require WEBGL mode to work
 
-    p5.createCanvas(width, height, p5.WEBGL).parent(canvasParentRef);
+    // shaders require WEBGL mode to work
+    canvasRef.current = p5
+      .createCanvas(width, height, p5.WEBGL)
+      .parent(canvasParentRef);
+
     p5.noStroke();
 
     // initialize the createGraphics layers
@@ -46,6 +50,8 @@ const WoodgrainShaderSketch = ({
     p5.clear();
     // instead of just setting the active shader we are passing it to the createGraphics layer
     shaderTexture.current.shader(shader.current);
+
+    p5.resizeCanvas(width, height);
 
     // here we're using setUniform() to send our uniform values to the shader
     shader.current.setUniform("u_resolution", [width, height]);
@@ -79,4 +85,4 @@ const WoodgrainShaderSketch = ({
   );
 };
 
-export default memo(WoodgrainShaderSketch);
+export default WoodgrainShaderSketch;

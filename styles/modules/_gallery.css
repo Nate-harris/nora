@@ -1,12 +1,15 @@
 .gallery-section {
-  @apply grid grid-cols-2;
+  @apply grid grid-cols-2 bg-orange pt-128 md:pt-64;
   &--item {
-    @apply relative col-span-2 md:col-span-1 p-36 lg:p-48;
+    @apply relative col-span-2 md:col-span-1 p-24 md:p-36 lg:p-48 m-24 shadow-md;
   }
   &--item-overlay {
-    @apply bg-transparent z-2 absolute inset-36 md:inset-48;
+    @apply bg-transparent z-2 absolute inset-24 md:inset-36 lg:inset-48;
   }
   &--label {
-    @apply overflow-hidden flex justify-center items-center font-delaGothicOne uppercase text-center text-32 md:text-48;
+    @apply overflow-hidden flex justify-center items-center font-delaGothicOne uppercase text-center text-32 md:text-48 lg:text-64;
+  }
+  &--name {
+    @apply border-16 pb-6 px-8;
   }
 }
