@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import { imageBuilder } from "../lib/sanity";
+import { imageBuilder } from "../lib/sanity/client";
 
 const HeadSEO = ({ site = {}, page = {} }) => {
   // set <head> variables
@@ -76,7 +76,7 @@ const HeadSEO = ({ site = {}, page = {} }) => {
         </>
       )}
 
-      {/* {shareGraphic && (
+      {shareGraphic && (
         <>
           <meta
             property="og:image"
@@ -95,7 +95,7 @@ const HeadSEO = ({ site = {}, page = {} }) => {
               .url()}
           />
         </>
-      )} */}
+      )}
 
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary_large_image" />

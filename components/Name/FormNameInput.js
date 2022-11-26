@@ -55,8 +55,6 @@ export default observer(({ pricePerLetter = 3000, maxNumLetters = 30 }) => {
 
       scale.set(updatedScale);
     }
-    console.log(spanRef);
-    console.log("resize", actualWidth, windowSize);
   };
 
   const handleChange = (e) => {

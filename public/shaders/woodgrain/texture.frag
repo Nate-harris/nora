@@ -35,7 +35,7 @@ mat2 rotate2d(float angle){
 float lines(in vec2 pos, float b){
     float scale = u_scale;
     pos *= scale+u_time*0.001;
-    return smoothstep(0.0,b,tan(pos.x*PI+u_time*u_rate));
+    return smoothstep(0.0,b,tan(pos.x*PI+u_time*0.75));
 }
 
 void main(void) {
@@ -50,7 +50,7 @@ void main(void) {
     pattern =  lines(pos,0.);
     float invertPattern = pow(pattern, -1.);
     
-    vec3 color = vec3(u_color);
+    vec3 color = vec3(u_color) / 255.0;
   
     gl_FragColor = vec4(vec3(invertPattern)*color,1.);
 

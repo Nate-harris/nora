@@ -50,8 +50,6 @@ export async function getStaticProps({ preview, previewData }) {
     }
   );
 
-  console.log("queries", queries);
-
   return {
     props: {
       data: pageData,

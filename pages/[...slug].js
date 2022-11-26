@@ -12,9 +12,6 @@ const Page = (props) => {
 
   const router = useRouter();
 
-  if (typeof navigator !== "undefined") {
-    console.log(navigator);
-  }
   const { site, page } = data;
   return (
     <>

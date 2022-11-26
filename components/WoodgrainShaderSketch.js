@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { useCallback, useRef } from "react";
 import { memo } from "react";
+import { colorValues } from "../utils/helpers";
 const Sketch = dynamic(() => import("react-p5").then((mod) => mod.default), {
   ssr: false,
 });
@@ -60,10 +61,7 @@ const WoodgrainShaderSketch = ({
     shader.current.setUniform("u_rate", rate.current);
     shader.current.setUniform("u_scale", scale.current);
 
-    shader.current.setUniform(
-      "u_color",
-      color.current.match(/\d+/g).map((x) => x / 255)
-    );
+    shader.current.setUniform("u_color", colorValues(color.current));
     shader.current.setUniform("u_time", p5.millis() / 1000.0);
     shader.current.setUniform("u_percent", 1.0);
     shader.current.setUniform("u_alpha", alpha.current);
