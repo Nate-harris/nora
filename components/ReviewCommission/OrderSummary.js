@@ -53,10 +53,10 @@ const TextLine = ({ children }) => {
 export default observer(() => {
   const { formData, productPrice } = useDataStore();
   return (
-    <div className="text-18 sm:text-36 font-light leading-240 md:leading-150 text-center flex flex-col gap-32 md:gap-32 px-32">
+    <div className="text-14 sm:text-24 md:text-36 font-light leading-240 md:leading-150 text-center flex flex-col gap-32 md:gap-32 px-16">
       <div>
         A puzzle for{" "}
-        <span className="font-delaGothicOne uppercase border-4 sm:border-6 border-pageText px-2 pb-3 sm:px-8 sm:pb-4">
+        <span className="font-delaGothicOne uppercase mx-4 border-4 sm:border-6 border-pageText px-4 pb-2 sm:px-8 sm:pb-4">
           {truncateString(formData.name, 10)}
         </span>{" "}
         will be{" "}
@@ -71,8 +71,8 @@ export default observer(() => {
 
       <div>
         It will use the
-        <div className="inline-block mx-20 translate-y-16 sm:translate-y-16">
-          <Palette colors={formData.palette.colors} width={240} />
+        <div className="inline-block mx-12 sm:mx-20 translate-y-10 sm:translate-y-16">
+          <Palette colors={formData.palette.colors} width={200} />
         </div>
         palette.
       </div>
@@ -83,7 +83,7 @@ export default observer(() => {
           {formData.frame.type}
         </span>
         <img
-          className="inline-block mx-8 sm:mx-12 translate-y-16 sm:translate-y-16"
+          className="w-80 sm:w-160 inline-block mx-8 sm:mx-12 translate-y-10 sm:translate-y-16"
           src={imageUrlFor(formData.frame.image).width(160)}
         />
         frame.

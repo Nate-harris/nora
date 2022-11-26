@@ -6,35 +6,13 @@ import {
 import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../lib/context";
-const { className, styles } = css.resolve`
-  div {
-    display: grid;
-    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    width: 100%;
-    height: 100%;
-  }
-  @media only screen and (max-width: 768px) {
-    div {
-      padding: 0px;
-      display: block;
-      padding: 0 0.625rem;
-      padding-top: 100px;
-    }
-  }
-`;
 
 const Color = ({ color, width }) => {
   return (
-    <div>
-      <style jsx>{`
-        div {
-          background-color: ${color};
-          height: ${width}px;
-          width: ${width / 3}px;
-        }
-      `}</style>
-    </div>
+    <div
+      style={{ background: color }}
+      className={`inline-block h-30 w-15 sm:h-60 sm:w-40`}
+    />
   );
 };
 export default Color;

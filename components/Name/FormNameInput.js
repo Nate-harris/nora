@@ -27,12 +27,25 @@ export default observer(({ pricePerLetter = 3000, maxNumLetters = 30 }) => {
   const isSmall = useIsSmall();
   const { formData, setName, updateBasePrice } = useDataStore();
 
-  const PADDING = isSmall ? 50 : 350;
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
+  const DESKTOP_WIDTH = 600;
+  const DESKTOP_PADDING = 350;
+
+  const MOBILE_WIDTH = 360;
+  const MOBILE_PADDING = 50;
+  const PADDING = isSmall ? MOBILE_PADDING : DESKTOP_PADDING;
 
   const resize = (name) => {
     // Update width
+
     spanRef.current.textContent = name;
-    const minWidth = name.length > 0 ? 0 : isSmall ? 300 : 600;
+    const width = isSmall ? MOBILE_WIDTH : DESKTOP_WIDTH;
+    const minWidth = name.length > 0 ? 0 : width;
     const actualWidth = spanRef.current.offsetWidth;
     inputRef.current.style.width = Math.max(minWidth, actualWidth) + "px";
 
@@ -56,7 +69,7 @@ export default observer(({ pricePerLetter = 3000, maxNumLetters = 30 }) => {
 
   const handleBlur = () => {
     if (inputRef.current.value.length === 0) {
-      inputRef.current.style.width = "400px";
+      inputRef.current.style.width = DESKTOP_WIDTH;
     }
   };
 

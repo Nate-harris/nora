@@ -70,7 +70,7 @@ const StatusBar = observer(() => {
     >
       <div
         className={cx(
-          "border border-pageText sm:border-transparent rounded-3xl px-12 py-4 overflow-hidden sm:overflow-auto"
+          "border border-pageText sm:border-transparent rounded-3xl px-6 py-4 overflow-hidden sm:overflow-auto"
         )}
       >
         <motion.ul

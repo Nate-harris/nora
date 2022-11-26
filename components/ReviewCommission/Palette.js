@@ -8,7 +8,7 @@ import Color from "./Color";
 
 const Palette = ({ colors, width }) => {
   return (
-    <div className="flex rounded-sm overflow-hidden">
+    <div className="w-60 h-30 sm:w-160 sm:h-60 rounded-sm overflow-hidden">
       {colors.map(({ hex }) => (
         <Color key={hex} color={hex} width={width / colors.length} />
       ))}
