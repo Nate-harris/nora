@@ -7,7 +7,14 @@ export default {
   name: "dividerPhoto",
   type: "object",
   icon: Image,
-  fields: [customImage()],
+  fields: [
+    {
+      name: "backgroundColor",
+      title: "Background Color",
+      type: "color",
+    },
+    customImage(),
+  ],
   preview: {
     select: {
       photo: "photo",

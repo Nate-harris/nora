@@ -25,6 +25,7 @@
     "glsl-blend": "^1.0.3",
     "glsl-film-grain": "^1.0.4",
     "groq": "^2.29.3",
+    "marqy": "^0.0.8",
     "mobx": "^6.3.7",
     "mobx-react": "^7.5.3",
     "mobx-react-lite": "^3.4.0",

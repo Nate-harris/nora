@@ -2,6 +2,7 @@ import React from "react";
 import DividerPhoto from "./DividerPhoto";
 import GallerySection from "./GallerySection";
 import Grid from "./Grid";
+import Marquee from "./Marquee";
 
 export const Module = ({ index, data }) => {
   if (!data) return null;
@@ -13,6 +14,8 @@ export const Module = ({ index, data }) => {
       return <DividerPhoto index={index} data={data} />;
     case "gallerySection":
       return <GallerySection index={index} data={data} />;
+    case "marquee":
+      return <Marquee index={index} data={data} />;
     default:
       return null;
   }

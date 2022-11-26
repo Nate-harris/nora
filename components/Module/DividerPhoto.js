@@ -8,7 +8,10 @@ const DividerPhoto = ({ data = {} }) => {
   if (!photo) return null;
 
   return (
-    <div className="divider">
+    <div
+      className="divider"
+      style={{ background: data?.backgroundColor?.hex ?? "auto" }}
+    >
       <Photo
         className="divider--photo"
         photo={photo}

@@ -20,7 +20,8 @@ const overlayVariants = {
 };
 
 const GalleryItem = ({ data = {} }) => {
-  const { name, photo, borderColor, panelColor, textColor } = data;
+  const { name, photo, borderColor, panelColor, textColor, includeReveal } =
+    data;
   const isSmall = useIsSmall();
   const [hovered, setHovered] = useState(false);
   const itemRef = useRef();
@@ -37,19 +38,21 @@ const GalleryItem = ({ data = {} }) => {
       onMouseLeave={() => setHovered(false)}
     >
       <div className="gallery-section--item-overlay">
-        <motion.div
-          variants={overlayVariants}
-          initial="closed"
-          animate={(isSmall ? inView : hovered) ? "open" : "closed"}
-          transition={{
-            ...FRAMER_TRANSITION_FASTEASE,
-            delay: isSmall ? 1.2 : 0,
-          }}
-          style={{ backgroundColor: panelColor.hex, color: textColor.hex }}
-          className="gallery-section--label"
-        >
-          <span className="gallery-section--name">{name}</span>
-        </motion.div>
+        {includeReveal && (
+          <motion.div
+            variants={overlayVariants}
+            initial="closed"
+            animate={(isSmall ? inView : hovered) ? "open" : "closed"}
+            transition={{
+              ...FRAMER_TRANSITION_FASTEASE,
+              delay: isSmall ? 1.2 : 0,
+            }}
+            style={{ backgroundColor: panelColor.hex, color: textColor.hex }}
+            className="gallery-section--label"
+          >
+            <span className="gallery-section--name">{name}</span>
+          </motion.div>
+        )}
       </div>
       <Photo photo={photo} width={1600} srcSizes={[800, 1000, 1200, 1600]} />
     </div>

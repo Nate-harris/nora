@@ -1,6 +1,9 @@
 .divider {
-  @apply relative p-12 sm:p-64 pt-96 sm:pt-128 bg-orange;
+  @apply relative p-12 sm:px-64 py-0;
+  &:first-of-type {
+    @apply pt-96 sm:pt-96;
+  }
   &--photo {
-    @apply rounded-3xl shadow-md overflow-hidden;
+    @apply overflow-hidden;
   }
 }

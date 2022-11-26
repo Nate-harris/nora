@@ -56,6 +56,7 @@ export default {
         { type: "grid" },
         { type: "dividerPhoto" },
         { type: "gallerySection" },
+        { type: "marquee" },
       ],
       hidden: ({ parent }) => parent?.isOrderPage,
       group: "content",

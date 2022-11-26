@@ -31,6 +31,7 @@ const WoodgrainShaderSketch = ({
   const setup = (p5, canvasParentRef) => {
     // disables scaling for retina screens which can create inconsistent scaling between displays
     p5.pixelDensity(1);
+    p5.setAttributes("alpha", true);
 
     // shaders require WEBGL mode to work
     canvasRef.current = p5
@@ -75,7 +76,7 @@ const WoodgrainShaderSketch = ({
     p5.texture(shaderTexture.current);
     p5.rect((-1 * width) / 2, (-1 * height) / 2, width, height);
 
-    p5.blendMode(p5.SCREEN);
+    //p5.blendMode(p5.SCREEN);
     p5.translate(0, 0, 0);
     p5.push();
   };

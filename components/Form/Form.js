@@ -109,7 +109,7 @@ export default observer(({ formData }) => {
         height={height}
         scale={{ current: -2.0 }}
         rate={{ current: 0.2 }}
-        alpha={{ current: theme === "dark" ? 0.06 : 0.2 }}
+        alpha={{ current: theme === "dark" ? 0.5 : 0.2 }}
       />
       <BottomDrawer>
         <TypingTutorial name={formData?.nameSelection?.exampleName} />

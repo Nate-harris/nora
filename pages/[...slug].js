@@ -7,9 +7,14 @@ import Layout from "../components/Layout/Layout";
 import Order from "../components/Order/Order";
 import Header from "../components/Header/Header";
 
-const Page = ({ data }) => {
+const Page = (props) => {
+  const { data } = props;
+
   const router = useRouter();
 
+  if (typeof navigator !== "undefined") {
+    console.log(navigator);
+  }
   const { site, page } = data;
   return (
     <>

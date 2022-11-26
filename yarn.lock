@@ -2282,6 +2282,11 @@
   "resolved" "https://registry.npmjs.org/make-error/-/make-error-1.3.6.tgz"
   "version" "1.3.6"
 
+"marqy@^0.0.8":
+  "integrity" "sha512-nhHvva+uaybjUbKhosHNCqoVS4XQnQJRL4nwPabChugnUu0aQxYxYJGxq9jJJrM5Bs2i64AHyWSSHEn1h1p2hQ=="
+  "resolved" "https://registry.npmjs.org/marqy/-/marqy-0.0.8.tgz"
+  "version" "0.0.8"
+
 "matchmediaquery@^0.3.0":
   "integrity" "sha512-Hlk20WQHRIm9EE9luN1kjRjYXAQToHOIAHPJn9buxBwuhfTHoKUcX+lXBbxc85DVQfXYbEQ4HcwQdd128E3qHQ=="
   "resolved" "https://registry.npmjs.org/matchmediaquery/-/matchmediaquery-0.3.1.tgz"

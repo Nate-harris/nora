@@ -51,6 +51,7 @@ import menu from "./documents/menu";
 import galleryItem from "./objects/gallery-item";
 import gallerySection from "./modules/gallery-section";
 import dividerPhoto from "./modules/divider-photo";
+import marquee from "./modules/marquee";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -83,6 +84,7 @@ export default createSchema({
     gallerySection,
     gridColumn,
     gridSize,
+    marquee,
     seo,
     socialLink,
     navLink,

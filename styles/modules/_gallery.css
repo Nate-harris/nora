@@ -1,7 +1,7 @@
 .gallery-section {
-  @apply grid grid-cols-2 bg-orange pt-128 md:pt-64;
+  @apply grid grid-cols-2 bg-orange;
   &--item {
-    @apply relative col-span-2 md:col-span-1 p-24 md:p-36 lg:p-48 m-24 shadow-md rounded-3xl;
+    @apply relative col-span-2 md:col-span-1 p-24 md:p-36 lg:p-48;
   }
   &--item-overlay {
     @apply bg-transparent z-2 absolute inset-24 md:inset-36 lg:inset-48;
