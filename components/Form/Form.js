@@ -20,6 +20,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
 import BottomDrawer from "./BottomDrawer";
 import TypingTutorial from "./TypingTutorial";
+import { useIsSmall } from "../../utils/useMediaQueries";
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
   { ssr: false }
@@ -37,12 +38,15 @@ const variants = {
   },
 };
 
+const mobileVariants = {};
+
 export default observer(({ formData }) => {
   const { formStep } = useUIStore();
   const { updateLetterPrice } = useDataStore();
   const { theme } = useTheme();
 
   const { clearCart } = useShoppingCart();
+  const isSmall = useIsSmall();
 
   useEffect(() => {
     updateLetterPrice(formData?.nameSelection?.price);
@@ -88,7 +92,6 @@ export default observer(({ formData }) => {
       key = "summary";
       formScreen = <OrderSummary />;
   }
-  console.log("formStep", formStep);
   return (
     <>
       <AnimatePresence mode="wait">
@@ -98,7 +101,7 @@ export default observer(({ formData }) => {
           initial={"initial"}
           animate={"active"}
           exit={"initial"}
-          variants={variants}
+          variants={isSmall ? mobileVariants : variants}
         >
           {formScreen}
         </motion.form>
