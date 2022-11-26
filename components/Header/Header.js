@@ -192,7 +192,7 @@ const Header = observer(({ data = {}, isOrderPage }) => {
       <header
         className={cx(
           "fixed top-0 right-0 left-0 z-10 p-32 flex justify-between pointer-events-none transition-all duration-300 ease-in-out",
-          isOrderPage && !menuOpen && "top-64 sm:top-0"
+          isOrderPage && !menuOpen && "top-68 sm:top-0"
         )}
       >
         <Icon isOrderPage={isOrderPage} />

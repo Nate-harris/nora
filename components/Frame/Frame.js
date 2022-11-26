@@ -48,7 +48,7 @@ const Frame = ({
       onMouseLeave={() => setHovered(false)}
     >
       <Photo
-        className={`w-sm md:w-xl pb-[${templateImage.aspectRatio * 100}%]`}
+        className={`w-full md:w-xl pb-[${templateImage.aspectRatio * 100}%]`}
         photo={templateImage}
         alt={`Frame ${type}`}
       />

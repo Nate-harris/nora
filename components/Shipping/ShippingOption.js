@@ -47,7 +47,7 @@ const ShippingOption = ({
           initial="initial"
           animate="active"
           exit="exit"
-          className={cx("btn lg:w-xl sm:w-lg w-sm", active && "is-active")}
+          className={cx("btn lg:w-xl sm:w-lg w-full", active && "is-active")}
           variants={variants}
           onClick={onClick}
         >

@@ -292,7 +292,7 @@ const Palette = ({
       initial={active ? "active" : noneSelected ? "hidden" : "inactive"}
       animate={active ? "active" : noneSelected ? "visible" : "inactive"}
       variants={containerVariants}
-      className="mx-auto w-sm md:w-2xl overflow-hidden"
+      className="mx-auto w-full md:w-2xl overflow-hidden"
       value={name}
       onClick={onClick}
     >
