@@ -130,13 +130,13 @@
     }
   }
   .xl-input {
-    @apply leading-100 font-delaGothicOne text-center;
+    @apply relative leading-100 font-delaGothicOne text-center;
     input[type="text"] {
-      @apply border-16 p-0 text-86 sm:text-148 text-center h-120 sm:h-164 pb-10 sm:pb-20;
+      @apply border-24 p-0 text-86 sm:text-148 text-center pb-10 sm:pb-20;
       caret-color: hsla(var(--orange-hsl), 1);
     }
     span {
-      @apply text-86 sm:text-148 border-16 border-pageText absolute overflow-hidden mx-auto top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-0 pb-4 sm:pb-14 px-10 sm:px-20;
+      @apply text-86 sm:text-148 border-16 border-pageText absolute overflow-hidden mx-auto top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-0 pb-4 sm:pb-14 px-24 sm:px-64;
     }
     input[type="text"]::placeholder {
       color: hsla(var(--orange-hsl), 1);

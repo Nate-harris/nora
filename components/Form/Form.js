@@ -18,6 +18,8 @@ import { nameSelection } from "../../lib/sanity/queries";
 import { useTheme } from "next-themes";
 import { AnimatePresence, motion } from "framer-motion";
 import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
+import BottomDrawer from "./BottomDrawer";
+import TypingTutorial from "./TypingTutorial";
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
   { ssr: false }
@@ -107,9 +109,13 @@ export default observer(({ formData }) => {
         height={height}
         scale={{ current: -2.0 }}
         rate={{ current: 0.2 }}
-        alpha={{ current: theme === "dark" ? 0.4 : 0.15 }}
+        alpha={{ current: theme === "dark" ? 0.06 : 0.2 }}
       />
-      <Description value={description} />
+      <BottomDrawer>
+        <TypingTutorial name={formData?.nameSelection?.exampleName} />
+        <Description value={description} />
+      </BottomDrawer>
+
       <StatusBar />
       <ThemeSwitcher />
     </>

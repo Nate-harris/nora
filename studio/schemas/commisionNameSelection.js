@@ -15,6 +15,11 @@ export default {
       ],
     },
     {
+      name: "exampleName",
+      title: "Example Name",
+      type: "string",
+    },
+    {
       name: "price",
       title: "Price Per Letter",
       type: "number",

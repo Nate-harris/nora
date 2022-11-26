@@ -18,24 +18,22 @@ const Description = observer(({ value }) => {
   const { formStep } = useUIStore();
   if (!value) return null;
   return (
-    <div className="hidden md:flex fixed bottom-0 left-0 right-0 justify-center">
-      <AnimatePresence>
+    <AnimatePresence>
+      <motion.div
+        layout
+        data-step={formStep + 1}
+        className={`shadow-md my-38 py-8 pr-24 bg-pageText text-pageBG rounded-3xl flex items-center before:content-[attr(data-step)] before:text-12 before:shadow-md before:bg-pageBG before:text-pageText before:h-28 before:w-48 before:flex before:items-center before:justify-center before:rounded-full before:mx-12 before:mr-16`}
+      >
         <motion.div
-          layout
-          data-step={formStep + 1}
-          className={`shadow-md my-38 py-8 pr-24 bg-pageText text-pageBG rounded-3xl flex items-center before:content-[attr(data-step)] before:text-12 before:shadow-md before:bg-pageBG before:text-pageText before:h-28 before:w-48 before:flex before:items-center before:justify-center before:rounded-full before:mx-12 before:mr-16`}
+          key={toPlainText(value)}
+          initial="hidden"
+          animate="visible"
+          variants={variants}
         >
-          <motion.div
-            key={toPlainText(value)}
-            initial="hidden"
-            animate="visible"
-            variants={variants}
-          >
-            <PortableText value={value} />
-          </motion.div>
+          <PortableText value={value} />
         </motion.div>
-      </AnimatePresence>
-    </div>
+      </motion.div>
+    </AnimatePresence>
   );
 });
 export default Description;

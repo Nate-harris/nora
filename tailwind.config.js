@@ -69,6 +69,7 @@ module.exports = {
       6: "6px",
       8: "8px",
       16: "16px",
+      24: "24px",
     },
     fontSize: new Array(201)
       .fill()
@@ -110,6 +111,15 @@ module.exports = {
         delaGothicOne: ["DelaGothicOne", "sans-serif"],
         courierSans: ["Courier Sans", "monospace"],
         inherit: "inherit",
+      },
+      keyframes: {
+        blink: {
+          "0%, 100%": { opacity: 1 },
+          "50%": { opacity: 0 },
+        },
+      },
+      animation: {
+        blink: "blink 1.5s linear infinite",
       },
       maxWidth: {
         xs: "20rem",

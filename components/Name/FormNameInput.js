@@ -33,7 +33,7 @@ export default observer(({ pricePerLetter = 3000, maxNumLetters = 30 }) => {
     }
   }, []);
 
-  const DESKTOP_WIDTH = 600;
+  const DESKTOP_WIDTH = 750;
   const DESKTOP_PADDING = 350;
 
   const MOBILE_WIDTH = 360;
@@ -82,7 +82,7 @@ export default observer(({ pricePerLetter = 3000, maxNumLetters = 30 }) => {
       <span ref={spanRef} />
       <motion.input
         style={{ scale }}
-        animate={{ opacity: !windowSize.width ? 0 : 1 }}
+        // animate={{ opacity: !windowSize.width ? 0 : 1 }}
         ref={inputRef}
         className={"is-xl"}
         onBlur={handleBlur}
