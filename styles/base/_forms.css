@@ -163,6 +163,18 @@
     input[type="text"]:focus::placeholder {
       color: hsla(var(--orange-hsl), 0.5);
     }
+    input[type="text"]:focus::-webkit-input-placeholder {
+      color: hsla(var(--orange-hsl), 0.5);
+    }
+    input[type="text"]:focus::-moz-placeholder {
+      color: hsla(var(--orange-hsl), 0.5);
+    }
+    input[type="text"]:focus:-ms-input-placeholder {
+      color: hsla(var(--orange-hsl), 0.5);
+    }
+    input[type="text"]:focus:-moz-placeholder {
+      color: hsla(var(--orange-hsl), 0.5);
+    }
   }
 
   input[type="checkbox"] {
