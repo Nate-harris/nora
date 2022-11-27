@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { useCallback, useRef } from "react";
 import { memo } from "react";
-import { colorValues } from "../utils/helpers";
+import { colorValues, isBrowser, useIsSafari } from "../utils/helpers";
 const Sketch = dynamic(() => import("react-p5").then((mod) => mod.default), {
   ssr: false,
 });
@@ -20,7 +20,9 @@ const WoodgrainShaderSketch = ({
   const shaderTexture = useRef(null);
   const shader = useRef(null);
   const canvasRef = useRef(null);
-
+  // Safari doesn't support alpha channle so this effect doesn't work.
+  const isSafari = useIsSafari();
+  if (isSafari) return null;
   function preload(p5) {
     // load the shader
     shader.current = p5.loadShader(

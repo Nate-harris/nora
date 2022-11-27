@@ -226,6 +226,24 @@ export const Keys = {
 
 export const isBrowser = typeof window !== "undefined";
 
+export const useIsSafari = () => {
+  const [s, setS] = useState(false);
+
+  useEffect(() => {
+    setS(
+      /constructor/i.test(window.HTMLElement) ||
+        (function (p) {
+          return p.toString() === "[object SafariRemoteNotification]";
+        })(
+          !window["safari"] ||
+            (typeof safari !== "undefined" && safari.pushNotification)
+        )
+    );
+    return () => {};
+  }, []);
+  return s;
+};
+
 export function isMobileSafari() {
   if (!isBrowser) return;
 
