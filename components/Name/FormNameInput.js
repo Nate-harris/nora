@@ -74,7 +74,7 @@ export default observer(({ pricePerLetter = 3000, maxNumLetters = 30 }) => {
       <span ref={spanRef} />
       <motion.input
         style={{ scale }}
-        // animate={{ opacity: !windowSize.width ? 0 : 1 }}
+        animate={{ opacity: !windowSize.width ? 0 : 1 }}
         ref={inputRef}
         className={"is-xl"}
         onBlur={handleBlur}

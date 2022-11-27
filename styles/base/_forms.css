@@ -132,7 +132,7 @@
   .xl-input {
     @apply relative leading-100 font-delaGothicOne text-center;
     input[type="text"] {
-      @apply border-16 sm:border-24 p-0 text-54 sm:text-148 text-center pb-10 sm:pb-20;
+      @apply border-12 sm:border-24 p-0 text-54 sm:text-148 text-center pb-10 sm:pb-20;
       caret-color: hsla(var(--orange-hsl), 1);
     }
     span {
