@@ -53,13 +53,14 @@ const mobileVariants = {
 
 export default observer(({ formData }) => {
   const { formStep } = useUIStore();
-  const { updateLetterPrice } = useDataStore();
+  const { updateLetterPrice, updateLetterMinimum } = useDataStore();
   const { theme } = useTheme();
 
   const { clearCart } = useShoppingCart();
   const isSmall = useIsSmall();
-
+  console.log(formData);
   useEffect(() => {
+    updateLetterMinimum(formData?.nameSelection?.minNumLetters);
     updateLetterPrice(formData?.nameSelection?.price);
     clearCart();
   }, []);

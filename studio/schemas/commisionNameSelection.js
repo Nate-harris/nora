@@ -25,6 +25,11 @@ export default {
       type: "number",
     },
     {
+      name: "minNumLetters",
+      title: "Minimum Number of Letter",
+      type: "number",
+    },
+    {
       name: "maxNumLetters",
       title: "Maximum Number of Letter",
       type: "number",

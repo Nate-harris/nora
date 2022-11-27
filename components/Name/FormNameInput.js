@@ -27,12 +27,6 @@ export default observer(({ pricePerLetter = 3000, maxNumLetters = 30 }) => {
   const isSmall = useIsSmall();
   const { formData, setName, updateBasePrice } = useDataStore();
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
-
   const DESKTOP_WIDTH = 750;
   const DESKTOP_PADDING = 350;
 

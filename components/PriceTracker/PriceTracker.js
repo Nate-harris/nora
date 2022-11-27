@@ -82,7 +82,7 @@ const overlayVariants = {
 
 const PriceTracker = observer(() => {
   const { reviewOpen, toggleReviewOpen } = useUIStore();
-  const { formData, productPrice } = useDataStore();
+  const { formData, productPrice, minNumLetters } = useDataStore();
 
   const reviewRef = useRef();
   const reviewRect = useRect(reviewRef);
@@ -119,6 +119,8 @@ const PriceTracker = observer(() => {
   });
 
   const isSmall = useIsSmall();
+
+  console.log("minNumLetters", minNumLetters);
   return (
     <>
       <motion.div
@@ -128,7 +130,11 @@ const PriceTracker = observer(() => {
         variants={variants}
         className={"price-tracker"}
         initial={"inactive"}
-        animate={productPrice === 0 ? "inactive" : "active"}
+        animate={
+          productPrice === 0 || formData.name.length < minNumLetters
+            ? "inactive"
+            : "active"
+        }
       >
         <motion.div
           variants={overlayVariants}

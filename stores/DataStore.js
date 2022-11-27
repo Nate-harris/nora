@@ -19,6 +19,7 @@ class DataStore {
     shippingPrice: 0,
     id: "commission",
   };
+  @observable minNumLetters = 0;
   @action.bound setCommissionId(id) {
     this.formData.id = id;
   }
@@ -35,12 +36,16 @@ class DataStore {
   @action.bound setShipping(shipping) {
     this.formData.shipping = shipping;
   }
+
   @computed get productPrice() {
     return (
       this.formData.basePrice +
       this.formData.framePrice +
       this.formData.shippingPrice
     );
+  }
+  @action.bound updateLetterMinimum(min) {
+    this.minNumLetters = min;
   }
   @action.bound updateLetterPrice(price) {
     this.formData.letterPrice = price;
