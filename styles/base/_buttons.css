@@ -1,6 +1,6 @@
 .btn {
   /* default style button */
-  @apply clean-btn inline-block relative bg-pageBG px-20 py-9 text-center border rounded-md font-semibold leading-125 transition-colors shadow-md font-delaGothicOne text-16 md:text-24;
+  @apply clean-btn inline-block relative bg-pageBG px-20 py-9 text-center border rounded-md font-semibold leading-125 transition-colors font-delaGothicOne text-16 md:text-24;
 
   /* default: hover */
   &:not(.is-primary):not(.is-white):not(.is-text):not(.is-disabled):not(.is-soldout):not(.is-active-control) {

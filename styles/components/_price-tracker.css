@@ -16,7 +16,7 @@
     @apply w-full flex justify-between items-center;
   }
   &--bubble {
-    @apply w-full md:w-auto rounded-3xl font-delaGothicOne bg-orange text-white shadow-md px-12 pr-16 py-10;
+    @apply w-full md:w-auto rounded-3xl font-delaGothicOne bg-orange text-white  px-12 pr-16 py-10;
   }
   &--label {
     @apply font-courierSans text-white rounded-full shadow-md px-24 py-8 mr-24 bg-pageBG text-pageText;

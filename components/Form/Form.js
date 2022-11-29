@@ -125,6 +125,7 @@ export default observer(({ formData }) => {
         height={height}
         scale={{ current: -2.0 }}
         rate={{ current: 0.2 }}
+        color={{ current: theme === "dark" ? "#000" : "#fff" }}
         alpha={{ current: theme === "dark" ? 0.5 : 0.2 }}
       />
       <BottomDrawer>

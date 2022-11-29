@@ -53,7 +53,7 @@ const TextLine = ({ children }) => {
 export default observer(() => {
   const { formData, productPrice } = useDataStore();
   return (
-    <div className="text-18 sm:text-24 md:text-36 font-light leading-200 md:leading-150 text-center flex flex-col gap-24 md:gap-32 px-48">
+    <div className="text-18 sm:text-24 md:text-36 leading-200 md:leading-150 text-center flex flex-col gap-24 md:gap-32 px-48">
       <div>
         A puzzle for{" "}
         <span className="font-delaGothicOne uppercase mx-4 border-4 sm:border-6 border-pageText px-4 pb-2 sm:px-8 sm:pb-4">

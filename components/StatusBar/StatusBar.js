@@ -45,7 +45,7 @@ const Item = ({ label, active, onLayout }) => {
         <motion.div
           style={{ width: itemWidth }}
           layoutId="status"
-          className="shadow-md absolute -z-1 top-0 bottom-0 right-0 left-0 rounded-full bg-pageText"
+          className="absolute -z-1 top-0 bottom-0 right-0 left-0 rounded-full bg-pageText"
         />
       )}
     </li>
