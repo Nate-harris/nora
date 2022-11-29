@@ -1,9 +1,12 @@
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
+import { useState } from "react";
 import { useCallback, useRef } from "react";
 import { memo } from "react";
 import { colorValues, isBrowser, useIsSafari } from "../utils/helpers";
 import { useIsSmall } from "../utils/useMediaQueries";
+import cx from "classnames";
+
 const Sketch = dynamic(() => import("react-p5").then((mod) => mod.default), {
   ssr: false,
 });
@@ -78,13 +81,20 @@ const WoodgrainShaderSketch = ({
     p5.texture(shaderTexture.current);
     p5.rect((-1 * width) / 2, (-1 * height) / 2, width, height);
 
-    //p5.blendMode(p5.SCREEN);
-    p5.translate(0, 0, 0);
     p5.push();
   };
 
   return (
-    <Sketch className={className} setup={setup} draw={draw} preload={preload} />
+    <>
+      {/* This suppresses the loading message from p5's preload method */}
+      <p id="p5_loading" className="hidden"></p>
+      <Sketch
+        className={cx(className)}
+        setup={setup}
+        draw={draw}
+        preload={preload}
+      />
+    </>
   );
 };
 
