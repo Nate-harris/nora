@@ -86,8 +86,6 @@ const WoodgrainShaderSketch = ({
 
   return (
     <>
-      {/* This suppresses the loading message from p5's preload method */}
-      <p id="p5_loading" className="hidden"></p>
       <Sketch
         className={cx(className)}
         setup={setup}
