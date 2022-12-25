@@ -18,7 +18,14 @@ export default {
       description: "This page will show at the root of your domain",
       group: "displays",
     },
-
+    {
+      title: "Order Page",
+      name: "order",
+      type: "reference",
+      to: [{ type: "page" }],
+      description: "This page will show as the order page of your domain",
+      group: "displays",
+    },
     {
       title: "Error Page (404)",
       name: "error",

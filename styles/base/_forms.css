@@ -160,6 +160,22 @@
       color: hsla(var(--orange-hsl), 1);
     }
 
+    input[type="text"]:hover::placeholder {
+      color: hsla(var(--orange-hsl), 0.9);
+    }
+    input[type="text"]:hover::-webkit-input-placeholder {
+      color: hsla(var(--orange-hsl), 0.9);
+    }
+    input[type="text"]:hover::-moz-placeholder {
+      color: hsla(var(--orange-hsl), 0.9);
+    }
+    input[type="text"]:hover:-ms-input-placeholder {
+      color: hsla(var(--orange-hsl), 0.9);
+    }
+    input[type="text"]:hover:-moz-placeholder {
+      color: hsla(var(--orange-hsl), 0.9);
+    }
+
     input[type="text"]:focus::placeholder {
       color: hsla(var(--orange-hsl), 0.5);
     }

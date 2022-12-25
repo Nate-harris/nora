@@ -9,11 +9,6 @@ export const useRouterEvents = () => {
   useEffect(() => {
     const handleRouteChange = (url, { shallow }) => {
       clearRouteVariables();
-      console.log(
-        `App is changing to ${url} ${
-          shallow ? "with" : "without"
-        } shallow routing`
-      );
     };
 
     router.events.on("routeChangeComplete", handleRouteChange);

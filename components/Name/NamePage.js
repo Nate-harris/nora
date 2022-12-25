@@ -2,7 +2,7 @@ import { motion, useMotionValue } from "framer-motion";
 import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
 import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
-import { useStore } from "../../lib/context";
+
 import { useEffect, useRef } from "react";
 import useWindowSize from "../../utils/useWindowSize";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
@@ -19,15 +19,17 @@ const variants = {
   },
 };
 
-export default observer(({ pricePerLetter = 3000, maxNumLetters = 30 }) => {
+export default observer(({ data }) => {
+  const { pricePerLetter = 3000, maxNumLetters = 30 } = data;
   const inputRef = useRef();
   const spanRef = useRef();
   const scale = useMotionValue(1);
   const windowSize = useWindowSize();
   const isSmall = useIsSmall();
+
   const { formData, setName, updateBasePrice } = useDataStore();
 
-  const DESKTOP_WIDTH = 750;
+  const DESKTOP_WIDTH = 700;
   const DESKTOP_PADDING = 350;
 
   const MOBILE_WIDTH = 320;

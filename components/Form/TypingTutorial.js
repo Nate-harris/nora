@@ -1,11 +1,12 @@
 import { PortableText, toPlainText } from "@portabletext/react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useIdleTimer } from "react-idle-timer";
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useStore } from "../../lib/context";
+import { useEffect, useState, useRef } from "react";
+
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import cx from "classnames";
+
 const variants = {
   hidden: {
     opacity: 0,
@@ -18,6 +19,7 @@ const variants = {
 const useTyping = (text) => {
   const [typed, setTyped] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
+  const timerRef = useRef(null);
 
   useEffect(() => {
     if (!isDeleting && typed.length < text.length) {
@@ -29,10 +31,13 @@ const useTyping = (text) => {
       setIsDeleting(typed.length !== 0);
 
       const delay = typed.length === text.length ? 2000 : 200;
-      setTimeout(() => {
+      timerRef.current = setTimeout(() => {
         setTyped(typed.slice(0, -1));
       }, delay);
     }
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, [typed, text, isDeleting]);
 
   return typed;
@@ -42,9 +47,25 @@ const TypingTutorial = observer(({ name = "George" }) => {
   const { formData } = useDataStore();
   const typed = useTyping(name);
 
+  const [showingTutorial, setShowingTutorial] = useState(false);
+
+  const onIdle = () => {
+    setShowingTutorial(true);
+  };
+
+  const onActive = (event) => {
+    setShowingTutorial(false);
+  };
+
+  const idleTimer = useIdleTimer({
+    onIdle,
+    onActive,
+    timeout: 1000 * 60 * 0.5,
+  });
+
   return (
     <AnimatePresence>
-      {formData.name.length === 0 && (
+      {showingTutorial && formData.name.length === 0 && (
         <motion.div
           variants={variants}
           initial="hidden"

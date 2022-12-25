@@ -1,5 +1,5 @@
 import { PortableText } from "@portabletext/react";
-import { useStore } from "../../lib/context";
+
 import { observer } from "mobx-react-lite";
 import css from "styled-jsx/css";
 import { formatCurrencyString } from "use-shopping-cart";
@@ -18,19 +18,17 @@ import { useRect } from "@reach/rect";
 import cx from "classnames";
 import { truncateString } from "../../studio/lib/helpers";
 import { useIsSmall } from "../../utils/useMediaQueries";
+import { FORM_SCREENS } from "../Order/Order";
 
 const variants = {
   active: {
     opacity: 1,
-    y: 0,
     transition: FRAMER_TRANSITION_FASTEREASE,
   },
-
-  inactive: ({ direction }) => ({
+  inactive: {
     opacity: 0,
-    y: direction * 100,
     transition: FRAMER_TRANSITION_FASTEREASE,
-  }),
+  },
 };
 
 const reviewVariants = {
@@ -65,8 +63,7 @@ const reviewVariants = {
 
 const overlayVariants = {
   active: {
-    opacity: 0.5,
-
+    opacity: 0.8,
     transition: {
       ...FRAMER_TRANSITION_EASEOUT,
       delay: 0.3,
@@ -75,12 +72,11 @@ const overlayVariants = {
 
   inactive: {
     opacity: 0,
-
     transition: FRAMER_TRANSITION_EASEOUT,
   },
 };
 
-const PriceTracker = observer(() => {
+const PriceTracker = observer(({ step }) => {
   const { reviewOpen, toggleReviewOpen } = useUIStore();
   const { formData, productPrice, minNumLetters } = useDataStore();
 
@@ -120,15 +116,14 @@ const PriceTracker = observer(() => {
 
   const isSmall = useIsSmall();
 
-  console.log("minNumLetters", minNumLetters);
   return (
     <>
       <motion.div
-        custom={{
-          direction: isSmall ? 0 : -1,
-        }}
         variants={variants}
-        className={"price-tracker"}
+        className={cx(
+          "price-tracker",
+          step === FORM_SCREENS + 1 && "is-checkout"
+        )}
         initial={"inactive"}
         animate={
           productPrice === 0 || formData.name.length < minNumLetters
@@ -146,7 +141,11 @@ const PriceTracker = observer(() => {
           )}
         />
 
-        <div className="price-tracker--container">
+        <motion.div
+          className={cx("price-tracker--container")}
+          layout="position"
+          transition={{ duration: 1.2, ease: "easeOut" }}
+        >
           <div className="price-tracker--bubble">
             <div className="price-tracker--bubble-header">
               <div className="price-tracker--bubble-header-label">
@@ -164,6 +163,7 @@ const PriceTracker = observer(() => {
                 width: isSmall ? "100%" : 500,
               }}
               variants={reviewVariants}
+              initial={"inactive"}
               animate={reviewOpen ? "active" : "inactive"}
               className="price-tracker--review"
             >
@@ -221,7 +221,7 @@ const PriceTracker = observer(() => {
           >
             {reviewOpen ? "x" : "i"}
           </button>
-        </div>
+        </motion.div>
       </motion.div>
     </>
   );

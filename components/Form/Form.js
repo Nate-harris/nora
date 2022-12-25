@@ -1,27 +1,27 @@
-import { useStore } from "../../lib/context";
 import { observer } from "mobx-react-lite";
-import FormNameInput from "../Name/FormNameInput";
-import FormPaletteSelect from "../Palette/FormPaletteSelect";
-import FormFrameSelect from "../Frame/FormFrameSelect";
-import FormShippingSelect from "../Shipping/FormShippingSelect";
-import OrderSummary from "../ReviewCommission/OrderSummary";
-import Description from "../Form/Description";
-import Layout from "./Layout";
+
+import NamePage from "@/components/Name/NamePage";
+import ColorPage from "@/components/Color/ColorPage";
+import FramePage from "@/components/Frame/FramePage";
+import ShippingPage from "@/components/Shipping/ShippingPage";
+
 import { useEffect } from "react";
 import { useShoppingCart } from "use-shopping-cart";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
-import StatusBar from "../StatusBar/StatusBar";
-import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
+
 import { useWindowSize } from "../../utils/helpers";
 import dynamic from "next/dynamic";
-import { nameSelection } from "../../lib/sanity/queries";
 import { useTheme } from "next-themes";
 import { AnimatePresence, motion } from "framer-motion";
 import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
-import BottomDrawer from "./BottomDrawer";
-import TypingTutorial from "./TypingTutorial";
 import { useIsSmall } from "../../utils/useMediaQueries";
 import MobileDescription from "./MobileDescription";
+import TopDrawer from "./TopDrawer";
+import TypingTutorial from "./TypingTutorial";
+import Description from "./Description";
+import OrderSummary from "@/components/ReviewCommission/OrderSummary";
+import { useRouter } from "next/router";
+
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
   { ssr: false }
@@ -51,72 +51,83 @@ const mobileVariants = {
   },
 };
 
-export default observer(({ formData }) => {
+const Page = ({ page, data }) => {
+  switch (page) {
+    case 1:
+      return <NamePage data={data} />;
+    case 2:
+      return <ColorPage data={data} />;
+    case 3:
+      return <FramePage data={data} />;
+    case 4:
+      return <ShippingPage data={data} />;
+    case 5:
+      return <OrderSummary data={data} />;
+    default:
+      return null;
+  }
+};
+
+export default observer(({ data, step }) => {
   const { formStep } = useUIStore();
-  const { updateLetterPrice, updateLetterMinimum } = useDataStore();
+  const { formData, updateLetterPrice, updateLetterMinimum } = useDataStore();
   const { theme } = useTheme();
+  const router = useRouter();
 
   const { clearCart } = useShoppingCart();
   const isSmall = useIsSmall();
-  console.log(formData);
+
   useEffect(() => {
-    updateLetterMinimum(formData?.nameSelection?.minNumLetters);
-    updateLetterPrice(formData?.nameSelection?.price);
+    updateLetterMinimum(data?.name?.minNumLetters);
+    updateLetterPrice(data?.name?.price);
     clearCart();
-  }, []);
+  }, [
+    clearCart,
+    data?.name?.minNumLetters,
+    data?.name?.price,
+    updateLetterMinimum,
+    updateLetterPrice,
+  ]);
 
   const { width, height } = useWindowSize();
 
   let formScreen = null;
-  let description = null;
+
   let key;
-  switch (formStep) {
-    case 0:
-      key = "name";
-      const { nameSelection } = formData;
-      formScreen = (
-        <FormNameInput
-          pricePerLetter={nameSelection?.price}
-          maxNumLetters={nameSelection?.maxNumLetters}
-        />
-      );
-      description = formData?.nameSelection?.description;
-      break;
+  let slug = null;
+  let description = null;
+  switch (step) {
     case 1:
-      key = "color";
-      const { colorSelection } = formData;
-      formScreen = <FormPaletteSelect options={colorSelection?.palettes} />;
-      description = formData?.colorSelection?.description;
+      slug = data.name.slug;
+      description = data.name.description;
       break;
     case 2:
-      key = "frame";
-      const { frameSelection } = formData;
-      formScreen = <FormFrameSelect options={frameSelection?.options} />;
-      description = frameSelection?.description;
+      slug = data.color.slug;
+      description = data.color.description;
       break;
     case 3:
-      key = "shipping";
-      const { shippingSelection } = formData;
-      formScreen = <FormShippingSelect options={shippingSelection?.options} />;
-      description = shippingSelection?.description;
+      slug = data.frame.slug;
+      description = data.frame.description;
       break;
     case 4:
-      key = "summary";
-      formScreen = <OrderSummary />;
+      slug = data.shipping.slug;
+      description = data.shipping.description;
+      break;
   }
+
   return (
     <>
       <AnimatePresence mode="wait">
         <motion.form
-          key={key}
+          key={step}
           className="control"
           initial={"initial"}
           animate={"active"}
           exit={"initial"}
           variants={isSmall ? mobileVariants : variants}
         >
-          <MobileDescription value={description} />
-          {formScreen}
+          <MobileDescription value={description} step={step} />
+          <Page page={step} data={data} />
         </motion.form>
       </AnimatePresence>
       <WoodgrainShaderSketch
@@ -128,13 +139,10 @@ export default observer(({ formData }) => {
         color={{ current: theme === "dark" ? "#000" : "#fff" }}
         alpha={{ current: theme === "dark" ? 0.5 : 0.2 }}
       />
-      <BottomDrawer>
-        <TypingTutorial name={formData?.nameSelection?.exampleName} />
-        <Description value={description} />
-      </BottomDrawer>
-
-      <StatusBar />
-      <ThemeSwitcher />
+      <TopDrawer>
+        <Description value={description} step={step} />
+        <TypingTutorial name={data?.name?.exampleName} />
+      </TopDrawer>
     </>
   );
 });

@@ -15,11 +15,10 @@ export default async function handler(req, res) {
       // Validate the cart details that were sent from the client.
       const cartItems = req.body;
       //Sanity client performs merchQuery
-      console.log("cartItems:", cartItems);
+
       //let sanityData = await sanity.fetch(commissionValidateQuery);
 
       const sanityData = await getCommissionPrice(cartItems.commission);
-      console.log("sanityData", sanityData);
       // The POST request is then validated against the data from Sanity.
       const line_items = validateCartItems(sanityData, cartItems);
 

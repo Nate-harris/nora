@@ -10,7 +10,7 @@ class MyDocument extends Document {
             href="/fonts/DelaGothicOne-Regular.woff2"
             as="font"
             type="font/woff2"
-            crossOrigin
+            crossOrigin="true"
           />
         </Head>
         <body>

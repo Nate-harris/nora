@@ -5,7 +5,7 @@ import {
   FRAMER_TRANSITION_FASTEREASE,
 } from "../../lib/framer/animations";
 import { observer } from "mobx-react-lite";
-import { useStore } from "../../lib/context";
+
 import { formatCurrencyString } from "use-shopping-cart";
 import cx from "classnames";
 

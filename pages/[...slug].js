@@ -1,11 +1,10 @@
 import React from "react";
 import { useRouter } from "next/router";
-
-import { Module } from "../components/Module/Module";
-import { getAllDocSlugs, getPage } from "../lib/sanity";
-import Layout from "../components/Layout/Layout";
-import Order from "../components/Order/Order";
-import Header from "../components/Header/Header";
+import { Module } from "@/components/Module/Module";
+import { getAllDocSlugs, getPage } from "@/lib/sanity";
+import Layout from "@/components/Layout/Layout";
+import Order from "@/components/Order/Order";
+import Header from "@/components/Header/Header";
 
 const Page = (props) => {
   const { data } = props;

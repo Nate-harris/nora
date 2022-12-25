@@ -1,0 +1,9 @@
+.description {
+  @apply my-32 mb-64 pr-24 text-64 text-pageText rounded-3xl flex items-center;
+  p {
+    @apply text-12;
+  }
+  &-index {
+    @apply text-12 shadow-md bg-pageText text-pageBG h-28 w-48 flex items-center justify-center rounded-full mx-12 mr-16;
+  }
+}

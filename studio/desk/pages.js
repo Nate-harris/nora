@@ -5,7 +5,13 @@ import { IntentLink, Link } from "part:@sanity/base/router";
 
 import { Card, Stack, Text } from "@sanity/ui";
 
-import { House, Browser, ShoppingCart, WarningOctagon } from "phosphor-react";
+import {
+  House,
+  Browser,
+  ShoppingCart,
+  WarningOctagon,
+  ListNumbers,
+} from "phosphor-react";
 
 import { standardViews } from "./previews/standard";
 
@@ -60,6 +66,33 @@ const currentHomePage = S.listItem()
 
     return S.document()
       .id(data.home._id)
+      .schemaType("page")
+      .views(standardViews);
+  });
+
+// Extract our home page
+const currentOrderPage = S.listItem()
+  .title("Order Page")
+  .icon(ListNumbers)
+  .child(async () => {
+    const data = await sanityClient.fetch(`
+    *[_type == "generalSettings"][0]{
+      order->{_id}
+    }
+  `);
+
+    if (!data?.order)
+      return S.component(() => (
+        <EmptyNotice
+          title="Order Page"
+          type="page"
+          link="settings;general"
+          linkTitle="General Settings"
+        />
+      )).title("Order Page");
+
+    return S.document()
+      .id(data.order._id)
       .schemaType("page")
       .views(standardViews);
   });
@@ -126,7 +159,7 @@ export const pagesMenu = S.listItem()
       .title("Pages")
       .items([
         currentHomePage,
-
+        currentOrderPage,
         currentErrorPage,
         S.listItem()
           .title("Other Pages")

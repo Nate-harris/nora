@@ -2,7 +2,7 @@ import { LayoutGroup, motion } from "framer-motion";
 import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
 import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
-import { useStore } from "../../lib/context";
+
 import ShippingOption from "./ShippingOption";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 
@@ -17,7 +17,10 @@ const variants = {
   },
 };
 
-export default observer(({ options }) => {
+export default observer(({ data }) => {
+  const {
+    shipping: { options },
+  } = data;
   const { formData, setShipping, updateShippingPrice } = useDataStore();
   const handleChange = (shippingType) => {
     setShipping(shippingType);
@@ -31,7 +34,7 @@ export default observer(({ options }) => {
     <LayoutGroup>
       <div
         className={
-          "flex flex-col justify-center gap-8 pt-24 sm:pt-64 w-full sm:w-auto p-24"
+          "flex flex-col justify-center gap-8 pt-24x sm:pt-64 w-full sm:w-auto p-24"
         }
       >
         {options.map((option, index) => (

@@ -5,7 +5,6 @@ import {
 } from "../../lib/framer/animations";
 import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
-import { useStore } from "../../lib/context";
 
 const Color = ({ color, width }) => {
   return (

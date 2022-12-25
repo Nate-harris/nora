@@ -2,9 +2,10 @@ import { LayoutGroup, motion } from "framer-motion";
 import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
 import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
-import { useStore } from "../../lib/context";
+
 import Frame from "./Frame";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
+
 const { className, styles } = css.resolve`
   div {
     display: grid;
@@ -34,7 +35,10 @@ const variants = {
   },
 };
 
-export default observer(({ options }) => {
+export default observer(({ data }) => {
+  const {
+    frame: { options },
+  } = data;
   const { formData, setFrame, updateFramePrice } = useDataStore();
   const handleChange = (frame) => {
     setFrame(frame);

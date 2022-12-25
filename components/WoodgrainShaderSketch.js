@@ -24,6 +24,7 @@ const WoodgrainShaderSketch = ({
   const shaderTexture = useRef(null);
   const shader = useRef(null);
   const canvasRef = useRef(null);
+  const frameRate = useRef(30);
   // Safari doesn't support alpha channle so this effect doesn't work.
   const isSafari = useIsSafari();
   const isSmall = useIsSmall();
@@ -82,6 +83,8 @@ const WoodgrainShaderSketch = ({
     p5.rect((-1 * width) / 2, (-1 * height) / 2, width, height);
 
     p5.push();
+
+    p5.frameRate(frameRate.current);
   };
 
   return (

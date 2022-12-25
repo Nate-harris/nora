@@ -1,5 +1,8 @@
 .price-tracker {
-  @apply fixed z-9 w-full sm:w-auto top-12 sm:top-0 left-0 right-0 flex justify-center items-start text-12 leading-100 p-0 px-12 sm:p-24 pointer-events-none;
+  @apply fixed z-9 w-full sm:w-auto top-16 sm:top-auto bottom-auto sm:bottom-4 left-0 right-0 flex justify-center items-start text-12 leading-100 p-0 px-12 sm:p-32 pointer-events-none;
+  &.is-checkout {
+    @apply justify-end;
+  }
   &--overlay {
     @apply fixed -z-1 top-0 bottom-0 left-0 right-0 bg-black;
   }
@@ -44,7 +47,7 @@
       background: hsla(var(--orange-hsl), 0.4);
     }
     &.is-active {
-      @apply text-pageText border-pageText;
+      @apply text-pageBG border-pageBG;
       &:hover {
         @apply border-orange text-orange;
         background: hsla(var(--orange-hsl), 0.4);

@@ -23,6 +23,9 @@ class DataStore {
   @action.bound setCommissionId(id) {
     this.formData.id = id;
   }
+  @action.bound setFormData(data) {
+    this.formData = data;
+  }
 
   @action.bound setName(name) {
     this.formData.name = name;
@@ -35,6 +38,19 @@ class DataStore {
   }
   @action.bound setShipping(shipping) {
     this.formData.shipping = shipping;
+  }
+
+  @computed get isNameCompleted() {
+    return this.formData.name.length >= this.minNumLetters;
+  }
+  @computed get isColorCompleted() {
+    return this.formData.palette !== null;
+  }
+  @computed get isFrameCompleted() {
+    return this.formData.frame !== null;
+  }
+  @computed get isShippingCompleted() {
+    return this.formData.shipping !== null;
   }
 
   @computed get productPrice() {

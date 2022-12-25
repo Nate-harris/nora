@@ -1,7 +1,7 @@
 import { PortableText, toPlainText } from "@portabletext/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { observer } from "mobx-react-lite";
-import { useStore } from "../../lib/context";
+
 import { useUIStore } from "../../providers/RootStoreProvider";
 
 const variants = {
@@ -14,11 +14,11 @@ const variants = {
   },
 };
 
-const BottomDrawer = observer(({ children }) => {
+const TopDrawer = observer(({ children }) => {
   return (
-    <div className="hidden md:flex flex-col fixed bottom-0 left-0 right-0 items-center justify-center">
+    <div className="hidden md:flex flex-col fixed top-0 left-0 right-0 items-center justify-center">
       {children}
     </div>
   );
 });
-export default BottomDrawer;
+export default TopDrawer;

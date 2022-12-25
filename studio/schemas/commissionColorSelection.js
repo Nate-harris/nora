@@ -4,6 +4,13 @@ export default {
   type: "object",
   fields: [
     {
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      description: "The slug is used to identify the section of the form.",
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: "description",
       title: "Color Selection Description",
       description:

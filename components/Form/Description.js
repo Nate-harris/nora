@@ -1,7 +1,6 @@
 import { PortableText, toPlainText } from "@portabletext/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { observer } from "mobx-react-lite";
-import { useStore } from "../../lib/context";
 import { useUIStore } from "../../providers/RootStoreProvider";
 
 const variants = {
@@ -14,17 +13,17 @@ const variants = {
   },
 };
 
-const Description = observer(({ value }) => {
+const Description = observer(({ value, step }) => {
   const { formStep } = useUIStore();
   if (!value) return null;
   return (
     <AnimatePresence>
-      <motion.div
-        layout
-        data-step={formStep + 1}
-        className={`my-38 py-8 pr-24 bg-pageText text-pageBG rounded-3xl flex items-center before:content-[attr(data-step)] before:text-12 before:shadow-md before:bg-pageBG before:text-pageText before:h-28 before:w-48 before:flex before:items-center before:justify-center before:rounded-full before:mx-12 before:mr-16`}
-      >
+      <motion.div layout="position" className={`description`}>
+        <motion.span layout="position" className={`description-index`}>
+          {step + 1}
+        </motion.span>
         <motion.div
+          layout="position"
           className="max-w-md"
           key={toPlainText(value)}
           initial="hidden"

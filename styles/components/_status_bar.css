@@ -1,0 +1,61 @@
+.status-bar {
+  &--item {
+    @apply text-pageText text-12 md:my-6 mx-2 sm:mx-0 pr-16 relative flex items-center pl-8 transition-all duration-700;
+    li {
+      @apply relative;
+    }
+    label {
+      @apply px-8 transition-all duration-300;
+    }
+    &::before {
+      @apply bg-pageText text-pageBG shadow-md flex justify-center items-center relative rounded-full text-8 sm:text-12 h-16 w-16 sm:h-24 sm:w-24 content-[counter(li-count)] transition-colors duration-700;
+    }
+    &.is-active {
+      @apply text-pageBG before:bg-pageBG before:text-pageText;
+    }
+
+    &.is-completed {
+      &::before {
+        @apply text-pageBG content-[''];
+
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: 50% 50%;
+        -webkit-mask-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' fill='var(--pageText)' height='7.5' width='7.5' viewBox='0 0 7.5 7.5'%3E%3Cpath d='M2.75,7.5c-.25,0-.48-.12-.62-.33L.13,4.17c-.23-.34-.14-.81,.21-1.04,.34-.23,.81-.14,1.04,.21l1.38,2.06L6.13,.33c.23-.34,.7-.44,1.04-.21,.34,.23,.44,.7,.21,1.04L3.37,7.17c-.14,.21-.37,.33-.62,.33Z'/%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' fill='var(--pageText)' height='7.5' width='7.5' viewBox='0 0 7.5 7.5'%3E%3Cpath d='M2.75,7.5c-.25,0-.48-.12-.62-.33L.13,4.17c-.23-.34-.14-.81,.21-1.04,.34-.23,.81-.14,1.04,.21l1.38,2.06L6.13,.33c.23-.34,.7-.44,1.04-.21,.34,.23,.44,.7,.21,1.04L3.37,7.17c-.14,.21-.37,.33-.62,.33Z'/%3E%3C/svg%3E");
+      }
+      &::after {
+      }
+    }
+
+    &.is-disabled {
+      @apply cursor-auto;
+      &:hover {
+        label {
+          @apply cursor-auto opacity-100;
+        }
+      }
+    }
+  }
+
+  &--bubble {
+    @apply absolute -z-1 -top-5 -bottom-5 right-0 left-0 rounded-full bg-pageText;
+  }
+
+  &--container {
+    @apply hidden sm:block fixed left-12 md:left-12 top-12 sm:top-1/2 right-12 sm:right-auto translate-y-0 sm:-translate-y-1/2;
+
+    ul {
+      @apply flex sm:flex-col;
+      counter-reset: li-count;
+
+      li {
+        counter-increment: li-count;
+      }
+    }
+  }
+
+  &--inner {
+    @apply border border-pageText sm:border-transparent rounded-2xl px-6 py-4 overflow-hidden sm:overflow-auto;
+  }
+}

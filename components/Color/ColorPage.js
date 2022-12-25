@@ -5,7 +5,6 @@ import {
 } from "../../lib/framer/animations";
 import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
-import { useStore } from "../../lib/context";
 import Palette from "./Palette";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 
@@ -20,7 +19,10 @@ const variants = {
   },
 };
 
-export default observer(({ options }) => {
+export default observer(({ data }) => {
+  const {
+    color: { palettes },
+  } = data;
   const { formData, setPalette } = useDataStore();
 
   const handleClick = (option) => {
@@ -34,7 +36,7 @@ export default observer(({ options }) => {
     <>
       <div className="w-full">
         <div className="p-24 sm:py-156 pb-240 w-full min-h-screen sm:h-screen sm:overflow-scroll">
-          {options.map((option, index) => (
+          {palettes?.map((option, index) => (
             <Palette
               key={option.name}
               onClick={() => handleClick(option)}
@@ -44,8 +46,8 @@ export default observer(({ options }) => {
               }
               noneSelected={formData.palette === null}
               index={index}
-              total={options.length}
-              last={index === options.length - 1}
+              total={palettes?.length}
+              last={index === palettes?.length - 1}
               {...option}
             />
           ))}

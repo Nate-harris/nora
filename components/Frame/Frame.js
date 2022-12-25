@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
 import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
-import { useStore } from "../../lib/context";
+
 import imageUrlFor from "../../lib/sanity/imageUrlFor";
 import cx from "classnames";
 import { useState } from "react";
@@ -48,7 +48,7 @@ const Frame = ({
       onMouseLeave={() => setHovered(false)}
     >
       <Photo
-        className={`w-full sm:w-auto md:w-xl pb-[${
+        className={`w-full sm:w-auto md:w-lg lg:w-xl pb-[${
           templateImage.aspectRatio * 100
         }%]`}
         photo={templateImage}

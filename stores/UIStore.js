@@ -1,5 +1,4 @@
 import { action, computed, makeObservable, observable } from "mobx";
-import { FORM_SCREENS } from "../pages";
 class UIStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -11,15 +10,27 @@ class UIStore {
   @observable menuOpen = false;
   @observable reviewOpen = false;
 
-  @action.bound setFormStep(step) {
-    this.formStep = step;
-  }
-  @action.bound incrementFormStep() {
+  @action.bound incrementFormStep(router) {
     this.nextButtonDisabled = true;
     this.formStep = this.formStep + 1;
+    //router.push(`/order?step=${this.formStep}`, undefined, { shallow: true });
   }
-  @action.bound decrementFormStep() {
+  @action.bound setFormStep(router, step) {
+    this.formStep = step;
+    //router.push(`/order?step=${this.formStep}`, undefined, { shallow: true });
+  }
+  @action.bound shallowUpdateQueryParam(key, value) {
+    if ("URLSearchParams" in window) {
+      var searchParams = new URLSearchParams(window.location.search);
+      searchParams.set(key, value);
+      var newRelativePathQuery =
+        window.location.pathname + "?" + searchParams.toString();
+      history.pushState(null, "", newRelativePathQuery);
+    }
+  }
+  @action.bound decrementFormStep(router) {
     this.formStep = this.formStep - 1;
+    //router.push(`/order?step=${this.formStep}`, undefined, { shallow: true });
   }
   @action.bound toggleMenuOpen() {
     this.menuOpen = !this.menuOpen;
@@ -29,12 +40,6 @@ class UIStore {
     this.reviewOpen = !this.reviewOpen;
   }
 
-  @computed get noPreviousPage() {
-    return this.formStep <= 0;
-  }
-  @computed get noNextPage() {
-    return this.formStep + 1 > FORM_SCREENS;
-  }
   @action.bound clearRouteVariables() {
     this.menuOpen = false;
     this.reviewOpen = false;

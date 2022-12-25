@@ -101,12 +101,12 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
     active: {
       alpha: 1.0,
       color: COLOR_COMBINATIONS[colorIndex].shader,
-      scale: 12.0,
+      scale: 6.0,
     },
     inactive: {
       alpha: 0.2,
       color: "rgb(255, 255, 255)",
-      scale: 5.0,
+      scale: 7.0,
     },
   };
 
@@ -115,38 +115,51 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
       animate(alpha, shaderVariants.active.alpha, {
         type: "tween",
         ease: "easeInOut",
-        delay: 0.2,
-        duration: 0.8,
+        delay: 0,
+        duration: 0.9,
       });
       animate(shaderColor, shaderVariants.active.color, {
         type: "tween",
         ease: "easeInOut",
-        delay: 0.2,
-        duration: 0.8,
+        delay: 0,
+        duration: 0.9,
       });
       animate(scale, shaderVariants.active.scale, {
         ease: "easeInOut",
-        duration: 1.2,
+        delay: 0.4,
+        duration: 1.4,
       });
     } else {
       animate(alpha, shaderVariants.inactive.alpha, {
         type: "tween",
         ease: "easeInOut",
-        delay: 0.6,
-        duration: 0.8,
+        delay: 0,
+        duration: 1,
       });
       animate(shaderColor, shaderVariants.inactive.color, {
         type: "tween",
         ease: "easeInOut",
-        delay: 0.6,
-        duration: 0.8,
+        delay: 0,
+        duration: 1,
       });
       animate(scale, shaderVariants.inactive.scale, {
         ease: "easeInOut",
+        delay: 0.2,
         duration: 1.2,
       });
     }
-  }, [itemHovered, alpha, shaderColor, scale]);
+  }, [
+    itemHovered,
+    alpha,
+    shaderColor,
+    scale,
+    shaderVariants.active.alpha,
+    shaderVariants.active.color,
+    shaderVariants.active.scale,
+    shaderVariants.inactive.alpha,
+    shaderVariants.inactive.color,
+    shaderVariants.inactive.scale,
+  ]);
 
   return (
     <motion.nav
@@ -163,7 +176,7 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
         color={shaderColor}
         scale={scale}
         alpha={alpha}
-        offset={{ current: { x: 2.0, y: 1.5 } }}
+        offset={{ current: { x: 8.0, y: 5 } }}
       />
 
       <ul {...rest} className="menu--container">
