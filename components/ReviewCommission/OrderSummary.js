@@ -45,7 +45,7 @@ const variants = {
   },
 };
 
-export default observer(() => {
+export default observer(({ data }) => {
   const router = useRouter();
   const { status } = router.query;
   const { formData, productPrice } = useDataStore();
@@ -57,17 +57,23 @@ export default observer(() => {
   const stripePromise = loadStripe(publishableKey);
 
   const createCheckOutSession = async () => {
+    const { name, description, image } = data.checkout;
     setLoading(true);
+
+    const item = {
+      name: name ?? "Nora Puzzle",
+      price: productPrice,
+      quantity: 1,
+    };
+    if (description) {
+      item.description = description;
+    }
+    if (image) {
+      item.image = imageUrlFor(image).url();
+    }
     const stripe = await stripePromise;
     const checkoutSession = await axios.post("/api/create-stripe-session", {
-      item: {
-        name: "NORA Puzzle",
-        description: formData.name,
-        image:
-          "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80",
-        price: productPrice,
-        quantity: 1,
-      },
+      item,
     });
     const result = await stripe.redirectToCheckout({
       sessionId: checkoutSession.data.id,

@@ -14,6 +14,7 @@ import localeString from "./locale/String";
 import localeText from "./locale/Text";
 import localeBlockContent from "./locale/BlockContent";
 import palette from "./palette";
+import checkout from "./checkout";
 import commission from "./commission";
 import commissionColorSelection from "./commissionColorSelection";
 import commisionNameSelection from "./commisionNameSelection";
@@ -71,6 +72,7 @@ export default createSchema({
     productVariant,
 
     palette,
+    checkout,
     commission,
     commissionColorSelection,
     commisionNameSelection,

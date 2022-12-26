@@ -7,6 +7,7 @@ export default {
     { title: "Color", name: "color" },
     { title: "Frame", name: "frame" },
     { title: "Shipping", name: "shipping" },
+    { title: "Checkout", name: "checkout" },
   ],
   fields: [
     {
@@ -36,6 +37,12 @@ export default {
       description: "Shipping the user wants",
       type: "commissionShippingSelection",
       group: "shipping",
+    },
+    {
+      name: "checkout",
+      title: "Checkout",
+      type: "checkout",
+      group: "checkout",
     },
   ],
 };
