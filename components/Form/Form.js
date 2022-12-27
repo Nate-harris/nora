@@ -70,7 +70,13 @@ const Page = ({ page, data }) => {
 
 export default observer(({ data, step }) => {
   const { formStep } = useUIStore();
-  const { formData, updateLetterPrice, updateLetterMinimum } = useDataStore();
+  const {
+    formData,
+    updateLetterPrice,
+    updateLetterMinimum,
+    updateColorMinimum,
+    updateColorMaximum,
+  } = useDataStore();
   const { theme } = useTheme();
   const router = useRouter();
 
@@ -79,10 +85,14 @@ export default observer(({ data, step }) => {
 
   useEffect(() => {
     updateLetterMinimum(data?.name?.minNumLetters);
+    updateColorMinimum(data?.color?.minNumColors);
+    updateColorMaximum(data?.color?.maxNumColors);
     updateLetterPrice(data?.name?.price);
     clearCart();
   }, [
     clearCart,
+    data?.color?.maxNumColors,
+    data?.color?.minNumColors,
     data?.name?.minNumLetters,
     data?.name?.price,
     updateLetterMinimum,

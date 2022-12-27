@@ -28,7 +28,6 @@ export default observer(({ data }) => {
   const isSmall = useIsSmall();
 
   const { formData, setName, updateBasePrice } = useDataStore();
-
   const DESKTOP_WIDTH = 700;
   const DESKTOP_PADDING = 350;
 

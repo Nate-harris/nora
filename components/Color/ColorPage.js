@@ -7,6 +7,9 @@ import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
 import Palette from "./Palette";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
+import ColoringBook from "./ColoringBook";
+import Swatch from "./Swatch";
+import SwatchCount from "./SwatchCount";
 
 const variants = {
   in: {
@@ -21,9 +24,9 @@ const variants = {
 
 export default observer(({ data }) => {
   const {
-    color: { palettes },
+    color: { palettes, colors },
   } = data;
-  const { formData, setPalette } = useDataStore();
+  const { formData, setPalette, minNumColors } = useDataStore();
 
   const handleClick = (option) => {
     setPalette({ name: option.name, colors: option.colors });
@@ -35,22 +38,18 @@ export default observer(({ data }) => {
   return (
     <>
       <div className="w-full">
-        <div className="p-24 sm:py-156 pb-240 w-full min-h-screen sm:h-screen sm:overflow-scroll">
-          {palettes?.map((option, index) => (
-            <Palette
-              key={option.name}
-              onClick={() => handleClick(option)}
-              active={
-                formData.palette !== null &&
-                option.name === formData.palette.name
-              }
-              noneSelected={formData.palette === null}
-              index={index}
-              total={palettes?.length}
-              last={index === palettes?.length - 1}
-              {...option}
-            />
-          ))}
+        <div className="p-24 md:mt-64 w-full">
+          <div className="flex justify-center">
+            <ColoringBook allowCompleted />
+          </div>
+          <SwatchCount />
+          <div className="color-picker--swatches">
+            <div className="color-picker--swatches-inner">
+              {colors?.map((option, index) => {
+                return <Swatch key={option.hex} data={option} />;
+              })}
+            </div>
+          </div>
 
           <motion.div
             initial={{ opacity: 0 }}

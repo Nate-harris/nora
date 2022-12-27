@@ -56,16 +56,16 @@ const listItemVariants = {
 
 const COLOR_COMBINATIONS = [
   {
-    background: "rgb(170, 164, 208)",
-    shader: "rgb(242, 121, 34)",
-  },
-  {
     background: "rgb(203, 188, 154)",
     shader: "rgb(239, 184, 87)",
   },
   {
     background: "rgb(120, 190, 227)",
     shader: "rgb(123, 183, 150)",
+  },
+  {
+    background: "rgb(170, 164, 208)",
+    shader: "rgb(242, 121, 34)",
   },
 ];
 

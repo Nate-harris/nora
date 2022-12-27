@@ -5,12 +5,13 @@ import {
 } from "../../lib/framer/animations";
 import css from "styled-jsx/css";
 import Color from "./Color";
+import cx from "classnames";
 
-const Palette = ({ colors, width }) => {
+const Palette = ({ colors, width, size = "large" }) => {
   return (
-    <div className="w-60 h-30 sm:w-160 sm:h-60 rounded-sm overflow-hidden">
-      {colors.map(({ hex }) => (
-        <Color key={hex} color={hex} width={width / colors.length} />
+    <div className={cx("palette", size === "small" && "is-small")}>
+      {colors.map((color, index) => (
+        <Color key={color} color={color} index={index} size={size} />
       ))}
     </div>
   );

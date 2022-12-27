@@ -5,12 +5,16 @@ import {
 } from "../../lib/framer/animations";
 import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
+import cx from "classnames";
+import { hexToRGB } from "@/utils/helpers";
 
-const Color = ({ color, width }) => {
+const Color = ({ color, index, size = "large" }) => {
   return (
-    <div
-      style={{ background: color }}
-      className={`inline-block h-30 w-15 sm:h-60 sm:w-40`}
+    <motion.div
+      style={{
+        background: hexToRGB(color, 0.9),
+      }}
+      className={cx(`palette--color`, size === "small" && "is-small")}
     />
   );
 };

@@ -26,9 +26,12 @@
 @import "components/_header";
 @import "components/_mega-nav";
 @import "components/_status_bar";
+@import "components/_order_summary";
+@import "components/_color_picker";
 @import "components/_footer";
 @import "components/_cart";
 @import "components/_theme-switch";
+@import "components/_palette";
 
 @import "modules/_hero";
 @import "modules/_gallery";

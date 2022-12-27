@@ -47,7 +47,7 @@
       background: hsla(var(--orange-hsl), 0.4);
     }
     &.is-active {
-      @apply text-pageBG border-pageBG;
+      @apply text-white border-white;
       &:hover {
         @apply border-orange text-orange;
         background: hsla(var(--orange-hsl), 0.4);

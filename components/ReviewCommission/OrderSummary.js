@@ -65,9 +65,11 @@ export default observer(({ data }) => {
       price: productPrice,
       quantity: 1,
     };
+
     if (description) {
       item.description = description;
     }
+
     if (image) {
       item.image = imageUrlFor(image).url();
     }
@@ -90,38 +92,37 @@ export default observer(({ data }) => {
   };
 
   return (
-    <div className="text-16 sm:text-24 md:text-32 leading-200 md:leading-150 text-center flex flex-col gap-24 md:gap-24 px-48">
-      <div>
+    <div className="order-summary">
+      <div className="order-summary--row">
         A puzzle for{" "}
-        <span className="font-delaGothicOne uppercase px-4 pb-2 sm:px-8 sm:pb-4">
+        <span className="order-summary--name">
           {truncateString(formData.name, 10)}
         </span>
       </div>
 
-      <div>
+      <div className="order-summary--row">
         Will be
-        <div className="inline-block mx-12 translate-y-12 sm:translate-y-18">
-          <Palette colors={formData.palette.colors} width={200} />
+        <div className="order-summary--palette">
+          <Palette colors={formData.colors} width={200} />
         </div>
       </div>
 
-      <div>
+      <div className="order-summary--row">
         Will have a
         {formData.frame?.image && (
-          <img
-            className="w-80 sm:w-160 inline-block mx-8 sm:mx-12 translate-y-10 sm:translate-y-20"
-            src={imageUrlFor(formData.frame.image).width(160)}
-            alt={formData.frame.name}
-          />
+          <div className="order-summary--frame">
+            <img
+              src={imageUrlFor(formData.frame.image).width(160)}
+              alt={formData.frame.name}
+            />
+          </div>
         )}
       </div>
-      <div className="pt-20">
-        And will take{" "}
-        <span className="font-delaGothicOne uppercase whitespace-nowrap">
-          {formData.shipping}
-        </span>
+      <div className="order-summary--row">
+        And will get to you in{" "}
+        <span className="order-summary--shipping">{formData.shipping}</span>
       </div>
-      <div className="pt-12">
+      <div className="order-summary--row">
         <Button
           key="checkout-button"
           onClick={handleCheckout}

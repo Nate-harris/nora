@@ -1,6 +1,6 @@
 .status-bar {
   &--item {
-    @apply text-pageText text-12 md:my-6 mx-2 sm:mx-0 pr-16 relative flex items-center pl-8 transition-all duration-700;
+    @apply text-pageText text-12 sm:my-6 mx-2 sm:mx-0 pr-16 relative flex items-center pl-8 transition-all duration-700;
     li {
       @apply relative;
     }

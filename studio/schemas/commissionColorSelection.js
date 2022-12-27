@@ -23,6 +23,22 @@ export default {
       ],
     },
     {
+      name: "minNumColors",
+      title: "Minimum Number of Colors",
+      type: "number",
+    },
+    {
+      name: "maxNumColors",
+      title: "Maximum Number of Colors",
+      type: "number",
+    },
+    {
+      name: "colors",
+      title: "Colors",
+      type: "array",
+      of: [{ type: "color" }],
+    },
+    {
       name: "palettes",
       title: "Color Palettes",
       type: "array",

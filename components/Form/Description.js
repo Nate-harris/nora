@@ -20,7 +20,7 @@ const Description = observer(({ value, step }) => {
     <AnimatePresence>
       <motion.div layout="position" className={`description`}>
         <motion.span layout="position" className={`description-index`}>
-          {step + 1}
+          {step}
         </motion.span>
         <motion.div
           layout="position"

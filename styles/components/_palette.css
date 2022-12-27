@@ -1,0 +1,12 @@
+.palette {
+  @apply flex gap-4 h-50 w-212 whitespace-nowrap;
+  &--color {
+    @apply inline-block rounded-md h-50 w-50;
+    &.is-small {
+      @apply h-35 w-35;
+    }
+  }
+  &.is-small {
+    @apply h-35 w-152 my-0;
+  }
+}

@@ -1,0 +1,22 @@
+.order-summary {
+  @apply text-16 md:text-12 leading-200 md:leading-100 text-center flex flex-col gap-24 md:gap-24 px-48 pb-48;
+
+  &--name {
+    @apply text-42 leading-80 font-delaGothicOne uppercase mx-12 mb-4;
+  }
+  &--palette {
+    @apply block sm:inline-block mx-10;
+  }
+  &--frame {
+    @apply block sm:inline-block w-160 sm:w-80 sm:w-160 mx-10;
+  }
+  &--shipping {
+    @apply text-44 leading-80 font-delaGothicOne uppercase whitespace-nowrap mx-10 mb-4;
+  }
+  &--row {
+    @apply flex flex-col sm:flex-col gap-12 items-center justify-center sm:pt-12;
+    &:last-of-type {
+      @apply pt-32;
+    }
+  }
+}

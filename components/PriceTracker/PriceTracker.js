@@ -78,7 +78,19 @@ const overlayVariants = {
 
 const PriceTracker = observer(({ step }) => {
   const { reviewOpen, toggleReviewOpen } = useUIStore();
-  const { formData, productPrice, minNumLetters } = useDataStore();
+  const {
+    formData,
+    name,
+    colors,
+    frame,
+    shipping,
+    isNameCompleted,
+    isColorCompleted,
+    isFrameCompleted,
+    isShippingCompleted,
+    productPrice,
+    minNumLetters,
+  } = useDataStore();
 
   const reviewRef = useRef();
   const reviewRect = useRect(reviewRef);
@@ -168,32 +180,32 @@ const PriceTracker = observer(({ step }) => {
               className="price-tracker--review"
             >
               <div ref={reviewRef}>
-                {formData?.name && (
+                {isNameCompleted && (
                   <div className="price-tracker--row">
                     <span className="price-tracker--row--label">
-                      {truncateString(formData.name, 10)}
+                      {truncateString(name, 10)}
                     </span>
                     <span className="price-tracker--row--value">
                       {isSmall ? mobileNamePrice : namePrice}
                     </span>
                   </div>
                 )}
-                {formData?.palette && (
+                {isColorCompleted && (
                   <div className="price-tracker--row">
                     <span className="price-tracker--row--label">
-                      <Palette colors={formData.palette.colors} width={180} />
+                      <Palette colors={colors} width={180} size="small" />
                     </span>
                     <span className="price-tracker--row--value">
                       {palettePrice}
                     </span>
                   </div>
                 )}
-                {formData?.frame && (
+                {isFrameCompleted && (
                   <div className="price-tracker--row">
                     <span className="price-tracker--row--label">
                       <img
                         className="min-w-[120px]"
-                        src={imageUrlFor(formData.frame.image).width(120)}
+                        src={imageUrlFor(frame.image).width(120)}
                       />
                     </span>
                     <span className="price-tracker--row--value">
@@ -201,10 +213,10 @@ const PriceTracker = observer(({ step }) => {
                     </span>
                   </div>
                 )}
-                {formData?.shipping && (
+                {isShippingCompleted && (
                   <div className="price-tracker--row">
                     <span className="price-tracker--row--label">
-                      {formData.shipping}
+                      {shipping}
                     </span>
                     <span className="price-tracker--row--value">
                       {shippingPrice}
