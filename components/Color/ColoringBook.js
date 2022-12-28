@@ -220,7 +220,7 @@ const ColoringBook = observer(({ allowCompleted = false }) => {
           id={letter.id}
           d={letter.d}
           fill={color}
-          stroke="#000"
+          className="stroke-current"
         />
       );
     });

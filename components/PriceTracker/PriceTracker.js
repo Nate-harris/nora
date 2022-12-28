@@ -193,7 +193,7 @@ const PriceTracker = observer(({ step }) => {
                 {isColorCompleted && (
                   <div className="price-tracker--row">
                     <span className="price-tracker--row--label">
-                      <Palette colors={colors} width={180} size="small" />
+                      <Palette colors={colors} width={180} size="sm" />
                     </span>
                     <span className="price-tracker--row--value">
                       {palettePrice}

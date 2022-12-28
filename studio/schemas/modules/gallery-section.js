@@ -1,10 +1,10 @@
-import { Square } from "phosphor-react";
+import { Rows } from "phosphor-react";
 
 export default {
   name: "gallerySection",
   title: "Gallery Section",
   type: "document",
-  icon: Square,
+  icon: Rows,
   fields: [
     {
       name: "content",
@@ -21,7 +21,7 @@ export default {
     prepare(selection) {
       return {
         title: "Gallery Section",
-        media: Square,
+        media: Rows,
       };
     },
   },

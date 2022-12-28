@@ -6,6 +6,7 @@ import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import { observer } from "mobx-react-lite";
 import { motion } from "framer-motion";
 import Menu from "../Menu/Menu";
+import { useRect } from "@reach/rect";
 
 const hamburgerTopLineVariants = {
   open: {
@@ -182,15 +183,30 @@ const Hamburger = observer(({ isOrderPage, onClick }) => {
   );
 });
 
-const Header = observer(({ data = {}, isOrderPage }) => {
+const Header = observer(({ data = {}, isOrderPage, onSetup = () => {} }) => {
   const { menuOpen } = useUIStore();
   const { productPrice } = useDataStore();
   const router = useRouter();
+
+  const [headerHeight, setHeaderHeight] = useState(null);
+  const headerRef = useRef();
+  const headerRect = useRect(headerRef);
+
+  useEffect(() => {
+    if (headerRect) {
+      setHeaderHeight(headerRect.height);
+    }
+  }, [headerRect]);
+
+  useEffect(() => {
+    onSetup({ height: headerHeight });
+  }, [onSetup, headerHeight]);
 
   return (
     <>
       <Menu items={data.menu.items} />
       <header
+        ref={headerRef}
         className={cx(
           "fixed top-0 right-0 left-0 z-10 p-24 sm:p-32 flex justify-between pointer-events-none transition-all duration-300 ease-in-out",
           isOrderPage && !menuOpen && productPrice !== 0 && "top-64 sm:top-0"

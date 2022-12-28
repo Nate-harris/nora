@@ -61,7 +61,11 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
           }}
         />
       )}
-      <Header data={site.header} isOrderPage={page.isOrderPage} />
+      <Header
+        data={site.header}
+        isOrderPage={page.isOrderPage}
+        onSetup={({ height }) => setHeaderHeight(height)}
+      />
       <motion.div
         key={page.id}
         initial="hide"

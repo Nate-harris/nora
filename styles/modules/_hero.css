@@ -5,7 +5,7 @@
   @media (max-height: 500px) {
     min-height: 500px;
   }
-  
+
   &--bg {
     @apply relative w-full  h-full;
     grid-area: 1/-1;

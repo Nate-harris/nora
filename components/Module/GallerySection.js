@@ -3,7 +3,7 @@ import React from "react";
 import { useRef } from "react";
 
 import Photo from "../Photo";
-import GalleryItem from "./GalleryItem";
+import GalleryItem from "@/components/Gallery/GalleryItem";
 import { motion } from "framer-motion";
 
 const GallerySection = ({ data = {} }) => {

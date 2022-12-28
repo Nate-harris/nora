@@ -7,9 +7,15 @@ import css from "styled-jsx/css";
 import Color from "./Color";
 import cx from "classnames";
 
-const Palette = ({ colors, width, size = "large" }) => {
+const Palette = ({ colors, width, size = "lg" }) => {
   return (
-    <div className={cx("palette", size === "small" && "is-small")}>
+    <div
+      className={cx(
+        "palette",
+        size === "xs" && "is-extra-small",
+        size === "sm" && "is-small"
+      )}
+    >
       {colors.map((color, index) => (
         <Color key={color} color={color} index={index} size={size} />
       ))}

@@ -4,6 +4,6 @@
     @apply pt-96 sm:pt-96;
   }
   &--photo {
-    @apply overflow-hidden;
+    @apply overflow-hidden rounded-xl;
   }
 }

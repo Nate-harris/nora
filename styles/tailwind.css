@@ -9,37 +9,11 @@
     url("/fonts/DelaGothicOne-Regular.woff") format("woff");
   font-style: normal;
 }
-@font-face {
-  font-family: "Courier Sans";
-  src: url("/fonts/CourierSans/CourierSansLLWebTrial-Regular.woff2")
-    format("woff2");
-  font-style: normal;
-}
+
 @font-face {
   font-family: "Courier Sans";
   src: url("/fonts/CourierSans/CourierSansLLWebTrial-Bold.woff2")
     format("woff2");
   font-weight: 700;
   font-style: normal;
-}
-@font-face {
-  font-family: "Courier Sans";
-  src: url("/fonts/CourierSans/CourierSansLLWebTrial-BoldItalic.woff2")
-    format("woff2");
-  font-weight: 700;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Courier Sans";
-  src: url("/fonts/CourierSans/CourierSansLLWebTrial-Light.woff2")
-    format("woff2");
-  font-weight: 200;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Courier Sans";
-  src: url("/fonts/CourierSans/CourierSansLLWebTrial-LightItalic.woff2")
-    format("woff2");
-  font-weight: 200;
-  font-style: italic;
 }

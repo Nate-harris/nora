@@ -11,6 +11,7 @@ body {
 
 .section {
   @apply relative px-16 py-48 sm:p-32 md:py-48 lg:py-80;
+  padding-top: calc(var(--headerHeight, 10rem) + 2.5rem);
 
   &--content {
     @apply mx-auto;

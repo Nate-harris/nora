@@ -8,13 +8,17 @@ import { observer } from "mobx-react-lite";
 import cx from "classnames";
 import { hexToRGB } from "@/utils/helpers";
 
-const Color = ({ color, index, size = "large" }) => {
+const Color = ({ color, index, size = "lg" }) => {
   return (
     <motion.div
       style={{
         background: hexToRGB(color, 0.9),
       }}
-      className={cx(`palette--color`, size === "small" && "is-small")}
+      className={cx(
+        `palette--color`,
+        size === "xs" && "is-extra-small",
+        size === "sm" && "is-small"
+      )}
     />
   );
 };
