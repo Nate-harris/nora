@@ -14,24 +14,68 @@ import { useCookies } from "react-cookie";
 
 export const FORM_SCREENS = 4;
 
+const useSettings = ({ minNumLetters, minNumColors, maxNumColors, price }) => {
+  const {
+    updateLetterPrice,
+    updateLetterMinimum,
+    updateColorMinimum,
+    updateColorMaximum,
+  } = useDataStore();
+  useEffect(() => {
+    updateLetterMinimum(minNumLetters);
+    updateColorMinimum(minNumColors);
+    updateColorMaximum(maxNumColors);
+    updateLetterPrice(price);
+  }, [
+    maxNumColors,
+    minNumColors,
+    minNumLetters,
+    price,
+    updateColorMaximum,
+    updateColorMinimum,
+    updateLetterMinimum,
+    updateLetterPrice,
+  ]);
+};
+
 const Order = observer(({ data }) => {
   const [cookie, setCookie] = useCookies(["nora"]);
   const {
     formData,
     setFormData,
+    name,
+    colors,
+    frame,
+    shipping,
     minNumLetters,
     isColorCompleted,
     isFrameCompleted,
     isShippingCompleted,
   } = useDataStore();
 
+  useSettings({
+    minNumLetters: data?.name?.minNumLetters,
+    price: data?.name?.price,
+    minNumColors: data?.color?.minNumColors,
+    maxNumColors: data?.color?.maxNumColors,
+  });
+
   useEffect(() => {
-    setCookie("nora", JSON.stringify(formData), {
-      path: "/",
-      maxAge: 3600, // Expires after 1hr
-      sameSite: true,
-    });
-  }, [setCookie, formData, formData.frame, formData.shipping]);
+    setCookie(
+      "nora",
+      JSON.stringify({
+        name,
+        colors,
+        frame,
+        shipping,
+      }),
+      {
+        path: "/",
+        maxAge: 3600, // Expires after 1hr
+        sameSite: true,
+      }
+    );
+  }, [setCookie, name, colors, frame, shipping]);
 
   const router = useRouter();
   const { step, status } = router.query;

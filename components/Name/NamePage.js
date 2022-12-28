@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react";
 import useWindowSize from "../../utils/useWindowSize";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import { useIsSmall } from "../../utils/useMediaQueries";
+import { useCallback } from "react";
 
 const variants = {
   in: {
@@ -27,7 +28,8 @@ export default observer(({ data }) => {
   const windowSize = useWindowSize();
   const isSmall = useIsSmall();
 
-  const { formData, setName, updateBasePrice } = useDataStore();
+  const { name, setName, updateBasePrice } = useDataStore();
+
   const DESKTOP_WIDTH = 700;
   const DESKTOP_PADDING = 350;
 
@@ -35,28 +37,29 @@ export default observer(({ data }) => {
   const MOBILE_PADDING = 50;
   const PADDING = isSmall ? MOBILE_PADDING : DESKTOP_PADDING;
 
-  const resize = (name) => {
-    // Update width
+  const resize = useCallback(
+    (name) => {
+      // Update width
+      spanRef.current.textContent = name;
+      const width = isSmall ? MOBILE_WIDTH : DESKTOP_WIDTH;
+      const minWidth = name.length > 0 ? 0 : width;
+      const actualWidth = spanRef.current.offsetWidth;
+      inputRef.current.style.width = Math.max(minWidth, actualWidth) + "px";
 
-    spanRef.current.textContent = name;
-    const width = isSmall ? MOBILE_WIDTH : DESKTOP_WIDTH;
-    const minWidth = name.length > 0 ? 0 : width;
-    const actualWidth = spanRef.current.offsetWidth;
-    inputRef.current.style.width = Math.max(minWidth, actualWidth) + "px";
+      // If too wide, scale down
+      if (actualWidth > windowSize.width - PADDING) {
+        const updatedScale = (windowSize.width - PADDING) / actualWidth;
 
-    // If too wide, scale down
-    if (actualWidth > windowSize.width - PADDING) {
-      const updatedScale = (windowSize.width - PADDING) / actualWidth;
-
-      scale.set(updatedScale);
-    }
-  };
+        scale.set(updatedScale);
+      }
+    },
+    [isSmall, windowSize.width, PADDING, scale]
+  );
 
   const handleChange = (e) => {
     const name = e.target.value.replaceAll(/\s/g, "").toUpperCase();
     setName(name);
     const nameNoSpaces = name.replace(/\s/g, "");
-    resize(nameNoSpaces);
     updateBasePrice(nameNoSpaces.length * pricePerLetter);
   };
 
@@ -67,8 +70,8 @@ export default observer(({ data }) => {
   };
 
   useEffect(() => {
-    resize(formData.name);
-  }, [windowSize.width]);
+    resize(name);
+  }, [name, resize, windowSize.width]);
 
   return (
     <p className="xl-input mt-24 sm:mt-0">
@@ -81,7 +84,7 @@ export default observer(({ data }) => {
         onBlur={handleBlur}
         type="text"
         onChange={handleChange}
-        value={formData.name}
+        value={name}
         placeholder="NORA"
         maxLength={maxNumLetters}
       />

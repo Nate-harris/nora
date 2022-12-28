@@ -80,7 +80,6 @@ export default observer(({ data, step }) => {
   const { theme } = useTheme();
   const router = useRouter();
 
-  const { clearCart } = useShoppingCart();
   const isSmall = useIsSmall();
 
   useEffect(() => {
@@ -88,13 +87,13 @@ export default observer(({ data, step }) => {
     updateColorMinimum(data?.color?.minNumColors);
     updateColorMaximum(data?.color?.maxNumColors);
     updateLetterPrice(data?.name?.price);
-    clearCart();
   }, [
-    clearCart,
     data?.color?.maxNumColors,
     data?.color?.minNumColors,
     data?.name?.minNumLetters,
     data?.name?.price,
+    updateColorMaximum,
+    updateColorMinimum,
     updateLetterMinimum,
     updateLetterPrice,
   ]);
