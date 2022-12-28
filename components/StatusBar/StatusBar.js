@@ -35,7 +35,15 @@ const StatusBar = observer(({ step }) => {
       completed: isShippingCompleted,
       disabled: !isShippingCompleted,
     },
-    { label: "Review", completed: false, disabled: true },
+    {
+      label: "Review",
+      completed:
+        isNameCompleted &&
+        isColorCompleted &&
+        isFrameCompleted &&
+        isShippingCompleted,
+      disabled: true,
+    },
   ];
 
   useEffect(() => {

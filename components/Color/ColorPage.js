@@ -38,7 +38,7 @@ export default observer(({ data }) => {
     <>
       <div className="w-full">
         <div className="p-24 md:mt-64 w-full">
-          <div className="flex justify-center">
+          <div className="flex justify-center w-full h-120 md:h-200">
             <ColoringBook allowCompleted />
           </div>
           <SwatchCount />
