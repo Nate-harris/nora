@@ -99,7 +99,7 @@ export default observer(({ data }) => {
       >
         <motion.div
           ref={noraRef}
-          className="absolute inset-x-64 z-6 pointer-events-none"
+          className="hidden sm:block absolute inset-x-64 z-6 pointer-events-none"
           style={{ y: ySpring, opacity }}
         >
           <ColoringBook />

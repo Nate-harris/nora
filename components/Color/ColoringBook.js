@@ -265,7 +265,7 @@ const ColoringBook = observer(({ allowCompleted = false }) => {
       onMouseLeave={() => setHovered(false)}
     >
       <g id="letters">{renderLetters()}</g>
-      <g id="completed" className="pointer-events-none">
+      <g id="completed" className="hidden md:block pointer-events-none">
         {renderCompleted()}
       </g>
     </svg>

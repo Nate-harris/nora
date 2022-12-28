@@ -17,7 +17,7 @@
 }
 
 .control {
-  @apply overflow-hidden sm:overflow-visible min-h-screen w-screen flex flex-col sm:justify-center items-center relative text-left pt-164 sm:pt-0 px-24;
+  @apply overflow-hidden sm:overflow-visible min-h-screen w-screen flex flex-col sm:justify-center items-center relative text-left pt-136 sm:pt-0 px-16;
 
   &--group {
     @apply grid gap-y-8 grid-cols-1 sm:grid-cols-2;
