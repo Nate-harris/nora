@@ -16,7 +16,7 @@
 }
 
 .gallery-item {
-  @apply col-span-2 flex justify-end items-stretch relative snap-mandatory snap-y border-dashed md:border-t;
+  @apply col-span-2 flex justify-center items-stretch relative snap-mandatory snap-y border-dashed md:border-t;
   &--image {
     @apply w-full md:w-1/2 md:min-h-[200px];
   }

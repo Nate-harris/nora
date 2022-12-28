@@ -33,8 +33,8 @@ function useParallax(value, distance) {
 
 const GalleryPhoto = ({ photo, scrollYProgress }) => {
   const isSmall = useIsSmall();
-  const x = useParallax(scrollYProgress, isSmall ? 0 : 250);
-  const xSpring = useSpring(x, { damping: 20, stiffness: 90 });
+  const x = useParallax(scrollYProgress, isSmall ? 0 : -150);
+  const xSpring = useSpring(x, { damping: 20, stiffness: 100 });
   return (
     <motion.div className="gallery-item--image" style={{ x: xSpring }}>
       <Photo photo={photo} />
