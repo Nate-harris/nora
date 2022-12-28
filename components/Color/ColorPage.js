@@ -5,7 +5,6 @@ import {
 } from "../../lib/framer/animations";
 import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
-import Palette from "./Palette";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import ColoringBook from "./ColoringBook";
 import Swatch from "./Swatch";
