@@ -110,7 +110,7 @@ const Icon = observer(({ isOrderPage }) => {
             {ICON_PATHS.map((path, index) => (
               <motion.path
                 key={path.id}
-                animate={{ scale: hovered ? 0.8 : 1 }}
+                animate={{ scale: hovered ? 0.9 : 1 }}
                 transition={{ delay: 0.05 * index }}
                 d={path.d}
               />

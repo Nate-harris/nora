@@ -28,7 +28,7 @@ export default observer(({ data }) => {
   const windowSize = useWindowSize();
   const isSmall = useIsSmall();
 
-  const { name, setName, updateBasePrice } = useDataStore();
+  const { name, setName } = useDataStore();
 
   const DESKTOP_WIDTH = 700;
   const DESKTOP_PADDING = 350;
@@ -49,8 +49,9 @@ export default observer(({ data }) => {
       // If too wide, scale down
       if (actualWidth > windowSize.width - PADDING) {
         const updatedScale = (windowSize.width - PADDING) / actualWidth;
-
         scale.set(updatedScale);
+      } else {
+        scale.set(1);
       }
     },
     [isSmall, windowSize.width, PADDING, scale]
@@ -59,8 +60,6 @@ export default observer(({ data }) => {
   const handleChange = (e) => {
     const name = e.target.value.replaceAll(/\s/g, "").toUpperCase();
     setName(name);
-    const nameNoSpaces = name.replace(/\s/g, "");
-    updateBasePrice(nameNoSpaces.length * pricePerLetter);
   };
 
   const handleBlur = () => {
@@ -74,7 +73,7 @@ export default observer(({ data }) => {
   }, [name, resize, windowSize.width]);
 
   return (
-    <p className="xl-input mt-24 sm:mt-0">
+    <div className="xl-input mt-24 sm:mt-0">
       <span ref={spanRef} />
       <motion.input
         style={{ scale }}
@@ -88,6 +87,6 @@ export default observer(({ data }) => {
         placeholder="NORA"
         maxLength={maxNumLetters}
       />
-    </p>
+    </div>
   );
 });

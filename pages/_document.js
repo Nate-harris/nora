@@ -13,7 +13,15 @@ class MyDocument extends Document {
             crossOrigin="true"
           />
         </Head>
-        <body>
+        <body
+          style={{
+            "--toastify-font-family": "'Courier Sans', 'monospace'",
+            "--toastify-text-color-light": "var(--brown)",
+            "--toastify-color-light": "#ffffff",
+            "--toastify-text-color-dark": "#ffffff",
+            "--toastify-color-dark": "var(--brown)",
+          }}
+        >
           <Main />
           <NextScript />
         </body>

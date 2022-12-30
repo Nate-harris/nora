@@ -22,11 +22,6 @@ import Description from "./Description";
 import OrderSummary from "@/components/ReviewCommission/OrderSummary";
 import { useRouter } from "next/router";
 
-const WoodgrainShaderSketch = dynamic(
-  () => import("../WoodgrainShaderSketch"),
-  { ssr: false }
-);
-
 const variants = {
   initial: {
     opacity: 0,
@@ -77,28 +72,10 @@ export default observer(({ data, step }) => {
     updateColorMinimum,
     updateColorMaximum,
   } = useDataStore();
-  const { theme } = useTheme();
+
   const router = useRouter();
 
   const isSmall = useIsSmall();
-
-  useEffect(() => {
-    updateLetterMinimum(data?.name?.minNumLetters);
-    updateColorMinimum(data?.color?.minNumColors);
-    updateColorMaximum(data?.color?.maxNumColors);
-    updateLetterPrice(data?.name?.price);
-  }, [
-    data?.color?.maxNumColors,
-    data?.color?.minNumColors,
-    data?.name?.minNumLetters,
-    data?.name?.price,
-    updateColorMaximum,
-    updateColorMinimum,
-    updateLetterMinimum,
-    updateLetterPrice,
-  ]);
-
-  const { width, height } = useWindowSize();
 
   let formScreen = null;
 
@@ -139,15 +116,7 @@ export default observer(({ data, step }) => {
           <Page page={step} data={data} />
         </motion.form>
       </AnimatePresence>
-      <WoodgrainShaderSketch
-        className="hidden md:block absolute top-0 left-0 right-0 bottom-0 -z-1"
-        width={width}
-        height={height}
-        scale={{ current: -2.0 }}
-        rate={{ current: 0.2 }}
-        color={{ current: theme === "dark" ? "#000" : "#fff" }}
-        alpha={{ current: theme === "dark" ? 0.5 : 0.2 }}
-      />
+
       <TopDrawer>
         <Description value={description} step={step} />
         <TypingTutorial name={data?.name?.exampleName} />

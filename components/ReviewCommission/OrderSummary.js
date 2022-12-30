@@ -48,7 +48,7 @@ const variants = {
 export default observer(({ data }) => {
   const router = useRouter();
   const { status } = router.query;
-  const { formData, productPrice } = useDataStore();
+  const { name, frame, colors, shipping, totalPrice } = useDataStore();
   const { cartDetails, checkoutSingleItem, clearCart, redirectToCheckout } =
     useShoppingCart();
   const [loading, setLoading] = useState(false);
@@ -62,7 +62,7 @@ export default observer(({ data }) => {
 
     const item = {
       name: name ?? "Nora Puzzle",
-      price: productPrice,
+      price: totalPrice,
       quantity: 1,
     };
 
@@ -95,32 +95,27 @@ export default observer(({ data }) => {
     <div className="order-summary">
       <div className="order-summary--row">
         A puzzle for{" "}
-        <span className="order-summary--name">
-          {truncateString(formData.name, 10)}
-        </span>
+        <span className="order-summary--name">{truncateString(name, 12)}</span>
       </div>
 
       <div className="order-summary--row">
         Will be
         <div className="order-summary--palette">
-          <Palette colors={formData.colors} width={200} />
+          <Palette colors={colors} width={200} />
         </div>
       </div>
 
       <div className="order-summary--row">
         Will have a
-        {formData.frame?.image && (
+        {frame && (
           <div className="order-summary--frame">
-            <img
-              src={imageUrlFor(formData.frame.image).width(160)}
-              alt={formData.frame.name}
-            />
+            <img src={imageUrlFor(frame.image).width(160)} alt={frame.name} />
           </div>
         )}
       </div>
       <div className="order-summary--row">
         And will get to you in{" "}
-        <span className="order-summary--shipping">{formData.shipping}</span>
+        <span className="order-summary--shipping">{shipping}</span>
       </div>
       <div className="order-summary--row">
         <Button

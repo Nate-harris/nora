@@ -14,12 +14,12 @@ class DataStore {
     colors: [],
     shipping: null,
     price: 0,
-    letterPrice: 0,
-    basePrice: 0,
-    framePrice: 0,
-    shippingPrice: 0,
     id: "commission",
   };
+  @observable letterPrice = 0;
+  @observable framePrice = 0;
+  @observable shippingPrice = 0;
+
   @observable minNumLetters = 0;
   @observable maxNumLetters = 0;
   @observable minNumColors = 0;
@@ -78,11 +78,11 @@ class DataStore {
     return this.formData.shipping !== null;
   }
 
-  @computed get productPrice() {
+  @computed get totalPrice() {
     return (
-      this.formData.basePrice +
-      this.formData.framePrice +
-      this.formData.shippingPrice
+      this.formData.name.length * this.letterPrice +
+      this.framePrice +
+      this.shippingPrice
     );
   }
   @action.bound updateLetterMinimum(min) {
@@ -98,16 +98,14 @@ class DataStore {
     this.maxNumColors = max;
   }
   @action.bound updateLetterPrice(price) {
-    this.formData.letterPrice = price;
+    this.letterPrice = price;
   }
-  @action.bound updateBasePrice(price) {
-    this.formData.basePrice = price;
-  }
+
   @action.bound updateFramePrice(price) {
-    this.formData.framePrice = price;
+    this.framePrice = price;
   }
   @action.bound updateShippingPrice(price) {
-    this.formData.shippingPrice = price;
+    this.shippingPrice = price;
   }
   @action.bound addToProductPrice(price) {
     this.formData.price += price;

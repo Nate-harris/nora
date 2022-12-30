@@ -44,5 +44,12 @@ export default {
       type: "checkout",
       group: "checkout",
     },
+    {
+      title: "Success Message",
+      name: "successMessage",
+      description: "Message to show after a successful checkout.",
+      type: "complexPortableText",
+      group: "checkout",
+    },
   ],
 };

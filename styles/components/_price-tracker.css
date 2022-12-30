@@ -25,7 +25,7 @@
     @apply font-courierSans text-white rounded-full shadow-md px-24 py-8 mr-24 bg-pageBG text-pageText;
   }
   &--row {
-    @apply py-12 md:whitespace-nowrap border-b border-dashed border-white flex justify-between items-end;
+    @apply py-12 md:whitespace-nowrap border-t border-dashed border-white flex justify-between items-end;
     &:first-of-type {
       @apply border-t mt-36;
     }

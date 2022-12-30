@@ -70,7 +70,7 @@ const COLOR_COMBINATIONS = [
 ];
 
 const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
-  const { menuOpen } = useUIStore();
+  const { menuOpen, toggleMenuOpen } = useUIStore();
   const [itemHovered, setItemHovered] = useState(false);
   const [colorIndex, setColorIndex] = useState(0);
 
@@ -104,7 +104,7 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
       scale: 6.0,
     },
     inactive: {
-      alpha: 0.2,
+      alpha: 0.4,
       color: "rgb(255, 255, 255)",
       scale: 7.0,
     },
@@ -115,36 +115,36 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
       animate(alpha, shaderVariants.active.alpha, {
         type: "tween",
         ease: "easeInOut",
-        delay: 0,
+
         duration: 0.9,
       });
       animate(shaderColor, shaderVariants.active.color, {
         type: "tween",
         ease: "easeInOut",
-        delay: 0,
+
         duration: 0.9,
       });
       animate(scale, shaderVariants.active.scale, {
         ease: "easeInOut",
-        delay: 0.4,
+
         duration: 1.4,
       });
     } else {
       animate(alpha, shaderVariants.inactive.alpha, {
         type: "tween",
         ease: "easeInOut",
-        delay: 0,
+
         duration: 1,
       });
       animate(shaderColor, shaderVariants.inactive.color, {
         type: "tween",
         ease: "easeInOut",
-        delay: 0,
+
         duration: 1,
       });
       animate(scale, shaderVariants.inactive.scale, {
         ease: "easeInOut",
-        delay: 0.2,
+
         duration: 1.2,
       });
     }
@@ -186,7 +186,12 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
               key={index}
               tabIndex={!hasFocus ? -1 : null}
               link={{ ...item, title: null }}
-              onClick={onClick}
+              onClick={() => {
+                toggleMenuOpen();
+                if (onClick) {
+                  onClick();
+                }
+              }}
             >
               <motion.li
                 custom={{

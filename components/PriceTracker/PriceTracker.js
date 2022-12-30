@@ -84,11 +84,14 @@ const PriceTracker = observer(({ step }) => {
     colors,
     frame,
     shipping,
+    letterPrice,
+    framePrice,
+    shippingPrice,
     isNameCompleted,
     isColorCompleted,
     isFrameCompleted,
     isShippingCompleted,
-    productPrice,
+    totalPrice,
     minNumLetters,
   } = useDataStore();
 
@@ -100,31 +103,6 @@ const PriceTracker = observer(({ step }) => {
       setReviewHeight(reviewRect.height);
     }
   }, [reviewRect]);
-
-  const mobileNamePrice = formatCurrencyString({
-    value: formData.name.length * formData?.letterPrice,
-    currency: "USD",
-  });
-  const namePrice = `${formData.name.length} x letters (${formatCurrencyString({
-    value: formData?.letterPrice,
-    currency: "USD",
-  })} each) ${formatCurrencyString({
-    value: formData.name.length * formData?.letterPrice,
-    currency: "USD",
-  })}`;
-
-  const palettePrice = formatCurrencyString({
-    value: 0,
-    currency: "USD",
-  });
-  const framePrice = formatCurrencyString({
-    value: formData?.framePrice,
-    currency: "USD",
-  });
-  const shippingPrice = formatCurrencyString({
-    value: formData?.shippingPrice,
-    currency: "USD",
-  });
 
   const isSmall = useIsSmall();
 
@@ -138,7 +116,7 @@ const PriceTracker = observer(({ step }) => {
         )}
         initial={"inactive"}
         animate={
-          productPrice === 0 || formData.name.length < minNumLetters
+          totalPrice === 0 || formData.name.length < minNumLetters
             ? "inactive"
             : "active"
         }
@@ -163,7 +141,7 @@ const PriceTracker = observer(({ step }) => {
               <div className="price-tracker--bubble-header-label">
                 <span className="price-tracker--label">Total</span>
                 {formatCurrencyString({
-                  value: productPrice,
+                  value: totalPrice,
                   currency: "USD",
                 })}
               </div>
@@ -183,10 +161,18 @@ const PriceTracker = observer(({ step }) => {
                 {isNameCompleted && (
                   <div className="price-tracker--row">
                     <span className="price-tracker--row--label">
-                      {truncateString(name, 10)}
+                      {truncateString(name, 12)}
                     </span>
                     <span className="price-tracker--row--value">
-                      {isSmall ? mobileNamePrice : namePrice}
+                      {`${
+                        formData.name.length
+                      } x letters (${formatCurrencyString({
+                        value: letterPrice,
+                        currency: "USD",
+                      })} each) ${formatCurrencyString({
+                        value: name.length * letterPrice,
+                        currency: "USD",
+                      })}`}
                     </span>
                   </div>
                 )}
@@ -196,7 +182,10 @@ const PriceTracker = observer(({ step }) => {
                       <Palette colors={colors} width={180} size="sm" />
                     </span>
                     <span className="price-tracker--row--value">
-                      {palettePrice}
+                      {formatCurrencyString({
+                        value: 0,
+                        currency: "USD",
+                      })}
                     </span>
                   </div>
                 )}
@@ -209,7 +198,10 @@ const PriceTracker = observer(({ step }) => {
                       />
                     </span>
                     <span className="price-tracker--row--value">
-                      {framePrice}
+                      {formatCurrencyString({
+                        value: framePrice,
+                        currency: "USD",
+                      })}
                     </span>
                   </div>
                 )}
@@ -219,7 +211,10 @@ const PriceTracker = observer(({ step }) => {
                       {shipping}
                     </span>
                     <span className="price-tracker--row--value">
-                      {shippingPrice}
+                      {formatCurrencyString({
+                        value: shippingPrice,
+                        currency: "USD",
+                      })}
                     </span>
                   </div>
                 )}

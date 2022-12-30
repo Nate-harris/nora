@@ -113,6 +113,9 @@ module.exports = {
         courierSans: ["Courier Sans", "monospace"],
         inherit: "inherit",
       },
+      screens: {
+        "hover-hover": { raw: "(hover: hover)" },
+      },
       keyframes: {
         blink: {
           "0%, 100%": { opacity: 1 },

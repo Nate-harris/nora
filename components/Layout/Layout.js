@@ -4,7 +4,10 @@ import { motion } from "framer-motion";
 
 import { isBrowser, isMobileSafari, useWindowSize } from "../../utils/helpers";
 
-import { FRAMER_TRANSITION_EASEOUT } from "../../lib/framer/animations";
+import {
+  FRAMER_TRANSITION_EASEOUT,
+  pageTransitionSpeed,
+} from "../../lib/framer/animations";
 import HeadSEO from "../HeadSEO";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -13,8 +16,8 @@ const pageTransitionAnim = {
   show: {
     opacity: 1,
     transition: {
-      duration: FRAMER_TRANSITION_EASEOUT.duration / 1000,
-      delay: 0.2,
+      duration: pageTransitionSpeed / 1000,
+      delay: 0.5,
       ease: "linear",
       when: "beforeChildren",
     },
@@ -22,8 +25,9 @@ const pageTransitionAnim = {
   hide: {
     opacity: 0,
     transition: {
-      duration: FRAMER_TRANSITION_EASEOUT.duration / 1000,
+      duration: pageTransitionSpeed / 1000,
       ease: "linear",
+      delay: 0.5,
       when: "beforeChildren",
     },
   },

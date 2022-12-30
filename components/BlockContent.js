@@ -7,7 +7,7 @@ const Content = ({ blocks, className }) => {
   if (!blocks) return null;
 
   return (
-    <div className={cx("rc", className, "text-white")}>
+    <div className={cx("rc", "text-white", className)}>
       <PortableText value={blocks} components={blockSerializers} />
     </div>
   );

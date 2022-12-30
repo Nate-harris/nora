@@ -34,8 +34,8 @@ mat2 rotate2d(float angle){
 
 float lines(in vec2 pos, float b){
     float scale = u_scale;
-    pos *= scale+u_time*0.001;
-    return smoothstep(0.0,b,tan(pos.x*PI+u_time*0.75));
+    pos *= scale+sin(u_time)*0.001;
+    return smoothstep(0.0,b,tan(pos.x*PI+sin(u_time/3.0)));
 }
 
 void main(void) {

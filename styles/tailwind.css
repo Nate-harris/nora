@@ -12,8 +12,6 @@
 
 @font-face {
   font-family: "Courier Sans";
-  src: url("/fonts/CourierSans/CourierSansLLWebTrial-Bold.woff2")
-    format("woff2");
-  font-weight: 700;
-  font-style: normal;
+  src: url("/fonts/CourierSans/CourierSansLLWeb-Bold.woff2") format("woff2"),
+    url("/fonts/CourierSans/CourierSansLLWeb-Bold.woff") format("woff");
 }
