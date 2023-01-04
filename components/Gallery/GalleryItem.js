@@ -16,6 +16,8 @@ import {
 import { useState } from "react";
 import { useIsSmall } from "../../utils/useMediaQueries";
 import Palette from "@/components/ReviewCommission/Palette";
+import BlockContent from "../BlockContent";
+
 const MotionPhoto = motion(Photo);
 
 const overlayVariants = {
@@ -41,7 +43,7 @@ const GalleryPhoto = ({ photo, scrollYProgress }) => {
     </motion.div>
   );
 };
-const GalleryInformation = ({ name, frame, colors, scrollYProgress }) => {
+const GalleryInformation = ({ name, frame, colors, note, scrollYProgress }) => {
   const x = useParallax(scrollYProgress, -100);
   const xSpring = useSpring(x, { damping: 20, stiffness: 80 });
   return (
@@ -59,13 +61,19 @@ const GalleryInformation = ({ name, frame, colors, scrollYProgress }) => {
               {frame.type}
             </div>
           )}
+          {note && (
+            <div>
+              <label>Note</label>
+              {note}
+            </div>
+          )}
         </div>
       </details>
     </motion.div>
   );
 };
 const GalleryItem = ({ data = {} }) => {
-  const { name, frame, colors, photo } = data;
+  const { name, frame, colors, note, photo } = data;
 
   const isSmall = useIsSmall();
   const [hovered, setHovered] = useState(false);
@@ -76,7 +84,7 @@ const GalleryItem = ({ data = {} }) => {
   if (!photo) return null;
 
   return (
-    <section
+    <article
       ref={ref}
       className="gallery-item"
       onMouseEnter={() => setHovered(true)}
@@ -86,10 +94,11 @@ const GalleryItem = ({ data = {} }) => {
         name={name}
         frame={frame}
         colors={colors}
+        note={note}
         scrollYProgress={scrollYProgress}
       />
       <GalleryPhoto photo={photo} scrollYProgress={scrollYProgress} />
-    </section>
+    </article>
   );
 };
 

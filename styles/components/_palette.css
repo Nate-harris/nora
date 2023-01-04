@@ -1,7 +1,7 @@
 .palette {
   @apply flex gap-4 h-50 whitespace-nowrap;
   &--color {
-    @apply inline-block rounded-md h-50 w-50;
+    @apply inline-block h-50 w-50;
     &.is-extra-small {
       @apply h-5 w-30;
     }

@@ -1,9 +1,11 @@
 .btn {
   /* default style button */
-  @apply clean-btn inline-block relative bg-pageBG px-20 py-9 text-center border rounded-md font-semibold leading-125 transition-colors font-delaGothicOne text-16 md:text-24;
+  @apply clean-btn inline-block relative bg-pageBG px-20 py-9 text-center border-6 font-bold leading-125 transition-colors font-delaGothicOne uppercase text-16 md:text-24;
 
   /* default: hover */
-  &:not(.is-primary):not(.is-white):not(.is-text):not(.is-disabled):not(.is-soldout):not(.is-active-control) {
+  &:not(.is-primary):not(.is-white):not(.is-text):not(.is-disabled):not(
+      .is-soldout
+    ):not(.is-active-control) {
     &.is-active,
     &:hover {
       @apply text-orange border-orange;
@@ -69,7 +71,7 @@
     @apply bg-pageBG text-current;
 
     &::after {
-      @apply absolute -inset-1 bg-pageBG opacity-50;
+      @apply absolute -inset-6 bg-pageBG opacity-50;
       content: "";
     }
   }
@@ -83,7 +85,9 @@
     @apply bg-pageText border-pageBG text-pageBG;
 
     /* inverted: hover */
-    &:not(.is-primary):not(.is-white):not(.is-text):not(.is-disabled):not(.is-soldout) {
+    &:not(.is-primary):not(.is-white):not(.is-text):not(.is-disabled):not(
+        .is-soldout
+      ) {
       &.is-active,
       &:hover {
         @apply bg-pageBG border-pageBG text-pageText;
@@ -118,7 +122,7 @@
 
   /* white style button */
   &.is-white {
-    @apply bg-white border-white text-orange;
+    @apply bg-transparent border-white text-white;
 
     &:hover {
       @apply text-white;

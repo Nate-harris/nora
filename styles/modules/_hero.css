@@ -1,5 +1,5 @@
 .hero {
-  @apply grid relative overflow-hidden min-h-screen border-b;
+  @apply grid relative overflow-hidden min-h-screen border-b-4 border-white;
   min-height: calc(var(--vh, 1vh) * 100);
 
   @media (max-height: 500px) {

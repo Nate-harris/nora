@@ -20,6 +20,13 @@ export default {
       to: [{ type: "frame" }],
     },
     {
+      name: "note",
+      title: "Note",
+      type: "string",
+      description: "Place to add a note about the item.",
+    },
+
+    {
       name: "colors",
       title: "Colors",
       type: "array",

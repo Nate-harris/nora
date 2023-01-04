@@ -48,6 +48,7 @@ module.exports = {
       current: "currentColor",
       black: "#000000",
       white: "#FFFFFF",
+      brown: "var(--brown)",
       orange: "var(--orange)",
       green: "var(--green)",
       purple: "var(--purple)",

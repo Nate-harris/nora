@@ -10,13 +10,13 @@ const sunPath =
 
 const themes = [
   {
-    title: "Light Mode",
+    title: "Light",
     name: "light",
     color: { hex: "#f4f4f0" },
     icon: sunPath,
   },
   {
-    title: "Dark Mode",
+    title: "Dark",
     name: "dark",
     color: { hex: "#000000" },
     icon: moonPath,

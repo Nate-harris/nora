@@ -3,6 +3,7 @@ import DividerPhoto from "./DividerPhoto";
 import GallerySection from "./GallerySection";
 import Grid from "./Grid";
 import Marquee from "./Marquee";
+import Hero from "./Hero";
 
 export const Module = ({ index, data }) => {
   if (!data) return null;
@@ -16,6 +17,8 @@ export const Module = ({ index, data }) => {
       return <GallerySection index={index} data={data} />;
     case "marquee":
       return <Marquee index={index} data={data} />;
+    case "hero":
+      return <Hero index={index} data={data} />;
     default:
       return null;
   }

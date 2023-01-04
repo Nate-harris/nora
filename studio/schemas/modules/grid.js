@@ -1,6 +1,7 @@
-import { TextAlignLeft, Question } from "phosphor-react";
+import { TextAlignLeft, Question, WarningCircle } from "phosphor-react";
 
 import { getTypeTitles } from "../../lib/helpers";
+import React from "react";
 
 export default {
   title: "Content Grid",
@@ -17,10 +18,55 @@ export default {
         message: `Grids are first defined by the number of "spaces" they should have. Visually, you can think of this like available cells in a spreadsheet or table. Then, we define the columns that should exist within this grid, and what "space(s)" they should occupy at different screen sizes.`,
       },
     },
+
+    {
+      name: "color",
+      type: "note",
+      options: {
+        icon: WarningCircle,
+        headline: "Gotcha",
+        message: (
+          <>
+            You can set a background color and/or image for the entire grid.
+            Setting a background image will override the background color.
+          </>
+        ),
+      },
+    },
     {
       name: "backgroundColor",
       title: "Background Color",
       type: "color",
+    },
+    {
+      name: "textColor",
+      title: "Text Color",
+      type: "color",
+    },
+    {
+      name: "backgroundImage",
+      title: "Background Image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    },
+    {
+      name: "backgroundSize",
+      title: "Background Size",
+      type: "object",
+      fields: [
+        {
+          name: "width",
+          title: "Width",
+          type: "number",
+        },
+        {
+          name: "height",
+          title: "Height",
+          type: "number",
+        },
+      ],
     },
     {
       title: "Grid Size",

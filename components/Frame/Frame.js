@@ -8,6 +8,7 @@ import cx from "classnames";
 import { useState } from "react";
 import { formatCurrencyString } from "use-shopping-cart";
 import Photo from "../Photo";
+
 const variants = {
   hidden: { height: "auto", opacity: 0 },
   inactive: {
@@ -54,9 +55,9 @@ const Frame = ({
         photo={templateImage}
         alt={`Frame ${type}`}
       />
-      <span
+      {/* <span
         className={cx(
-          "hidden md:block absolute text-12 transition-all duration-300 -rotate-90 top-1/2 -translate-y-1/2 p-12 px-48 rounded-xl",
+          "hidden md:block absolute text-12 transition-all duration-300 -rotate-90 top-1/2 -translate-y-1/2 p-12 px-36",
           type === "Walnut" && "text-white bg-orange",
           type === "Red Oak" && "text-white bg-orange",
           (active || hovered) && "opacity-100 -translate-x-3/4",
@@ -64,7 +65,7 @@ const Frame = ({
         )}
       >
         {type}
-      </span>
+      </span> */}
     </motion.div>
   );
 };

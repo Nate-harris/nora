@@ -220,6 +220,7 @@ const ColoringBook = observer(({ allowCompleted = false }) => {
           id={letter.id}
           d={letter.d}
           fill={color}
+          strokeWidth={1.4}
           className="stroke-current"
         />
       );
@@ -258,7 +259,7 @@ const ColoringBook = observer(({ allowCompleted = false }) => {
 
   return (
     <svg
-      className="rounded-xl overflow-hidden max-w-xl"
+      className="overflow-hidden max-w-xl"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 487.89 197.02"
       onMouseEnter={() => setHovered(true)}

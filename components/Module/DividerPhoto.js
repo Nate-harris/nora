@@ -10,7 +10,7 @@ const DividerPhoto = ({ data = {} }) => {
   return (
     <div
       className="divider"
-      style={{ background: data?.backgroundColor?.hex ?? "auto" }}
+      style={{ backgroundColor: data?.backgroundColor?.hex ?? "auto" }}
     >
       <Photo
         className="divider--photo"

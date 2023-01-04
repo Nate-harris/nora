@@ -12,11 +12,12 @@ const Page = (props) => {
   const router = useRouter();
 
   const { site, page } = data;
+
   return (
     <>
       {!router.isFallback && (
         <Layout site={site} page={page}>
-          {page.isOrderPage ? (
+          {page.isOrder ? (
             <Order data={page.data} />
           ) : (
             page.modules?.map((module, key) => (

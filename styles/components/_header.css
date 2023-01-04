@@ -7,10 +7,23 @@ a[href="#content"].skip-link {
 }
 
 .header {
-  @apply sticky top-0 inset-x-0 z-5;
+  @apply fixed top-0 right-0 left-0 z-10 p-24 sm:p-32 flex justify-between pointer-events-none transition-all duration-300 ease-in-out border-b-4 border-transparent;
 
   &.is-overlay {
     @apply h-0;
+  }
+  &.is-white {
+    @apply text-white;
+  }
+
+  &.has-bg {
+    @apply bg-white border-b-4 border-pageText text-orange sm:p-18;
+    background: hsla(var(--pageText-hsl), 0.1);
+
+    &.is-white {
+      @apply bg-white border-b-4 border-white;
+      background: hsla(var(--white-hsl), 0.6);
+    }
   }
 
   &--outer {
@@ -36,26 +49,6 @@ a[href="#content"].skip-link {
   &--content {
     @apply flex flex-col items-center relative z-3;
   }
-
-  /* &--border {
-    @apply absolute inset-x-0 bottom-0 z-2 border-t;
-    transition: opacity 0s 0.6s linear;
-
-    .is-overlay:not(.has-bg) & {
-      transition-duration: 0.4s;
-      transition-delay: 0s;
-    }
-
-    .is-white & {
-      @apply border-white;
-      transition-delay: 0s;
-    }
-
-    &.is-hidden {
-      @apply opacity-0;
-      transition-delay: 0s;
-    }
-  } */
 }
 
 .logo {
@@ -65,7 +58,7 @@ a[href="#content"].skip-link {
     @apply clean-btn block p-8 bg-transparent;
 
     svg {
-      @apply block fill-current w-auto w-200;
+      @apply block fill-current w-200;
     }
   }
 }
@@ -145,20 +138,6 @@ a[href="#content"].skip-link {
   }
 }
 
-.cart-toggle {
-  @apply clean-btn flex items-center relative bg-transparent -mr-8 p-8 font-semibold uppercase;
-  font: inherit;
-
-  &--count {
-    @apply flex flex-col justify-center relative w-32 h-32 ml-8 rounded-full bg-transparent border border-current text-current text-14 font-bold leading-160;
-
-    &.is-active {
-      @apply border-pageText bg-pageText text-pageBG;
-      animation: pulse 2s infinite;
-    }
-  }
-}
-
 .main-navigation {
   &--desktop {
     @apply hidden sm:flex justify-between items-center absolute inset-0;
@@ -211,6 +190,7 @@ a[href="#content"].skip-link {
       &--inner {
         @apply flex-1 flex flex-col overflow-y-scroll px-16 pb-16;
         padding-top: calc(var(--headerHeight, 10rem) + 2.5rem);
+        mix-blend-mode: difference;
       }
 
       button {

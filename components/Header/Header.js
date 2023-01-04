@@ -4,7 +4,7 @@ import Link from "next/link";
 import cx from "classnames";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import { observer } from "mobx-react-lite";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Menu from "../Menu/Menu";
 import { useRect } from "@reach/rect";
 
@@ -83,7 +83,7 @@ const ICON_PATHS = [
     d: "M117.4,26.23c-.44-1.33-1.04-3.01-1.79-5.02h-11.2l-1.76,5.02h-8.81L103.67,.74h12.92l9.9,25.49h-9.09Zm-3.79-10.5c-.89-2.46-1.8-4.92-2.74-7.37l-.84-2.28c-.82,2.13-2.02,5.35-3.62,9.65h7.2Z",
   },
 ];
-const Icon = observer(({ isOrderPage }) => {
+const Icon = observer(() => {
   const { menuOpen } = useUIStore();
   const router = useRouter();
   const [hovered, setHovered] = useState(false);
@@ -100,13 +100,7 @@ const Icon = observer(({ isOrderPage }) => {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 126.49 26.58"
         >
-          <g
-            className="transition-all duration-300 ease-in-out"
-            style={{
-              fill:
-                menuOpen || !isOrderPage ? "var(--white)" : "var(--headerText)",
-            }}
-          >
+          <g className="transition-all duration-300 ease-in-out fill-current">
             {ICON_PATHS.map((path, index) => (
               <motion.path
                 key={path.id}
@@ -122,7 +116,7 @@ const Icon = observer(({ isOrderPage }) => {
   );
 });
 
-const Hamburger = observer(({ isOrderPage, onClick }) => {
+const Hamburger = observer(({ onClick }) => {
   const { menuOpen, toggleMenuOpen } = useUIStore();
   const router = useRouter();
   const [hovered, setHovered] = useState(false);
@@ -140,13 +134,7 @@ const Hamburger = observer(({ isOrderPage, onClick }) => {
         viewBox="0 0 89 64"
         overflow="visible"
       >
-        <g
-          className="transition-all duration-300 ease-in-out"
-          style={{
-            fill:
-              menuOpen || !isOrderPage ? "var(--white)" : "var(--headerText)",
-          }}
-        >
+        <g className="transition-all duration-300 ease-in-out fill-current">
           <motion.g
             animate={{ scale: !menuOpen && hovered ? 0.9 : 1 }}
             transition={{ delay: 0 }}
@@ -183,40 +171,47 @@ const Hamburger = observer(({ isOrderPage, onClick }) => {
   );
 });
 
-const Header = observer(({ data = {}, isOrderPage, onSetup = () => {} }) => {
-  const { menuOpen } = useUIStore();
-  const { productPrice } = useDataStore();
-  const router = useRouter();
+const Header = observer(
+  ({ data = {}, isHome, isOrder, onSetup = () => {} }) => {
+    const { menuOpen } = useUIStore();
+    const router = useRouter();
 
-  const [headerHeight, setHeaderHeight] = useState(null);
-  const headerRef = useRef();
-  const headerRect = useRect(headerRef);
+    const [headerHeight, setHeaderHeight] = useState(null);
+    const observeRef = useRef();
+    const headerRef = useRef();
+    const headerRect = useRect(headerRef);
+    const inView = useInView(observeRef);
 
-  useEffect(() => {
-    if (headerRect) {
-      setHeaderHeight(headerRect.height);
-    }
-  }, [headerRect]);
+    useEffect(() => {
+      if (headerRect) {
+        setHeaderHeight(headerRect.height);
+      }
+    }, [headerRect]);
 
-  useEffect(() => {
-    onSetup({ height: headerHeight });
-  }, [onSetup, headerHeight]);
+    useEffect(() => {
+      onSetup({ height: headerHeight });
+    }, [onSetup, headerHeight]);
 
-  return (
-    <>
-      <Menu items={data.menu.items} />
-      <header
-        ref={headerRef}
-        className={cx(
-          "fixed top-0 right-0 left-0 z-10 p-24 sm:p-32 flex justify-between pointer-events-none transition-all duration-300 ease-in-out",
-          isOrderPage && !menuOpen && productPrice !== 0 && "top-64 sm:top-0"
-        )}
-      >
-        <Icon isOrderPage={isOrderPage} />
-        <Hamburger isOrderPage={isOrderPage} />
-      </header>
-    </>
-  );
-});
+    return (
+      <>
+        <Menu items={data.menu.items} />
+        <header
+          ref={headerRef}
+          className={cx(
+            "header",
+            isOrder && !menuOpen && "top-64 sm:top-0",
+            isHome && !inView && !menuOpen && "has-bg",
+            (menuOpen || isHome) && "is-white",
+            isOrder ? "text-orange" : "text-pageText"
+          )}
+        >
+          <Icon />
+          <Hamburger />
+        </header>
+        <span ref={observeRef} className="header--observer" />
+      </>
+    );
+  }
+);
 
 export default Header;

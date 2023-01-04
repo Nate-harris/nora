@@ -1,5 +1,5 @@
 .gallery-section {
-  @apply grid grid-cols-2 bg-pageText text-pageBG p-24 md:p-48 overflow-hidden;
+  @apply grid grid-cols-2 bg-pageBG text-pageText p-24 md:p-48 overflow-hidden;
   padding-top: calc(var(--headerHeight, 10rem) + 2.5rem);
   &--item {
     @apply relative col-span-2 md:col-span-2 p-24 md:p-36 lg:p-48;
@@ -21,9 +21,12 @@
     @apply w-full md:w-1/2 md:min-h-[200px];
   }
   &--information {
-    @apply hidden md:flex z-0 inset-24 absolute text-pageBG flex flex-col justify-start gap-12 p-24 rounded-lg;
-    background: hsla(var(--pageBG-hsl), 0.025);
+    @apply hidden md:flex z-0 inset-24 absolute flex-col justify-start gap-12 p-24 rounded-xl;
+    background: hsla(var(--pageText-hsl), 0.025);
 
+    p {
+      @apply !text-10;
+    }
     &-top-row {
       @apply flex justify-start items-center gap-12 mt-auto;
     }

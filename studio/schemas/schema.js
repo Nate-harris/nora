@@ -48,6 +48,8 @@ import headerSettings from "./documents/settings-header";
 
 import page from "./documents/page";
 import grid from "./modules/grid";
+import hero from "./modules/hero";
+
 import menu from "./documents/menu";
 import galleryItem from "./objects/gallery-item";
 import gallerySection from "./modules/gallery-section";
@@ -99,6 +101,7 @@ export default createSchema({
     accordions,
     page,
     grid,
+    hero,
     menu,
     dividerPhoto,
     generalSettings,

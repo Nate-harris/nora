@@ -7,9 +7,7 @@ export const useRouterEvents = () => {
   const { clearRouteVariables } = useUIStore();
 
   useEffect(() => {
-    const handleRouteChange = (url, { shallow }) => {
-      clearRouteVariables();
-    };
+    const handleRouteChange = (url, { shallow }) => {};
 
     router.events.on("routeChangeComplete", handleRouteChange);
 

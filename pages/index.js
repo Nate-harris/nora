@@ -32,6 +32,7 @@ export async function getStaticProps({ preview, previewData }) {
     *[_type == "page" && _id == ${queries.homeID}] | order(_updatedAt desc)[0]{
       "id": _id,
       hasTransparentHeader,
+      "isHome": _id == ${queries.homeID},
       modules[]{
         defined(_ref) => { ...@->content[0] {
           ${queries.modules}

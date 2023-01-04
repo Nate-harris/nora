@@ -41,18 +41,11 @@ export default {
       group: "settings",
     },
     {
-      title: "Is Order Page?",
-      name: "isOrderPage",
-      type: "boolean",
-      description: "When activated this page will have the order form.",
-      initialValue: false,
-      group: "settings",
-    },
-    {
       title: "Page Content",
       name: "modules",
       type: "array",
       of: [
+        { type: "hero" },
         { type: "grid" },
         { type: "dividerPhoto" },
         { type: "gallerySection" },

@@ -2,6 +2,7 @@ import React from "react";
 import cx from "classnames";
 import Freeform from "./Freeform";
 import AccordionList from "./AccordionList";
+import { buildSrc } from "@/utils/helpers";
 
 const Grid = ({ data = {} }) => {
   const { size, columns } = data;
@@ -33,11 +34,30 @@ const Grid = ({ data = {} }) => {
     );
   };
 
+  const style = {};
+
+  let backgroundColor;
+  if (data?.backgroundColor?.hex) {
+    style.backgroundColor = data?.backgroundColor?.hex;
+  }
+
+  let textColor;
+  if (data?.textColor?.hex) {
+    style.color = data?.textColor?.hex;
+  }
+
+  let backgroundImage;
+  if (data?.backgroundImage?.asset) {
+    style.backgroundImage = `url(${buildSrc(data?.backgroundImage)})`;
+  }
+
+  let backgroundSize;
+  if (data?.backgroundSize) {
+    style.backgroundSize = `${data?.backgroundSize?.width}px ${data?.backgroundSize?.height}px`;
+  }
+
   return (
-    <section
-      style={{ background: data?.backgroundColor?.hex ?? "auto" }}
-      className="section"
-    >
+    <section style={style} className="section">
       <div className="section--content">
         <div
           className={`grid grid-cols-${size} gap-x-16 gap-y-16 sm:gap-x-32 lg:gap-x-48`}
