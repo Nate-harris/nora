@@ -57,7 +57,7 @@ const Grid = ({ data = {} }) => {
   }
 
   return (
-    <section style={style} className="section">
+    <section style={style} className={cx("section")}>
       <div className="section--content">
         <div
           className={`grid grid-cols-${size} gap-x-16 gap-y-16 sm:gap-x-32 lg:gap-x-48`}

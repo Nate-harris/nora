@@ -17,45 +17,25 @@ export const blockSerializers = {
       );
     },
     h2: ({ children }) => {
-      return (
-        <h2>
-          <Balancer>{children}</Balancer>
-        </h2>
-      );
+      return <h2>{children}</h2>;
     },
     h3: ({ children }) => {
-      return (
-        <h3>
-          <Balancer>{children}</Balancer>
-        </h3>
-      );
+      return <h3>{children}</h3>;
     },
     h4: ({ children }) => {
-      return (
-        <h4>
-          <Balancer>{children}</Balancer>
-        </h4>
-      );
+      return <h4>{children}</h4>;
     },
     h5: ({ children }) => {
-      return (
-        <h5>
-          <Balancer>{children}</Balancer>
-        </h5>
-      );
+      return <h5>{children}</h5>;
     },
     h6: ({ children }) => {
-      return (
-        <h6>
-          <Balancer>{children}</Balancer>
-        </h6>
-      );
+      return <h6>{children}</h6>;
     },
     // build our mock header styles
     h1mock: ({ children }) => {
       return (
         <p className={cx("is-h1")}>
-          <Balancer>{children}</Balancer>
+          <Balancer> {children}</Balancer>
         </p>
       );
     },

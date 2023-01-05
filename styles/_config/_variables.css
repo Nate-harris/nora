@@ -7,7 +7,7 @@
   --green: #0f622c;
   --purple: #aaa4d0;
   --seaside-oak: #c89d7d;
-  --tan: #f2dcb5;
+  --tan: #fff8ec;
   --brown: #2a1710;
 
   --frame-dark-border: #8a5036;
@@ -39,7 +39,7 @@
   --black-hsl: 0, 0%, 0%;
   --white-hsl: 0, 0%, 100%;
 
-  --pageBG: #ffffff;
+  --pageBG: var(--white);
   --pageText: var(--brown);
 
   --pageBG-hsl: 60, 14%, 95%;
@@ -51,7 +51,7 @@
 
 [data-theme="dark"] {
   --pageBG: var(--brown);
-  --pageText: #ffffff;
+  --pageText: var(--white);
 
   --pageBG-hsl: 0, 0%, 0%;
   --pageText-hsl: 60, 14%, 95%;
