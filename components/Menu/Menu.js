@@ -14,9 +14,11 @@ import dynamic from "next/dynamic";
 import { useWindowSize } from "../../utils/helpers";
 import { useEffect } from "react";
 import { useState } from "react";
+import { memo } from "react";
+import cx from "classnames";
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
-  { ssr: false }
+  { loading: () => "", ssr: false }
 );
 
 const containerVariants = {
@@ -169,15 +171,16 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
       variants={containerVariants}
       className="menu"
     >
-      <WoodgrainShaderSketch
-        className="menu--overlay"
-        width={width}
-        height={height}
-        color={shaderColor}
-        scale={scale}
-        alpha={alpha}
-        offset={{ current: { x: 8.0, y: 5 } }}
-      />
+      <div className={cx("menu--overlay", menuOpen && "is-active")}>
+        <WoodgrainShaderSketch
+          width={width}
+          height={height}
+          color={shaderColor}
+          scale={scale}
+          alpha={alpha}
+          offset={{ current: { x: 8.0, y: 5 } }}
+        />
+      </div>
 
       <ul {...rest} className="menu--container">
         {items?.map((item, index) => {
@@ -217,4 +220,4 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
   );
 });
 
-export default Menu;
+export default memo(Menu);

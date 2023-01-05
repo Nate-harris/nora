@@ -19,8 +19,9 @@ import BlockContent from "@/components/BlockContent";
 
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
-  { ssr: false }
+  { loading: () => "", ssr: false }
 );
+
 export const FORM_SCREENS = 4;
 
 const useSettings = ({ minNumLetters, minNumColors, maxNumColors, price }) => {

@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
   {
+    loading: () => "",
     ssr: false,
   }
 );

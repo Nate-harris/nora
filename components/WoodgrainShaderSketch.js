@@ -8,6 +8,7 @@ import { useIsSmall } from "../utils/useMediaQueries";
 import cx from "classnames";
 
 const Sketch = dynamic(() => import("react-p5").then((mod) => mod.default), {
+  loading: () => "",
   ssr: false,
 });
 
@@ -21,6 +22,7 @@ const WoodgrainShaderSketch = ({
   width = 1000,
   alpha = { current: 0.15 },
 }) => {
+  const hasLoaded = useRef(false);
   const shaderTexture = useRef(null);
   const shader = useRef(null);
   const canvasRef = useRef(null);
@@ -33,7 +35,10 @@ const WoodgrainShaderSketch = ({
     // load the shader
     shader.current = p5.loadShader(
       "/shaders/woodgrain/texture.vert",
-      "/shaders/woodgrain/texture.frag"
+      "/shaders/woodgrain/texture.frag",
+      () => {
+        hasLoaded.current = true;
+      }
     );
   }
 

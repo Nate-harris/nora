@@ -6,7 +6,6 @@ import FramePage from "@/components/Frame/FramePage";
 import ShippingPage from "@/components/Shipping/ShippingPage";
 
 import { useEffect } from "react";
-import { useShoppingCart } from "use-shopping-cart";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 
 import { useWindowSize } from "../../utils/helpers";

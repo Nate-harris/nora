@@ -16,16 +16,6 @@ a[href="#content"].skip-link {
     @apply text-white;
   }
 
-  &.has-bg {
-    @apply bg-white border-b-4 border-pageText text-orange sm:p-18;
-    background: hsla(var(--pageText-hsl), 0.1);
-
-    &.is-white {
-      @apply bg-white border-b-4 border-white;
-      background: hsla(var(--white-hsl), 0.6);
-    }
-  }
-
   &--outer {
     @apply relative;
   }
@@ -39,10 +29,6 @@ a[href="#content"].skip-link {
 
     .has-bg & {
       @apply bg-pageBG;
-    }
-
-    .is-white & {
-      @apply text-white delay-75;
     }
   }
 
