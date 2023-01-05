@@ -11,16 +11,9 @@ body {
 
 .section {
   @apply move-background relative px-24 py-48 sm:p-32 md:py-64 lg:py-80;
-  clip-path: inset(0.5rem 1rem 0.5rem 1rem round 12px);
 
   &:first-of-type {
-    @apply mt-5 pt-120;
-  }
-  &:last-of-type {
-    @apply mb-5;
-  }
-  &:only-of-type {
-    @apply mt-5 mb-5;
+    @apply pt-120;
   }
 
   &--content {
