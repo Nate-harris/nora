@@ -1,9 +1,0 @@
-.divider {
-  @apply relative p-12 sm:px-64 py-0;
-  &:first-of-type {
-    @apply pt-96 sm:pt-96;
-  }
-  &--photo {
-    @apply overflow-hidden rounded-xl;
-  }
-}
