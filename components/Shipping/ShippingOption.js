@@ -53,7 +53,7 @@ const ShippingOption = ({
         >
           <motion.div
             layout
-            className="text-24 sm:text-48 py-8 font-delaGothicOne uppercase whitespace-nowrap"
+            className="text-32 sm:text-48 py-8 font-delaGothicOne uppercase whitespace-nowrap"
           >
             {type}
           </motion.div>

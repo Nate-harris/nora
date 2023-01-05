@@ -1,7 +1,9 @@
+import { Package } from "phosphor-react";
 export default {
   name: "shippingOption",
   title: "Shipping Option",
   type: "document",
+  icon: Package,
   fields: [
     {
       name: "type",

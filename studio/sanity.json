@@ -1,7 +1,7 @@
 {
   "root": true,
   "project": {
-    "name": "nora"
+    "name": "Nora"
   },
   "api": {
     "projectId": "bumgp0dm",
@@ -19,9 +19,7 @@
   ],
   "env": {
     "development": {
-      "plugins": [
-        "@sanity/vision"
-      ]
+      "plugins": ["@sanity/vision"]
     }
   },
   "parts": [

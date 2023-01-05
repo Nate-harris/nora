@@ -30,10 +30,10 @@
   }
 
   .move-background {
-    animation: rotateGradient 45s linear infinite;
+    animation: moveBG 45s linear infinite;
   }
 
-  @keyframes rotateGradient {
+  @keyframes moveBG {
     0% {
       background-position: 0% 0%;
     }

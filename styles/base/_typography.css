@@ -32,7 +32,7 @@
   /* Headlines */
   h1,
   .is-h1 {
-    @apply m-0 text-20 sm:text-20 md:text-24 leading-130;
+    @apply m-0 text-14 sm:text-20 md:text-24 leading-130;
   }
 
   h2,

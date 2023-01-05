@@ -17,9 +17,9 @@ class MyDocument extends Document {
           style={{
             "--toastify-font-family": "'Courier Sans', 'monospace'",
             "--toastify-text-color-light": "var(--brown)",
-            "--toastify-color-light": "#ffffff",
-            "--toastify-text-color-dark": "#ffffff",
-            "--toastify-color-dark": "var(--brown)",
+            "--toastify-color-light": "var(--white)",
+            "--toastify-text-color-dark": "var(--white)",
+            "--toastify-color-dark": "var(--orange)",
           }}
         >
           <Main />

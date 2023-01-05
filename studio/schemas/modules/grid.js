@@ -10,16 +10,6 @@ export default {
   icon: TextAlignLeft,
   fields: [
     {
-      name: "gridNote",
-      type: "note",
-      options: {
-        icon: Question,
-        headline: "How to setup a Grid",
-        message: `Grids are first defined by the number of "spaces" they should have. Visually, you can think of this like available cells in a spreadsheet or table. Then, we define the columns that should exist within this grid, and what "space(s)" they should occupy at different screen sizes.`,
-      },
-    },
-
-    {
       name: "color",
       type: "note",
       options: {
@@ -67,6 +57,15 @@ export default {
           type: "number",
         },
       ],
+    },
+    {
+      name: "gridNote",
+      type: "note",
+      options: {
+        icon: Question,
+        headline: "How to setup a Grid",
+        message: `Grids are first defined by the number of "spaces" they should have. Visually, you can think of this like available cells in a spreadsheet or table. Then, we define the columns that should exist within this grid, and what "space(s)" they should occupy at different screen sizes.`,
+      },
     },
     {
       title: "Grid Size",

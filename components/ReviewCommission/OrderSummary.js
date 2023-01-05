@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Photo from "../Photo";
 const { className, styles } = css.resolve`
   div {
     display: grid;
@@ -109,7 +110,7 @@ export default observer(({ data }) => {
         Will have a
         {frame && (
           <div className="order-summary--frame">
-            <img src={imageUrlFor(frame.image).width(160)} alt={frame.name} />
+            <Photo photo={frame.image} width={160} alt={frame.name} />
           </div>
         )}
       </div>

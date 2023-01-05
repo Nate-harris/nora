@@ -38,23 +38,12 @@ export default {
       type: "array",
       of: [{ type: "color" }],
     },
-    {
-      name: "palettes",
-      title: "Color Palettes",
-      type: "array",
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "palette" }],
-        },
-      ],
-    },
-    {
-      name: "allowCustomCommissionColorSelection",
-      title: "Allow Custom Color Selection",
-      description:
-        "Toggles the ability for a user to enter a custom color palette",
-      type: "boolean",
-    },
+    // {
+    //   name: "allowCustomCommissionColorSelection",
+    //   title: "Allow Custom Color Selection",
+    //   description:
+    //     "Toggles the ability for a user to enter a custom color palette",
+    //   type: "boolean",
+    // },
   ],
 };

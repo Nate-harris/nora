@@ -199,7 +199,7 @@ const Header = observer(
           ref={headerRef}
           className={cx(
             "header",
-            isOrder && !menuOpen && "top-64 sm:top-0",
+            isOrder && !menuOpen && "is-shifted",
             isHome && !inView && !menuOpen && "has-bg",
             (menuOpen || isHome) && "is-white",
             isOrder ? "text-orange" : "text-pageText"

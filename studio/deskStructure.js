@@ -12,8 +12,6 @@ export default () =>
     .items([
       pagesMenu,
       S.divider(),
-      storeSettings,
-      S.divider(),
       menusMenu,
       S.divider(),
       settingsMenu,
@@ -30,6 +28,7 @@ export default () =>
             "generalSettings",
             "headerSettings",
             "promoSettings",
+            "checkout",
 
             "footerSettings",
 

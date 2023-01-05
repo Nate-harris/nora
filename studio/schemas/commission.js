@@ -1,6 +1,6 @@
 export default {
-  name: "commission",
   title: "Commission",
+  name: "commission",
   type: "document",
   groups: [
     { title: "Name", name: "name", default: true },
@@ -52,4 +52,11 @@ export default {
       group: "checkout",
     },
   ],
+  preview: {
+    prepare() {
+      return {
+        title: "Order Settings",
+      };
+    },
+  },
 };

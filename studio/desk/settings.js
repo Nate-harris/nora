@@ -11,6 +11,7 @@ import {
   GlobeSimple,
   Shuffle,
 } from "phosphor-react";
+import { orderMenu } from "./order";
 
 export const settingsMenu = S.listItem()
   .title("Settings")
@@ -47,6 +48,8 @@ export const settingsMenu = S.listItem()
               .documentId("footerSettings")
           )
           .icon(AnchorSimple),
+        S.divider(),
+        orderMenu,
         S.divider(),
 
         S.listItem()
