@@ -1,0 +1,40 @@
+{
+  "name": "nora",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "package.json",
+  "author": "Ryan Sheehan <sheehan.w.ryan@gmail.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "sanity start",
+    "build": "sanity build"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@sanity/base": "^2.30.1",
+    "@sanity/color-input": "^2.35.0",
+    "@sanity/core": "^2.30.2",
+    "@sanity/default-layout": "^2.30.1",
+    "@sanity/default-login": "^2.30.1",
+    "@sanity/desk-tool": "^2.30.1",
+    "@sanity/eslint-config-studio": "^2.0.0",
+    "@sanity/vision": "^2.30.1",
+    "eslint": "^8.6.0",
+    "phosphor-react": "^1.4.1",
+    "prop-types": "^15.8.1",
+    "react": "17.0.0",
+    "react-barcode": "^1.3.2",
+    "react-dom": "^17.0",
+    "react-icons": "^4.4.0",
+    "sanity-plugin-color-picker": "^1.0.3",
+    "sanity-plugin-note-field": "^1.1.4",
+    "styled-components": "^5.3.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://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@github.com/Ryan-Sheehan/nora.git"
+  }
+}

@@ -1,0 +1,61 @@
+/* Variables */
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --grey: #f7f7f7;
+  --orange: #f27922;
+  --green: #0f622c;
+  --purple: #aaa4d0;
+  --seaside-oak: #c89d7d;
+  --tan: #f2dcb5;
+  --brown: #2a1710;
+
+  --frame-dark-border: #8a5036;
+  --frame-dark-bg: #512412;
+  --frame-light-border: #f0a57a;
+  --frame-light-bg: #d69767;
+
+  --black: #20231f;
+
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 16px;
+
+  --spacing-s: 0.3125rem;
+  --spacing-m: 0.625rem;
+  --spacing-l: 1.25rem;
+  --spacing-xl: 2.5rem;
+
+  --radius-small: 4px;
+  --radius-medium: 8px;
+  --radius-large: 16px;
+
+  --shadow: 0 0 12px rgb(0 0 0 / 24%);
+
+  --orange-hsl: 25, 89%, 54%;
+
+  --green-hsl: 141, 73%, 22%;
+
+  --black-hsl: 0, 0%, 0%;
+  --white-hsl: 0, 0%, 100%;
+
+  --pageBG: #ffffff;
+  --pageText: var(--brown);
+
+  --pageBG-hsl: 60, 14%, 95%;
+  --pageText-hsl: 0, 0%, 0%;
+
+  --headerText: var(--orange);
+  --palette-bg: transparent;
+}
+
+[data-theme="dark"] {
+  --pageBG: var(--brown);
+  --pageText: #ffffff;
+
+  --pageBG-hsl: 0, 0%, 0%;
+  --pageText-hsl: 60, 14%, 95%;
+
+  --headerText: #ffffff;
+  --palette-bg: #ffffff;
+}

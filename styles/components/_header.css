@@ -1,0 +1,228 @@
+a[href="#content"].skip-link {
+  @apply block fixed top-0 left-1/2 -translate-x-1/2 -translate-y-full z-9 px-8 py-4 bg-pageBG text-pageText text-12 leading-125 font-semibold uppercase;
+
+  &:focus {
+    @apply translate-y-0 outline-none;
+  }
+}
+
+.header {
+  @apply fixed top-0 right-0 left-0 z-10 p-24 sm:p-32 flex justify-between pointer-events-none transition-all duration-300 ease-in-out border-b-4 border-transparent;
+
+  &.is-shifted {
+    @apply top-64 sm:top-0;
+  }
+  &.is-overlay {
+    @apply h-0;
+  }
+  &.is-white {
+    @apply text-white;
+  }
+
+  &--outer {
+    @apply relative;
+  }
+
+  &--inner {
+    @apply relative z-2 p-4 sm:p-16 bg-pageBG;
+
+    .is-overlay & {
+      @apply bg-transparent transition-colors duration-300;
+    }
+
+    .has-bg & {
+      @apply bg-pageBG;
+    }
+  }
+
+  &--content {
+    @apply flex flex-col items-center relative z-3;
+  }
+}
+
+.logo {
+  @apply flex flex-col relative z-1;
+
+  &--link {
+    @apply clean-btn block p-8 bg-transparent;
+
+    svg {
+      @apply block fill-current w-200;
+    }
+  }
+}
+
+.menu-toggle {
+  @apply sm:hidden absolute inset-y-0 left-0 z-6 clean-btn p-15 bg-transparent;
+
+  .is-overlay:not(.has-bg) & {
+    @apply transition-colors duration-300;
+  }
+
+  &.is-open {
+    @apply text-pageText;
+  }
+}
+
+.hamburger {
+  @apply relative flex flex-col items-center justify-center mx-auto w-30;
+
+  &::before,
+  &::after {
+    @apply block relative w-full h-0 border-t;
+    content: "";
+    margin: 6px 0;
+    transition: opacity 0s 0.2s linear, transform 0.2s 0.2s ease-out;
+
+    .is-open & {
+      @apply opacity-0;
+      transition: opacity 0s 0.2s linear, transform 0.2s ease-out;
+    }
+  }
+
+  &::before {
+    .is-open & {
+      transform: translateY(5px);
+    }
+  }
+
+  &::after {
+    .is-open & {
+      transform: translateY(-5px);
+    }
+  }
+
+  &--icon {
+    @apply block relative w-full h-0 border-t;
+    transition: border 0s 0.2s linear;
+
+    .is-open & {
+      @apply border-transparent;
+    }
+
+    &::before,
+    &::after {
+      @apply block absolute w-full h-0 border-t opacity-0;
+      content: "";
+      top: calc(50% - 0.5px);
+      transition: opacity 0s 0.2s, transform 0.2s ease-out;
+
+      .is-open & {
+        @apply opacity-100;
+        transition: transform 0.2s 0.2s ease-out;
+      }
+    }
+
+    &::before {
+      .is-open & {
+        transform: rotate(45deg);
+      }
+    }
+
+    &::after {
+      .is-open & {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+
+.main-navigation {
+  &--desktop {
+    @apply hidden sm:flex justify-between items-center absolute inset-0;
+
+    .menu-left,
+    .menu-right {
+      @apply flex items-center;
+    }
+
+    ul {
+      @apply flex;
+
+      li {
+        @apply mx-8;
+      }
+
+      button {
+        @apply clean-btn bg-transparent;
+      }
+
+      a,
+      button {
+        @apply block p-8 text-14 leading-150 font-semibold uppercase;
+      }
+    }
+  }
+
+  &--mobile {
+    @apply sm:hidden flex justify-end items-center absolute inset-0;
+
+    .menu-mobile {
+      @apply fixed top-0 left-0 w-full max-w-[420px] h-screen z-5 flex flex-col bg-pageBG text-pageText;
+      height: calc(var(--vh, 1vh) * 100);
+      will-change: transform;
+
+      @media (min-width: 421px) {
+        border-right-width: 1px;
+      }
+
+      &--backdrop {
+        @apply fixed inset-0 z-4 bg-black bg-opacity-40 pointer-events-none opacity-0;
+        transition: opacity 0.15s linear;
+
+        &.is-active {
+          @apply pointer-events-auto opacity-100;
+          backdrop-filter: blur(6px);
+        }
+      }
+
+      &--inner {
+        @apply flex-1 flex flex-col overflow-y-scroll px-16 pb-16;
+        padding-top: calc(var(--headerHeight, 10rem) + 2.5rem);
+        mix-blend-mode: difference;
+      }
+
+      button {
+        @apply clean-btn bg-transparent;
+        font: inherit;
+      }
+
+      a,
+      button {
+        @apply block p-0;
+      }
+
+      &--primary {
+        ul {
+          @apply flex flex-col;
+        }
+
+        a,
+        button {
+          @apply text-36 leading-150;
+        }
+      }
+
+      &--secondary {
+        @apply pt-32;
+
+        ul {
+          @apply flex flex-col;
+        }
+
+        a,
+        button {
+          @apply text-20 leading-150;
+        }
+      }
+
+      &--featured {
+        @apply flex;
+      }
+    }
+  }
+
+  .cart-toggle {
+    @apply mx-8 p-8 text-14 leading-150 font-semibold uppercase;
+  }
+}
