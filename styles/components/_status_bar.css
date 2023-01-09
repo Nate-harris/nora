@@ -39,7 +39,7 @@
   }
 
   &--bubble {
-    @apply absolute -z-1 -top-5 -bottom-5 right-0 left-0 rounded-full bg-pageText;
+    @apply absolute -z-1 -top-5 -bottom-5 right-0 left-0 rounded-xl bg-pageText;
   }
 
   &--container {

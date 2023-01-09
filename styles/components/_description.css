@@ -4,7 +4,7 @@
     @apply text-12;
   }
   &-index {
-    @apply text-12 shadow-md bg-pageText text-pageBG h-28 w-48 flex items-center justify-center rounded-full mx-12 mr-16;
+    @apply text-12 shadow-md bg-pageText text-pageBG h-32 w-32 flex items-center justify-center rounded-full mx-12 mr-16;
   }
 }
 
