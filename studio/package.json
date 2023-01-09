@@ -31,6 +31,7 @@
     "react-icons": "^4.4.0",
     "sanity-plugin-color-picker": "^1.0.3",
     "sanity-plugin-note-field": "^1.1.4",
+    "sanity-plugin-vercel-deploy": "^2.1.6",
     "styled-components": "^5.3.5"
   },
   "repository": {
