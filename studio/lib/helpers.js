@@ -1,5 +1,4 @@
 import React from "react";
-import { Circle } from "phosphor-react";
 
 export const getModuleName = (type) => {
   switch (type) {
@@ -71,19 +70,6 @@ export const getDynamicRoute = (name) => {
     default:
       return false;
   }
-};
-
-export const getSwatch = (color) => {
-  return (
-    <Circle
-      color={color}
-      weight="fill"
-      style={{
-        boxShadow: "0 0 0 1px rgba(255,255,255,.4), 0 0 0 1px rgba(0,0,0,.15)",
-        borderRadius: "50%",
-      }}
-    />
-  );
 };
 
 // replace template tags with values
