@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import cx from "classnames";
 import Freeform from "./Freeform";
 import AccordionList from "./AccordionList";
 import { buildSrc } from "@/utils/helpers";
+import { m, useInView } from "framer-motion";
 
 const Grid = ({ data = {} }) => {
-  const { size, columns } = data;
+  const { size, isClipped, backgroundTexture, columns } = data;
+
+  const ref = useRef();
+  const inView = useInView(ref);
 
   const getGridSize = (
     breakpoint,
@@ -57,12 +61,16 @@ const Grid = ({ data = {} }) => {
   }
 
   return (
-    <section style={style} className={cx("section")}>
+    <section
+      ref={ref}
+      style={style}
+      className={cx("section", isClipped && "is-sine", backgroundTexture ?? "")}
+    >
       <div className="section--content">
         <div
           className={`grid grid-cols-${size} gap-x-16 gap-y-16 sm:gap-x-32 lg:gap-x-48`}
         >
-          {columns.map((col, key) => {
+          {columns?.map((col, key) => {
             const { sizes, blocks } = col;
 
             return (

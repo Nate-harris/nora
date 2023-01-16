@@ -9,10 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/font": "^13.0.2",
     "@portabletext/react": "^1.0.6",
     "@reach/rect": "^0.18.0",
-    "@react-three/fiber": "^8.7.3",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^3.3.2",
     "@sanity/image-url": "^1.0.1",
@@ -27,7 +25,6 @@
     "groq": "^2.29.3",
     "marqy": "^0.0.8",
     "mobx": "^6.3.7",
-    "mobx-react": "^7.5.3",
     "mobx-react-lite": "^3.4.0",
     "next": "12.2.1",
     "next-themes": "^0.2.1",
@@ -44,7 +41,6 @@
     "react-wrap-balancer": "^0.2.4",
     "stripe": "^9.13.0",
     "swr": "^1.3.0",
-    "three": "^0.144.0",
     "use-shopping-cart": "2.4.3",
     "uuid": "^8.3.2"
   },

@@ -14,6 +14,13 @@ export default {
       type: "complexPortableText",
     },
     {
+      title: "Is Fixed?",
+      name: "isFixed",
+      type: "boolean",
+      description:
+        "Should this hero be scrolled past and visible through an opening or should it scroll with the page?",
+    },
+    {
       title: "Background Type",
       name: "bgType",
       type: "string",

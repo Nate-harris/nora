@@ -29,16 +29,53 @@
     background-size: 16px 16px;
   }
 
-  .move-background {
-    animation: moveBG 45s linear infinite;
+  .is-houndstooth {
+    animation: moveBGDiagonal 45s linear infinite;
+    background-image: url("/houndstooth.svg");
+    background-size: 100px 100px;
+    background-repeat: repeat;
+  }
+  .is-checkered {
+    @apply h-150 p-0;
+    animation: moveBGDown 60s linear infinite;
+    background-image: url("/checkered.svg");
+    background-size: 100px 100px;
+    background-repeat: repeat;
+  }
+  .is-nora {
+    animation: moveBGDiagonalLeft 70s linear infinite;
+    background-image: url("/palette.svg");
+    background-size: 480px 220px;
+    background-repeat: repeat;
   }
 
-  @keyframes moveBG {
+  .move-bg {
+    animation: moveBGDiagonal 45s linear infinite;
+  }
+
+  @keyframes moveBGDiagonal {
     0% {
       background-position: 0% 0%;
     }
     100% {
       background-position: 100% 100%;
+    }
+  }
+  @keyframes moveBGDiagonalLeft {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: -100% 100%;
+    }
+  }
+
+  @keyframes moveBGDown {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: -100% 0%;
     }
   }
 

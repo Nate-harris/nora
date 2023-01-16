@@ -3,9 +3,11 @@ import React from "react";
 import BlockContent from "@/components/BlockContent";
 import VideoLoop from "@/components/VimeoLoop";
 import Photo from "@/components/Photo";
+import cx from "classnames";
+import { useInView } from "framer-motion";
 
 const Hero = ({ data = {} }) => {
-  const { content, bgType, photos, video } = data;
+  const { content, bgType, isFixed, photos, video } = data;
 
   return (
     <section className="hero">
@@ -19,7 +21,7 @@ const Hero = ({ data = {} }) => {
 
       {bgType === "video" && (
         <>
-          <div className="hero--bg is-desktop">
+          <div className={cx("hero--bg is-desktop", isFixed && "is-fixed")}>
             <VideoLoop title={video.title} id={video.id} />
           </div>
           <div className="hero--bg is-mobile">

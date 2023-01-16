@@ -34,6 +34,7 @@ const containerVariants = {
 
 const INITIAL_DELAY = 0.3;
 const ITEM_STAGGER = 0.15;
+
 const listItemVariants = {
   visible: ({ hasDelay, direction, offset }) => ({
     opacity: 1,
@@ -58,16 +59,20 @@ const listItemVariants = {
 
 const COLOR_COMBINATIONS = [
   {
+    background: "rgb(170, 164, 208)",
+    shader: "rgb(242, 121, 34)",
+  },
+  {
+    background: "rgb(123, 183, 150)",
+    shader: "rgb(242, 121, 34)",
+  },
+  {
     background: "rgb(203, 188, 154)",
     shader: "rgb(239, 184, 87)",
   },
   {
     background: "rgb(120, 190, 227)",
     shader: "rgb(123, 183, 150)",
-  },
-  {
-    background: "rgb(170, 164, 208)",
-    shader: "rgb(242, 121, 34)",
   },
 ];
 
@@ -82,6 +87,7 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
 
   const [hasDelay, setHasDelay] = useState(true);
   const { width, height } = useWindowSize();
+
   // Don't want the delay for our hover animation so remove it once
   // we have opened the menu
   useEffect(() => {
@@ -117,36 +123,30 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
       animate(alpha, shaderVariants.active.alpha, {
         type: "tween",
         ease: "easeInOut",
-
         duration: 0.9,
       });
       animate(shaderColor, shaderVariants.active.color, {
         type: "tween",
         ease: "easeInOut",
-
         duration: 0.9,
       });
       animate(scale, shaderVariants.active.scale, {
         ease: "easeInOut",
-
         duration: 1.4,
       });
     } else {
       animate(alpha, shaderVariants.inactive.alpha, {
         type: "tween",
         ease: "easeInOut",
-
         duration: 1,
       });
       animate(shaderColor, shaderVariants.inactive.color, {
         type: "tween",
         ease: "easeInOut",
-
         duration: 1,
       });
       animate(scale, shaderVariants.inactive.scale, {
         ease: "easeInOut",
-
         duration: 1.2,
       });
     }
@@ -171,7 +171,7 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
       variants={containerVariants}
       className="menu"
     >
-      <div className={cx("menu--overlay", menuOpen && "is-active")}>
+      <div className={cx("menu--overlay")}>
         <WoodgrainShaderSketch
           width={width}
           height={height}

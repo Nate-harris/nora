@@ -16,6 +16,11 @@ export default {
   ],
   fields: [
     {
+      name: "isClipped",
+      title: "Is Clipped?",
+      type: "boolean",
+    },
+    {
       name: "backgroundColor",
       title: "Background Color",
       type: "color",

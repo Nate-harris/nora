@@ -74,7 +74,7 @@
   }
 
   &--photo {
-    @apply relative w-300 sm:w-300 px-32 py-16 sm:px-48 sm:py-32;
+    @apply relative w-300 sm:w-lg px-16 py-16 sm:px-16 sm:py-32;
   }
 
   &--product {

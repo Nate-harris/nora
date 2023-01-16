@@ -32,17 +32,17 @@
   /* Headlines */
   h1,
   .is-h1 {
-    @apply m-0 text-14 sm:text-20 md:text-24 leading-130;
+    @apply m-0 text-28 sm:text-36 font-delaGothicOne leading-120 tracking-wider uppercase;
   }
 
   h2,
   .is-h2 {
-    @apply m-0 text-32 lg:text-48 font-delaGothicOne font-normal leading-125 tracking-wider;
+    @apply m-0 text-28 sm:text-32 font-delaGothicOne leading-150 tracking-wider uppercase;
   }
 
   h3,
   .is-h3 {
-    @apply m-0 text-20 lg:text-24 font-delaGothicOne font-normal leading-125 tracking-wider;
+    @apply m-0 text-22 font-delaGothicOne leading-150 tracking-wider uppercase;
   }
 
   h4,

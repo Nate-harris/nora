@@ -24,6 +24,11 @@ export default {
       },
     },
     {
+      name: "isClipped",
+      title: "Is Clipped?",
+      type: "boolean",
+    },
+    {
       name: "backgroundColor",
       title: "Background Color",
       type: "color",
@@ -57,6 +62,19 @@ export default {
           type: "number",
         },
       ],
+    },
+    {
+      title: "Background Texture",
+      name: "backgroundTexture",
+      type: "string",
+      description: "Repeating background texture you can apply to a section",
+      options: {
+        list: [
+          { title: "Checkered", value: "checkered" },
+          { title: "Houndstooth", value: "houndstooth" },
+          { title: "Nora", value: "nora" },
+        ],
+      },
     },
     {
       name: "gridNote",

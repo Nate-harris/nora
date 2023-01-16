@@ -1,10 +1,7 @@
 .menu {
   @apply fixed inset-0 z-10 flex justify-center items-center overflow-hidden;
   &--overlay {
-    @apply move-background sm:animate-none absolute inset-0 -z-1 invisible opacity-0 transition-opacity duration-300 ease-in-out;
-    &.is-active {
-      @apply visible opacity-100;
-    }
+    @apply move-bg sm:animate-none absolute inset-0 -z-1;
 
     @media (max-width: 768px) {
       background-image: url("/walnut.png");

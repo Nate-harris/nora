@@ -9,11 +9,34 @@ body {
   @apply flex flex-col;
 }
 
+.marquee-section {
+  @apply relative backdrop-blur-2xl;
+}
+
 .section {
-  @apply move-background relative px-24 py-48 sm:p-32 md:py-64 lg:py-80;
+  @apply move-bg relative px-24 py-48 sm:p-32 md:py-64 lg:py-80;
 
   &:first-of-type {
     @apply pt-120;
+  }
+
+  &.houndstooth {
+    @apply is-houndstooth;
+  }
+
+  &.checkered {
+    @apply is-checkered;
+  }
+  &.nora {
+    @apply is-nora;
+  }
+
+  &.is-clipped {
+    @apply -my-16;
+    clip-path: inset(3.2rem 3.2rem 3.2rem 3.2rem round 10px);
+    figure {
+      @apply -m-32;
+    }
   }
 
   &--content {
