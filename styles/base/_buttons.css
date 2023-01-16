@@ -17,7 +17,8 @@
   &.is-primary {
     @apply bg-pageText border-pageText text-pageBG;
     &:hover {
-      background: hsla(var(--pageText-hsl), 0.025);
+      @apply text-pageText;
+      background: hsla(var(--pageText-hsl), 0.1);
     }
   }
 

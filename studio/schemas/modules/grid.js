@@ -73,6 +73,8 @@ export default {
           { title: "Checkered", value: "checkered" },
           { title: "Houndstooth", value: "houndstooth" },
           { title: "Nora", value: "nora" },
+          { title: "Squiggle", value: "squiggle" },
+          { title: "Blur", value: "blur" },
         ],
       },
     },

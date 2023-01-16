@@ -30,6 +30,12 @@ body {
   &.nora {
     @apply is-nora;
   }
+  &.squiggle {
+    @apply is-squiggle;
+  }
+  &.blur {
+    @apply is-blur;
+  }
 
   &.is-clipped {
     @apply -my-16;

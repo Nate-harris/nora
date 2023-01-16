@@ -37,7 +37,7 @@
   }
   .is-checkered {
     @apply h-150 p-0;
-    animation: moveBGDown 60s linear infinite;
+    animation: moveBGLeft 60s linear infinite;
     background-image: url("/checkered.svg");
     background-size: 100px 100px;
     background-repeat: repeat;
@@ -47,6 +47,16 @@
     background-image: url("/palette.svg");
     background-size: 480px 220px;
     background-repeat: repeat;
+  }
+  .is-squiggle {
+    animation: moveBGRight 30s linear infinite;
+    background-image: url("/squiggle.svg");
+    background-size: 500px 150px;
+    background-repeat: repeat;
+  }
+  .is-blur {
+    @apply backdrop-blur-2xl;
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
   .move-bg {
@@ -58,7 +68,7 @@
       background-position: 0% 0%;
     }
     100% {
-      background-position: 100% 100%;
+      background-position: 100% 200%;
     }
   }
   @keyframes moveBGDiagonalLeft {
@@ -70,12 +80,20 @@
     }
   }
 
-  @keyframes moveBGDown {
+  @keyframes moveBGLeft {
     0% {
       background-position: 0% 0%;
     }
     100% {
       background-position: -100% 0%;
+    }
+  }
+  @keyframes moveBGRight {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 0%;
     }
   }
 
