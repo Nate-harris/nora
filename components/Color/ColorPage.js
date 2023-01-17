@@ -9,6 +9,9 @@ import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import ColoringBook from "./ColoringBook";
 import Swatch from "./Swatch";
 import SwatchCount from "./SwatchCount";
+import Drawer from "@/components/drawer";
+import { useState } from "react";
+import Photo from "../Photo";
 
 const variants = {
   in: {
@@ -23,15 +26,24 @@ const variants = {
 
 export default observer(({ data }) => {
   const {
-    color: { palettes, colors },
+    color: { colors, examples },
   } = data;
-  const { formData, setPalette, minNumColors } = useDataStore();
+  const { formData, setPalette, clearColors, addColor, minNumColors } =
+    useDataStore();
 
-  const handleClick = (option) => {
-    setPalette({ name: option.name, colors: option.colors });
+  const [examplesOpen, setExamplesOpen] = useState(false);
+
+  const toggleExamples = (e) => {
+    e.preventDefault();
+    setExamplesOpen(!examplesOpen);
   };
-  const clearSelection = () => {
-    setPalette(null);
+
+  const handleExampleClicked = (colors) => {
+    clearColors();
+    colors.forEach((color) => {
+      addColor(color.hex);
+    });
+    setExamplesOpen(false);
   };
 
   return (
@@ -39,7 +51,7 @@ export default observer(({ data }) => {
       <div className="w-full">
         <div className="p-24 md:mt-64 w-full">
           <div className="flex justify-center w-full h-120 md:h-200">
-            <ColoringBook allowCompleted />
+            <ColoringBook allowCompleted={!examplesOpen} />
           </div>
           <SwatchCount />
           <div className="color-picker--swatches">
@@ -49,18 +61,43 @@ export default observer(({ data }) => {
               })}
             </div>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: formData.palette !== null ? 1 : 0 }}
-            className="flex justify-center p-24"
-          >
-            <div className="btn" onClick={clearSelection}>
-              Clear Selection
-            </div>
-          </motion.div>
+          <div className="color-picker--toggle-row">
+            <button className="color-picker--toggle" onClick={toggleExamples}>
+              {examplesOpen ? "Hide examples" : "See examples"}
+            </button>
+          </div>
         </div>
       </div>
+      <Drawer
+        direction="right"
+        isOpen={examplesOpen}
+        onClose={() => setExamplesOpen(false)}
+        className="examples"
+      >
+        <div className="p-12 flex flex-col gap-12 overflow-scroll">
+          {examples.map((example, index) => {
+            return (
+              <div
+                key={index}
+                className="flex flex-col gap-12 border-b border-dashed"
+              >
+                <Photo photo={example.photo} />
+                <div className="flex flex-wrap gap-6">
+                  {example.colors?.map((option, index) => {
+                    return <Swatch key={option.hex} data={option} />;
+                  })}
+                </div>
+                <button
+                  className="color-picker--toggle"
+                  onClick={() => handleExampleClicked(example.colors)}
+                >
+                  Use colors
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      </Drawer>
     </>
   );
 });

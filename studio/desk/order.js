@@ -1,6 +1,13 @@
 import S from "@sanity/desk-tool/structure-builder";
 
-import { ShoppingCart, Gear, FrameCorners, Package } from "phosphor-react";
+import {
+  ShoppingCart,
+  Gear,
+  PaintBrushHousehold,
+  FrameCorners,
+  Package,
+  ProjectorScreen,
+} from "phosphor-react";
 
 export const orderMenu = S.listItem()
   .title("Order")
@@ -21,11 +28,19 @@ export const orderMenu = S.listItem()
           .title("Frames")
           .child(S.documentTypeList("frame").title("Frames"))
           .icon(FrameCorners),
+        S.listItem()
+          .title("Swatches")
+          .child(S.documentTypeList("swatch").title("Swatches"))
+          .icon(PaintBrushHousehold),
 
         S.listItem()
           .title("Shipping Options")
           .child(S.documentTypeList("shippingOption").title("Shipping Options"))
           .icon(Package),
+        S.listItem()
+          .title("Example Colors")
+          .child(S.documentTypeList("exampleColor").title("Example Colors"))
+          .icon(ProjectorScreen),
       ])
   )
   .icon(ShoppingCart);

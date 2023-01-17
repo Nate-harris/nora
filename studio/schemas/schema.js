@@ -55,6 +55,8 @@ import galleryItem from "./objects/gallery-item";
 import gallerySection from "./modules/gallery-section";
 import dividerPhoto from "./modules/divider-photo";
 import marquee from "./modules/marquee";
+import swatch from "./swatch";
+import exampleColors from "./objects/exampleColors";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -102,6 +104,8 @@ export default createSchema({
     page,
     grid,
     hero,
+    swatch,
+    exampleColors,
     menu,
     dividerPhoto,
     generalSettings,

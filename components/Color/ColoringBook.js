@@ -203,7 +203,7 @@ const containerVariants = {
   }),
 };
 
-const ColoringBook = observer(({ allowCompleted = false }) => {
+const ColoringBook = observer(({ allowCompleted = true }) => {
   const { colors, isColorCompleted } = useDataStore();
   const [hovered, setHovered] = useState(null);
 

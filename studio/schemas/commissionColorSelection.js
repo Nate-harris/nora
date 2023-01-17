@@ -36,7 +36,7 @@ export default {
       name: "colors",
       title: "Colors",
       type: "array",
-      of: [{ type: "color" }],
+      of: [{ type: "reference", to: [{ type: "swatch" }] }],
     },
     // {
     //   name: "allowCustomCommissionColorSelection",

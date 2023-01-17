@@ -8,12 +8,21 @@
   &--count {
     @apply text-center my-24 text-12;
   }
+  &--toggle-row {
+    @apply w-full flex justify-center;
+  }
+  &--toggle {
+    @apply bg-transparent underline text-center my-24 text-12;
+    &:hover {
+      @apply text-orange;
+    }
+  }
   &--swatch {
     @apply relative inline-block h-50 w-50 cursor-pointer;
     &-border {
       @apply z-3 absolute inset-0 pointer-events-none;
       &.is-active {
-      @apply border-4 border-pageText;
+        @apply border-4 border-pageText;
         &::after {
           @apply z-4 content-['x'] bg-pageText py-4 px-6 pr-8 pt-6 absolute -top-4 -right-4 translate-y-0 translate-x-0 text-12 text-pageBG;
         }
