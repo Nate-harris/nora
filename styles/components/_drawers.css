@@ -5,11 +5,11 @@
   transition: visibility 0.2s 0.8s;
 
   &.is-left {
-    @apply left-0 sm:border-r border-white;
+    @apply left-0;
   }
 
   &.is-right {
-    @apply right-0 sm:border-l border-white;
+    @apply right-0;
   }
 
   &.is-active {
