@@ -72,6 +72,12 @@ export default observer(({ data }) => {
     resize(name);
   }, [name, resize, windowSize.width]);
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [inputRef.current]);
+
   return (
     <div className="xl-input mt-24 sm:mt-0">
       <span ref={spanRef} />

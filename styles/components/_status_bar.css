@@ -8,7 +8,7 @@
       @apply px-8 transition-all duration-300;
     }
     &::before {
-      @apply bg-pageText text-pageBG shadow-md flex justify-center items-center relative rounded-full text-8 sm:text-12 h-16 w-16 sm:h-24 sm:w-24 content-[counter(li-count)] transition-colors duration-700;
+      @apply bg-pageText text-pageBG flex justify-center items-center relative rounded-full text-8 sm:text-12 h-16 w-16 sm:h-24 sm:w-24 content-[counter(li-count)] transition-colors duration-700;
     }
     &.is-active {
       @apply text-pageBG before:bg-pageBG before:text-pageText;
