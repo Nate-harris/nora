@@ -6,8 +6,9 @@ import { useRect } from "@reach/rect";
 import { useState, useRef, useEffect } from "react";
 import { useIsSmall } from "../../utils/useMediaQueries";
 import Item from "@/components/StatusBar/Item";
+import Information from "@/components/StatusBar/Information";
 
-const StatusBar = observer(({ step }) => {
+const StatusBar = observer(({ step, hasInformation }) => {
   const {
     isNameCompleted,
     isColorCompleted,
@@ -54,6 +55,7 @@ const StatusBar = observer(({ step }) => {
     <div className={"status-bar--container"}>
       <div className={cx("status-bar--inner")}>
         <motion.ul style={{ x: isSmall ? offset : 0 }}>
+          {hasInformation && <Information label={"How this works"} />}
           {steps.map((item, index) => {
             return (
               <Item

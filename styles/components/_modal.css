@@ -1,0 +1,30 @@
+.modal {
+  @apply fixed inset-0 w-full bg-transparent h-screen z-9 invisible pointer-events-none flex flex-col justify-center items-center;
+
+  transition: visibility 0.2s 0.8s;
+
+  &.is-active {
+    @apply visible;
+    transition-delay: 0s;
+  }
+
+  &.is-updating {
+    @apply cursor-wait !important;
+  }
+
+  &--backdrop {
+    @apply fixed inset-0 z-8  bg-opacity-40 pointer-events-none opacity-0;
+    transition: opacity 0.15s linear;
+
+    &.is-active {
+      @apply pointer-events-auto opacity-100 backdrop-blur-sm;
+    }
+  }
+
+  &--inner {
+    @apply pointer-events-auto flex flex-col relative bg-orange text-white rounded-md p-16 max-w-lg text-center;
+    ul {
+      @apply mb-24;
+    }
+  }
+}

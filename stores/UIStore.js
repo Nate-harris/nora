@@ -9,6 +9,7 @@ class UIStore {
   @observable formStep = 0;
   @observable menuOpen = false;
   @observable reviewOpen = false;
+  @observable modalActive = false;
 
   @observable isPageTransition = false;
   @action.bound togglePageTransition(state) {
@@ -17,6 +18,14 @@ class UIStore {
 
   @action.bound toggleMenuOpen() {
     this.menuOpen = !this.menuOpen;
+  }
+
+  @action.bound showModal() {
+    this.modalActive = true;
+  }
+
+  @action.bound hideModal() {
+    this.modalActive = false;
   }
 
   @action.bound toggleReviewOpen() {

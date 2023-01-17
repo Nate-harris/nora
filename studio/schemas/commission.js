@@ -3,6 +3,7 @@ export default {
   name: "commission",
   type: "document",
   groups: [
+    { title: "Information", name: "information" },
     { title: "Name", name: "name", default: true },
     { title: "Color", name: "color" },
     { title: "Frame", name: "frame" },
@@ -10,6 +11,14 @@ export default {
     { title: "Checkout", name: "checkout" },
   ],
   fields: [
+    {
+      name: "modalContent",
+      title: "Information Modal Content",
+      description:
+        "Information on how the ordering process works. Will be accessible by the modal on the order page.",
+      type: "complexPortableText",
+      group: "information",
+    },
     {
       name: "nameSelection",
       title: "Name Selection",

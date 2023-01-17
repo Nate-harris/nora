@@ -129,11 +129,11 @@ ul {
     }
 
     li {
-      @apply mb-1;
+      @apply mb-16;
 
       &::before {
         content: "+";
-        @apply inline-block relative -ml-4 w-4;
+        @apply inline-block relative mr-8;
       }
     }
   }

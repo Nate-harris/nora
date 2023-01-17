@@ -29,6 +29,8 @@ export default () =>
             "headerSettings",
             "promoSettings",
             "checkout",
+            "swatch",
+            "exampleColor",
 
             "footerSettings",
 

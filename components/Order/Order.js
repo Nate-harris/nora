@@ -11,11 +11,12 @@ import { useTheme } from "next-themes";
 import { useQueryState, queryTypes } from "next-usequerystate";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { useDataStore } from "providers/RootStoreProvider";
+import { useDataStore, useUIStore } from "providers/RootStoreProvider";
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { toast } from "react-toastify";
 import BlockContent from "@/components/BlockContent";
+import Modal from "../modal";
 
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
@@ -57,13 +58,13 @@ const Order = observer(({ data }) => {
     colors,
     frame,
     shipping,
-
     minNumLetters,
     minNumColors,
     isColorCompleted,
     isFrameCompleted,
     isShippingCompleted,
   } = useDataStore();
+  const { modalActive, showModal, hideModal } = useUIStore();
 
   useSettings({
     minNumLetters: data?.name?.minNumLetters,
@@ -128,6 +129,7 @@ const Order = observer(({ data }) => {
           router.push(`/order?step=1`, undefined, { shallow: true });
         }
       } else {
+        showModal();
         router.push(`/order?step=1`, undefined, { shallow: true });
       }
     }
@@ -197,7 +199,11 @@ const Order = observer(({ data }) => {
             increment={increment}
           />
           <PriceTracker step={parseInt(step)} />
-          <StatusBar step={parseInt(step)} />
+
+          <StatusBar
+            step={parseInt(step)}
+            hasInformation={data?.modalContent}
+          />
         </>
       )}
       <ThemeSwitcher />
@@ -210,6 +216,11 @@ const Order = observer(({ data }) => {
         color={{ current: theme === "dark" ? "#000" : "#fff" }}
         alpha={{ current: theme === "dark" ? 0.5 : 0.2 }}
       />
+      {data?.modalContent && (
+        <Modal isOpen={modalActive} onClose={() => hideModal()}>
+          <BlockContent blocks={data.modalContent} />
+        </Modal>
+      )}
     </>
   );
 });
