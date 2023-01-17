@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 487.89 197.02">
 <defs><style>
-.o-top,.o-bottom,.r-right,.a-middle,.n-left,.frame{fill:#f5a565;}
-.r-left,.o-middle,.a-bottom{fill:#f2904a;}
-.cls-1{fill:#f2904a;}.cls-1,.cls-2,.cls-3,.cls-4,.cls-5.cls-2{fill:#ebcbb0;}.cls-3{fill:#f2904a;}.cls-4{fill:#f2904a;}.cls-5{fill:#f2904a;}.cls-6{fill:#f2904a;}
+.o-top,.o-bottom,.r-right,.a-middle,.n-left,.frame{fill:#f67e28;}
+.r-left,.o-middle,.a-bottom{fill:#f67e28;}
+.cls-1{fill:#f67e28;}.cls-1,.cls-2,.cls-3,.cls-4,.cls-5.cls-2{fill:#ebcbb0;}.cls-3{fill:#f67e28;}.cls-4{fill:#f67e28;}.cls-5{fill:#f67e28;}.cls-6{fill:#f67e28;}
 </style>
 </defs>
-<g id="Layer_1-2"><g><g id="frame">
+<g id="Layer_1-2"><g><g id="frame" class="all">
 <path class="frame" d="M474.74,13.15V183.87H13.15V13.15H474.74m12.65-12.65H.5V196.52H487.39V.5h0Z"/>
 </g>
 <g id="letters"><g>

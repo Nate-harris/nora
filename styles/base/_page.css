@@ -10,11 +10,11 @@ body {
 }
 
 .marquee-section {
-  @apply relative backdrop-blur-2xl;
+  @apply z-2 relative backdrop-blur-2xl;
 }
 
 .section {
-  @apply move-bg relative px-24 py-48 sm:p-32 md:py-64 lg:py-80;
+  @apply z-2 move-bg relative px-24 py-48 sm:p-32 md:py-64 lg:py-80;
 
   &:first-of-type {
     @apply pt-120;

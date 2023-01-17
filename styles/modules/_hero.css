@@ -24,7 +24,7 @@
   }
 
   &--placeholder {
-    @apply relative w-full h-screen;
+    @apply z-0 relative w-full h-screen;
     &.is-fixed {
       @apply fixed inset-0;
     }

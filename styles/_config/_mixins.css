@@ -30,7 +30,7 @@
   }
 
   .is-houndstooth {
-    animation: moveBGDiagonal 45s linear infinite;
+    animation: moveBGDiagonal 80s linear infinite;
     background-image: url("/houndstooth.svg");
     background-size: 100px 100px;
     background-repeat: repeat;
@@ -45,7 +45,7 @@
   .is-nora {
     animation: moveBGDiagonalLeft 70s linear infinite;
     background-image: url("/palette.svg");
-    background-size: 480px 220px;
+    background-size: 550px 220px;
     background-repeat: repeat;
   }
   .is-squiggle {
@@ -55,7 +55,7 @@
     background-repeat: repeat;
   }
   .is-blur {
-    @apply backdrop-blur-2xl;
+    @apply backdrop-blur-md;
     background-color: rgba(255, 255, 255, 0.1);
   }
   .is-wood {
