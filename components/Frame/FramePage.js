@@ -102,7 +102,7 @@ export default observer(({ data }) => {
           className="hidden sm:block absolute inset-x-64 z-6 pointer-events-none"
           style={{ y: ySpring, opacity }}
         >
-          <ColoringBook />
+          <ColoringBook allowCompleted={false} />
         </motion.div>
         {options.map((option, index) => {
           const active = frame !== null && frame.type === option.type;
