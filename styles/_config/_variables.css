@@ -44,6 +44,8 @@
   --pageBG: var(--white);
   --pageText: var(--brown);
 
+  --brown-hsl: 16, 45%, 11%;
+
   --pageBG-hsl: 60, 14%, 95%;
   --pageText-hsl: 0, 0%, 0%;
 

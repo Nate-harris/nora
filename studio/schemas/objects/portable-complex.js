@@ -139,6 +139,7 @@ export default {
                         { title: "Default", value: "" },
                         { title: "Primary", value: "is-primary" },
                         { title: "White", value: "is-white" },
+                        { title: "Brown", value: "is-brown" },
                       ],
                       layout: "radio",
                     },

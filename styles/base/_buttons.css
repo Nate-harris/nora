@@ -3,9 +3,9 @@
   @apply clean-btn inline-block relative bg-pageBG px-20 py-9 text-center border-6 font-bold leading-125 transition-colors font-delaGothicOne uppercase text-16 md:text-24;
 
   /* default: hover */
-  &:not(.is-primary):not(.is-white):not(.is-text):not(.is-disabled):not(
-      .is-soldout
-    ):not(.is-active-control) {
+  &:not(.is-primary):not(.is-white):not(.is-brown):not(.is-text):not(
+      .is-disabled
+    ):not(.is-soldout):not(.is-active-control) {
     &.is-active,
     &:hover {
       @apply text-orange border-orange;
@@ -86,9 +86,9 @@
     @apply bg-pageText border-pageBG text-pageBG;
 
     /* inverted: hover */
-    &:not(.is-primary):not(.is-white):not(.is-text):not(.is-disabled):not(
-        .is-soldout
-      ) {
+    &:not(.is-primary):not(.is-white):not(.is-brown):not(.is-text):not(
+        .is-disabled
+      ):not(.is-soldout) {
       &.is-active,
       &:hover {
         @apply bg-pageBG border-pageBG text-pageText;
@@ -134,6 +134,24 @@
     &.is-disabled,
     &.is-soldout {
       @apply bg-white text-black text-opacity-20;
+
+      &::after {
+        @apply hidden;
+      }
+    }
+  }
+
+  &.is-brown {
+    @apply bg-transparent border-brown text-brown;
+
+    &:hover {
+      background: hsla(var(--brown-hsl), 0.2);
+    }
+
+    /* disabled button state */
+    &.is-disabled,
+    &.is-soldout {
+      @apply bg-brown text-black text-opacity-20;
 
       &::after {
         @apply hidden;
