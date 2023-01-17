@@ -39,6 +39,11 @@ export default {
       type: "color",
     },
     {
+      name: "borderColor",
+      title: "Border Color",
+      type: "color",
+    },
+    {
       name: "backgroundImage",
       title: "Background Image",
       type: "image",

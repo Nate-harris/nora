@@ -51,6 +51,7 @@ module.exports = {
       brown: "var(--brown)",
       orange: "var(--orange)",
       green: "var(--green)",
+      yellow: "var(--yellow)",
       purple: "var(--purple)",
       pageBG: "var(--pageBG)",
       pageText: "var(--pageText)",

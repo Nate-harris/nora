@@ -51,6 +51,11 @@ const Grid = ({ data = {} }) => {
     style.color = data?.textColor?.hex;
   }
 
+  // let borderColor;
+  // if (data?.borderColor?.hex) {
+  //   style.borderColor = data?.borderColor?.hex;
+  // }
+
   let backgroundImage;
   if (data?.backgroundImage?.asset) {
     style.backgroundImage = `url(${buildSrc(data?.backgroundImage)})`;
