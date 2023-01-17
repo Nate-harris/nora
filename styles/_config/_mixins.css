@@ -55,7 +55,7 @@
     background-repeat: repeat;
   }
   .is-blur {
-    @apply backdrop-blur-3xl;
+    @apply backdrop-blur-2xl;
   }
   .is-wood {
     animation: moveBGRight 50s linear infinite;
