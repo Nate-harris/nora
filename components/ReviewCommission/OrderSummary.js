@@ -17,6 +17,9 @@ import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Photo from "../Photo";
+import { toast } from "react-toastify";
+import { useTheme } from "next-themes";
+
 const { className, styles } = css.resolve`
   div {
     display: grid;
@@ -53,18 +56,25 @@ export default observer(({ data }) => {
   const { cartDetails, checkoutSingleItem, clearCart, redirectToCheckout } =
     useShoppingCart();
   const [loading, setLoading] = useState(false);
+  const { theme } = useTheme();
 
   const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
   const stripePromise = loadStripe(publishableKey);
 
   const createCheckOutSession = async () => {
-    const { name, description, image } = data.checkout;
+    const { description, image } = data.checkout;
     setLoading(true);
 
     const item = {
       name: name ?? "Nora Puzzle",
       price: totalPrice,
       quantity: 1,
+      metadata: {
+        Name: name,
+        Frame: frame.type,
+        Colors: colors.join(", "),
+        Shipping: shipping,
+      },
     };
 
     if (description) {
@@ -74,17 +84,29 @@ export default observer(({ data }) => {
     if (image) {
       item.image = imageUrlFor(image).url();
     }
-    const stripe = await stripePromise;
-    const checkoutSession = await axios.post("/api/create-stripe-session", {
-      item,
-    });
-    const result = await stripe.redirectToCheckout({
-      sessionId: checkoutSession.data.id,
-    });
-    if (result.error) {
-      alert(result.error.message);
+    console.log(item);
+    try {
+      const stripe = await stripePromise;
+
+      const checkoutSession = await axios.post("/api/create-stripe-session", {
+        item,
+      });
+      const result = await stripe.redirectToCheckout({
+        sessionId: checkoutSession.data.id,
+      });
+      setLoading(false);
+    } catch (error) {
+      toast.error(
+        "Problem redirecting to checkout. Please check your connection and try again.",
+        {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          theme,
+        }
+      );
     }
-    setLoading(false);
   };
 
   const handleCheckout = async (event) => {

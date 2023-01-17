@@ -57,7 +57,7 @@ const ShippingOption = ({
           >
             {type}
           </motion.div>
-          <div className="font-courierSans text-10 py-8 opacity-50">
+          <div className="font-courierSans text-12 py-8 opacity-50">
             {formatCurrencyString({
               value: price,
               currency: "USD",
