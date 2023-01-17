@@ -3,6 +3,9 @@
   p {
     @apply text-12;
   }
+  h3 {
+    @apply mb-0;
+  }
   &-index {
     @apply text-12 bg-pageText text-pageBG h-32 w-32 flex items-center justify-center rounded-full mx-12 mr-16;
   }
