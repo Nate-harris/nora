@@ -36,6 +36,9 @@ body {
   &.blur {
     @apply is-blur;
   }
+  &.wood {
+    @apply is-wood;
+  }
 
   &.is-clipped {
     @apply -my-16;

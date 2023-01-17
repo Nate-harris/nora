@@ -58,6 +58,13 @@
     @apply backdrop-blur-2xl;
     background-color: rgba(255, 255, 255, 0.1);
   }
+  .is-wood {
+    animation: moveBGRight 50s linear infinite;
+    background-image: url("/wood.svg");
+    background-size: 2200px 600px;
+    background-position: 50% 0;
+    background-repeat: repeat;
+  }
 
   .move-bg {
     animation: moveBGDiagonal 45s linear infinite;

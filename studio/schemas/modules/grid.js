@@ -75,6 +75,7 @@ export default {
           { title: "Nora", value: "nora" },
           { title: "Squiggle", value: "squiggle" },
           { title: "Blur", value: "blur" },
+          { title: "Wood", value: "wood" },
         ],
       },
     },
