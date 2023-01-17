@@ -47,6 +47,7 @@ const Grid = ({ data = {} }) => {
 
   let textColor;
   if (data?.textColor?.hex) {
+    style["--pageText"] = data?.textColor?.hex;
     style.color = data?.textColor?.hex;
   }
 
