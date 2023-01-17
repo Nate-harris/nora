@@ -8,7 +8,6 @@ import { useInView } from "framer-motion";
 
 const Hero = ({ data = {} }) => {
   const { content, bgType, isFixed, photos, video, videoPlaceholder } = data;
-  console.log("videoPlaceholder", videoPlaceholder);
   return (
     <section className="hero">
       {content && (
@@ -27,7 +26,9 @@ const Hero = ({ data = {} }) => {
           <div className="hero--bg is-mobile">
             <VideoLoop title={video.title} id={video.id} />
           </div>
-          <div className={cx("hero--placeholder ", isFixed && "is-fixed")}>
+          <div
+            className={cx("hero--video-placeholder ", isFixed && "is-fixed")}
+          >
             <Photo photo={videoPlaceholder} layout="fill" />
           </div>
         </>

@@ -1,5 +1,5 @@
 .hero {
-  @apply grid relative overflow-hidden min-h-screen;
+  @apply grid relative overflow-hidden min-h-screen bg-brown;
   min-height: calc(var(--vh, 1vh) * 100);
 
   @media (max-height: 500px) {
@@ -23,7 +23,7 @@
     }
   }
 
-  &--placeholder {
+  &--video-placeholder {
     @apply z-0 relative w-full h-screen;
     &.is-fixed {
       @apply fixed inset-0;

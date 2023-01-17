@@ -28,7 +28,7 @@
 
     &::after {
       @apply absolute inset-0 z-1;
-      backdrop-filter: blur(1rem) contrast(1.5);
+      backdrop-filter: blur(1rem);
       content: "";
     }
 
@@ -39,20 +39,9 @@
 }
 
 .video-loop {
-  @apply absolute inset-0 bg-black;
-
-  [data-theme="metal"] & {
-    &::after {
-      @apply absolute inset-0 bg-pageText mix-blend-multiply;
-      content: "";
-    }
-  }
+  @apply absolute inset-0;
 
   iframe {
-    @apply absolute top-1/2 left-1/2 transform-gpu -translate-x-1/2 -translate-y-1/2 w-screen min-h-screen;
-
-    [data-theme="metal"] & {
-      filter: invert(1) blur(0px) grayscale(1);
-    }
+    @apply bg-brown absolute top-1/2 left-1/2 transform-gpu -translate-x-1/2 -translate-y-1/2 w-screen min-h-screen;
   }
 }
