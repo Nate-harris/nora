@@ -20,16 +20,14 @@ const variants = {
   },
 };
 
-const MAX_NUM_COLORS = 4;
-
 export default observer(({ data }) => {
-  const { addColor, removeColor, colors } = useDataStore();
+  const { addColor, removeColor, colors, maxNumColors } = useDataStore();
 
   const handleClick = (color) => {
     if (colors.includes(color.hex)) {
       removeColor(color.hex);
     } else {
-      if (colors.length < MAX_NUM_COLORS) {
+      if (colors.length < maxNumColors) {
         addColor(color.hex);
       }
     }
@@ -42,7 +40,7 @@ export default observer(({ data }) => {
       className={cx(
         "color-picker--swatch",
         colors.includes(data.hex) && "is-active",
-        colors.length >= MAX_NUM_COLORS &&
+        colors.length >= maxNumColors &&
           !colors.includes(data.hex) &&
           "is-disabled"
       )}

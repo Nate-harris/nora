@@ -74,13 +74,16 @@ export default observer(({ data }) => {
         onClose={() => setExamplesOpen(false)}
         className="examples"
       >
-        <div className="p-12 flex flex-col gap-12 overflow-scroll text-white">
+        <div className="color-picker--examples">
+          <button
+            className="color-picker--close"
+            onClick={() => setExamplesOpen(false)}
+          >
+            Close
+          </button>
           {examples.map((example, index) => {
             return (
-              <div
-                key={index}
-                className="flex flex-col gap-12 border-b border-dashed border-white"
-              >
+              <div key={index} className="color-picker--example">
                 <Photo photo={example.photo} />
                 <div className="flex flex-wrap gap-6">
                   {example.colors?.map((option, index) => {
@@ -88,7 +91,7 @@ export default observer(({ data }) => {
                   })}
                 </div>
                 <button
-                  className="color-picker--toggle"
+                  className="color-picker--add-colors"
                   onClick={() => handleExampleClicked(example.colors)}
                 >
                   Use colors
