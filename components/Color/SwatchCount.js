@@ -3,11 +3,11 @@ import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import Swatch from "./Swatch";
 
 const SwatchCount = observer(() => {
-  const { colors, minNumColors } = useDataStore();
+  const { colors, minNumColors, maxNumColors } = useDataStore();
   return (
     <>
       <div className="color-picker--count">
-        {`${colors.length} of ${minNumColors} colors selected`}
+        {`${colors.length} of ${minNumColors}-${maxNumColors} colors selected`}
       </div>
     </>
   );
