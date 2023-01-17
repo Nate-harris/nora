@@ -74,12 +74,12 @@ export default observer(({ data }) => {
         onClose={() => setExamplesOpen(false)}
         className="examples"
       >
-        <div className="p-12 flex flex-col gap-12 overflow-scroll">
+        <div className="p-12 flex flex-col gap-12 overflow-scroll text-white">
           {examples.map((example, index) => {
             return (
               <div
                 key={index}
-                className="flex flex-col gap-12 border-b border-dashed"
+                className="flex flex-col gap-12 border-b border-dashed border-white"
               >
                 <Photo photo={example.photo} />
                 <div className="flex flex-wrap gap-6">

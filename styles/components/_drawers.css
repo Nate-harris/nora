@@ -1,15 +1,15 @@
 .drawer {
-  @apply fixed top-0 w-full h-screen sm:max-w-sm md:max-w-md z-9 bg-pageText text-pageBG invisible pointer-events-none;
+  @apply fixed top-0 w-full h-screen sm:max-w-sm md:max-w-md z-9 bg-brown text-pageBG invisible pointer-events-none;
   height: calc(var(--vh, 1vh) * 100);
   will-change: transform;
   transition: visibility 0.2s 0.8s;
 
   &.is-left {
-    @apply left-0 sm:border-r;
+    @apply left-0 sm:border-r border-white;
   }
 
   &.is-right {
-    @apply right-0 sm:border-l;
+    @apply right-0 sm:border-l border-white;
   }
 
   &.is-active {
@@ -22,7 +22,7 @@
   }
 
   &--backdrop {
-    @apply fixed inset-0 z-8  bg-opacity-40 pointer-events-none opacity-0;
+    @apply fixed inset-0 z-8 bg-opacity-40 pointer-events-none opacity-0;
     transition: opacity 0.15s linear;
 
     &.is-active {
