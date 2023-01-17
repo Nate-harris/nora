@@ -73,6 +73,13 @@ export default {
         return parent.bgType !== "video";
       },
     },
+    customImage({
+      title: "Video Placeholder",
+      name: "videoPlaceholder",
+      hidden: ({ parent }) => {
+        return parent.bgType !== "video";
+      },
+    }),
   ],
   preview: {
     select: {

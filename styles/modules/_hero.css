@@ -7,7 +7,7 @@
   }
 
   &--bg {
-    @apply relative w-full  h-full;
+    @apply z-1 relative w-full h-full;
     grid-area: 1/-1;
 
     &.is-desktop {
@@ -20,6 +20,16 @@
 
     &.is-mobile {
       @apply sm:hidden;
+    }
+  }
+
+  &--placeholder {
+    @apply relative w-full h-screen;
+    &.is-fixed {
+      @apply fixed inset-0;
+    }
+    .ar {
+      @apply h-screen;
     }
   }
 
