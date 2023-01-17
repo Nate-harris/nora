@@ -10,7 +10,7 @@ body {
 }
 
 .marquee-section {
-  @apply z-2 relative;
+  @apply z-2 relative backdrop-blur-sm;
 }
 
 .section {

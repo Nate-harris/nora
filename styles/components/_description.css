@@ -1,10 +1,10 @@
 .description {
-  @apply hidden sm:flex my-32 mb-24 sm:mb-64 text-64 text-pageText rounded-3xl flex flex-col sm:flex-row text-center sm:text-left items-center;
+  @apply hidden sm:flex my-32 mb-24 sm:mb-64 text-64 text-pageText rounded-3xl flex-col sm:flex-row text-center sm:text-left items-center;
   p {
     @apply text-12;
   }
   h3 {
-    @apply mb-0;
+    @apply mb-2;
   }
   &-index {
     @apply text-12 bg-pageText text-pageBG h-32 w-32 flex items-center justify-center rounded-full mx-12 mr-16;
