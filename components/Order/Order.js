@@ -153,7 +153,7 @@ const Order = observer(({ data }) => {
 
   if (!router.isReady) {
     return (
-      <div className="h-screen w-screen flex items-center justify-center">
+      <div className="h-screen w-screen flex items-center justify-center pb-64">
         <div
           role="status"
           className="w-full h-full flex justify-center items-center"

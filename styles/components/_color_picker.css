@@ -2,7 +2,7 @@
   &--swatches {
     @apply flex justify-center;
     &-inner {
-      @apply max-w-sm flex flex-wrap justify-center gap-6;
+      @apply max-w-[240px] sm:max-w-[380px] flex flex-wrap justify-center gap-6;
     }
   }
   &--count {

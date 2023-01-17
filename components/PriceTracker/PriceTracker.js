@@ -129,6 +129,7 @@ const PriceTracker = observer(({ step }) => {
             "price-tracker--overlay",
             reviewOpen && "pointer-events-auto"
           )}
+          onClick={toggleReviewOpen}
         />
 
         <motion.div

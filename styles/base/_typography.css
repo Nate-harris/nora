@@ -129,7 +129,7 @@ ul {
     }
 
     li {
-      @apply mb-16;
+      @apply mb-16 leading-130;
 
       &::before {
         content: "+";
