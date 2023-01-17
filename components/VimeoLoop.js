@@ -43,7 +43,7 @@ const VideoLoop = ({
           videoRef.current = node;
         }}
         title={title}
-        src={`https://player.vimeo.com/video/${id}?controls=0&autoplay=1&autopause=0&loop=1&muted=1`}
+        src={`https://player.vimeo.com/video/${id}?transparent=0&controls=0&autoplay=1&autopause=0&loop=1&muted=1`}
         frameBorder="0"
         allow="autoplay; fullscreen"
         aria-hidden="true"
