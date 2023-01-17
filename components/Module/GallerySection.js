@@ -18,7 +18,7 @@ const GallerySection = ({ data = {} }) => {
           return <GalleryItem key={index} data={item} />;
         })}
       </section>
-      <div className="fixed w-200 right-0 top-0 bottom-0 flex items-center">
+      <div className="z-3 fixed w-200 right-0 top-0 bottom-0 flex items-center">
         <ThemeSwitcher />
       </div>
     </>
