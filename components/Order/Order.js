@@ -59,6 +59,7 @@ const Order = observer(({ data }) => {
     shipping,
 
     minNumLetters,
+    minNumColors,
     isColorCompleted,
     isFrameCompleted,
     isShippingCompleted,
@@ -118,7 +119,7 @@ const Order = observer(({ data }) => {
         setFormData(cookie.nora);
         if (
           cookie.nora.name.length >= minNumLetters &&
-          cookie.nora.palette !== null &&
+          cookie.nora.colors.length >= minNumColors &&
           cookie.nora.frame !== null &&
           cookie.nora.shipping !== null
         ) {
