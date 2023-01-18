@@ -187,7 +187,9 @@ export default observer(({ data }) => {
           )}
         </div>
         <div className="order-summary--row">
-          And will get to you in{" "}
+          {additionalInfo.length > 0
+            ? "Will get to you in"
+            : "And will get to you in"}{" "}
           <span className="order-summary--shipping">{shipping}</span>
         </div>
         {additionalInfo.length > 0 && (
