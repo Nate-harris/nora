@@ -65,6 +65,14 @@
     background-repeat: repeat;
   }
 
+  &.is-clipped {
+    @apply p-64;
+    clip-path: inset(3.2rem 3.2rem 3.2rem 3.2rem round 10px);
+    figure {
+      @apply rounded-xl overflow-hidden;
+    }
+  }
+
   .move-bg {
     animation: moveBGDiagonal 45s linear infinite;
   }

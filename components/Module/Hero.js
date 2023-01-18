@@ -4,7 +4,29 @@ import BlockContent from "@/components/BlockContent";
 import VideoLoop from "@/components/VimeoLoop";
 import Photo from "@/components/Photo";
 import cx from "classnames";
-import { useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
+
+const fadeAnim = {
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      delay: 4,
+      ease: [0.16, 1, 0.3, 1],
+      when: "beforeChildren",
+    },
+  },
+  hide: {
+    opacity: 0,
+    y: "-100%",
+    transition: {
+      duration: 0.2,
+      ease: [0.16, 1, 0.3, 1],
+      when: "beforeChildren",
+    },
+  },
+};
 
 const Hero = ({ data = {} }) => {
   const { content, bgType, isFixed, photos, video, videoPlaceholder } = data;
@@ -12,9 +34,15 @@ const Hero = ({ data = {} }) => {
     <section className="hero">
       {content && (
         <div className="hero--overlay">
-          <div className="hero--content">
+          <m.div
+            initial="hide"
+            animate="show"
+            exit="hide"
+            variants={fadeAnim}
+            className="hero--content"
+          >
             <BlockContent blocks={content} />
-          </div>
+          </m.div>
         </div>
       )}
 
@@ -23,7 +51,7 @@ const Hero = ({ data = {} }) => {
           <div className={cx("hero--bg is-desktop", isFixed && "is-fixed")}>
             <VideoLoop title={video.title} id={video.id} />
           </div>
-          <div className="hero--bg is-mobile">
+          <div className={cx("hero--bg is-mobile", isFixed && "is-fixed")}>
             <VideoLoop title={video.title} id={video.id} />
           </div>
           <div

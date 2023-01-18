@@ -10,7 +10,7 @@ body {
 }
 
 .marquee-section {
-  @apply z-2 relative is-blur;
+  @apply z-2 relative;
 }
 
 .section {
@@ -39,13 +39,8 @@ body {
   &.wood {
     @apply is-wood;
   }
-
-  &.is-clipped {
-    @apply -my-16;
-    clip-path: inset(3.2rem 3.2rem 3.2rem 3.2rem round 10px);
-    figure {
-      @apply -m-32;
-    }
+  &.clipped {
+    @apply is-clipped;
   }
 
   &--content {

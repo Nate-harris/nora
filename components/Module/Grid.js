@@ -70,7 +70,7 @@ const Grid = ({ data = {} }) => {
     <section
       ref={ref}
       style={style}
-      className={cx("section", isClipped && "is-sine", backgroundTexture ?? "")}
+      className={cx("section", isClipped && "clipped", backgroundTexture ?? "")}
     >
       <div className="section--content">
         <div

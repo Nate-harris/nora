@@ -20,6 +20,9 @@
 
     &.is-mobile {
       @apply sm:hidden;
+      &.is-fixed {
+        @apply fixed inset-0;
+      }
     }
   }
 
@@ -34,13 +37,16 @@
   }
 
   &--overlay {
-    @apply z-2 flex flex-col justify-center;
+    @apply z-2 flex flex-col;
     grid-area: 1/-1;
   }
 
   &--content {
-    @apply w-full max-w-5xl mx-auto px-4 text-center text-white;
+    @apply w-full max-w-2xl mx-auto px-4 text-center text-white text-32;
     padding-top: calc(var(--headerHeight) + 2rem);
     padding-bottom: var(--headerHeight);
+    p {
+      @apply text-20 sm:text-30 leading-130;
+    }
   }
 }
