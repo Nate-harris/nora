@@ -67,6 +67,9 @@ export default observer(({ data }) => {
 
     const item = {
       name: name ?? "Nora Puzzle",
+      description: `1x puzzle for ${name}, in ${colors.join(", ")}, with a ${
+        frame.type
+      } frame, and arriving in ${shipping}.`,
       price: totalPrice,
       quantity: 1,
       metadata: {
@@ -77,14 +80,10 @@ export default observer(({ data }) => {
       },
     };
 
-    if (description) {
-      item.description = description;
-    }
-
     if (image) {
       item.image = imageUrlFor(image).url();
     }
-    console.log(item);
+
     try {
       const stripe = await stripePromise;
 

@@ -210,25 +210,29 @@ const Header = observer(
           )}
         >
           <Icon />
-          {isHome && data?.homePageVisibleMenu && (
-            <m.div
-              animate={{ y: scrollDirection === "down" ? "-250%" : "0" }}
-              className="hidden sm:flex gap-16 items-center -ml-32 text-14  backdrop-blur-xl px-16 rounded-md pointer-events-auto"
-            >
-              {data.homePageVisibleMenu.items.map((item, index) => {
-                return (
-                  <CustomLink
-                    key={index}
-                    className="underline hover:opacity-50"
-                    link={{ ...item, title: null }}
-                  >
-                    {item.title}
-                  </CustomLink>
-                );
-              })}
-            </m.div>
-          )}
-          <Hamburger />
+          <div className="flex gap-24">
+            {isHome && data?.homePageVisibleMenu && (
+              <m.nav
+                animate={{
+                  y: menuOpen || scrollDirection === "down" ? "-250%" : "0",
+                }}
+                className="hidden sm:flex gap-16 items-center -ml-64 text-14 backdrop-blur-xl px-16 rounded-md pointer-events-auto"
+              >
+                {data.homePageVisibleMenu.items.map((item, index) => {
+                  return (
+                    <CustomLink
+                      key={index}
+                      className="underline hover:opacity-50"
+                      link={{ ...item, title: null }}
+                    >
+                      {item.title}
+                    </CustomLink>
+                  );
+                })}
+              </m.nav>
+            )}
+            <Hamburger />
+          </div>
         </header>
         <span ref={observeRef} className="header--observer" />
       </>

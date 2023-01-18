@@ -209,10 +209,9 @@ const ColoringBook = observer(({ allowCompleted = true }) => {
 
   const renderLetters = useCallback(() => {
     return LETTER_PATHS.map((letter, index) => {
-      const color =
-        colors.length > 0
-          ? hexToRGB(colors[index % colors.length], 0.95)
-          : "transparent";
+      console.log("rendering letter", colors);
+      const hex = colors[index % colors.length]?.hex;
+      const color = colors.length > 0 ? hexToRGB(hex, 0.95) : "transparent";
 
       return (
         <path
@@ -229,8 +228,8 @@ const ColoringBook = observer(({ allowCompleted = true }) => {
 
   const renderCompleted = useCallback(() => {
     return COMPLETED.map((letter, index) => {
-      const color =
-        colors.length > 0 ? colors[index % colors.length] : "transparent";
+      const hex = colors[index % colors.length]?.hex;
+      const color = colors.length > 0 ? hex : "transparent";
 
       return (
         <motion.rect

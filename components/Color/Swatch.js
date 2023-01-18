@@ -23,12 +23,13 @@ const variants = {
 export default observer(({ data }) => {
   const { addColor, removeColor, colors, maxNumColors } = useDataStore();
 
-  const handleClick = (color) => {
-    if (colors.includes(color.hex)) {
-      removeColor(color.hex);
+  const active = colors.map((color) => color.hex).includes(data.hex);
+  const handleClick = () => {
+    if (active) {
+      removeColor(data);
     } else {
       if (colors.length < maxNumColors) {
-        addColor(color.hex);
+        addColor(data);
       }
     }
   };
@@ -36,20 +37,17 @@ export default observer(({ data }) => {
   return (
     <div
       key={data.name}
-      onClick={() => handleClick(data)}
+      onClick={handleClick}
       className={cx(
         "color-picker--swatch",
-        colors.includes(data.hex) && "is-active",
+        active && "is-active",
         colors.length >= maxNumColors &&
           !colors.includes(data.hex) &&
           "is-disabled"
       )}
     >
       <div
-        className={cx(
-          "color-picker--swatch-border",
-          colors.includes(data.hex) && "is-active"
-        )}
+        className={cx("color-picker--swatch-border", active && "is-active")}
       ></div>
       <div
         className={cx("color-picker--swatch-fill")}

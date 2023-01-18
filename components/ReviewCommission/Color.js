@@ -12,7 +12,7 @@ const Color = ({ color, index, size = "lg" }) => {
   return (
     <motion.div
       style={{
-        background: hexToRGB(color, 0.9),
+        background: hexToRGB(color.hex, 0.9),
       }}
       className={cx(
         `palette--color`,

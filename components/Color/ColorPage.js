@@ -41,7 +41,7 @@ export default observer(({ data }) => {
   const handleExampleClicked = (colors) => {
     clearColors();
     colors.forEach((color) => {
-      addColor(color.hex);
+      addColor(color);
     });
     setExamplesOpen(false);
   };
