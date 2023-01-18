@@ -210,7 +210,7 @@ const Header = observer(
           )}
         >
           <Icon />
-          {data?.homePageVisibleMenu && (
+          {isHome && data?.homePageVisibleMenu && (
             <m.div
               animate={{ y: scrollDirection === "down" ? "-250%" : "0" }}
               className="hidden sm:flex gap-16 items-center -ml-32 text-14  backdrop-blur-xl px-16 rounded-md pointer-events-auto"
