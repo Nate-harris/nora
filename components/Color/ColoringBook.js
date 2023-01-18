@@ -259,7 +259,7 @@ const ColoringBook = observer(({ allowCompleted = true }) => {
 
   return (
     <svg
-      className="overflow-hidden max-w-xl"
+      className="overflow-hidden"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 487.89 197.02"
       onMouseEnter={() => setHovered(true)}
