@@ -9,6 +9,7 @@ import Menu from "../Menu/Menu";
 import { useRect } from "@reach/rect";
 import CustomLink from "../CustomLink/CustomLink";
 import { useScrollDirection } from "@/utils/helpers";
+import HomePageVisibleMenu from "./HomePageVisibleMenu";
 
 const hamburgerTopLineVariants = {
   open: {
@@ -183,8 +184,6 @@ const Header = observer(
     const headerRef = useRef();
     const headerRect = useRect(headerRef);
     const inView = useInView(observeRef);
-    const scrollDirection = useScrollDirection();
-    const { scrollYProgress } = useViewportScroll();
 
     useEffect(() => {
       if (headerRect) {
@@ -211,26 +210,7 @@ const Header = observer(
         >
           <Icon />
           <div className="flex gap-24">
-            {isHome && data?.homePageVisibleMenu && (
-              <m.nav
-                animate={{
-                  y: menuOpen || scrollDirection === "down" ? "-250%" : "0",
-                }}
-                className="hidden sm:flex gap-16 items-center -ml-64 text-14 backdrop-blur-xl px-16 rounded-md pointer-events-auto"
-              >
-                {data.homePageVisibleMenu.items.map((item, index) => {
-                  return (
-                    <CustomLink
-                      key={index}
-                      className="underline hover:opacity-50"
-                      link={{ ...item, title: null }}
-                    >
-                      {item.title}
-                    </CustomLink>
-                  );
-                })}
-              </m.nav>
-            )}
+            {isHome && <HomePageVisibleMenu data={data?.homePageVisibleMenu} />}
             <Hamburger />
           </div>
         </header>
