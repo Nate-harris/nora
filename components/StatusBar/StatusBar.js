@@ -54,8 +54,8 @@ const StatusBar = observer(({ step, hasInformation }) => {
   return (
     <div className={"status-bar--container"}>
       <div className={cx("status-bar--inner")}>
+        {hasInformation && <Information label={"How this works"} />}
         <motion.ul style={{ x: isSmall ? offset : 0 }}>
-          {hasInformation && <Information label={"How this works"} />}
           {steps.map((item, index) => {
             return (
               <Item

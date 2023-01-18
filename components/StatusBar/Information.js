@@ -21,9 +21,9 @@ const Information = observer(({ label }) => {
   };
 
   return (
-    <li className={cx("status-bar--item", "is-information")}>
+    <div className={cx("status-bar--item", "is-information")}>
       <button onClick={handleClick}>{label}</button>
-    </li>
+    </div>
   );
 });
 
