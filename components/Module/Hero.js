@@ -11,7 +11,7 @@ const fadeAnim = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.8,
+      duration: 1.6,
       delay: 4,
       ease: [0.16, 1, 0.3, 1],
       when: "beforeChildren",
@@ -51,7 +51,7 @@ const Hero = ({ data = {} }) => {
           <div className={cx("hero--bg is-desktop", isFixed && "is-fixed")}>
             <VideoLoop title={video.title} id={video.id} />
           </div>
-          <div className={cx("hero--bg is-mobile", isFixed && "is-fixed")}>
+          <div className="hero--bg is-mobile">
             <VideoLoop title={video.title} id={video.id} />
           </div>
           <div

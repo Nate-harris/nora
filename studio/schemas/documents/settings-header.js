@@ -11,6 +11,12 @@ export default {
       type: "reference",
       to: [{ type: "menu" }],
     },
+    {
+      title: "Home Page Visible Menu",
+      name: "homePageVisibleMenu",
+      type: "reference",
+      to: [{ type: "menu" }],
+    },
   ],
   preview: {
     prepare() {

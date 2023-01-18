@@ -328,6 +328,29 @@ export function useParams(fallback) {
   return [currentParams, setCurrentParams];
 }
 
+export function useScrollDirection() {
+  const [direction, setDirection] = useState(null);
+
+  useEffect(() => {
+    let previousPosition = window.scrollY;
+
+    function handleScroll() {
+      const currentPosition = window.scrollY;
+      if (currentPosition > previousPosition) {
+        setDirection("down");
+      } else {
+        setDirection("up");
+      }
+      previousPosition = currentPosition;
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return direction;
+}
+
 // use a Portal for overlays
 export function InPortal({ id, children }) {
   const [hasMounted, setHasMounted] = useState(false);

@@ -4,9 +4,11 @@ import Link from "next/link";
 import cx from "classnames";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import { observer } from "mobx-react-lite";
-import { motion, useInView } from "framer-motion";
+import { motion, m, useInView, useViewportScroll } from "framer-motion";
 import Menu from "../Menu/Menu";
 import { useRect } from "@reach/rect";
+import CustomLink from "../CustomLink/CustomLink";
+import { useScrollDirection } from "@/utils/helpers";
 
 const hamburgerTopLineVariants = {
   open: {
@@ -181,6 +183,8 @@ const Header = observer(
     const headerRef = useRef();
     const headerRect = useRect(headerRef);
     const inView = useInView(observeRef);
+    const scrollDirection = useScrollDirection();
+    const { scrollYProgress } = useViewportScroll();
 
     useEffect(() => {
       if (headerRect) {
@@ -206,6 +210,24 @@ const Header = observer(
           )}
         >
           <Icon />
+          {data?.homePageVisibleMenu && (
+            <m.div
+              animate={{ y: scrollDirection === "down" ? "-250%" : "0" }}
+              className="hidden sm:flex gap-16 items-center -ml-32 text-14  backdrop-blur-xl px-16 rounded-md pointer-events-auto"
+            >
+              {data.homePageVisibleMenu.items.map((item, index) => {
+                return (
+                  <CustomLink
+                    key={index}
+                    className="underline hover:opacity-50"
+                    link={{ ...item, title: null }}
+                  >
+                    {item.title}
+                  </CustomLink>
+                );
+              })}
+            </m.div>
+          )}
           <Hamburger />
         </header>
         <span ref={observeRef} className="header--observer" />
