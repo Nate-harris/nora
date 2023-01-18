@@ -48,6 +48,29 @@ export default {
       group: "shipping",
     },
     {
+      name: "collectAdditionalInfo",
+      title: "Collect Additional Info?",
+      description:
+        "Add a field for additional information to be collected from the user.",
+      type: "boolean",
+      group: "checkout",
+    },
+    {
+      name: "additionalInfoMessage",
+      title: "Additional Info Message",
+      description:
+        "Information on what kind of additional information is needed.",
+      type: "complexPortableText",
+      group: "checkout",
+    },
+    {
+      name: "additionalInfoLabel",
+      title: "Additional Info Label",
+      description: "Label above additional info input.",
+      type: "complexPortableText",
+      group: "checkout",
+    },
+    {
       name: "checkout",
       title: "Checkout",
       type: "checkout",

@@ -210,7 +210,9 @@ const Header = observer(
         >
           <Icon />
           <div className="flex gap-24">
-            {isHome && <HomePageVisibleMenu data={data?.homePageVisibleMenu} />}
+            {!isOrder && (
+              <HomePageVisibleMenu data={data?.homePageVisibleMenu} />
+            )}
             <Hamburger />
           </div>
         </header>

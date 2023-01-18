@@ -39,7 +39,7 @@ const Modal = ({ isOpen = false, onClose = () => {}, className, children }) => {
             allowOutsideClick: true,
           }}
         >
-          <m.nav
+          <m.div
             ref={drawerRef}
             key="modal"
             initial="hide"
@@ -57,16 +57,10 @@ const Modal = ({ isOpen = false, onClose = () => {}, className, children }) => {
               "is-active": isActive,
             })}
           >
-            <div className="modal--inner">
+            <m.div layout className="modal--inner">
               {children}
-              <button
-                className="btn is-white modal--toggle"
-                onClick={() => onClose(false)}
-              >
-                Let's do it
-              </button>
-            </div>
-          </m.nav>
+            </m.div>
+          </m.div>
         </FocusTrap>
 
         <div

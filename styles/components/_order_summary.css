@@ -15,8 +15,34 @@
   }
   &--row {
     @apply flex flex-col sm:flex-col gap-12 items-center justify-center sm:pt-12;
-    &:last-of-type {
-      @apply pt-32;
+  }
+  &--additional-info {
+    @apply max-w-lg;
+    &-buttons {
+      @apply flex flex-col gap-24 justify-center pt-16;
+    }
+    &-close {
+      @apply text-14 font-courierSans leading-30 bg-transparent underline;
+      &:hover {
+        @apply opacity-80;
+      }
+    }
+    &-second-page {
+      @apply flex flex-col gap-24;
+      textarea {
+        @apply border-white text-white;
+      }
+    }
+    &-note {
+      @apply max-w-sm p-12 rounded-md;
+      color: hsla(var(--pageText-hsl), 0.5);
+      background: hsla(var(--pageText-hsl), 0.1);
+    }
+  }
+  &--additional-info-toggle {
+    @apply bg-transparent underline;
+    &:hover {
+      @apply text-orange;
     }
   }
 }

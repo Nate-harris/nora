@@ -209,7 +209,6 @@ const ColoringBook = observer(({ allowCompleted = true }) => {
 
   const renderLetters = useCallback(() => {
     return LETTER_PATHS.map((letter, index) => {
-      console.log("rendering letter", colors);
       const hex = colors[index % colors.length]?.hex;
       const color = colors.length > 0 ? hexToRGB(hex, 0.95) : "transparent";
 

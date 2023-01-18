@@ -22,7 +22,7 @@
   }
 
   &--inner {
-    @apply pointer-events-auto flex flex-col relative bg-orange text-white rounded-md p-46 max-w-lg text-center;
+    @apply pointer-events-auto flex flex-col relative bg-orange text-white rounded-md p-28 sm:p-46 m-16 sm:m-0 sm:max-w-3xl text-center;
     ul {
       @apply mb-24;
     }

@@ -17,8 +17,10 @@
 }
 
 .control {
-  @apply overflow-hidden sm:overflow-visible pb-64 sm:pb-0 min-h-screen w-screen flex flex-col sm:justify-center items-center relative text-left pt-136 sm:pt-0 px-16;
-
+  @apply relative text-left;
+  &.is-order-form {
+    @apply overflow-hidden sm:overflow-visible pb-64 sm:pb-0 min-h-screen w-screen flex flex-col sm:justify-center items-center pt-136 sm:pt-0 px-16;
+  }
   &--group {
     @apply grid gap-y-8 grid-cols-1 sm:grid-cols-2;
 
@@ -115,7 +117,7 @@
   input[type="number"],
   input[type="password"],
   textarea {
-    @apply relative appearance-none w-full h-full px-16 py-8 rounded-none border font-inherit text-16 leading-100 bg-transparent text-pageText;
+    @apply relative appearance-none w-full h-full px-16 py-8 rounded-none border-6 font-inherit text-17 leading-100 bg-transparent text-pageText;
 
     .is-inline & {
       @apply border-0;
@@ -127,6 +129,45 @@
       @apply bg-transparent text-pageText;
       -webkit-text-fill-color: var(--pageText);
       -webkit-box-shadow: 0 0 0 100em var(--pageBG) inset;
+    }
+  }
+  textarea {
+    @apply resize-none pt-16;
+    &::placeholder {
+      @apply transition-all duration-300;
+      color: hsla(var(--white-hsl), 0.8);
+    }
+    &::-webkit-input-placeholder {
+      @apply transition-all duration-300;
+      color: hsla(var(--white-hsl), 0.8);
+    }
+    &::-moz-placeholder {
+      @apply transition-all duration-300;
+      color: hsla(var(--white-hsl), 0.8);
+    }
+    &:-ms-input-placeholder {
+      @apply transition-all duration-300;
+      color: hsla(var(--white-hsl), 0.8);
+    }
+    &:-moz-placeholder {
+      @apply transition-all duration-300;
+      color: hsla(var(--white-hsl), 0.8);
+    }
+
+    &:hover::placeholder {
+      color: hsla(var(--white-hsl), 0.6);
+    }
+    &:hover::-webkit-input-placeholder {
+      color: hsla(var(--white-hsl), 0.6);
+    }
+    &:hover::-moz-placeholder {
+      color: hsla(var(--white-hsl), 0.6);
+    }
+    &:hover:-ms-input-placeholder {
+      color: hsla(var(--white-hsl), 0.6);
+    }
+    &:hover:-moz-placeholder {
+      color: hsla(var(--white-hsl), 0.6);
     }
   }
   .xl-input {

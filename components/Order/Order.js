@@ -58,6 +58,7 @@ const Order = observer(({ data }) => {
     colors,
     frame,
     shipping,
+    additionalInfo,
     minNumLetters,
     minNumColors,
     isColorCompleted,
@@ -87,6 +88,7 @@ const Order = observer(({ data }) => {
           colors,
           frame,
           shipping,
+          additionalInfo,
         }),
         {
           path: "/",
@@ -95,7 +97,15 @@ const Order = observer(({ data }) => {
         }
       );
     }
-  }, [router.isReady, setCookie, name, colors, frame, shipping]);
+  }, [
+    router.isReady,
+    setCookie,
+    name,
+    colors,
+    frame,
+    shipping,
+    additionalInfo,
+  ]);
 
   /*
    * On initial mount, set the query state to 0
@@ -218,7 +228,15 @@ const Order = observer(({ data }) => {
       />
       {data?.modalContent && (
         <Modal isOpen={modalActive} onClose={() => hideModal()}>
-          <BlockContent blocks={data.modalContent} />
+          <div className="max-w-md flex flex-col">
+            <BlockContent blocks={data.modalContent} />
+            <button
+              className="btn is-white modal--toggle"
+              onClick={() => hideModal()}
+            >
+              Let's do it
+            </button>
+          </div>
         </Modal>
       )}
     </>

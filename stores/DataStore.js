@@ -13,6 +13,7 @@ class DataStore {
     palette: null,
     colors: [],
     shipping: null,
+    additionalInfo: "",
     price: 0,
     id: "commission",
   };
@@ -43,6 +44,9 @@ class DataStore {
   @action.bound setShipping(shipping) {
     this.formData.shipping = shipping;
   }
+  @action.bound setAdditionalInfo(note) {
+    this.formData.additionalInfo = note;
+  }
   @action.bound addColor(color) {
     this.formData.colors.push(color);
   }
@@ -63,6 +67,9 @@ class DataStore {
   }
   @computed get shipping() {
     return this.formData.shipping;
+  }
+  @computed get additionalInfo() {
+    return this.formData.additionalInfo;
   }
 
   @computed get isNameCompleted() {

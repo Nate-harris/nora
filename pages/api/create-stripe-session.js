@@ -15,12 +15,12 @@ async function CreateStripeSession(req, res) {
       currency: "usd",
       product_data: {
         metadata: item.metadata,
+        description: item.description,
         images: [item.image],
         name: item.name,
       },
       unit_amount: item.price,
     },
-    description: item.description,
     quantity: item.quantity,
   };
 

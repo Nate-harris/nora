@@ -105,7 +105,7 @@ export default observer(({ data, step }) => {
       <AnimatePresence mode="wait">
         <motion.form
           key={step}
-          className="control"
+          className="control is-order-form"
           initial={"initial"}
           animate={"active"}
           exit={"initial"}

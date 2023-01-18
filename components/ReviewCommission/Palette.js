@@ -17,7 +17,7 @@ const Palette = ({ colors, width, size = "lg" }) => {
       )}
     >
       {colors.map((color, index) => (
-        <Color key={color} color={color} index={index} size={size} />
+        <Color key={index} color={color} index={index} size={size} />
       ))}
     </div>
   );
