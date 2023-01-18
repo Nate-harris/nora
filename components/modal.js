@@ -6,7 +6,7 @@ import cx from "classnames";
 import { InPortal } from "@/utils/helpers";
 
 const Modal = ({ isOpen = false, onClose = () => {}, className, children }) => {
-  const drawerRef = useRef();
+  const modalRef = useRef();
   const [isActive, setIsActive] = useState(isOpen);
 
   useEffect(() => {
@@ -35,12 +35,12 @@ const Modal = ({ isOpen = false, onClose = () => {}, className, children }) => {
         <FocusTrap
           active={isActive}
           focusTrapOptions={{
-            fallbackFocus: () => drawerRef.current,
+            fallbackFocus: () => modalRef.current,
             allowOutsideClick: true,
           }}
         >
           <m.div
-            ref={drawerRef}
+            ref={modalRef}
             key="modal"
             initial="hide"
             animate={isActive ? "show" : "hide"}
@@ -57,9 +57,7 @@ const Modal = ({ isOpen = false, onClose = () => {}, className, children }) => {
               "is-active": isActive,
             })}
           >
-            <m.div layout className="modal--inner">
-              {children}
-            </m.div>
+            <div className="modal--inner">{children}</div>
           </m.div>
         </FocusTrap>
 

@@ -1,5 +1,8 @@
-import { AnimatePresence, m, motion } from "framer-motion";
-import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  FRAMER_TRANSITION_FASTEASE,
+  swipeAnim,
+} from "../../lib/framer/animations";
 import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
 
@@ -21,37 +24,6 @@ import Photo from "../Photo";
 import { toast } from "react-toastify";
 import { useTheme } from "next-themes";
 import Modal from "../modal";
-
-const swipeAnim = {
-  show: {
-    opacity: 1,
-    x: ["-1rem", "0rem"],
-    transition: {
-      x: {
-        duration: 0.6,
-        delay: 0.1,
-        ease: [0.16, 1, 0.3, 1],
-      },
-      opacity: {
-        duration: 0.4,
-        delay: 0.1,
-      },
-    },
-  },
-  hide: {
-    x: ["0rem", "1rem"],
-    opacity: 0,
-    transition: {
-      x: {
-        duration: 0.4,
-        ease: [0.16, 1, 0.3, 1],
-      },
-      opacity: {
-        duration: 0.1,
-      },
-    },
-  },
-};
 
 const variants = {
   in: {
@@ -219,11 +191,12 @@ export default observer(({ data }) => {
           )}
         </div>
       </div>
+
       {data?.collectAdditionalInfo && (
         <Modal isOpen={showAdditionalInfo} onClose={() => hideModal()}>
           <div className="order-summary--additional-info">
             {additionalInfoPage === 0 && (
-              <m.div
+              <motion.div
                 key="additional-info-1"
                 initial="hide"
                 animate={"show"}
@@ -245,10 +218,10 @@ export default observer(({ data }) => {
                     Close
                   </button>
                 </div>
-              </m.div>
+              </motion.div>
             )}
             {additionalInfoPage === 1 && (
-              <m.div
+              <motion.div
                 key="additional-info-2"
                 initial="hide"
                 animate={"show"}
@@ -280,7 +253,7 @@ export default observer(({ data }) => {
                 >
                   Back
                 </button>
-              </m.div>
+              </motion.div>
             )}
           </div>
         </Modal>

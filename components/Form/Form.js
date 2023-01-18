@@ -12,7 +12,10 @@ import { useWindowSize } from "../../utils/helpers";
 import dynamic from "next/dynamic";
 import { useTheme } from "next-themes";
 import { AnimatePresence, motion } from "framer-motion";
-import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
+import {
+  FRAMER_TRANSITION_FASTEASE,
+  swipeAnim,
+} from "../../lib/framer/animations";
 import { useIsSmall } from "../../utils/useMediaQueries";
 import MobileDescription from "./MobileDescription";
 import TopDrawer from "./TopDrawer";
@@ -106,10 +109,10 @@ export default observer(({ data, step }) => {
         <motion.form
           key={step}
           className="control is-order-form"
-          initial={"initial"}
-          animate={"active"}
-          exit={"initial"}
-          variants={isSmall ? mobileVariants : variants}
+          initial={"hide"}
+          animate={"show"}
+          exit={"hide"}
+          variants={isSmall ? mobileVariants : swipeAnim}
         >
           <MobileDescription value={description} step={step} />
           <Page page={step} data={data} />
