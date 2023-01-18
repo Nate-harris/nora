@@ -92,7 +92,7 @@ export default observer(({ data }) => {
         value={name}
         placeholder="NORA"
         maxLength={maxNumLetters}
-        autocomplete="off"
+        autoComplete="off"
       />
     </div>
   );
