@@ -20,7 +20,6 @@ const VisibleMenu = observer(({ data = {}, isHome }) => {
 
   useEffect(() => {
     if (router.isReady) {
-      console.log("cookie", cookie);
       if (cookie.nora) {
         setOrderStarted(true);
       } else {
