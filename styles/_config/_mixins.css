@@ -121,7 +121,7 @@
     .is-open &,
     &.is-active {
       &::before {
-        @apply bg-pageText;
+        @apply bg-orange;
         animation: pulse 2s infinite;
       }
     }

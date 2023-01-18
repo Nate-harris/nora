@@ -9,10 +9,26 @@ import Menu from "../Menu/Menu";
 import { useRect } from "@reach/rect";
 import CustomLink from "../CustomLink/CustomLink";
 import { useScrollDirection } from "@/utils/helpers";
+import { useCookies } from "react-cookie";
 
 const HomePageVisibleMenu = observer(({ data = {}, isHome }) => {
   const { menuOpen } = useUIStore();
   const scrollDirection = useScrollDirection();
+  const [cookie, setCookie] = useCookies(["nora"]);
+  const [orderStarted, setOrderStarted] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.isReady) {
+      if (cookie.nora) {
+        setOrderStarted(true);
+      } else {
+        setOrderStarted(false);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady]);
+
   if (!data) return null;
   return (
     <m.nav
@@ -25,7 +41,10 @@ const HomePageVisibleMenu = observer(({ data = {}, isHome }) => {
         return (
           <CustomLink
             key={index}
-            className="underline hover:opacity-50"
+            className={cx(
+              "underline hover:opacity-50",
+              item.page.isOrder && "has-indicator is-active"
+            )}
             link={{ ...item, title: null }}
           >
             {item.title}
