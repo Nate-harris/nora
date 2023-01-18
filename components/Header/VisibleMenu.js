@@ -11,7 +11,7 @@ import CustomLink from "../CustomLink/CustomLink";
 import { useScrollDirection } from "@/utils/helpers";
 import { useCookies } from "react-cookie";
 
-const HomePageVisibleMenu = observer(({ data = {}, isHome }) => {
+const VisibleMenu = observer(({ data = {}, isHome }) => {
   const { menuOpen } = useUIStore();
   const scrollDirection = useScrollDirection();
   const [cookie, setCookie] = useCookies(["nora"]);
@@ -20,6 +20,7 @@ const HomePageVisibleMenu = observer(({ data = {}, isHome }) => {
 
   useEffect(() => {
     if (router.isReady) {
+      console.log("cookie", cookie);
       if (cookie.nora) {
         setOrderStarted(true);
       } else {
@@ -43,7 +44,8 @@ const HomePageVisibleMenu = observer(({ data = {}, isHome }) => {
             key={index}
             className={cx(
               "underline hover:opacity-50",
-              item.page.isOrder && "has-indicator is-active"
+              item.page.isOrder && "has-indicator",
+              orderStarted && "is-active"
             )}
             link={{ ...item, title: null }}
           >
@@ -55,4 +57,4 @@ const HomePageVisibleMenu = observer(({ data = {}, isHome }) => {
   );
 });
 
-export default HomePageVisibleMenu;
+export default VisibleMenu;

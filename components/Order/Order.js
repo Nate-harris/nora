@@ -50,7 +50,7 @@ const useSettings = ({ minNumLetters, minNumColors, maxNumColors, price }) => {
 };
 
 const Order = observer(({ data }) => {
-  const [cookie, setCookie] = useCookies(["nora"]);
+  const [cookie, setCookie, removeCookie] = useCookies(["nora"]);
   const {
     formData,
     setFormData,
@@ -123,6 +123,7 @@ const Order = observer(({ data }) => {
       }
 
       if (router.query.status === "success") {
+        removeCookie("nora");
         return;
       }
 

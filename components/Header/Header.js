@@ -9,7 +9,7 @@ import Menu from "../Menu/Menu";
 import { useRect } from "@reach/rect";
 import CustomLink from "../CustomLink/CustomLink";
 import { useScrollDirection } from "@/utils/helpers";
-import HomePageVisibleMenu from "./HomePageVisibleMenu";
+import VisibleMenu from "./VisibleMenu";
 
 const hamburgerTopLineVariants = {
   open: {
@@ -210,9 +210,7 @@ const Header = observer(
         >
           <Icon />
           <div className="flex gap-24">
-            {!isOrder && (
-              <HomePageVisibleMenu data={data?.homePageVisibleMenu} />
-            )}
+            {!isOrder && <VisibleMenu data={data?.homePageVisibleMenu} />}
             <Hamburger />
           </div>
         </header>
