@@ -19,7 +19,7 @@
 .control {
   @apply relative text-left;
   &.is-order-form {
-    @apply overflow-hidden sm:overflow-visible pb-64 sm:pb-0 min-h-screen w-screen flex flex-col sm:justify-center items-center pt-136 sm:pt-0 px-16;
+    @apply overflow-hidden sm:overflow-visible pb-172 sm:pb-0 min-h-screen w-screen flex flex-col justify-center items-center pt-136 sm:pt-0 px-16;
   }
   &--group {
     @apply grid gap-y-8 grid-cols-1 sm:grid-cols-2;

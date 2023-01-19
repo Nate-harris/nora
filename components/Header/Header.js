@@ -177,6 +177,7 @@ const Hamburger = observer(({ onClick }) => {
 const Header = observer(
   ({ data = {}, isHome, isOrder, onSetup = () => {} }) => {
     const { menuOpen } = useUIStore();
+    const { totalPrice } = useDataStore();
     const router = useRouter();
 
     const [headerHeight, setHeaderHeight] = useState(null);
@@ -202,7 +203,7 @@ const Header = observer(
           ref={headerRef}
           className={cx(
             "header",
-            isOrder && !menuOpen && "is-shifted",
+            isOrder && !menuOpen && totalPrice !== 0 && "is-shifted",
             isHome && !inView && !menuOpen && "has-bg",
             (menuOpen || isHome) && "is-white",
             isOrder ? "text-orange" : "text-pageText"

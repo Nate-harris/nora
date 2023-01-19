@@ -18,7 +18,7 @@
   }
 
   p {
-    @apply m-0 text-17 leading-150;
+    @apply m-0 text-14 sm:text-17 leading-150;
   }
 
   strong {
@@ -42,7 +42,7 @@
 
   h3,
   .is-h3 {
-    @apply m-0 text-22 font-delaGothicOne leading-150 tracking-wider uppercase;
+    @apply m-0 text-18 sm:text-22 font-delaGothicOne leading-120 sm:leading-150 tracking-wider uppercase;
   }
 
   h4,
@@ -122,7 +122,7 @@ p {
 
 ul {
   .rc & {
-    @apply pl-8 text-16 leading-150;
+    @apply pl-8 text-14 sm:text-17 leading-150;
 
     &:not(:last-child) {
       @apply mb-6;

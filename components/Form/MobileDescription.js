@@ -8,8 +8,9 @@ const MobileDescription = observer(({ value, step }) => {
   if (!value) return null;
   return (
     <div className={`mobile-description`}>
-      <span className="mobile-description-index">{step}</span>
-      <PortableText value={value} />
+      <div>
+        <PortableText value={value} />
+      </div>
     </div>
   );
 });

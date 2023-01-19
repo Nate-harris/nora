@@ -95,7 +95,7 @@ export default observer(({ data }) => {
         onMouseMove={handleMouseMove}
         onHoverEnd={handleMouseLeave}
         ref={containerRef}
-        className="cursor-grabbing relative flex flex-col mt-24 sm:mt-64 gap-12 md:gap-0 w-full sm:w-auto p-24 pt-0"
+        className="cursor-grabbing relative flex flex-col mt-24 sm:mt-64 w-full sm:w-auto"
       >
         <motion.div
           ref={noraRef}

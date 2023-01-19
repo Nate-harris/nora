@@ -114,10 +114,10 @@ export default observer(({ data, step }) => {
           exit={"hide"}
           variants={isSmall ? mobileVariants : swipeAnim}
         >
-          <MobileDescription value={description} step={step} />
           <Page page={step} data={data} />
         </motion.form>
       </AnimatePresence>
+      <MobileDescription value={description} step={step} />
 
       <TopDrawer>
         <Description value={description} step={step} />

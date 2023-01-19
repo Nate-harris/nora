@@ -79,7 +79,7 @@ export default observer(({ data }) => {
   }, [inputRef.current]);
 
   return (
-    <div className="xl-input mt-24 sm:mt-0">
+    <div className="xl-input">
       <span ref={spanRef} />
       <motion.input
         style={{ scale }}

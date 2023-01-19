@@ -13,6 +13,7 @@ import { useIsSmall } from "@/utils/useMediaQueries";
 import { useRef } from "react";
 import { useRouter } from "next/router";
 import { FORM_SCREENS } from "@/components/Order/Order";
+import cx from "classnames";
 
 function useAudio(path) {
   const [audio, setAudio] = useState(new Audio(path));
@@ -121,9 +122,11 @@ const Controls = ({ data, step, increment, decrement }) => {
 
   return (
     <div
-      className={
-        "fixed bottom-0 right-0 left-0 p-24 sm:p-32 flex justify-between"
-      }
+      className={cx(
+        "sm:bottom-0 fixed right-0 left-0 p-12 sm:p-32 flex justify-between",
+        step < 5 && "bottom-116",
+        step >= 5 && "bottom-0"
+      )}
     >
       <Button
         key="previous-button"

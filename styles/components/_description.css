@@ -12,11 +12,12 @@
 }
 
 .mobile-description {
-  @apply p-24 py-16 flex sm:hidden md:my-32 mb-0 md:mb-24 sm:mb-64 text-64 text-pageText rounded-3xl flex-col sm:flex-row gap-24 text-center sm:text-left items-center max-w-sm;
+  @apply fixed bottom-12 inset-x-12 flex sm:hidden text-pageText px-16 py-12 rounded-xl;
+  background: hsla(var(--pageText-hsl), 0.1);
   p {
     @apply text-12;
   }
-  &-index {
-    @apply text-12 bg-pageText text-pageBG h-36 w-36 flex items-center justify-center rounded-full mx-12 mr-16;
+  h3 {
+    @apply mb-4;
   }
 }

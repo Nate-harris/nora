@@ -49,7 +49,7 @@ export default observer(({ data }) => {
   return (
     <>
       <div className="w-full">
-        <div className="p-24 md:mt-64 w-full">
+        <div className="p-12 sm:p-24 md:mt-64 w-full">
           <div className="flex justify-center w-full h-120 md:h-240 ">
             <ColoringBook allowCompleted={!examplesOpen} />
           </div>
