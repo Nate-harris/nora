@@ -49,7 +49,7 @@
 
   h3,
   .is-h3 {
-    @apply m-0 text-18 sm:text-22 font-delaGothicOne leading-120 sm:leading-150 tracking-wider uppercase;
+    @apply m-0 text-18 sm:text-22 font-delaGothicOne leading-120 sm:leading-150 uppercase;
   }
 
   h4,
