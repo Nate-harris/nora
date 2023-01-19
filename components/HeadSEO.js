@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { imageBuilder } from "../lib/sanity/client";
+import { useTheme } from "next-themes";
 
 const HeadSEO = ({ site = {}, page = {} }) => {
   // set <head> variables
@@ -37,13 +38,16 @@ const HeadSEO = ({ site = {}, page = {} }) => {
     site.seo?.shareGraphic?.asset ||
     "/knickerbocker-share.png";
 
+  const { theme } = useTheme();
+
+  const themeColor = theme === "dark" ? "#2a1710" : "#ffffff";
   return (
     <Head>
       <meta charSet="utf-8" />
       <meta httpEquiv="x-ua-compatible" content="ie=edge" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <meta name="format-detection" content="telephone=no" />
-      <meta name="theme-color" content="var(--pageBG)" />
+      <meta name="theme-color" content={themeColor} />
       <link rel="icon" href={siteFaviconLegacy} sizes="any" />
       <link preload="true" rel="icon" type="image/svg+xml" href={siteFavicon} />
       <link preload="true" rel="mask-icon" href={siteFavicon} color="#000000" />
