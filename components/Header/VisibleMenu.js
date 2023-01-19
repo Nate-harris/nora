@@ -11,6 +11,10 @@ import CustomLink from "../CustomLink/CustomLink";
 import { useScrollDirection } from "@/utils/helpers";
 import { useCookies } from "react-cookie";
 import { useIsSmall } from "@/utils/useMediaQueries";
+import {
+  FRAMER_TRANSITION_EASEOUT,
+  FRAMER_TRANSITION_FASTEASE,
+} from "@/lib/framer/animations";
 
 const VisibleMenu = observer(({ data = {}, isHome }) => {
   const { menuOpen } = useUIStore();
@@ -35,8 +39,10 @@ const VisibleMenu = observer(({ data = {}, isHome }) => {
   return (
     <m.nav
       animate={{
+        opacity: menuOpen ? 0 : 1,
         y: isSmall ? 0 : menuOpen || scrollDirection === "down" ? "-250%" : "0",
       }}
+      transition={FRAMER_TRANSITION_FASTEASE}
       className="hidden fixed bottom-36 right-24 sm:relative sm:bottom-0 sm:right-0 sm:flex gap-16 items-center -ml-64 text-14 backdrop-blur-xl px-16 py-12 rounded-md pointer-events-auto"
     >
       {data.items.map((item, index) => {
