@@ -51,7 +51,9 @@ class DataStore {
     this.formData.colors.push(color);
   }
   @action.bound removeColor(color) {
-    this.formData.colors = this.formData.colors.filter((c) => c !== color);
+    this.formData.colors = this.formData.colors.filter(
+      ({ hex }) => hex !== color.hex
+    );
   }
   @action.bound clearColors() {
     this.formData.colors = [];

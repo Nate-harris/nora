@@ -25,7 +25,7 @@ const variants = {
   },
 };
 
-const FRAME_BORDER = 8;
+const FRAME_BORDER = 16;
 export default observer(({ data }) => {
   const {
     frame: { options },
@@ -49,7 +49,8 @@ export default observer(({ data }) => {
     handleChange({ type: option.type, image: option.templateImage });
   };
 
-  const clearSelection = () => {
+  const clearSelection = (e) => {
+    e.preventDefault();
     setFrame(null);
   };
 
@@ -122,9 +123,12 @@ export default observer(({ data }) => {
         animate={{ opacity: frame !== null ? 1 : 0 }}
         className="flex justify-center p-24"
       >
-        <div className="btn" onClick={clearSelection}>
+        <button
+          className="bg-transparent text-12 underline hover:text-orange"
+          onClick={clearSelection}
+        >
           Clear Selection
-        </div>
+        </button>
       </motion.div>
     </>
   );

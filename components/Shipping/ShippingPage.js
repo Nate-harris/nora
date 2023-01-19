@@ -27,7 +27,8 @@ export default observer(({ data }) => {
     const option = options.find((option) => option.type === shippingType);
     updateShippingPrice(option.price);
   };
-  const clearSelection = () => {
+  const clearSelection = (e) => {
+    e.preventDefault();
     setShipping(null);
   };
   return (
@@ -56,9 +57,12 @@ export default observer(({ data }) => {
           animate={{ opacity: formData.shipping !== null ? 1 : 0 }}
           className="flex justify-center p-16"
         >
-          <div className="btn" onClick={clearSelection}>
+          <button
+            className="bg-transparent text-12 underline hover:text-orange"
+            onClick={clearSelection}
+          >
             Clear Selection
-          </div>
+          </button>
         </motion.div>
       </div>
     </LayoutGroup>

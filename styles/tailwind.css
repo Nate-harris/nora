@@ -15,6 +15,12 @@
 }
 
 @font-face {
+  font-family: "Sharp Grotesk";
+  src: url("/fonts/SharpGrotesk/SharpGroteskBold-25.otf") format("opentype");
+  font-style: normal;
+}
+
+@font-face {
   font-family: "Courier Sans";
   src: url("/fonts/CourierSans/CourierSansLLWeb-Bold.woff2") format("woff2"),
     url("/fonts/CourierSans/CourierSansLLWeb-Bold.woff") format("woff");

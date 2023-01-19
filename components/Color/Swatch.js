@@ -41,9 +41,7 @@ export default observer(({ data }) => {
       className={cx(
         "color-picker--swatch",
         active && "is-active",
-        colors.length >= maxNumColors &&
-          !colors.includes(data.hex) &&
-          "is-disabled"
+        colors.length >= maxNumColors && !active && "is-disabled"
       )}
     >
       <div

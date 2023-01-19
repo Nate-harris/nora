@@ -30,19 +30,20 @@ export default observer(({ data }) => {
 
   const { name, setName } = useDataStore();
 
-  const DESKTOP_WIDTH = 700;
-  const DESKTOP_PADDING = 350;
-
-  const MOBILE_WIDTH = 320;
-  const MOBILE_PADDING = 50;
-  const PADDING = isSmall ? MOBILE_PADDING : DESKTOP_PADDING;
-
   const resize = useCallback(
     (name) => {
+      const DESKTOP_WIDTH = 700;
+      const DESKTOP_PADDING = 350;
+
+      const MOBILE_WIDTH = windowSize.width * 0.91;
+      const MOBILE_PADDING = 40;
+
+      const MIN_WIDTH = isSmall ? MOBILE_WIDTH : DESKTOP_WIDTH;
+      const PADDING = isSmall ? MOBILE_PADDING : DESKTOP_PADDING;
+
       // Update width
       spanRef.current.textContent = name;
-      const width = isSmall ? MOBILE_WIDTH : DESKTOP_WIDTH;
-      const minWidth = name.length > 0 ? 0 : width;
+      const minWidth = name.length > 0 ? 0 : MIN_WIDTH;
       const actualWidth = spanRef.current.offsetWidth;
       inputRef.current.style.width = Math.max(minWidth, actualWidth) + "px";
 
@@ -54,7 +55,7 @@ export default observer(({ data }) => {
         scale.set(1);
       }
     },
-    [isSmall, windowSize.width, PADDING, scale]
+    [isSmall, windowSize.width, scale]
   );
 
   const handleChange = (e) => {

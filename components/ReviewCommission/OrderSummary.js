@@ -186,7 +186,7 @@ export default observer(({ data }) => {
             >
               {additionalInfo.length > 0
                 ? "Edit note"
-                : "Anything else you want us to know?"}
+                : "Anything else we should know?"}
             </button>
           )}
         </div>
