@@ -19,9 +19,6 @@ body {
   &:first-of-type {
     @apply pt-120;
   }
-  &:last-of-type {
-    @apply pb-128 sm:pb-256;
-  }
 
   &.houndstooth {
     @apply is-houndstooth;
