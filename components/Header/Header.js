@@ -210,12 +210,11 @@ const Header = observer(
           )}
         >
           <Icon />
-          <div className="flex gap-24">
-            {!isOrder && <VisibleMenu data={data?.homePageVisibleMenu} />}
-            <Hamburger />
-          </div>
+
+          <Hamburger />
         </header>
         <span ref={observeRef} className="header--observer" />
+        {!isOrder && <VisibleMenu data={data?.homePageVisibleMenu} />}
       </>
     );
   }
