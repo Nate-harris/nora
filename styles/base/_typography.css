@@ -30,6 +30,17 @@
   }
 
   /* Headlines */
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    /*reset for mobile browsers */
+    font-weight: normal;
+  }
+
   h1,
   .is-h1 {
     @apply m-0 text-28 sm:text-36 font-delaGothicOne leading-120 tracking-wider uppercase;
