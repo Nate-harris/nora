@@ -68,14 +68,15 @@ const COLOR_COMBINATIONS = [
   // Green
   {
     background: "rgb(123, 183, 150)",
-    shader: "rgb(252, 154, 122)",
+    shader: "rgb(203, 188, 154)",
   },
-  // Blue
+  // Beige
   {
     background: "rgb(203, 188, 154)",
     shader: "rgb(239, 184, 87)",
   },
-  // Beige
+  // Blue
+
   {
     background: "rgb(120, 190, 227)",
     shader: "rgb(123, 183, 150)",
