@@ -22,7 +22,7 @@
       @apply flex flex-col gap-24 justify-center pt-16;
     }
     &-close {
-      @apply text-14 font-courierSans leading-30 bg-transparent underline;
+      @apply text-14 font-courierSans bg-transparent underline;
       &:hover {
         @apply opacity-80;
       }
