@@ -351,6 +351,32 @@ export function useScrollDirection() {
   return direction;
 }
 
+export function useAudio(path) {
+  const [audio, setAudio] = useState(new Audio(path));
+  const [source, setSource] = useState(path);
+  const [playing, setPlaying] = useState(false);
+
+  function play() {
+    setPlaying(true);
+    audio.play();
+  }
+
+  function stop() {
+    setPlaying(false);
+    audio.pause();
+    audio.currentTime = 0;
+  }
+
+  useEffect(() => {
+    audio.addEventListener("ended", () => setPlaying(false));
+    return () => {
+      audio.removeEventListener("ended", () => setPlaying(false));
+    };
+  }, [audio]);
+
+  return [play, { playing, stop }];
+}
+
 // use a Portal for overlays
 export function InPortal({ id, children }) {
   const [hasMounted, setHasMounted] = useState(false);

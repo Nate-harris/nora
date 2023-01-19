@@ -17,6 +17,8 @@ import { useCookies } from "react-cookie";
 import { toast } from "react-toastify";
 import BlockContent from "@/components/BlockContent";
 import Modal from "../modal";
+import MobileDescription from "../Form/MobileDescription";
+import Description from "../Form/Description";
 
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
@@ -162,6 +164,23 @@ const Order = observer(({ data }) => {
     });
   };
 
+  let slug = null;
+  let description = null;
+  switch (parseInt(step)) {
+    case 1:
+      description = data.name.description;
+      break;
+    case 2:
+      description = data.color.description;
+      break;
+    case 3:
+      description = data.frame.description;
+      break;
+    case 4:
+      description = data.shipping.description;
+      break;
+  }
+
   if (!router.isReady) {
     return (
       <div className="h-screen w-screen flex items-center justify-center pb-64">
@@ -203,13 +222,18 @@ const Order = observer(({ data }) => {
       {router.query.status !== "success" && (
         <>
           <Form data={data} step={parseInt(step)} />
-          <Controls
-            data={data}
-            step={parseInt(step)}
-            decrement={decrement}
-            increment={increment}
-          />
+          <div className="fixed bottom-0 inset-x-0 flex flex-col gap-16 p-16 sm:p-36">
+            <Controls
+              data={data}
+              step={parseInt(step)}
+              decrement={decrement}
+              increment={increment}
+            />
+            <MobileDescription value={description} step={parseInt(step)} />
+          </div>
+
           <PriceTracker step={parseInt(step)} />
+          <Description value={description} step={parseInt(step)} />
 
           <StatusBar
             step={parseInt(step)}

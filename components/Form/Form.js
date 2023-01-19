@@ -81,28 +81,6 @@ export default observer(({ data, step }) => {
 
   let formScreen = null;
 
-  let key;
-  let slug = null;
-  let description = null;
-  switch (step) {
-    case 1:
-      slug = data.name.slug;
-      description = data.name.description;
-      break;
-    case 2:
-      slug = data.color.slug;
-      description = data.color.description;
-      break;
-    case 3:
-      slug = data.frame.slug;
-      description = data.frame.description;
-      break;
-    case 4:
-      slug = data.shipping.slug;
-      description = data.shipping.description;
-      break;
-  }
-
   return (
     <>
       <AnimatePresence mode="wait">
@@ -117,10 +95,8 @@ export default observer(({ data, step }) => {
           <Page page={step} data={data} />
         </motion.form>
       </AnimatePresence>
-      <MobileDescription value={description} step={step} />
 
       <TopDrawer>
-        <Description value={description} step={step} />
         <TypingTutorial name={data?.name?.exampleName} />
       </TopDrawer>
     </>

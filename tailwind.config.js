@@ -113,7 +113,6 @@ module.exports = {
       fontFamily: {
         delaGothicOne: ["DelaGothicOne", "sans-serif"],
         courierSans: ["Courier Sans", "monospace"],
-        sharpGrotesk: ["Sharp Grotesk", "sans-serif"],
         inherit: "inherit",
       },
       screens: {
