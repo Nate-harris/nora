@@ -32,9 +32,9 @@ const variants = {
 };
 
 const reviewVariants = {
-  active: ({ height, width }) => ({
+  active: ({ height, activeWidth }) => ({
     height,
-    width,
+    width: activeWidth,
     opacity: 1,
     transition: {
       duration: 0.7,
@@ -45,10 +45,9 @@ const reviewVariants = {
       },
     },
   }),
-
-  inactive: {
+  inactive: ({ height, inactiveWidth }) => ({
     height: 0,
-    width: 0,
+    width: inactiveWidth,
     opacity: 0,
     transition: {
       ...FRAMER_TRANSITION_EASEOUT,
@@ -58,7 +57,7 @@ const reviewVariants = {
         duration: 0.25,
       },
     },
-  },
+  }),
 };
 
 const overlayVariants = {
@@ -137,7 +136,7 @@ const PriceTracker = observer(({ step }) => {
           layout="position"
           transition={{ duration: 1.2, ease: "easeOut" }}
         >
-          <div className="price-tracker--bubble">
+          <div className="price-tracker--bubble" onClick={toggleReviewOpen}>
             <div className="price-tracker--bubble-header">
               <div className="price-tracker--bubble-header-label">
                 <span className="price-tracker--label">Total</span>
@@ -151,14 +150,15 @@ const PriceTracker = observer(({ step }) => {
             <motion.div
               custom={{
                 height: reviewHeight,
-                width: isSmall ? "100%" : 500,
+                activeWidth: isSmall ? "100%" : 500,
+                inactiveWidth: isSmall ? "100%" : 0,
               }}
               variants={reviewVariants}
               initial={"inactive"}
               animate={reviewOpen ? "active" : "inactive"}
               className="price-tracker--review"
             >
-              <div ref={reviewRef}>
+              <div ref={reviewRef} className="price-tracker--review-inner">
                 {isNameCompleted && (
                   <div className="price-tracker--row">
                     <span className="price-tracker--row--label">
@@ -196,6 +196,7 @@ const PriceTracker = observer(({ step }) => {
                       <img
                         className="min-w-[120px]"
                         src={imageUrlFor(frame.image).width(120)}
+                        alt="Nora frame"
                       />
                     </span>
                     <span className="price-tracker--row--value">

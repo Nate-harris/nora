@@ -8,6 +8,9 @@
   }
   &--review {
     @apply flex flex-col overflow-hidden;
+    &-inner {
+      @apply pt-24 sm:pt-0;
+    }
   }
   &--container {
     @apply w-full sm:w-auto relative flex items-start gap-12 pointer-events-auto;
@@ -31,7 +34,7 @@
     }
 
     &--value {
-      @apply font-courierSans;
+      @apply font-courierSans whitespace-nowrap;
     }
   }
   &--mobile-toggle {
@@ -41,7 +44,7 @@
     }
   }
   &--toggle {
-    @apply hidden md:flex h-42 w-42 rounded-full justify-center items-center bg-transparent border border-pageText text-pageText;
+    @apply hidden md:flex h-42 w-42 rounded-full justify-center items-center bg-transparent border border-pageText text-pageText transition-colors;
     &:hover {
       @apply border-orange text-orange;
       background: hsla(var(--orange-hsl), 0.4);

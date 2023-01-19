@@ -110,6 +110,9 @@ module.exports = {
         return acc;
       }, {}),
     extend: {
+      transitionDelay: {
+        0: "0ms",
+      },
       fontFamily: {
         delaGothicOne: ["DelaGothicOne", "sans-serif"],
         courierSans: ["Courier Sans", "monospace"],
