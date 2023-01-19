@@ -58,9 +58,9 @@
     @apply backdrop-blur-xl;
   }
   .is-wood {
-    animation: moveBGRight 50s linear infinite;
+    animation: moveBGRight 120s linear infinite;
     background-image: url("/wood.svg");
-    background-size: 2200px 600px;
+    background-size: 4000px 1000px;
     background-position: 50% 0;
     background-repeat: repeat;
   }

@@ -4,14 +4,16 @@
     @apply move-bg sm:animate-none absolute inset-0 -z-1;
 
     @media (max-width: 768px) {
-      background-image: url("/walnut.png");
+      background-image: url("/squiggle.svg");
+      background-size: 500px 150px;
+      background-repeat: repeat;
     }
   }
   &--container {
     @apply flex flex-col gap-y-48;
   }
   &--item {
-    @apply text-36 sm:text-64 font-delaGothicOne text-center uppercase text-white border-8 sm:border-16 px-12 md:px-16 py-8 pb-12 md:pb-16 border-white;
+    @apply text-36 sm:text-64 font-courierSans sm:font-delaGothicOne text-center sm:uppercase text-white border-0 sm:border-16 px-12 md:px-16 py-8 pb-12 md:pb-16 border-white underline sm:no-underline;
     &:hover {
       background: hsla(var(--white-hsl), 0.2);
     }

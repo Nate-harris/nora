@@ -33,7 +33,7 @@ const containerVariants = {
 };
 
 const INITIAL_DELAY = 0.3;
-const ITEM_STAGGER = 0.15;
+const ITEM_STAGGER = 0.2;
 
 const listItemVariants = {
   visible: ({ hasDelay, direction, offset }) => ({
@@ -41,6 +41,8 @@ const listItemVariants = {
     rotate: direction * 3,
     y: 0,
     transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1],
       delay: hasDelay ? offset * ITEM_STAGGER + INITIAL_DELAY : 0,
     },
   }),
@@ -52,7 +54,7 @@ const listItemVariants = {
   hidden: {
     opacity: 0,
     rotate: 0,
-    y: -12,
+    y: -24,
     transition: FRAMER_TRANSITION_FASTEASE,
   },
 };
