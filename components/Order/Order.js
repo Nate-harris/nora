@@ -19,6 +19,7 @@ import BlockContent from "@/components/BlockContent";
 import Modal from "../modal";
 import MobileDescription from "../Form/MobileDescription";
 import Description from "../Form/Description";
+import Balancer from "react-wrap-balancer";
 
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
@@ -212,9 +213,9 @@ const Order = observer(({ data }) => {
   return (
     <>
       {router.query.status === "success" && (
-        <div className="h-screen w-screen flex flex-col items-center justify-center text-center">
+        <div className="order--success">
           <BlockContent
-            className="text-pageText"
+            className="order--success-message"
             blocks={data?.successMessage}
           />
         </div>

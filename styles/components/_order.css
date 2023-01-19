@@ -1,0 +1,8 @@
+.order {
+  &--success {
+    @apply h-screen w-screen flex flex-col items-center justify-center text-center;
+    &-message {
+      @apply text-pageText max-w-md p-24;
+    }
+  }
+}
