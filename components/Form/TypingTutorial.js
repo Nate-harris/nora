@@ -64,22 +64,24 @@ const TypingTutorial = observer(({ name = "George" }) => {
   });
 
   return (
-    <AnimatePresence>
-      {showingTutorial && formData.name.length === 0 && (
-        <motion.div
-          variants={variants}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-          className={cx(
-            "relative font-delaGothicOne uppercase text-36 h-56 border-8 border-pageText pb-6 px-10 after:content-[''] after:absolute after:top-2 after:bottom-2 after:right-6 after:w-1 after:bg-orange after:animate-blink",
-            typed.length === 0 && "text-orange"
-          )}
-        >
-          {typed.length === 0 ? "Nora" : typed}
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div className="hidden sm:flex justify-center items-start fixed z-9 bottom-4 inset-x-0 text-12 leading-100 p-32 pointer-events-none">
+      <AnimatePresence>
+        {showingTutorial && formData.name.length === 0 && (
+          <motion.div
+            variants={variants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className={cx(
+              "relative font-delaGothicOne uppercase text-36 h-56 border-8 border-pageText pb-6 px-10 after:content-[''] after:absolute after:top-2 after:bottom-2 after:right-6 after:w-1 after:bg-orange after:animate-blink",
+              typed.length === 0 && "text-orange"
+            )}
+          >
+            {typed.length === 0 ? "Nora" : typed}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 });
 export default TypingTutorial;

@@ -12,6 +12,7 @@
 
 @import "components/_accordions";
 @import "components/_order";
+@import "components/_order-controls";
 @import "components/_carousels";
 @import "components/_menu";
 @import "components/_counters";

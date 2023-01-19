@@ -20,6 +20,7 @@ import Modal from "../modal";
 import MobileDescription from "../Form/MobileDescription";
 import Description from "../Form/Description";
 import Balancer from "react-wrap-balancer";
+import TypingTutorial from "../Form/TypingTutorial";
 
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
@@ -223,7 +224,7 @@ const Order = observer(({ data }) => {
       {router.query.status !== "success" && (
         <>
           <Form data={data} step={parseInt(step)} />
-          <div className="fixed bottom-0 inset-x-0 flex flex-col gap-16 p-16 sm:p-36">
+          <div className="fixed bottom-0 inset-x-0 flex flex-col gap-16 p-16 sm:p-36 pointer-events-none">
             <Controls
               data={data}
               step={parseInt(step)}
@@ -232,6 +233,8 @@ const Order = observer(({ data }) => {
             />
             <MobileDescription value={description} step={parseInt(step)} />
           </div>
+
+          <TypingTutorial name={data?.name?.exampleName} />
 
           <PriceTracker step={parseInt(step)} />
           <Description value={description} step={parseInt(step)} />

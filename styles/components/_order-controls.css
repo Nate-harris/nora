@@ -1,0 +1,8 @@
+.order-controls {
+  &--container {
+    @apply flex justify-between pointer-events-none;
+    button {
+      @apply pointer-events-auto;
+    }
+  }
+}

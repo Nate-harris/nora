@@ -44,7 +44,7 @@ const Controls = observer(({ data, step, increment, decrement }) => {
   const noNextPage = step >= FORM_SCREENS + 1;
 
   return (
-    <div className={cx("flex justify-between")}>
+    <div className={cx("order-controls--container")}>
       <Button
         key="previous-button"
         onClick={handlePreviousButtonPressed}

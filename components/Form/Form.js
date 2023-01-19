@@ -95,10 +95,6 @@ export default observer(({ data, step }) => {
           <Page page={step} data={data} />
         </motion.form>
       </AnimatePresence>
-
-      <TopDrawer>
-        <TypingTutorial name={data?.name?.exampleName} />
-      </TopDrawer>
     </>
   );
 });
