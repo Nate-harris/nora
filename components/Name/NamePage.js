@@ -33,7 +33,7 @@ export default observer(({ data }) => {
   const resize = useCallback(
     (name) => {
       const DESKTOP_WIDTH = 700;
-      const DESKTOP_PADDING = 350;
+      const DESKTOP_PADDING = 400;
 
       const MOBILE_WIDTH = windowSize.width * 0.91;
       const MOBILE_PADDING = 40;
@@ -65,7 +65,7 @@ export default observer(({ data }) => {
 
   const handleBlur = () => {
     if (inputRef.current.value.length === 0) {
-      inputRef.current.style.width = DESKTOP_WIDTH;
+      resize("");
     }
   };
 
@@ -77,7 +77,7 @@ export default observer(({ data }) => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
-  }, [inputRef.current]);
+  }, [inputRef]);
 
   return (
     <div className="xl-input">
