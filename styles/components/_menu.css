@@ -11,7 +11,7 @@
     @apply flex flex-col gap-y-48;
   }
   &--item {
-    @apply text-40 sm:text-64 font-delaGothicOne text-center uppercase text-white border-12 sm:border-16 px-12 md:px-16 py-8 pb-12 md:pb-16 border-white;
+    @apply text-36 sm:text-64 font-delaGothicOne text-center uppercase text-white border-8 sm:border-16 px-12 md:px-16 py-8 pb-12 md:pb-16 border-white;
     &:hover {
       background: hsla(var(--white-hsl), 0.2);
     }
