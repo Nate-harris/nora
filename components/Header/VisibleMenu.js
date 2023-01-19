@@ -43,7 +43,7 @@ const VisibleMenu = observer(({ data = {}, isHome }) => {
         y: isSmall ? 0 : menuOpen || scrollDirection === "down" ? "-250%" : "0",
       }}
       transition={FRAMER_TRANSITION_FASTEASE}
-      className="hidden fixed bottom-36 right-24 sm:relative sm:bottom-0 sm:right-0 sm:flex gap-16 items-center -ml-64 text-14 backdrop-blur-xl px-16 py-12 rounded-md pointer-events-auto"
+      className="fixed bottom-36 right-24 sm:relative sm:bottom-0 sm:right-0 sm:flex gap-16 items-center -ml-64 text-14 backdrop-blur-xl px-16 py-12 rounded-md pointer-events-auto"
     >
       {data.items.map((item, index) => {
         return (
