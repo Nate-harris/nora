@@ -12,14 +12,14 @@ const fadeAnim = {
     y: 0,
     transition: {
       duration: 1.6,
-      delay: 4,
+      delay: 2,
       ease: [0.16, 1, 0.3, 1],
       when: "beforeChildren",
     },
   },
   hide: {
     opacity: 0,
-    y: "-100%",
+    y: "-30%",
     transition: {
       duration: 0.2,
       ease: [0.16, 1, 0.3, 1],
