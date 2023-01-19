@@ -2,11 +2,11 @@
   @apply max-w-md border-r;
 
   &--header {
-    @apply flex items-center relative px-16 py-12 sm:px-32 sm:py-24 text-14 leading-150 font-semibold uppercase;
+    @apply flex items-center relative px-16 py-12 sm:px-32 sm:py-24 text-14 leading-150   uppercase;
 
     &::after {
       @apply absolute inset-x-0 bottom-0 border-t;
-      content: '';
+      content: "";
     }
   }
 
@@ -36,7 +36,7 @@
 }
 
 .filters-close {
-  @apply clean-btn bg-transparent -mr-8 mx-8 p-8 text-14 leading-150 font-semibold uppercase;
+  @apply clean-btn bg-transparent -mr-8 mx-8 p-8 text-14 leading-150   uppercase;
 }
 
 .filter-group {
@@ -113,7 +113,7 @@
   }
 
   &--label {
-    @apply mt-4 text-12 font-semibold;
+    @apply mt-4 text-12;
 
     .is-swatch & {
       @apply mt-8;

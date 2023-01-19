@@ -28,11 +28,11 @@
       @apply flex flex-col items-end mt-auto ml-auto;
 
       &--current {
-        @apply text-14 opacity-40 leading-150 font-semibold;
+        @apply text-14 opacity-40 leading-150;
       }
 
       &--discount {
-        @apply mb-8 p-4 rounded-md bg-pageText text-pageBG text-10 leading-125 tracking-widest font-semibold uppercase;
+        @apply mb-8 p-4 rounded-md bg-pageText text-pageBG text-10 leading-125 tracking-widest   uppercase;
       }
     }
   }
@@ -46,7 +46,7 @@
   }
 
   &--variant {
-    @apply flex items-center mb-8 text-14 leading-160 tracking-wider font-semibold uppercase;
+    @apply flex items-center mb-8 text-14 leading-160 tracking-wider   uppercase;
 
     .label {
       @apply flex-shrink-0 -my-4 scale-90;
@@ -74,7 +74,7 @@
   @apply flex mt-16 py-16 border-t;
 
   &--title {
-    @apply mr-48 text-14 font-semibold uppercase tracking-wider;
+    @apply mr-48 text-14   uppercase tracking-wider;
   }
 
   &--values {

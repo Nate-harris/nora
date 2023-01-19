@@ -41,7 +41,7 @@
     }
   }
   &--toggle {
-    @apply hidden md:block font-bold h-42 w-42 rounded-full flex justify-center items-center bg-transparent border border-pageText text-pageText;
+    @apply hidden md:flex h-42 w-42 rounded-full justify-center items-center bg-transparent border border-pageText text-pageText;
     &:hover {
       @apply border-orange text-orange;
       background: hsla(var(--orange-hsl), 0.4);

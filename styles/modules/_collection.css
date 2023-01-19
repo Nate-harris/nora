@@ -37,7 +37,7 @@
     @apply flex items-center px-8 sm:px-16;
 
     .filters-toggle {
-      @apply clean-btn flex items-center relative p-16 bg-transparent text-14 leading-150 font-semibold uppercase;
+      @apply clean-btn flex items-center relative p-16 bg-transparent text-14 leading-150   uppercase;
 
       &--count {
         @apply w-24 h-24 ml-8 rounded-full bg-pageText text-pageBG text-12 leading-[2];
@@ -85,7 +85,7 @@
   }
 
   &--title {
-    @apply hidden sm:inline mr-8 font-semibold uppercase;
+    @apply hidden sm:inline mr-8   uppercase;
   }
 
   &--icon {
@@ -144,7 +144,7 @@
     @apply m-0 !important;
 
     .is-featured & {
-      @apply text-16 font-semibold;
+      @apply text-16;
     }
 
     .is-inline & {
@@ -190,11 +190,11 @@
     @apply flex items-center justify-start;
 
     &--current {
-      @apply sm:text-16 sm:leading-150 font-semibold;
+      @apply sm:text-16 sm:leading-150;
     }
 
     &--discount {
-      @apply ml-8 px-6 py-4 rounded-md bg-pageText text-pageBG text-10 leading-125 tracking-widest font-semibold uppercase;
+      @apply ml-8 px-6 py-4 rounded-md bg-pageText text-pageBG text-10 leading-125 tracking-widest   uppercase;
     }
   }
 }
@@ -203,7 +203,7 @@
   @apply flex flex-col relative;
 
   h2 {
-    @apply mt-4 text-center text-16 font-semibold transition-opacity duration-200;
+    @apply mt-4 text-center text-16   transition-opacity duration-200;
 
     .product-featured:hover & {
       @apply opacity-100 visible;

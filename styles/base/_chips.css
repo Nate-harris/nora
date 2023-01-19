@@ -1,6 +1,12 @@
 .chip-group {
   @apply flex overflow-x-auto hide-scrollbar;
-  mask-image: linear-gradient(90deg,transparent 0, #000 1rem, #000 calc(100% - 1rem), transparent);
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 1rem,
+    #000 calc(100% - 1rem),
+    transparent
+  );
 
   &--list {
     @apply p-16 whitespace-nowrap;
@@ -12,7 +18,7 @@
 }
 
 .chip {
-  @apply clean-btn inline-flex items-center justify-center align-middle bg-pageBG text-pageText rounded-full p-8 text-14 leading-100 font-semibold;
+  @apply clean-btn inline-flex items-center justify-center align-middle bg-pageBG text-pageText rounded-full p-8 text-14 leading-100;
 
   &--label {
     @apply px-8 py-1 max-w-[10rem] overflow-hidden overflow-ellipsis;
@@ -22,7 +28,7 @@
     @apply w-24 h-24 p-4 -my-8 -mx-4 rounded-full transition-colors duration-300;
 
     .chip:hover & {
-      background: hsla(var(--pageText-hsl), .2);
+      background: hsla(var(--pageText-hsl), 0.2);
     }
 
     svg {

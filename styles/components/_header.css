@@ -1,5 +1,5 @@
 a[href="#content"].skip-link {
-  @apply block fixed top-0 left-1/2 -translate-x-1/2 -translate-y-full z-9 px-8 py-4 bg-pageBG text-pageText text-12 leading-125 font-semibold uppercase;
+  @apply block fixed top-0 left-1/2 -translate-x-1/2 -translate-y-full z-9 px-8 py-4 bg-pageBG text-pageText text-12 leading-125  uppercase;
 
   &:focus {
     @apply translate-y-0 outline-none;
@@ -149,7 +149,7 @@ a[href="#content"].skip-link {
 
       a,
       button {
-        @apply block p-8 text-14 leading-150 font-semibold uppercase;
+        @apply block p-8 text-14 leading-150  uppercase;
       }
     }
   }
@@ -223,6 +223,6 @@ a[href="#content"].skip-link {
   }
 
   .cart-toggle {
-    @apply mx-8 p-8 text-14 leading-150 font-semibold uppercase;
+    @apply mx-8 p-8 text-14 leading-150  uppercase;
   }
 }

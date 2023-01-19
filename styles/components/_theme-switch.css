@@ -10,6 +10,6 @@
   }
 
   &--label {
-    @apply mx-8 text-12 font-semibold;
+    @apply mx-8 text-12;
   }
 }

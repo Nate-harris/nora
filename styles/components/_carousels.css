@@ -78,12 +78,12 @@
 
     &::after {
       @apply absolute left-1/2 -translate-x-1/2 inset-y-12 w-1 bg-pageBG opacity-30;
-      content: '';
+      content: "";
     }
   }
 
   &--counter-item {
-    @apply relative flex flex-col overflow-hidden p-8 text-12 leading-125 font-semibold;
+    @apply relative flex flex-col overflow-hidden p-8 text-12 leading-125;
 
     &.is-current {
       @apply pl-12;
@@ -98,7 +98,7 @@
 
       span {
         @apply block;
-        font-feature-settings: 'tnum';
+        font-feature-settings: "tnum";
         will-change: transform;
 
         + span {
@@ -118,7 +118,7 @@
         @apply block relative w-8 h-8 bg-pageText rounded-full opacity-30;
         transition: opacity 0.1s linear,
           transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-        content: '';
+        content: "";
       }
 
       &:hover {

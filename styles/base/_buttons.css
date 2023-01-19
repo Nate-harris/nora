@@ -1,6 +1,6 @@
 .btn {
   /* default style button */
-  @apply clean-btn inline-block relative bg-pageBG px-12 sm:px-20 py-5 sm:py-10 text-center border-6 font-bold leading-125 transition-colors font-delaGothicOne uppercase text-20 md:text-24;
+  @apply clean-btn inline-block relative bg-pageBG px-12 sm:px-20 py-5 sm:py-10 text-center border-6 leading-125 transition-colors font-delaGothicOne uppercase text-20 md:text-24;
 
   /* default: hover */
   &:not(.is-primary):not(.is-white):not(.is-brown):not(.is-text):not(

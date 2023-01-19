@@ -21,10 +21,6 @@
     @apply m-0 text-14 sm:text-17 leading-150;
   }
 
-  strong {
-    @apply font-semibold;
-  }
-
   ul {
     @apply list-none m-0 p-0;
   }
