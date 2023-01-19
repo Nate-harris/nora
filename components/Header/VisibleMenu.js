@@ -43,14 +43,14 @@ const VisibleMenu = observer(({ data = {}, isHome }) => {
         y: isSmall ? 0 : menuOpen || scrollDirection === "down" ? "-250%" : "0",
       }}
       transition={FRAMER_TRANSITION_FASTEASE}
-      className="fixed bottom-36 right-24 z-1 sm:bottom-auto sm:top-26 sm:right-100 gap-16 items-center -ml-64 text-14 backdrop-blur-xl px-16 py-12 rounded-md pointer-events-auto transition-colors border border-transparent hover:border-white"
+      className="fixed bottom-36 right-24 z-1 sm:bottom-auto sm:top-26 sm:right-100 backdrop-blur-xl "
     >
       {data.items.map((item, index) => {
         return (
           <CustomLink
             key={index}
             className={cx(
-              "underline ",
+              "block underline px-16 py-12 rounded-md pointer-events-auto transition-colors border border-transparent hover:border-white text-14",
               item.page.isOrder && "has-indicator",
               orderStarted && "is-active"
             )}
