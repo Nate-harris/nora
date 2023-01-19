@@ -10,9 +10,11 @@ import { useRect } from "@reach/rect";
 import CustomLink from "../CustomLink/CustomLink";
 import { useScrollDirection } from "@/utils/helpers";
 import { useCookies } from "react-cookie";
+import { useIsSmall } from "@/utils/useMediaQueries";
 
 const VisibleMenu = observer(({ data = {}, isHome }) => {
   const { menuOpen } = useUIStore();
+  const isSmall = useIsSmall();
   const scrollDirection = useScrollDirection();
   const [cookie, setCookie] = useCookies(["nora"]);
   const [orderStarted, setOrderStarted] = useState(false);
@@ -33,9 +35,9 @@ const VisibleMenu = observer(({ data = {}, isHome }) => {
   return (
     <m.nav
       animate={{
-        y: menuOpen || scrollDirection === "down" ? "-250%" : "0",
+        y: isSmall ? 0 : menuOpen || scrollDirection === "down" ? "-250%" : "0",
       }}
-      className="hidden sm:flex gap-16 items-center -ml-64 text-14 backdrop-blur-xl px-16 rounded-md pointer-events-auto"
+      className="hidden fixed bottom-36 right-24 sm:relative sm:bottom-0 sm:right-0 sm:flex gap-16 items-center -ml-64 text-14 backdrop-blur-xl px-16 py-12 rounded-md pointer-events-auto"
     >
       {data.items.map((item, index) => {
         return (

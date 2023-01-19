@@ -73,6 +73,28 @@ export default {
         return parent.bgType !== "video";
       },
     },
+    {
+      name: "mobileVideo",
+      type: "object",
+      fields: [
+        {
+          title: "Background Video",
+          name: "id",
+          type: "string",
+          description:
+            "A video that will show in this section on mobile that is a better aspect ratio than the desktop video.",
+        },
+        {
+          title: "Background Video Title",
+          name: "title",
+          type: "string",
+          description: "Short title/description of the video",
+        },
+      ],
+      hidden: ({ parent }) => {
+        return parent.bgType !== "video";
+      },
+    },
     customImage({
       title: "Video Placeholder",
       name: "videoPlaceholder",

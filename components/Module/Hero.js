@@ -29,7 +29,15 @@ const fadeAnim = {
 };
 
 const Hero = ({ data = {} }) => {
-  const { content, bgType, isFixed, photos, video, videoPlaceholder } = data;
+  const {
+    content,
+    bgType,
+    isFixed,
+    photos,
+    video,
+    mobileVideo,
+    videoPlaceholder,
+  } = data;
   return (
     <section className="hero">
       {content && (
@@ -51,8 +59,8 @@ const Hero = ({ data = {} }) => {
           <div className={cx("hero--bg is-desktop", isFixed && "is-fixed")}>
             <VideoLoop title={video.title} id={video.id} />
           </div>
-          <div className="hero--bg is-mobile">
-            <VideoLoop title={video.title} id={video.id} />
+          <div className={cx("hero--bg is-mobile", isFixed && "is-fixed")}>
+            <VideoLoop title={mobileVideo.title} id={mobileVideo.id} />
           </div>
           <div
             className={cx("hero--video-placeholder ", isFixed && "is-fixed")}
