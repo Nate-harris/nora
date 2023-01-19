@@ -13,11 +13,11 @@ import { useIsSmall } from "../../utils/useMediaQueries";
 import { useRouter } from "next/router";
 
 const Information = observer(({ label }) => {
-  const { showModal } = useUIStore();
+  const { showIntroInfoModal } = useUIStore();
 
   const handleClick = (e) => {
     e.preventDefault();
-    showModal(true);
+    showIntroInfoModal();
   };
 
   return (

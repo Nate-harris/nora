@@ -9,7 +9,7 @@ class UIStore {
   @observable formStep = 0;
   @observable menuOpen = false;
   @observable reviewOpen = false;
-  @observable modalActive = false;
+  @observable introInfoModalActive = false;
 
   @observable isPageTransition = false;
   @action.bound togglePageTransition(state) {
@@ -20,12 +20,12 @@ class UIStore {
     this.menuOpen = !this.menuOpen;
   }
 
-  @action.bound showModal() {
-    this.modalActive = true;
+  @action.bound showIntroInfoModal() {
+    this.introInfoModalActive = true;
   }
 
-  @action.bound hideModal() {
-    this.modalActive = false;
+  @action.bound hideIntroInfoModal() {
+    this.introInfoModalActive = false;
   }
 
   @action.bound toggleReviewOpen() {

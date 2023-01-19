@@ -69,7 +69,8 @@ const Order = observer(({ data }) => {
     isFrameCompleted,
     isShippingCompleted,
   } = useDataStore();
-  const { modalActive, showModal, hideModal } = useUIStore();
+  const { introInfoModalActive, showIntroInfoModal, hideIntroInfoModal } =
+    useUIStore();
 
   useSettings({
     minNumLetters: data?.name?.minNumLetters,
@@ -144,7 +145,7 @@ const Order = observer(({ data }) => {
           router.push(`/order?step=1`, undefined, { shallow: true });
         }
       } else {
-        showModal();
+        showIntroInfoModal();
         router.push(`/order?step=1`, undefined, { shallow: true });
       }
     }
@@ -256,12 +257,15 @@ const Order = observer(({ data }) => {
         alpha={{ current: theme === "dark" ? 0.5 : 0.2 }}
       />
       {data?.modalContent && (
-        <Modal isOpen={modalActive} onClose={() => hideModal()}>
+        <Modal
+          isOpen={introInfoModalActive}
+          onClose={() => hideIntroInfoModal()}
+        >
           <div className="max-w-md flex flex-col">
             <BlockContent blocks={data.modalContent} />
             <button
               className="btn is-white modal--toggle"
-              onClick={() => hideModal()}
+              onClick={() => hideIntroInfoModal()}
             >
               Let's do it
             </button>

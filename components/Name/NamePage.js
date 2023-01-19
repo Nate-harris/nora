@@ -29,6 +29,7 @@ export default observer(({ data }) => {
   const isSmall = useIsSmall();
 
   const { name, setName } = useDataStore();
+  const { introInfoModalActive } = useUIStore();
 
   const resize = useCallback(
     (name) => {
@@ -75,9 +76,15 @@ export default observer(({ data }) => {
 
   useEffect(() => {
     if (inputRef.current) {
-      inputRef.current.focus();
+      if (introInfoModalActive) {
+        inputRef.current.blur();
+      } else {
+        setTimeout(() => {
+          inputRef.current.focus();
+        }, 100);
+      }
     }
-  }, [inputRef]);
+  }, [introInfoModalActive]);
 
   return (
     <div className="xl-input">
@@ -87,8 +94,8 @@ export default observer(({ data }) => {
         animate={{ opacity: !windowSize.width ? 0 : 1 }}
         ref={inputRef}
         className={"is-xl"}
-        onBlur={handleBlur}
         type="text"
+        onBlur={handleBlur}
         onChange={handleChange}
         value={name}
         placeholder="NORA"
