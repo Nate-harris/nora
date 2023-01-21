@@ -95,7 +95,6 @@ export default observer(({ data }) => {
 
     try {
       const stripe = await stripePromise;
-
       const checkoutSession = await axios.post("/api/create-stripe-session", {
         item,
       });
@@ -174,9 +173,9 @@ export default observer(({ data }) => {
         )}
         <div className="order-summary--row">
           <Button
-            key="checkout-button"
             onClick={handleCheckout}
-            label="Checkout"
+            disabled={loading}
+            label={loading ? "Opening..." : "Checkout"}
             className="is-active-control"
           />
           {data?.collectAdditionalInfo && (
