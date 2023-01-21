@@ -50,7 +50,7 @@ const VisibleMenu = observer(({ data = {}, isHome }) => {
           <CustomLink
             key={index}
             className={cx(
-              "block underline px-16 py-12 rounded-md pointer-events-auto transition-colors border border-transparent hover:border-white text-14",
+              "text-white block underline px-16 py-12 rounded-md pointer-events-auto transition-colors border border-transparent hover:border-white text-14",
               item.page.isOrder && "has-indicator",
               orderStarted && "is-active"
             )}
