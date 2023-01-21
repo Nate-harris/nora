@@ -24,6 +24,7 @@ import Photo from "../Photo";
 import { toast } from "react-toastify";
 import { useTheme } from "next-themes";
 import Modal from "../modal";
+import { useAudio } from "@/utils/helpers";
 
 const variants = {
   in: {
@@ -50,6 +51,7 @@ export default observer(({ data }) => {
   } = useDataStore();
   const { cartDetails, checkoutSingleItem, clearCart, redirectToCheckout } =
     useShoppingCart();
+  const [playCheckoutSoundFx] = useAudio("/sounds/Hooray!.mp3");
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
   const [additionalInfoPage, setAdditionalInfoPage] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -92,6 +94,7 @@ export default observer(({ data }) => {
     if (image) {
       item.image = imageUrlFor(image).url();
     }
+    playCheckoutSoundFx();
 
     try {
       const stripe = await stripePromise;
