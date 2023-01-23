@@ -36,7 +36,7 @@
     background-repeat: repeat;
   }
   .is-checkered {
-    @apply h-150 p-0;
+    @apply h-100 sm:h-150 p-0;
     animation: moveBGLeft 60s linear infinite;
     background-image: url("/checkered.svg");
     background-size: 100px 100px;

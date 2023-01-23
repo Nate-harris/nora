@@ -101,10 +101,10 @@ export default observer(({ data }) => {
       const checkoutSession = await axios.post("/api/create-stripe-session", {
         item,
       });
+      setLoading(false);
       const result = await stripe.redirectToCheckout({
         sessionId: checkoutSession.data.id,
       });
-      setLoading(false);
     } catch (error) {
       toast.error(
         "Problem redirecting to checkout. Please check your connection and try again.",

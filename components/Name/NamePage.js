@@ -101,6 +101,7 @@ export default observer(({ data }) => {
         placeholder="NAME"
         maxLength={maxNumLetters}
         autoComplete="off"
+        autoFocus={true}
       />
     </div>
   );

@@ -212,9 +212,9 @@ const Header = observer(
           <Icon />
 
           <Hamburger />
+          {!isOrder && <VisibleMenu data={data?.homePageVisibleMenu} />}
         </header>
         <span ref={observeRef} className="header--observer" />
-        {!isOrder && <VisibleMenu data={data?.homePageVisibleMenu} />}
       </>
     );
   }
