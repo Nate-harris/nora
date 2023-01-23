@@ -26,6 +26,22 @@ export default {
       type: "color",
     },
     {
+      title: "Background Texture",
+      name: "backgroundTexture",
+      type: "string",
+      description: "Repeating background texture you can apply to a section",
+      options: {
+        list: [
+          { title: "Checkered", value: "checkered" },
+          { title: "Houndstooth", value: "houndstooth" },
+          { title: "Nora", value: "nora" },
+          { title: "Squiggle", value: "squiggle" },
+          { title: "Blur", value: "blurred" },
+          { title: "Wood", value: "wood" },
+        ],
+      },
+    },
+    {
       title: "Items",
       name: "items",
       type: "array",

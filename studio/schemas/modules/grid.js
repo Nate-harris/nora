@@ -79,7 +79,7 @@ export default {
           { title: "Houndstooth", value: "houndstooth" },
           { title: "Nora", value: "nora" },
           { title: "Squiggle", value: "squiggle" },
-          { title: "Blur", value: "blur" },
+          { title: "Blur", value: "blurred" },
           { title: "Wood", value: "wood" },
         ],
       },

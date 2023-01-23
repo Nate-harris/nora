@@ -7,7 +7,8 @@ import Photo from "../Photo";
 import cx from "classnames";
 
 const Marquee = ({ data = {} }) => {
-  const { items, isClipped, speed, reverse, pausable } = data;
+  const { items, isClipped, backgroundTexture, speed, reverse, pausable } =
+    data;
 
   const ref = useRef();
   const inView = useInView(ref);
@@ -16,7 +17,7 @@ const Marquee = ({ data = {} }) => {
     <div
       ref={ref}
       style={{ background: data?.backgroundColor?.hex ?? "auto" }}
-      className={cx("marquee-section")}
+      className={cx("marquee-section", backgroundTexture ?? "")}
     >
       <Marqy
         speed={speed}
