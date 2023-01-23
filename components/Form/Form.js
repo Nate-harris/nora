@@ -91,6 +91,7 @@ export default observer(({ data, step }) => {
           animate={"show"}
           exit={"hide"}
           variants={isSmall ? mobileVariants : swipeAnim}
+          autoComplete="off"
         >
           <Page page={step} data={data} />
         </motion.form>
