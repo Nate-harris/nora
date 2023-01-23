@@ -21,12 +21,6 @@ export default {
       type: "complexPortableText",
     },
     {
-      title: "Min Width",
-      name: "minWidth",
-      type: "string",
-      fieldset: "blockOptions",
-    },
-    {
       title: "Max Width",
       name: "maxWidth",
       type: "string",
