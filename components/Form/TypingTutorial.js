@@ -77,7 +77,7 @@ const TypingTutorial = observer(({ name = "George" }) => {
               typed.length === 0 && "text-orange"
             )}
           >
-            {typed.length === 0 ? "Nora" : typed}
+            {typed.length === 0 ? "Name" : typed}
           </motion.div>
         )}
       </AnimatePresence>

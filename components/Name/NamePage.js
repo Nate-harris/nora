@@ -81,7 +81,7 @@ export default observer(({ data }) => {
       } else {
         setTimeout(() => {
           inputRef.current.focus();
-        }, 100);
+        }, 400);
       }
     }
   }, [introInfoModalActive]);
@@ -98,7 +98,7 @@ export default observer(({ data }) => {
         onBlur={handleBlur}
         onChange={handleChange}
         value={name}
-        placeholder="NORA"
+        placeholder="NAME"
         maxLength={maxNumLetters}
         autoComplete="off"
       />

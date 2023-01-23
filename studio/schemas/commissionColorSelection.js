@@ -1,3 +1,4 @@
+import React from "react";
 export default {
   name: "commissionColorSelection",
   title: "Color Selection",
@@ -9,6 +10,22 @@ export default {
       type: "slug",
       description: "The slug is used to identify the section of the form.",
       validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "tagsNote",
+      type: "note",
+      options: {
+        headline: "Template Tags",
+        message: (
+          <>
+            <span>
+              You can use <code>{`{{name}}`}</code> to dynamically display the
+              customer's currently entered name into the description.
+            </span>
+          </>
+        ),
+        tone: "primary",
+      },
     },
     {
       name: "description",

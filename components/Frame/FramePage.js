@@ -51,6 +51,7 @@ export default observer(({ data }) => {
 
   const clearSelection = (e) => {
     e.preventDefault();
+    updateFramePrice(0);
     setFrame(null);
   };
 

@@ -27,6 +27,9 @@
   &--label {
     @apply font-courierSans text-white rounded-full px-24 py-8 mr-24 bg-pageBG text-pageText;
   }
+  &--name {
+    @apply font-courierSans text-white rounded-full py-8 mr-24 whitespace-nowrap overflow-hidden;
+  }
   &--row {
     @apply py-12 md:whitespace-nowrap border-t border-dashed border-white flex justify-between items-end;
     &:first-of-type {

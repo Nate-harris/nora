@@ -29,6 +29,7 @@ export default observer(({ data }) => {
   };
   const clearSelection = (e) => {
     e.preventDefault();
+    updateShippingPrice(0);
     setShipping(null);
   };
   return (

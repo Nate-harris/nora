@@ -1,3 +1,4 @@
+import React from "react";
 export default {
   name: "commissionNameSelection",
   title: "Name Selection",

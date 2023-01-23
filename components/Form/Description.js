@@ -1,8 +1,9 @@
 import { swipeAnim, swipeDownAnim } from "@/lib/framer/animations";
+import { replaceTemplateTags } from "@/utils/helpers";
 import { PortableText, toPlainText } from "@portabletext/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { observer } from "mobx-react-lite";
-import { useUIStore } from "../../providers/RootStoreProvider";
+import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 
 const variants = {
   hidden: {
@@ -19,6 +20,18 @@ const variants = {
 
 const Description = observer(({ value, step }) => {
   if (!value) return null;
+  const { name } = useDataStore();
+  const templateTags = [
+    {
+      tag: "{{name}}",
+      value: name,
+    },
+  ];
+  const valueWithTags = replaceTemplateTags(
+    JSON.stringify(value),
+    templateTags
+  );
+  const parsedValue = JSON.parse(valueWithTags);
   return (
     <div className={`description`}>
       <div className={`description-index`}>
@@ -38,13 +51,13 @@ const Description = observer(({ value, step }) => {
       <div className="max-w-md">
         <AnimatePresence mode="wait">
           <motion.div
-            key={toPlainText(value)}
+            key={toPlainText(parsedValue)}
             initial="hide"
             animate="show"
             exit="hide"
             variants={swipeDownAnim}
           >
-            <PortableText value={value} />
+            <PortableText value={parsedValue} />
           </motion.div>
         </AnimatePresence>
       </div>

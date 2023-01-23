@@ -140,6 +140,16 @@ const PriceTracker = observer(({ step }) => {
             <div className="price-tracker--bubble-header">
               <div className="price-tracker--bubble-header-label">
                 <span className="price-tracker--label">Total</span>
+                <motion.span
+                  className="price-tracker--name"
+                  animate={{ width: step === 5 ? 0 : "auto" }}
+                  transition={{
+                    ...FRAMER_TRANSITION_EASEOUT,
+                    delay: 1.6,
+                  }}
+                >
+                  {`A puzzle for "${name}" will be...`}
+                </motion.span>
                 {formatCurrencyString({
                   value: totalPrice,
                   currency: "USD",
