@@ -125,11 +125,11 @@ export default observer(({ data }) => {
         onMouseMove={handleMouseMove}
         onHoverEnd={handleMouseLeave}
         ref={containerRef}
-        className="cursor-grabbing relative flex flex-col mt-124 sm:mt-64 w-full sm:w-auto"
+        className="cursor-grabbing relative flex flex-col mt-96 sm:mt-64 w-full sm:w-auto"
       >
         <motion.div
           ref={noraRef}
-          className="block absolute inset-x-32 sm:inset-x-64 z-6 pointer-events-none"
+          className="block absolute inset-x-24 sm:inset-x-36 z-6 pointer-events-none"
           style={{ y: ySpring, opacity }}
         >
           <ColoringBook allowCompleted={false} />
