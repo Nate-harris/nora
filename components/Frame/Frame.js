@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 
 import imageUrlFor from "../../lib/sanity/imageUrlFor";
 import cx from "classnames";
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import { formatCurrencyString } from "use-shopping-cart";
 import Photo from "../Photo";
 
@@ -26,36 +26,30 @@ const variants = {
   },
 };
 
-const Frame = ({
-  type,
-  active,
-  noneSelected,
-  price,
-  templateImage,
-  onClick,
-}) => {
-  const src = imageUrlFor(templateImage).width(1080);
-  const [hovered, setHovered] = useState(false);
-  return (
-    <motion.div
-      key={type}
-      className={"relative"}
-      variants={variants}
-      initial={active || noneSelected ? "visible" : "inactive"}
-      animate={active || noneSelected ? "visible" : "inactive"}
-      whileHover={active ? "visible" : "hover"}
-      onClick={onClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <Photo
-        className={`w-full sm:w-auto md:w-lg lg:w-xl pb-[${
-          templateImage.aspectRatio * 100
-        }%]`}
-        photo={templateImage}
-        alt={`Frame ${type}`}
-      />
-      {/* <span
+const Frame = forwardRef(
+  ({ type, active, noneSelected, price, templateImage, onClick }, ref) => {
+    const src = imageUrlFor(templateImage).width(1080);
+    const [hovered, setHovered] = useState(false);
+    return (
+      <motion.div
+        ref={ref}
+        className={"relative"}
+        variants={variants}
+        initial={active || noneSelected ? "visible" : "inactive"}
+        animate={active || noneSelected ? "visible" : "inactive"}
+        whileHover={active ? "visible" : "hover"}
+        onClick={onClick}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <Photo
+          className={`w-full sm:w-auto md:w-lg lg:w-xl pb-[${
+            templateImage.aspectRatio * 100
+          }%]`}
+          photo={templateImage}
+          alt={`Frame ${type}`}
+        />
+        {/* <span
         className={cx(
           "hidden md:block absolute text-12 transition-all duration-300 -rotate-90 top-1/2 -translate-y-1/2 p-12 px-36",
           type === "Walnut" && "text-white bg-orange",
@@ -66,7 +60,10 @@ const Frame = ({
       >
         {type}
       </span> */}
-    </motion.div>
-  );
-};
+      </motion.div>
+    );
+  }
+);
+
+Frame.displayName = "Frame";
 export default Frame;

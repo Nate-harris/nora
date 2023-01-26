@@ -5,14 +5,18 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
-import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
+import {
+  FRAMER_TRANSITION_EASEOUT,
+  FRAMER_TRANSITION_FASTEASE,
+} from "../../lib/framer/animations";
 import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
 
 import Frame from "./Frame";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import ColoringBook from "../Color/ColoringBook";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useIsSmall } from "@/utils/useMediaQueries";
 
 const variants = {
   in: {
@@ -25,7 +29,7 @@ const variants = {
   },
 };
 
-const FRAME_BORDER = 16;
+const FRAME_BORDER = 32;
 export default observer(({ data }) => {
   const {
     frame: { options },
@@ -33,11 +37,11 @@ export default observer(({ data }) => {
   const { formData, frame, setFrame, updateFramePrice } = useDataStore();
   const opacity = useMotionValue(0);
   const y = useMotionValue(frame === null ? 0 : FRAME_BORDER);
+  const framesRef = useRef({});
   const containerRef = useRef(null);
   const noraRef = useRef(null);
   const [offsetTop, setOffsetTop] = useState(0);
-
-  useEffect(() => {}, []);
+  const isSmall = useIsSmall();
 
   const handleChange = (frame) => {
     setFrame(frame);
@@ -55,24 +59,48 @@ export default observer(({ data }) => {
     setFrame(null);
   };
 
+  const lockNoraToFrame = useCallback(
+    (frame) => {
+      const selectedFrame = framesRef.current[frame.type];
+      const nora = noraRef.current;
+      if (selectedFrame && nora) {
+        const { height: frameHeight } = selectedFrame.getBoundingClientRect();
+        const { height: noraHeight } = nora.getBoundingClientRect();
+        const updatedY = (frameHeight - noraHeight) / 2;
+        animate(y, updatedY, FRAMER_TRANSITION_FASTEASE);
+        animate(opacity, 1);
+      }
+    },
+    [opacity, y]
+  );
+
+  const unlockNoraFromFrame = useCallback(() => {
+    const container = containerRef.current;
+    const nora = noraRef.current;
+    if (container && nora) {
+      const { height: noraHeight } = nora.getBoundingClientRect();
+      const { top: containerTop } = container.getBoundingClientRect();
+      const updatedOffset = containerTop + noraHeight / 2;
+      setOffsetTop(updatedOffset);
+    }
+  }, []);
+
   useEffect(() => {
     if (frame !== null) {
-      animate(y, FRAME_BORDER);
-      animate(opacity, 1);
-    }
-
-    // Wait for the animation to finish before getting offset
-    // so we have the correct height.
-    setTimeout(() => {
-      const container = containerRef.current;
-      const nora = noraRef.current;
-      if (container && nora) {
-        const { height } = nora.getBoundingClientRect();
-        const { top } = container.getBoundingClientRect();
-        setOffsetTop(top + height / 2);
+      lockNoraToFrame(frame);
+    } else {
+      // Wait for the animation to finish before getting offset
+      // so we have the correct height.
+      if (!isSmall) {
+        setTimeout(
+          unlockNoraFromFrame,
+          FRAMER_TRANSITION_FASTEASE.duration * 1000
+        );
+      } else {
+        animate(y, -128, FRAMER_TRANSITION_EASEOUT);
       }
-    }, FRAMER_TRANSITION_FASTEASE.duration * 1000);
-  }, [y, opacity, frame]);
+    }
+  }, [frame, y, isSmall, lockNoraToFrame, unlockNoraFromFrame]);
 
   const handleMouseEnter = () => {
     animate(opacity, 1);
@@ -88,7 +116,7 @@ export default observer(({ data }) => {
     animate(opacity, 0);
   };
 
-  const ySpring = useSpring(y, { stiffness: 100, damping: 16 });
+  const ySpring = useSpring(y, { stiffness: 120, damping: 16 });
 
   return (
     <>
@@ -97,11 +125,11 @@ export default observer(({ data }) => {
         onMouseMove={handleMouseMove}
         onHoverEnd={handleMouseLeave}
         ref={containerRef}
-        className="cursor-grabbing relative flex flex-col mt-24 sm:mt-64 w-full sm:w-auto"
+        className="cursor-grabbing relative flex flex-col mt-124 sm:mt-64 w-full sm:w-auto"
       >
         <motion.div
           ref={noraRef}
-          className="hidden sm:block absolute inset-x-64 z-6 pointer-events-none"
+          className="block absolute inset-x-32 sm:inset-x-64 z-6 pointer-events-none"
           style={{ y: ySpring, opacity }}
         >
           <ColoringBook allowCompleted={false} />
@@ -110,6 +138,9 @@ export default observer(({ data }) => {
           const active = frame !== null && frame.type === option.type;
           return (
             <Frame
+              ref={(node) => {
+                framesRef.current[option.type] = node;
+              }}
               key={option.type}
               active={active}
               noneSelected={frame === null}
