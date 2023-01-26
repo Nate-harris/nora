@@ -5,6 +5,7 @@ import VideoLoop from "@/components/VimeoLoop";
 import Photo from "@/components/Photo";
 import cx from "classnames";
 import { m, useInView } from "framer-motion";
+import { useIsSmall } from "@/utils/useMediaQueries";
 
 const fadeAnim = {
   show: {
@@ -17,15 +18,15 @@ const fadeAnim = {
       when: "beforeChildren",
     },
   },
-  hide: {
+  hide: ({ isSmall }) => ({
     opacity: 0,
-    y: "-5rem",
+    y: isSmall ? 0 : "-5rem",
     transition: {
       duration: 0.2,
       ease: [0.16, 1, 0.3, 1],
       when: "beforeChildren",
     },
-  },
+  }),
 };
 
 const Hero = ({ data = {} }) => {
@@ -38,6 +39,7 @@ const Hero = ({ data = {} }) => {
     mobileVideo,
     videoPlaceholder,
   } = data;
+  const isSmall = useIsSmall();
   return (
     <section className="hero">
       {content && (
@@ -47,6 +49,7 @@ const Hero = ({ data = {} }) => {
             animate="show"
             exit="hide"
             variants={fadeAnim}
+            custom={{ isSmall }}
             className="hero--content"
           >
             <BlockContent blocks={content} />

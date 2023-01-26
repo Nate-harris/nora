@@ -47,31 +47,24 @@ const Description = observer(({ value, step }) => {
 
   if (!value) return null;
   return (
-    <div className={`description relative`}>
-      <div className="top-1/2 -translate-y-1/2  absolute">
-        <motion.div className={`-translate-x-28 description-index`}>
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={step}
-              initial="hide"
-              animate="show"
-              exit="hide"
-              variants={swipeAnim}
-            >
-              {step}
-            </motion.span>
-          </AnimatePresence>
-        </motion.div>
-        <motion.div
-          initial={{ width: 350 }}
-          animate={{ width: descriptionWidth }}
-        />
-      </div>
+    <div className={`description`}>
+      <motion.div className={`description-index`}>
+        <AnimatePresence mode="wait">
+          <motion.span
+            key={step}
+            initial="hide"
+            animate="show"
+            exit="hide"
+            variants={swipeAnim}
+          >
+            {step}
+          </motion.span>
+        </AnimatePresence>
+      </motion.div>
 
-      <motion.div className="ml-58 max-w-md">
+      <motion.div className="max-w-md">
         <AnimatePresence mode="wait">
           <motion.div
-            ref={descriptionRef}
             key={toPlainText(parsedValue)}
             initial="hide"
             animate="show"

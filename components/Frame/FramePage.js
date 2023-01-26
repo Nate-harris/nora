@@ -30,6 +30,7 @@ const variants = {
 };
 
 const FRAME_BORDER = 32;
+const MOBILE_OFFSET = -128;
 export default observer(({ data }) => {
   const {
     frame: { options },
@@ -37,7 +38,9 @@ export default observer(({ data }) => {
   const { formData, frame, setFrame, updateFramePrice } = useDataStore();
   const isSmall = useIsSmall();
   const opacity = useMotionValue(isSmall ? 1 : 0);
-  const y = useMotionValue(frame === null ? 0 : FRAME_BORDER);
+  const y = useMotionValue(
+    frame === null ? (isSmall ? MOBILE_OFFSET : 0) : FRAME_BORDER
+  );
   const framesRef = useRef({});
   const containerRef = useRef(null);
   const noraRef = useRef(null);
