@@ -17,6 +17,7 @@ import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import ColoringBook from "../Color/ColoringBook";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useIsSmall } from "@/utils/useMediaQueries";
+import { isBrowser } from "@/utils/helpers";
 
 const variants = {
   in: {
@@ -105,6 +106,15 @@ export default observer(({ data }) => {
       }
     }
   }, [frame, y, isSmall, lockNoraToFrame, unlockNoraFromFrame]);
+
+  useEffect(() => {
+    if (isBrowser) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [frame]);
 
   const handleMouseEnter = () => {
     animate(opacity, 1);
