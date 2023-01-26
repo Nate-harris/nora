@@ -5,7 +5,7 @@ import OrderSummary from "@/components/ReviewCommission/OrderSummary";
 
 import StatusBar from "@/components/StatusBar/StatusBar";
 import ThemeSwitcher from "@/components/ThemeSwitcher/ThemeSwitcher";
-import { useWindowSize } from "@/utils/helpers";
+import { isBrowser, useWindowSize } from "@/utils/helpers";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
 import { useQueryState, queryTypes } from "next-usequerystate";
@@ -166,6 +166,15 @@ const Order = observer(({ data }) => {
       shallow: true,
     });
   };
+
+  useEffect(() => {
+    if (isBrowser) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [step]);
 
   let slug = null;
   let description = null;
