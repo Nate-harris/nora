@@ -76,7 +76,7 @@ export default observer(({ data }) => {
       >
         <div className="color-picker--examples">
           <button
-            className="color-picker--close"
+            className="btn color-picker--close"
             onClick={() => setExamplesOpen(false)}
           >
             Close
