@@ -28,7 +28,7 @@
     @apply font-courierSans text-white rounded-full px-24 py-8 mr-24 bg-pageBG text-pageText;
   }
   &--name {
-    @apply hidden md:block font-courierSans text-white rounded-full py-8 mr-24 whitespace-nowrap overflow-hidden;
+    @apply invisible hidden md:visible md:block font-courierSans text-white rounded-full py-8 mr-24 whitespace-nowrap overflow-hidden;
   }
   &--row {
     @apply py-12 md:whitespace-nowrap border-t border-dashed border-white flex justify-between items-end;

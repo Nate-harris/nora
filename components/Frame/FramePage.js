@@ -70,7 +70,7 @@ export default observer(({ data }) => {
         const { height: frameHeight } = selectedFrame.getBoundingClientRect();
         const { height: noraHeight } = nora.getBoundingClientRect();
         const updatedY = (frameHeight - noraHeight) / 2;
-        console.log(updatedY);
+        console.log(y.get(), updatedY);
         animate(y, updatedY, FRAMER_TRANSITION_FASTEASE);
         animate(opacity, 1);
       }
@@ -111,7 +111,7 @@ export default observer(({ data }) => {
   };
 
   const handleMouseMove = (event) => {
-    if (frame !== null) return;
+    if (isSmall || frame !== null) return;
     y.set(event.clientY - offsetTop);
   };
 
