@@ -39,7 +39,7 @@ export default observer(({ data }) => {
   const isSmall = useIsSmall();
   const opacity = useMotionValue(isSmall ? 1 : 0);
   const y = useMotionValue(
-    frame === null ? (isSmall ? MOBILE_OFFSET : 0) : FRAME_BORDER
+    frame === null ? (isSmall ? MOBILE_OFFSET : 0) : isSmall ? 12 : 32
   );
   const framesRef = useRef({});
   const containerRef = useRef(null);
@@ -120,7 +120,7 @@ export default observer(({ data }) => {
     animate(opacity, 0);
   };
 
-  const ySpring = useSpring(y, { stiffness: 100, damping: 30 });
+  const ySpring = useSpring(y, { stiffness: 120, damping: 20 });
 
   return (
     <>
@@ -129,11 +129,11 @@ export default observer(({ data }) => {
         onMouseMove={handleMouseMove}
         onHoverEnd={handleMouseLeave}
         ref={containerRef}
-        className="cursor-grabbing relative flex flex-col mt-96 sm:mt-64 w-full sm:w-auto"
+        className="cursor-grabbing px-24 sm:px-0 relative flex flex-col mt-96 sm:mt-64 w-full sm:w-auto"
       >
         <motion.div
           ref={noraRef}
-          className="block absolute inset-x-24 sm:inset-x-36 z-6 pointer-events-none"
+          className="block absolute inset-x-36 sm:inset-x-36 z-6 pointer-events-none"
           style={{ y: ySpring, opacity }}
         >
           <ColoringBook allowCompleted={false} />
