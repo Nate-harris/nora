@@ -35,13 +35,13 @@ export default observer(({ data }) => {
     frame: { options },
   } = data;
   const { formData, frame, setFrame, updateFramePrice } = useDataStore();
-  const opacity = useMotionValue(0);
+  const isSmall = useIsSmall();
+  const opacity = useMotionValue(isSmall ? 1 : 0);
   const y = useMotionValue(frame === null ? 0 : FRAME_BORDER);
   const framesRef = useRef({});
   const containerRef = useRef(null);
   const noraRef = useRef(null);
   const [offsetTop, setOffsetTop] = useState(0);
-  const isSmall = useIsSmall();
 
   const handleChange = (frame) => {
     setFrame(frame);
@@ -67,6 +67,7 @@ export default observer(({ data }) => {
         const { height: frameHeight } = selectedFrame.getBoundingClientRect();
         const { height: noraHeight } = nora.getBoundingClientRect();
         const updatedY = (frameHeight - noraHeight) / 2;
+        console.log(updatedY);
         animate(y, updatedY, FRAMER_TRANSITION_FASTEASE);
         animate(opacity, 1);
       }
@@ -116,7 +117,7 @@ export default observer(({ data }) => {
     animate(opacity, 0);
   };
 
-  const ySpring = useSpring(y, { stiffness: 120, damping: 16 });
+  const ySpring = useSpring(y, { stiffness: 100, damping: 30 });
 
   return (
     <>
