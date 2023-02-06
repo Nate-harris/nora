@@ -22,7 +22,7 @@ const VideoLoop = ({
     if (videoRef.current && iframePlayer === null) {
       setIframePlayer(new Player(videoRef.current));
     }
-  }, [videoRef.current]);
+  }, [iframePlayer, setIframePlayer]);
 
   useEffect(() => {
     if (iframePlayer) {

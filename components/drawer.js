@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import FocusTrap from "focus-trap-react";
 import cx from "classnames";
@@ -19,11 +19,14 @@ const Drawer = ({
     setIsActive(isOpen);
   }, [isOpen]);
 
-  const handleKeyDown = (e) => {
-    if (e.which === 27) {
-      onClose(false);
-    }
-  };
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (e.which === 27) {
+        onClose(false);
+      }
+    },
+    [onClose]
+  );
 
   useEffect(() => {
     if (isActive) {
@@ -33,7 +36,7 @@ const Drawer = ({
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isActive]);
+  }, [isActive, handleKeyDown]);
 
   return (
     <InPortal id="drawer">

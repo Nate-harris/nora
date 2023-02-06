@@ -276,7 +276,7 @@ const Order = observer(({ data }) => {
               className="btn is-white modal--toggle"
               onClick={() => hideIntroInfoModal()}
             >
-              Let's do it
+              {"Let's do it"}
             </button>
           </div>
         </Modal>

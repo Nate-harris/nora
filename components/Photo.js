@@ -56,7 +56,8 @@ const Photo = ({
   // trigger any onLoad callbacks
   useEffect(() => {
     if (isLoaded) onLoad?.();
-  }, [isLoaded]);
+  }, [isLoaded, onLoad]);
+
   if (!photo?.asset) return null;
   return (
     <figure ref={ref} className={className ? className : null}>
