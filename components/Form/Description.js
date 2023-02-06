@@ -11,12 +11,33 @@ const variants = {
   hidden: {
     opacity: 0,
     transition: {
-      duration: 0.4,
+      delay: 0.1,
+      duration: 0.5,
     },
   },
   visible: {
     opacity: 1,
     transition: { duration: 0.4, delay: 0.4 },
+  },
+};
+
+const indexContainerVariants = {
+  hide: {
+    opacity: 0,
+    transition: {
+      opacity: {
+        duration: 0.3,
+      },
+    },
+  },
+  show: {
+    opacity: 1,
+    transition: {
+      opacity: {
+        delay: 0.3,
+        duration: 0.2,
+      },
+    },
   },
 };
 
@@ -48,8 +69,15 @@ const Description = observer(({ value, step }) => {
   if (!value) return null;
   return (
     <div className={`description`}>
-      <motion.div className={`description-index`}>
-        <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={step}
+          initial="hide"
+          animate="show"
+          exit="hide"
+          variants={indexContainerVariants}
+          className={`description-index`}
+        >
           <motion.span
             key={step}
             initial="hide"
@@ -59,22 +87,20 @@ const Description = observer(({ value, step }) => {
           >
             {step}
           </motion.span>
-        </AnimatePresence>
-      </motion.div>
+        </motion.div>
+      </AnimatePresence>
 
-      <motion.div className="max-w-md">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={toPlainText(parsedValue)}
-            initial="hide"
-            animate="show"
-            exit="hide"
-            variants={swipeDownAnim}
-          >
-            <PortableText value={parsedValue} />
-          </motion.div>
-        </AnimatePresence>
-      </motion.div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={toPlainText(parsedValue)}
+          initial="hide"
+          animate="show"
+          exit="hide"
+          variants={swipeDownAnim}
+        >
+          <PortableText value={parsedValue} />
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 });

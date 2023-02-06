@@ -1,10 +1,10 @@
 .description {
   @apply hidden fixed top-0 inset-x-0 sm:flex my-32 mb-24 sm:mb-64 text-64 text-pageText rounded-3xl justify-center text-center sm:text-left items-center;
   p {
-    @apply text-12;
+    @apply text-12 mb-0 max-w-md;
   }
   h3 {
-    @apply mb-4;
+    @apply mb-4 leading-100;
   }
   &-index {
     @apply text-16 bg-pageText text-pageBG h-42 w-42 flex items-center justify-center rounded-full mr-16;

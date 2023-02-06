@@ -1,6 +1,10 @@
 import { getCommissionPrice } from "@/lib/sanity/getCommissionPrice";
 
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const key =
+  process.env.NODE_ENV === "development"
+    ? process.env.STRIPE_DEV_SECRET_KEY
+    : process.env.STRIPE_PROD_SECRET_KEY;
+const stripe = require("stripe")(key);
 
 async function CreateStripeSession(req, res) {
   const { item } = req.body;
@@ -9,7 +13,7 @@ async function CreateStripeSession(req, res) {
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
       : "https://nora-new.vercel.app";
-  console.log(item);
+
   const transformedItem = {
     price_data: {
       currency: "usd",
@@ -28,9 +32,16 @@ async function CreateStripeSession(req, res) {
     payment_method_types: ["card"],
     line_items: [transformedItem],
     billing_address_collection: "auto",
-    shipping_address_collection: {
-      allowed_countries: ["US", "CA"],
-    },
+    shipping_address_collection: { allowed_countries: ["US", "CA"] },
+    shipping_options: [
+      {
+        shipping_rate_data: {
+          type: "fixed_amount",
+          fixed_amount: { amount: 0, currency: "usd" },
+          display_name: "Free shipping",
+        },
+      },
+    ],
     mode: "payment",
     success_url: redirectURL + "/order?status=success&step=5",
     cancel_url: redirectURL + "/order?status=cancel&step=5",

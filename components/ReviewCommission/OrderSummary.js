@@ -57,7 +57,11 @@ export default observer(({ data }) => {
   const [loading, setLoading] = useState(false);
   const { theme } = useTheme();
 
-  const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+  const publishableKey =
+    process.env.NODE_ENV === "development"
+      ? process.env.NEXT_PUBLIC_STRIPE_DEV_PUBLISHABLE_KEY
+      : process.env.NEXT_PUBLIC_STRIPE_PROD_PUBLISHABLE_KEY;
+
   const stripePromise = loadStripe(publishableKey);
 
   const createCheckOutSession = async () => {

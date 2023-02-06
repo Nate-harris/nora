@@ -101,10 +101,6 @@
     @apply p-24 m-[-0.5px];
   }
 
-  &.is-inline {
-    @apply my-16;
-  }
-
   &--visuals {
     @apply relative;
   }
@@ -145,10 +141,6 @@
 
     .is-featured & {
       @apply text-16;
-    }
-
-    .is-inline & {
-      @apply text-24;
     }
 
     + .price {
