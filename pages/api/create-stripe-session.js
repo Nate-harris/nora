@@ -12,7 +12,7 @@ async function CreateStripeSession(req, res) {
   const redirectURL =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
-      : "https://nora-new.vercel.app";
+      : "https://norapuzzle.com/";
 
   const transformedItem = {
     price_data: {
