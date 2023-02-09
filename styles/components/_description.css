@@ -16,6 +16,9 @@
   background: hsla(var(--pageText-hsl), 0.1);
   p {
     @apply text-12;
+    &:last-child {
+      @apply mb-0;
+    }
   }
   h3 {
     @apply mb-4;

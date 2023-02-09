@@ -234,7 +234,7 @@ const Order = observer(({ data }) => {
       {router.query.status !== "success" && (
         <>
           <Form data={data} step={parseInt(step)} />
-          <div className="fixed bottom-0 inset-x-0 flex flex-col gap-16 p-16 sm:p-36 pointer-events-none">
+          <div className="fixed z-5 bottom-0 inset-x-0 flex flex-col gap-16 p-16 sm:p-36 pointer-events-none">
             <Controls
               data={data}
               step={parseInt(step)}
