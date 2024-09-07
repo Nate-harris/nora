@@ -458,6 +458,7 @@ export function useScrollRestoration(router, delay) {
 
 export function buildSrc(image, options = {}) {
   const { width, height, format, quality } = options;
+  if (!image.asset) return "";
   let imgSrc = imageBuilder.image(image);
 
   if (width) {
