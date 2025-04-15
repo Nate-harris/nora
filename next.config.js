@@ -16,3 +16,7 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+
+module.exports = {
+  swcMinify: false,
+};
