@@ -3,6 +3,8 @@ import { FRAMER_TRANSITION_FASTEASE } from "../../lib/framer/animations";
 import css from "styled-jsx/css";
 import { observer } from "mobx-react-lite";
 
+import SVGText from "@/components/Name/SVGText";
+
 import { useEffect, useRef } from "react";
 import useWindowSize from "../../utils/useWindowSize";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
@@ -46,7 +48,9 @@ export default observer(({ data }) => {
       spanRef.current.textContent = name;
       const minWidth = name.length > 0 ? 0 : MIN_WIDTH;
       const actualWidth = spanRef.current.offsetWidth;
-      inputRef.current.style.width = Math.max(minWidth, actualWidth) + "px";
+      if (inputRef) {
+        inputRef.current.style.width = Math.max(minWidth, actualWidth) + "px";
+      }
 
       // If too wide, scale down
       if (actualWidth > windowSize.width - PADDING) {
@@ -103,6 +107,7 @@ export default observer(({ data }) => {
         autoComplete="off"
         autoFocus={true}
       />
+      <SVGText name={name}></SVGText>
     </div>
   );
 });
