@@ -49,20 +49,15 @@ const mobileVariants = {
 };
 
 const Page = ({ page, data }) => {
-  switch (page) {
-    case 1:
-      return <NamePage data={data} />;
-    case 2:
-      return <ColorPage data={data} />;
-    case 3:
-      return <FramePage data={data} />;
-    case 4:
-      return <ShippingPage data={data} />;
-    case 5:
-      return <OrderSummary data={data} />;
-    default:
-      return null;
-  }
+  return (
+    <>
+      <NamePage data={data} />
+      <ColorPage data={data} />
+      <FramePage data={data} />
+      <ShippingPage data={data} />
+      <OrderSummary data={data} />
+    </>
+  );
 };
 
 export default observer(({ data, step }) => {

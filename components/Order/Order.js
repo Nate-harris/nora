@@ -80,7 +80,6 @@ const Order = observer(({ data }) => {
   });
 
   const router = useRouter();
-  const { step, status } = router.query;
   const { width, height } = useWindowSize();
   const { theme } = useTheme();
 
@@ -153,20 +152,6 @@ const Order = observer(({ data }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
-  const decrement = () => {
-    if (parseInt(step) === 1) return;
-    router.push(`/order?step=${parseInt(step) - 1}`, undefined, {
-      shallow: true,
-    });
-  };
-
-  const increment = () => {
-    if (parseInt(step) >= FORM_SCREENS + 1) return;
-    router.push(`/order?step=${parseInt(step) + 1}`, undefined, {
-      shallow: true,
-    });
-  };
-
   useEffect(() => {
     if (isBrowser) {
       window.scrollTo({
@@ -174,24 +159,25 @@ const Order = observer(({ data }) => {
         behavior: "smooth",
       });
     }
-  }, [step]);
+  }, []);
 
   let slug = null;
   let description = null;
-  switch (parseInt(step)) {
-    case 1:
-      description = data.name.description;
-      break;
-    case 2:
-      description = data.color.description;
-      break;
-    case 3:
-      description = data.frame.description;
-      break;
-    case 4:
-      description = data.shipping.description;
-      break;
-  }
+  description = data.name.description;
+  // switch (parseInt(step)) {
+  //   case 1:
+  //     description = data.name.description;
+  //     break;
+  //   case 2:
+  //     description = data.color.description;
+  //     break;
+  //   case 3:
+  //     description = data.frame.description;
+  //     break;
+  //   case 4:
+  //     description = data.shipping.description;
+  //     break;
+  // }
 
   if (!router.isReady) {
     return (
@@ -233,26 +219,16 @@ const Order = observer(({ data }) => {
       )}
       {router.query.status !== "success" && (
         <>
-          <Form data={data} step={parseInt(step)} />
+          <Form data={data} />
           <div className="fixed z-5 bottom-0 inset-x-0 flex flex-col gap-16 p-16 sm:p-36 pointer-events-none">
-            <Controls
-              data={data}
-              step={parseInt(step)}
-              decrement={decrement}
-              increment={increment}
-            />
-            <MobileDescription value={description} step={parseInt(step)} />
+            <Controls data={data} decrement={() => {}} increment={() => {}} />
+            <MobileDescription value={description} />
           </div>
 
           <TypingTutorial name={data?.name?.exampleName} />
 
-          <PriceTracker step={parseInt(step)} />
-          <Description value={description} step={parseInt(step)} />
-
-          <StatusBar
-            step={parseInt(step)}
-            hasInformation={data?.modalContent}
-          />
+          <PriceTracker />
+          <Description value={description} />
         </>
       )}
       <ThemeSwitcher />
