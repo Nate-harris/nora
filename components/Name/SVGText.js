@@ -1,4 +1,4 @@
-"use client;";
+"use client";
 
 import { motion } from "framer-motion";
 import { observer } from "mobx-react-lite";
@@ -17,7 +17,7 @@ const pathFromLetter = async (letter) => {
   debugger;
 };
 
-export default observer(({ name }) => {
+export default observer(({ name, scale }) => {
   const r = useRef();
   const [svgSrc, setSvgSrc] = useState(null);
   useEffect(() => {
@@ -33,18 +33,27 @@ export default observer(({ name }) => {
   }, []);
   useEffect(() => {
     if (!svgSrc) {
-      debugger;
       return;
     }
     r.current.innerHTML = "";
-    name.split("").forEach((letter) => {
-      const letterSVG = svgSrc.querySelector(`path#${letter.toLowerCase()}_1`);
-      if (letterSVG) {
-        const clone = letterSVG.cloneNode(true);
-        r.current.appendChild(clone);
-      }
-    });
+    name
+      .split("")
+      .map((l) => l.toLowerCase())
+      .forEach((letter) => {
+        const n = parts_per_letter[letter];
+        console.log(letter, n);
+        for (let i = 0; i < n; i++) {
+          const blah = `#${letter}_${i + 1}`;
+          console.log(blah);
+          const letterSVG = svgSrc.querySelector(blah);
+          if (letterSVG) {
+            const clone = letterSVG.cloneNode(true);
+            clone.fill = "red";
+            r.current.appendChild(clone);
+          }
+        }
+      });
   }, [name]);
 
-  return <svg ref={r}></svg>;
+  return <svg className="letters" ref={r} style={scale}></svg>;
 });
