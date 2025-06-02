@@ -79,7 +79,9 @@ export default observer(({ name, scale }) => {
     });
   }, []);
 
-  const WIDTH = 175;
+  const WIDTH = 168;
+  const PADDING = 24;
+  const LETTER_SCALE = 0.445;
 
   const paths = svgSrc
     ? name
@@ -88,18 +90,29 @@ export default observer(({ name, scale }) => {
         .map((letter, i) => {
           const letterData = svgSrc[letter];
           if (letterData) {
-            return (
+            return letterData.paths.map((p) => (
               <path
-                d={letterData.paths[0].d}
-                transform={`translate(${i * WIDTH})`}
+                d={p.d}
+                stroke="currentColor"
+                strokeWidth={1.4}
+                fill="white"
+                transform={`scale(${LETTER_SCALE}) translate(${
+                  i * WIDTH + PADDING
+                } ${PADDING})`}
               />
-            );
+            ));
           }
         })
+        .reduce((m, e) => [...m, ...e], [])
     : null;
 
   return (
-    <svg className="letters" ref={r} style={scale}>
+    <svg
+      width={WIDTH * LETTER_SCALE * name.length + PADDING * 3}
+      className="letters"
+      ref={r}
+      style={{ ...scale, paddingBottom: 0 }}
+    >
       {paths}
     </svg>
   );

@@ -25,7 +25,6 @@ const variants = {
 export default observer(({ data }) => {
   const { pricePerLetter = 3000, maxNumLetters = 30 } = data;
   const inputRef = useRef();
-  const spanRef = useRef();
   const scale = useMotionValue(1);
   const windowSize = useWindowSize();
   const isSmall = useIsSmall();
@@ -35,30 +34,7 @@ export default observer(({ data }) => {
 
   const resize = useCallback(
     (name) => {
-      const DESKTOP_WIDTH = 700;
-      const DESKTOP_PADDING = 400;
-
-      const MOBILE_WIDTH = windowSize.width * 0.91;
-      const MOBILE_PADDING = 40;
-
-      const MIN_WIDTH = isSmall ? MOBILE_WIDTH : DESKTOP_WIDTH;
-      const PADDING = isSmall ? MOBILE_PADDING : DESKTOP_PADDING;
-
-      // Update width
-      spanRef.current.textContent = name;
-      const minWidth = name.length > 0 ? 0 : MIN_WIDTH;
-      const actualWidth = spanRef.current.offsetWidth;
-      if (inputRef) {
-        inputRef.current.style.width = Math.max(minWidth, actualWidth) + "px";
-      }
-
-      // If too wide, scale down
-      if (actualWidth > windowSize.width - PADDING) {
-        const updatedScale = (windowSize.width - PADDING) / actualWidth;
-        scale.set(updatedScale);
-      } else {
-        scale.set(1);
-      }
+      inputRef.current.style.width = `${Math.max(175 * name.length, 300)}px`;
     },
     [isSmall, windowSize.width, scale]
   );
@@ -92,21 +68,7 @@ export default observer(({ data }) => {
 
   return (
     <div className="xl-input">
-      <span ref={spanRef} />
-      <motion.input
-        style={{ scale }}
-        animate={{ opacity: !windowSize.width ? 0 : 1 }}
-        ref={inputRef}
-        className={"is-xl"}
-        type="text"
-        onBlur={handleBlur}
-        onChange={handleChange}
-        value={name}
-        placeholder="NAME"
-        maxLength={maxNumLetters}
-        autoComplete="off"
-        autoFocus={true}
-      />
+      <input ref={inputRef} onChange={handleChange}></input>
       <SVGText name={name}></SVGText>
     </div>
   );
