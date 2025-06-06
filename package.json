@@ -57,7 +57,7 @@
   "devDependencies": {
     "eslint": "8.19.0",
     "eslint-config-next": "12.2.1",
-    "sanity": "^3.91.0"
+    "sanity": "^3.89.0"
   },
   "peerDependencies": {
     "postcss": "^8.4.5"
