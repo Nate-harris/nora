@@ -6,9 +6,21 @@ import { useDataStore } from "../../providers/RootStoreProvider";
 import { useEffect, useRef, useState } from "react";
 import { use } from "react";
 
+const blah = (windowWidth) => (windowWidth > 640 ? 12 : 24);
+
 export default observer(({ name, scale }) => {
   const r = useRef();
   const [svgSrc, setSvgSrc] = useState(null);
+  const [borderWidth, setBorderWidth] = useState(blah(window.screen.width));
+  useEffect(() => {
+    const updateSize = () => {
+      console.log("updating size", window.innerWidth);
+      setBorderWidth(blah(window.innerWidth));
+    };
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
   useEffect(() => {
     fetch("/SVG/letters/letters.json")
       .then((resp) => resp.json())
@@ -83,7 +95,6 @@ export default observer(({ name, scale }) => {
   const LETTER_HEIGHT = 288.25;
   const PADDING = 17;
   // small breakpoint from tailwind https://tailwindcss.com/docs/responsive-design
-  const getBorderWidth = () => (window.screen.width > 640 ? 12 : 24);
   const LETTER_SPACING = 12;
   const LETTER_SCALE = 0.445;
 
@@ -126,7 +137,7 @@ export default observer(({ name, scale }) => {
       ref={r}
       style={{
         ...scale,
-        borderWidth: `${getBorderWidth()}px`,
+        borderWidth: `${borderWidth}px`,
         height: LETTER_HEIGHT * LETTER_SCALE + PADDING * 2,
         paddingBottom: 0,
       }}
