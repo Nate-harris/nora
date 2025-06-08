@@ -79,9 +79,22 @@ export default observer(({ name, scale }) => {
     });
   }, []);
 
-  const WIDTH = 168;
-  const PADDING = 24;
+  const LETTER_WIDTH = 162.25;
+  const LETTER_HEIGHT = 288.25;
+  const PADDING = 17;
+  // small breakpoint from tailwind https://tailwindcss.com/docs/responsive-design
+  const getBorderWidth = () => (window.screen.width > 640 ? 12 : 24);
+  const LETTER_SPACING = 12;
   const LETTER_SCALE = 0.445;
+
+  const getBoxWidth = (name) => {
+    if (name.length === 0) return 300;
+    return (
+      PADDING * 2 +
+      LETTER_SCALE *
+        (LETTER_WIDTH * name.length + LETTER_SPACING * (name.length - 1))
+    );
+  };
 
   const paths = svgSrc
     ? name
@@ -97,8 +110,8 @@ export default observer(({ name, scale }) => {
                 strokeWidth={1.4}
                 fill="white"
                 transform={`scale(${LETTER_SCALE}) translate(${
-                  i * WIDTH + PADDING
-                } ${PADDING})`}
+                  PADDING / LETTER_SCALE + i * LETTER_SPACING + i * LETTER_WIDTH
+                } ${PADDING / LETTER_SCALE})`}
               />
             ));
           }
@@ -108,10 +121,15 @@ export default observer(({ name, scale }) => {
 
   return (
     <svg
-      width={WIDTH * LETTER_SCALE * name.length + PADDING * 3}
+      width={getBoxWidth(name)}
       className="letters"
       ref={r}
-      style={{ ...scale, paddingBottom: 0 }}
+      style={{
+        ...scale,
+        borderWidth: `${getBorderWidth()}px`,
+        height: LETTER_HEIGHT * LETTER_SCALE + PADDING * 2,
+        paddingBottom: 0,
+      }}
     >
       {paths}
     </svg>
