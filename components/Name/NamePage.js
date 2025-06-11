@@ -69,7 +69,16 @@ export default observer(({ data }) => {
   return (
     <div className="xl-input">
       <input ref={inputRef} onChange={handleChange}></input>
-      <SVGText name={name}></SVGText>
+      <SVGText
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log(inputRef.current);
+          inputRef.current.focus();
+          console.log("EEEET");
+        }}
+        name={name}
+      ></SVGText>
     </div>
   );
 });

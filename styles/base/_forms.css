@@ -181,6 +181,14 @@
       box-sizing: content-box;
       margin: 0 auto;
     }
+    input{
+      position: absolute;
+      opacity: 0;
+    }
+
+    input:focus +svg {
+      box-shadow: 0px 0px 4px grey;
+    }
     span {
       @apply text-64 sm:text-148 tracking-tighter sm:tracking-tight border-16 border-pageText absolute overflow-hidden mx-auto top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-0 pb-4 sm:pb-14 px-24 sm:px-64;
     }
