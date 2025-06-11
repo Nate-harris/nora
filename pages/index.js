@@ -29,7 +29,7 @@ const Home = ({ data }) => {
 export async function getStaticProps({ preview, previewData }) {
   const pageData = await getStaticPage(
     `
-    *[_type == "page" && _id == ${queries.homeID}] | order(_updatedAt desc)[0]{
+    *[_type == "page" && _id == "ba4f2e1a-6f32-4186-82a4-7c6ea6a7bbcd"][0]{
       "id": _id,
       hasTransparentHeader,
       "isHome": _id == ${queries.homeID},
@@ -50,6 +50,7 @@ export async function getStaticProps({ preview, previewData }) {
       token: previewData?.token,
     }
   );
+console.log("Fetched Home Page:", pageData);
 
   return {
     props: {
