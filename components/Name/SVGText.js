@@ -118,19 +118,12 @@ export default observer(({ name, scale, onClick }) => {
           if (!letterData) {
             console.error("No letter data found for", letter);
           }
-          if (letterData.holes.length !== 1) {
-            console.error(
-              "Expected one hole in letter",
-              letter,
-              letterData.holes
-            );
-          }
           const scale = `scale(${LETTER_SCALE})`;
           const translate = `translate(${
             PADDING / LETTER_SCALE + i * LETTER_SPACING + i * LETTER_WIDTH
           } ${PADDING / LETTER_SCALE})`;
 
-          const holes = letterData.holes.map((h, j) => (
+          const hole = (
             <mask id={`${letter}_${i}`} key={`${letter}-${i}`}>
               <rect
                 fill="white"
@@ -138,16 +131,19 @@ export default observer(({ name, scale, onClick }) => {
                 y="0"
                 width={LETTER_WIDTH}
                 height={LETTER_HEIGHT}
+                key={`${letter}-${i}-op-def`}
               />
-              <circle
-                cx={h.cx}
-                cy={h.cy}
-                r={h.r}
-                fill="black"
-                key={`${letter}-${j}`}
-              />
+              {letterData.holes.map((h, j) => (
+                <circle
+                  cx={h.cx}
+                  cy={h.cy}
+                  r={h.r}
+                  fill="black"
+                  key={`${letter}-${j}`}
+                />
+              ))}
             </mask>
-          ));
+          );
           const paths = letterData.paths.map((p) => (
             <path
               d={p.d}
@@ -159,13 +155,13 @@ export default observer(({ name, scale, onClick }) => {
             />
           ));
           return {
-            holes,
+            hole,
             paths,
           };
         })
         .reduce(
           (m, e) => ({
-            holes: [...m.holes, ...e.holes],
+            holes: [...m.holes, e.hole],
             paths: [...m.paths, ...e.paths],
           }),
           { holes: [], paths: [] }
