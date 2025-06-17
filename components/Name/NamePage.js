@@ -10,6 +10,7 @@ import useWindowSize from "../../utils/useWindowSize";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import { useIsSmall } from "../../utils/useMediaQueries";
 import { useCallback } from "react";
+import definedLetters from "./definedLetters";
 
 const variants = {
   in: {
@@ -36,13 +37,25 @@ export default observer(({ data }) => {
     (name) => {
       inputRef.current.style.width = `${Math.max(175 * name.length, 300)}px`;
     },
-    [isSmall, windowSize.width, scale]
+    [isSmall, windowSize.width, scale, name]
   );
 
-  const handleChange = (e) => {
-    const name = e.target.value.replaceAll(/\s/g, "").toUpperCase();
-    setName(name);
-  };
+  const handleChange = useCallback(
+    (e) => {
+      let lastCharAdded = e.target.value.slice(-1);
+      const name = definedLetters.includes(lastCharAdded.toUpperCase())
+        ? e.target.value.toUpperCase()
+        : e.target.value.slice(0, -1).toUpperCase();
+      setName(name);
+
+      if (name.length < e.target.value.length) {
+        console.log("TODO: notify user of unsupported character");
+      }
+      e.target.value = name;
+      console.log("Name changed to:", name);
+    },
+    [name]
+  );
 
   const handleBlur = () => {
     if (inputRef.current.value.length === 0) {
@@ -75,7 +88,6 @@ export default observer(({ data }) => {
           e.stopPropagation();
           console.log(inputRef.current);
           inputRef.current.focus();
-          console.log("EEEET");
         }}
         name={name}
       ></SVGText>

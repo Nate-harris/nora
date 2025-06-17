@@ -5,6 +5,7 @@ import { observer } from "mobx-react-lite";
 import { useDataStore } from "../../providers/RootStoreProvider";
 import { useEffect, useRef, useState } from "react";
 import { use } from "react";
+import definedLetters from "./definedLetters";
 
 const borderWidthFromWindowWidth = (windowWidth) =>
   windowWidth > 640 ? 12 : 24;
@@ -33,37 +34,8 @@ export default observer(({ name, scale, onClick }) => {
 
   useEffect(() => {
     // utility to load svg file letters into json
-    const letters = [
-      "A",
-      "B",
-      "C",
-      "D",
-      "E",
-      "F",
-      "G",
-      "H",
-      "I",
-      "J",
-      "K",
-      "L",
-      "M",
-      "N",
-      "O",
-      "P",
-      "Q",
-      "R",
-      "S",
-      "T",
-      "U",
-      "V",
-      "W",
-      "X",
-      "Y",
-      "Z",
-      "-27",
-    ];
     Promise.all(
-      letters.map((l) => {
+      definedLetters.map((l) => {
         return fetch(`/SVG/letters/NORA__${l}.svg`)
           .then((r) => r.text())
           .then((text) => {
@@ -109,6 +81,7 @@ export default observer(({ name, scale, onClick }) => {
     );
   };
 
+  console.log("rendering", name);
   const svgData = svgSrc
     ? name
         .split("")
@@ -168,6 +141,8 @@ export default observer(({ name, scale, onClick }) => {
         )
     : null;
 
+  const lineX = getBoxWidth(name) - PADDING / 2;
+
   return (
     <svg
       tabIndex={-1}
@@ -183,12 +158,27 @@ export default observer(({ name, scale, onClick }) => {
       }}
       onClick={onClick}
     >
-      <circle cx="50" cy="50" r="50" />
       <mask id="test">
         <circle cx="50" cy="50" r="50" />
       </mask>
       {svgData && svgData.holes}
       {svgData && svgData.paths}
+      {name.length > 0 && (
+        <motion.g
+          className="blinky-line"
+          stroke="currentColor"
+          strokeWidth={2}
+          animate={{ opacity: [0.3, 1, 0.3] }}
+          transition={{ duration: 1, repeat: Infinity }}
+        >
+          <line
+            x1={lineX}
+            y1={PADDING}
+            x2={lineX}
+            y2={LETTER_HEIGHT * LETTER_SCALE + PADDING}
+          ></line>
+        </motion.g>
+      )}
     </svg>
   );
 });
