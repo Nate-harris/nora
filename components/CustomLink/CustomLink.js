@@ -42,20 +42,18 @@ const CustomLink = ({ link, children, ...rest }) => {
             : `/${isDynamic ? `${isDynamic}/` : ""}${link.page?.slug}`
         }
         scroll={false}
-      >
-        <a
-          className={
-            link.isButton
-              ? cx("btn", link.styles?.style, {
-                  "is-large": link.styles?.isLarge,
-                  "is-block": link.styles?.isBlock,
-                })
-              : null
-          }
-          {...rest}
-        >
-          {link.title || children}
-        </a>
+        className={
+          link.isButton
+            ? cx("btn", link.styles?.style, {
+                "is-large": link.styles?.isLarge,
+                "is-block": link.styles?.isBlock,
+              })
+            : null
+        }
+        {...rest}>
+
+        {link.title || children}
+
       </NextLink>
     );
   }

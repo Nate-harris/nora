@@ -91,7 +91,7 @@ const Icon = observer(() => {
   const router = useRouter();
   const [hovered, setHovered] = useState(false);
   return (
-    <Link href="/">
+    <Link href="/" legacyBehavior>
       {/*calc(50vw - 12rem + 3.2rem)*/}
       <motion.a
         className="pointer-events-auto justify-self-center self-center"
