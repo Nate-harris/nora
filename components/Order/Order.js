@@ -183,12 +183,6 @@ const Order = observer(({ data }) => {
       description = data.name.description;
       break;
     case 2:
-      description = data.color.description;
-      break;
-    case 3:
-      description = data.frame.description;
-      break;
-    case 4:
       description = data.shipping.description;
       break;
   }

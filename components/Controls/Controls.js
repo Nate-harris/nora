@@ -14,7 +14,7 @@ const useIsNextButtonDisabled = (step) => {
   } = useDataStore();
   switch (step) {
     case 1:
-      return !isNameCompleted;
+      return !isNameCompleted || !isColorCompleted;
     case 2:
       return !isColorCompleted;
     case 3:
