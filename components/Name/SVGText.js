@@ -65,6 +65,10 @@ export default observer(({ name, scale, onClick }) => {
     });
   }, []);
 
+  if (name.length === 0) {
+    name = "NAME";
+  }
+
   const LETTER_WIDTH = 162.25;
   const LETTER_HEIGHT = 288.25;
   const PADDING = 17;
@@ -81,7 +85,6 @@ export default observer(({ name, scale, onClick }) => {
     );
   };
 
-  console.log("rendering", name);
   const svgData = svgSrc
     ? name
         .split("")
