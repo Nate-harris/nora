@@ -5,12 +5,19 @@ import { observer } from "mobx-react-lite";
 
 import SVGText from "@/components/Name/SVGText";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import useWindowSize from "../../utils/useWindowSize";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import { useIsSmall } from "../../utils/useMediaQueries";
 import { useCallback } from "react";
 import definedLetters from "./definedLetters";
+import Swatch from "../Color/Swatch";
+import SwatchCount from "../Color/SwatchCount";
+
+const toggleExamples = (e) => {
+  e.preventDefault();
+  setExamplesOpen(!examplesOpen);
+};
 
 const variants = {
   in: {
@@ -24,11 +31,15 @@ const variants = {
 };
 
 export default observer(({ data }) => {
-  const { pricePerLetter = 3000, maxNumLetters = 30 } = data;
+  const {
+    color: { colors, examples },
+  } = data;
   const inputRef = useRef();
   const scale = useMotionValue(1);
   const windowSize = useWindowSize();
   const isSmall = useIsSmall();
+
+  const [examplesOpen, setExamplesOpen] = useState(false);
 
   const { name, setName } = useDataStore();
   const { introInfoModalActive } = useUIStore();
@@ -80,17 +91,32 @@ export default observer(({ data }) => {
   }, [introInfoModalActive]);
 
   return (
-    <div className="xl-input">
-      <input ref={inputRef} onChange={handleChange}></input>
-      <SVGText
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          console.log(inputRef.current);
-          inputRef.current.focus();
-        }}
-        name={name}
-      ></SVGText>
-    </div>
+    <>
+      <div className="xl-input">
+        <input ref={inputRef} onChange={handleChange}></input>
+        <SVGText
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log(inputRef.current);
+            inputRef.current.focus();
+          }}
+          name={name}
+        ></SVGText>
+      </div>
+      <SwatchCount />
+      <div className="color-picker--swatches">
+        <div className="color-picker--swatches-inner">
+          {colors?.map((option) => {
+            return <Swatch key={option.hex} data={option} />;
+          })}
+        </div>
+      </div>
+      <div className="color-picker--toggle-row">
+        <button className="color-picker--toggle" onClick={toggleExamples}>
+          {examplesOpen ? "Hide examples" : "See examples"}
+        </button>
+      </div>
+    </>
   );
 });

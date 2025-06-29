@@ -11,11 +11,15 @@ const borderWidthFromWindowWidth = (windowWidth) =>
   windowWidth > 640 ? 12 : 24;
 
 export default observer(({ name, scale, onClick }) => {
+  const { colors } = useDataStore();
   const r = useRef();
   const [svgSrc, setSvgSrc] = useState(null);
+  const [svgData, setSvgData] = useState(null);
   const [borderWidth, setBorderWidth] = useState(
     borderWidthFromWindowWidth(window.screen.width)
   );
+
+  // sets the border width based on the window width
   useEffect(() => {
     const updateSize = () => {
       setBorderWidth(borderWidthFromWindowWidth(window.innerWidth));
@@ -24,6 +28,7 @@ export default observer(({ name, scale, onClick }) => {
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
+  // fetches the letters json file from public/SVG/letters/letters.json
   useEffect(() => {
     fetch("/SVG/letters/letters.json")
       .then((resp) => resp.json())
@@ -32,8 +37,9 @@ export default observer(({ name, scale, onClick }) => {
       });
   }, []);
 
+  // utility function not used by code
+  // creates json objects from source svg files
   useEffect(() => {
-    // utility to load svg file letters into json
     Promise.all(
       definedLetters.map((l) => {
         return fetch(`/SVG/letters/NORA__${l}.svg`)
@@ -85,11 +91,16 @@ export default observer(({ name, scale, onClick }) => {
     );
   };
 
-  const svgData = svgSrc
-    ? name
+  useEffect(() => {
+    if (!svgSrc) return;
+    setSvgData(
+      name
         .split("")
         .map((l) => l.toUpperCase())
         .map((letter, i) => {
+          if (letter === "&") {
+            letter = "ampersand";
+          }
           const letterData = svgSrc[letter];
           if (!letterData) {
             console.error("No letter data found for", letter);
@@ -120,16 +131,17 @@ export default observer(({ name, scale, onClick }) => {
               ))}
             </mask>
           );
-          const paths = letterData.paths.map((p) => (
-            <path
-              d={p.d}
-              stroke="currentColor"
-              strokeWidth={1.4}
-              fill="white"
-              mask={`url(#${letter}_${i})`}
-              transform={`${scale} ${translate}`}
-            />
-          ));
+          const paths = letterData.paths.map((p) => {
+            return (
+              <path
+                d={p.d}
+                stroke="currentColor"
+                stroke-width={10.4}
+                mask={`url(#${letter}_${i})`}
+                transform={`${scale} ${translate}`}
+              />
+            );
+          });
           return {
             hole,
             paths,
@@ -138,11 +150,18 @@ export default observer(({ name, scale, onClick }) => {
         .reduce(
           (m, e) => ({
             holes: [...m.holes, e.hole],
-            paths: [...m.paths, ...e.paths],
+            paths: [...m.paths, ...e.paths].map((p, i) => ({
+              ...p,
+              props: {
+                ...p.props,
+                fill: colors.length ? colors[i % colors.length].hex : "#fff",
+              },
+            })),
           }),
           { holes: [], paths: [] }
         )
-    : null;
+    );
+  }, [svgSrc, colors.length, name]);
 
   const lineX = getBoxWidth(name) - PADDING / 2;
 
