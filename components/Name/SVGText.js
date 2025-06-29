@@ -79,7 +79,7 @@ export default observer(({ name, scale, onClick }) => {
   const LETTER_HEIGHT = 288.25;
   const PADDING = 17;
   // small breakpoint from tailwind https://tailwindcss.com/docs/responsive-design
-  const LETTER_SPACING = 12;
+  const LETTER_SPACING = 3;
   const LETTER_SCALE = 0.445;
 
   const getBoxWidth = (name) => {
