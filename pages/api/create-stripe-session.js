@@ -12,28 +12,33 @@ export default async function handler(req, res) {
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
-  const { item } = req.body;
-
-  const redirectURL =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3000"
-      : "https://norapuzzle.com";
-
-  const transformedItem = {
-    price_data: {
-      currency: "usd",
-      product_data: {
-        metadata: item.metadata,
-        description: item.description,
-        images: [item.image],
-        name: item.name,
-      },
-      unit_amount: item.price,
-    },
-    quantity: item.quantity,
-  };
-
   try {
+    console.log("Request body:", req.body);
+
+    const { item } = req.body;
+
+    const redirectURL =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000"
+        : "https://norapuzzle.com";
+
+    const transformedItem = {
+      price_data: {
+        currency: "usd",
+        product_data: {
+          metadata: item?.metadata,
+          description: item?.description,
+          images: [item?.image],
+          name: item?.name,
+        },
+        unit_amount: item?.price,
+      },
+      quantity: item?.quantity,
+    };
+
+    console.log("Stripe key starts with:", key?.slice?.(0, 6));
+    console.log("Transformed item:", transformedItem);
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: [transformedItem],
@@ -52,13 +57,14 @@ export default async function handler(req, res) {
       success_url: `${redirectURL}/order?status=success&step=5`,
       cancel_url: `${redirectURL}/order?status=cancel&step=5`,
       metadata: {
-        ...item.metadata,
-        images: item.image,
+        ...item?.metadata,
+        images: item?.image,
       },
     });
 
     res.status(200).json({ id: session.id });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Stripe error:", error?.message, error?.stack);
+    res.status(500).json({ error: error?.message });
   }
 }
