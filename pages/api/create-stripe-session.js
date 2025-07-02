@@ -1,9 +1,4 @@
-import { getCommissionPrice } from "@/lib/sanity/getCommissionPrice";
-
-const key =
-  process.env.NODE_ENV === "development"
-    ? process.env.STRIPE_DEV_SECRET_KEY
-    : process.env.STRIPE_PROD_SECRET_KEY;
+const key = process.env.STRIPE_PROD_SECRET_KEY;
 const stripe = require("stripe")(key);
 
 export default async function handler(req, res) {
@@ -13,35 +8,27 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log("Request body:", req.body);
-
     const { item } = req.body;
-
-    const redirectURL =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3000"
-        : "https://norapuzzle.com";
-
-    const transformedItem = {
-      price_data: {
-        currency: "usd",
-        product_data: {
-          metadata: item?.metadata,
-          description: item?.description,
-          images: [item?.image],
-          name: item?.name,
-        },
-        unit_amount: item?.price,
-      },
-      quantity: item?.quantity,
-    };
-
-    console.log("Stripe key starts with:", key?.slice?.(0, 6));
-    console.log("Transformed item:", transformedItem);
+    console.log("Stripe key starts:", key?.slice?.(0,8));
+    console.log("Item:", item);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      line_items: [transformedItem],
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: item.name,
+              description: item.description,
+              images: [item.image],
+            },
+            unit_amount: item.price,
+          },
+          quantity: item.quantity,
+        },
+      ],
+      mode: "payment",
       billing_address_collection: "auto",
       shipping_address_collection: { allowed_countries: ["US", "CA"] },
       shipping_options: [
@@ -53,18 +40,14 @@ export default async function handler(req, res) {
           },
         },
       ],
-      mode: "payment",
-      success_url: `${redirectURL}/order?status=success&step=5`,
-      cancel_url: `${redirectURL}/order?status=cancel&step=5`,
-      metadata: {
-        ...item?.metadata,
-        images: item?.image,
-      },
+      success_url: "https://norapuzzle.com/order?status=success&step=5",
+      cancel_url: "https://norapuzzle.com/order?status=cancel&step=5",
+      metadata: item.metadata,
     });
 
-    res.status(200).json({ id: session.id });
+    return res.status(200).json({ id: session.id });
   } catch (error) {
-    console.error("Stripe error:", error?.message, error?.stack);
-    res.status(500).json({ error: error?.message });
+    console.error("Stripe error:", error);
+    return res.status(500).json({ error: error.message });
   }
 }
