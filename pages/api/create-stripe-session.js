@@ -33,28 +33,32 @@ export default async function handler(req, res) {
     quantity: item.quantity,
   };
 
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
-    line_items: [transformedItem],
-    billing_address_collection: "auto",
-    shipping_address_collection: { allowed_countries: ["US", "CA"] },
-    shipping_options: [
-      {
-        shipping_rate_data: {
-          type: "fixed_amount",
-          fixed_amount: { amount: 0, currency: "usd" },
-          display_name: "Free shipping",
+  try {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: [transformedItem],
+      billing_address_collection: "auto",
+      shipping_address_collection: { allowed_countries: ["US", "CA"] },
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: { amount: 0, currency: "usd" },
+            display_name: "Free shipping",
+          },
         },
+      ],
+      mode: "payment",
+      success_url: `${redirectURL}/order?status=success&step=5`,
+      cancel_url: `${redirectURL}/order?status=cancel&step=5`,
+      metadata: {
+        ...item.metadata,
+        images: item.image,
       },
-    ],
-    mode: "payment",
-    success_url: redirectURL + "/order?status=success&step=5",
-    cancel_url: redirectURL + "/order?status=cancel&step=5",
-    metadata: {
-      ...item.metadata,
-      images: item.image,
-    },
-  });
+    });
 
-  res.json({ id: session.id });
+    res.status(200).json({ id: session.id });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 }
