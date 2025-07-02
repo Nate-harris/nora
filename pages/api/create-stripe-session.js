@@ -6,13 +6,18 @@ const key =
     : process.env.STRIPE_PROD_SECRET_KEY;
 const stripe = require("stripe")(key);
 
-async function CreateStripeSession(req, res) {
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    res.setHeader("Allow", ["POST"]);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
+
   const { item } = req.body;
 
   const redirectURL =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
-      : "https://norapuzzle.com/";
+      : "https://norapuzzle.com";
 
   const transformedItem = {
     price_data: {
@@ -53,5 +58,3 @@ async function CreateStripeSession(req, res) {
 
   res.json({ id: session.id });
 }
-
-export default CreateStripeSession;
