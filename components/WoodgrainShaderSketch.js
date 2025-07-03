@@ -1,4 +1,13 @@
-// ... imports ...
+import dynamic from "next/dynamic";
+import { useRef } from "react";
+import cx from "classnames";
+import { colorValues, useIsSafari } from "../utils/helpers";
+import { useIsSmall } from "../utils/useMediaQueries";
+
+const Sketch = dynamic(() => import("react-p5").then((mod) => mod.default), {
+  loading: () => "",
+  ssr: false,
+});
 
 const getRefValue = (val, fallback) =>
   val && typeof val === "object" && "current" in val ? val.current : val ?? fallback;
@@ -13,7 +22,14 @@ const WoodgrainShaderSketch = ({
   width = 1000,
   alpha = 0.15,
 }) => {
-  // ... refs and browser checks ...
+  const hasLoaded = useRef(false);
+  const shaderTexture = useRef(null);
+  const shader = useRef(null);
+  const canvasRef = useRef(null);
+  const frameRate = useRef(30);
+
+  const isSafari = useIsSafari();
+  const isSmall = useIsSmall();
   if (isSafari || isSmall) return null;
 
   // Normalize values for use in uniforms
