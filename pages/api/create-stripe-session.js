@@ -1,5 +1,4 @@
-const key = process.env.STRIPE_PROD_SECRET_KEY;
-const stripe = require("stripe")(key);
+const stripe = require('stripe')(process.env.STRIPE_PROD_SECRET_KEY);
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -9,8 +8,8 @@ export default async function handler(req, res) {
 
   try {
     const { item } = req.body;
-    console.log("Stripe key starts:", key?.slice?.(0,8));
-    console.log("Item:", item);
+    console.log("Stripe key starts with:", process.env.STRIPE_PROD_SECRET_KEY?.slice(0, 8));
+    console.log("Item received:", item);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
@@ -23,7 +22,7 @@ export default async function handler(req, res) {
               description: item.description,
               images: [item.image],
             },
-            unit_amount: item.price,
+            unit_amount: item.price, // 10000 = $100
           },
           quantity: item.quantity,
         },
@@ -45,9 +44,9 @@ export default async function handler(req, res) {
       metadata: item.metadata,
     });
 
-    return res.status(200).json({ id: session.id });
+    res.status(200).json({ id: session.id });
   } catch (error) {
-    console.error("Stripe error:", error);
-    return res.status(500).json({ error: error.message });
+    console.error("Stripe error:", error.message, error.stack);
+    res.status(500).json({ error: error.message });
   }
 }
