@@ -49,12 +49,14 @@ const WoodgrainShaderSketch = ({
     );
   }
 
+  // --- FIX: Don't call .parent if ref is missing ---
   const setup = (p5, canvasParentRef) => {
     p5.pixelDensity(1);
     p5.setAttributes("alpha", true);
-    canvasRef.current = p5
-      .createCanvas(width, height, p5.WEBGL)
-      .parent(canvasParentRef);
+    canvasRef.current = p5.createCanvas(width, height, p5.WEBGL);
+    if (canvasParentRef) {
+      canvasRef.current.parent(canvasParentRef);
+    }
     p5.noStroke();
     shaderTexture.current = p5.createGraphics(width, height, p5.WEBGL);
     shaderTexture.current.noStroke();
