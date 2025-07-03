@@ -1,4 +1,8 @@
-const stripe = require('stripe')(process.env.STRIPE_PROD_SECRET_KEY);
+const stripe = require('stripe')(
+  process.env.NODE_ENV === "development"
+    ? process.env.STRIPE_DEV_SECRET_KEY
+    : process.env.STRIPE_PROD_SECRET_KEY
+);
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -8,8 +12,15 @@ export default async function handler(req, res) {
 
   try {
     const { item } = req.body;
-    console.log("Stripe key starts with:", process.env.STRIPE_PROD_SECRET_KEY?.slice(0, 8));
+    const key = process.env.NODE_ENV === "development"
+      ? process.env.STRIPE_DEV_SECRET_KEY
+      : process.env.STRIPE_PROD_SECRET_KEY;
+    console.log("Stripe key starts with:", key?.slice(0, 8));
     console.log("Item received:", item);
+
+    if (!key) {
+      throw new Error("Stripe secret key is missing from environment variables.");
+    }
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
@@ -46,7 +57,6 @@ export default async function handler(req, res) {
 
     res.status(200).json({ id: session.id });
   } catch (error) {
-    // Log and return the full error, not just error.message
     console.error("Stripe error:", error);
     res.status(500).json({ error: error.message, raw: error.raw, stack: error.stack });
   }
