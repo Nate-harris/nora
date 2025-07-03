@@ -22,7 +22,7 @@ export default async function handler(req, res) {
               description: item.description,
               images: [item.image],
             },
-            unit_amount: item.price, // 10000 = $100
+            unit_amount: item.price,
           },
           quantity: item.quantity,
         },
@@ -46,7 +46,8 @@ export default async function handler(req, res) {
 
     res.status(200).json({ id: session.id });
   } catch (error) {
-    console.error("Stripe error:", error.message, error.stack);
-    res.status(500).json({ error: error.message });
+    // Log and return the full error, not just error.message
+    console.error("Stripe error:", error);
+    res.status(500).json({ error: error.message, raw: error.raw, stack: error.stack });
   }
 }
