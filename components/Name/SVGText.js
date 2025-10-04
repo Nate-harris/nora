@@ -37,39 +37,6 @@ export default observer(({ name, scale, onClick }) => {
       });
   }, []);
 
-  // utility function not used by code
-  // creates json objects from source svg files
-  useEffect(() => {
-    Promise.all(
-      definedLetters.map((l) => {
-        return fetch(`/SVG/letters/NORA__${l}.svg`)
-          .then((r) => r.text())
-          .then((text) => {
-            const svg = new DOMParser().parseFromString(
-              text,
-              "image/svg+xml"
-            )?.documentElement;
-            const holes = [...svg.querySelectorAll("circle")];
-            const paths = [...svg.querySelectorAll("path")];
-            return {
-              [l]: {
-                svg,
-                holes: holes.map((h) => ({
-                  cx: h.getAttribute("cx"),
-                  cy: h.getAttribute("cy"),
-                  r: h.getAttribute("r"),
-                })),
-                paths: paths.map((p) => ({
-                  d: p.getAttribute("d"),
-                })),
-              },
-            };
-          });
-      })
-    ).then((results) => {
-      localStorage.setItem("letters", JSON.stringify(results));
-    });
-  }, []);
 
   if (name.length === 0) {
     name = "NAME";
@@ -77,9 +44,9 @@ export default observer(({ name, scale, onClick }) => {
 
   const LETTER_WIDTH = 162.25;
   const LETTER_HEIGHT = 288.25;
-  const PADDING = 17;
+  const PADDING = 8;
   // small breakpoint from tailwind https://tailwindcss.com/docs/responsive-design
-  const LETTER_SPACING = 8;
+  const LETTER_SPACING = 5;
   const LETTER_SCALE = 0.445;
   const STROKE = 4;
 
@@ -135,7 +102,7 @@ export default observer(({ name, scale, onClick }) => {
             return (
               <path
                 d={p.d}
-                stroke="currentColor"
+                stroke="black"
                 strokeWidth={STROKE}
                 mask={`url(#${letter}_${i})`}
                 transform={`${scale} ${translate}`}
@@ -183,14 +150,15 @@ export default observer(({ name, scale, onClick }) => {
 
   const height = LETTER_HEIGHT * LETTER_SCALE + PADDING * 2;
   const frame_join_offset = 7;
+  const leftrightwidth = 14;
 
   return (
     <>
       <div>
-        <img id="left" src="/frame_side.png" style={{ position: "absolute", height: height + 2 * borderWidth, width: borderWidth, top: 0 }}></img>
-        <img id="right" src="/frame_side.png" style={{ position: "absolute", height: height + 2 * borderWidth, right: 0, width: borderWidth, transform: "rotate(180deg)" }}></img >
-        <img id="top" src="/frame-top.jpeg" style={{ left: borderWidth - frame_join_offset - 2, position: "absolute", height: borderWidth + 4, width: getBoxWidth(name) + 2 * frame_join_offset + 2 }}></img >
-        <img id="bottom" src="/frame-top.jpeg" style={{ left: borderWidth - frame_join_offset, position: "absolute", height: borderWidth + 4, width: getBoxWidth(name) + 2 * frame_join_offset + 2, bottom: 0 }}></img >
+        <img id="left" src="/frame_side.png" style={{ position: "absolute", height: height + 2 * borderWidth, width: leftrightwidth, top: 0 }}></img>
+        <img id="right" src="/frame_side.png" style={{ position: "absolute", height: height + 2 * borderWidth, right: 0, width: leftrightwidth, transform: "rotate(180deg)" }}></img >
+        <img id="top" src="/frame-top.jpeg" style={{ left: borderWidth - frame_join_offset - 2, position: "absolute", height: leftrightwidth, width: getBoxWidth(name) + 2 * frame_join_offset + 2 }}></img >
+        <img id="bottom" src="/frame-top.jpeg" style={{ left: borderWidth - frame_join_offset - 1, position: "absolute", height: leftrightwidth, width: getBoxWidth(name) + 2 * frame_join_offset + 2, bottom: 0 }}></img >
       </div >
       <svg
         tabIndex={-1}
@@ -215,7 +183,7 @@ export default observer(({ name, scale, onClick }) => {
         {name.length > 0 && (
           <motion.g
             className="blinky-line"
-            stroke="currentColor"
+            stroke="black"
             strokeWidth={2}
             animate={{ opacity: [0.3, 1, 0.3] }}
             transition={{ duration: 1, repeat: Infinity }}
