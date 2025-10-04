@@ -165,13 +165,13 @@ export default observer(({ name, scale, onClick }) => {
         .reduce(
           (m, e) => ({
             holes: [...m.holes, e.hole],
-            paths: [...m.paths, ...e.paths.map((p, i) => ({
+            paths: [...m.paths, ...e.paths].map((p, i) => ({
               ...p,
               props: {
                 ...p.props,
                 fill: colors.length ? colors[i % colors.length].hex : "#fff",
               },
-            }))],
+            })),
             strokes: [...m.strokes, e.strokes]
           }),
           { holes: [], paths: [], strokes: [] }
