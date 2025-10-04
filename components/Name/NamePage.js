@@ -14,10 +14,7 @@ import definedLetters from "./definedLetters";
 import Swatch from "../Color/Swatch";
 import SwatchCount from "../Color/SwatchCount";
 
-const toggleExamples = (e) => {
-  e.preventDefault();
-  setExamplesOpen(!examplesOpen);
-};
+
 
 const variants = {
   in: {
@@ -89,7 +86,10 @@ export default observer(({ data }) => {
       }
     }
   }, [introInfoModalActive]);
-
+  const toggleExamples = (e) => {
+    e.preventDefault();
+    setExamplesOpen(!examplesOpen);
+  };
   return (
     <>
       <div className="xl-input">
