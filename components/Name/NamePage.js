@@ -5,6 +5,8 @@ import { observer } from "mobx-react-lite";
 
 import SVGText from "@/components/Name/SVGText";
 
+import Drawer from "@/components/drawer";
+import Photo from "../Photo";
 import { useEffect, useRef, useState } from "react";
 import useWindowSize from "../../utils/useWindowSize";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
@@ -31,14 +33,28 @@ export default observer(({ data }) => {
   const {
     color: { colors, examples },
   } = data;
+
+
   const inputRef = useRef();
   const scale = useMotionValue(1);
   const windowSize = useWindowSize();
   const isSmall = useIsSmall();
 
   const [examplesOpen, setExamplesOpen] = useState(false);
+  const toggleExamples = (e) => {
+    e.preventDefault();
+    setExamplesOpen(!examplesOpen);
+  };
 
-  const { name, setName } = useDataStore();
+  const handleExampleClicked = (colors) => {
+    clearColors();
+    colors.forEach((color) => {
+      addColor(color);
+    });
+    setExamplesOpen(false);
+  };
+
+  const { name, setName, clearColors, addColor } = useDataStore();
   const { introInfoModalActive } = useUIStore();
 
   const resize = useCallback(
@@ -86,10 +102,7 @@ export default observer(({ data }) => {
       }
     }
   }, [introInfoModalActive]);
-  const toggleExamples = (e) => {
-    e.preventDefault();
-    setExamplesOpen(!examplesOpen);
-  };
+
   return (
     <>
       <div className="xl-input">
@@ -117,6 +130,40 @@ export default observer(({ data }) => {
           {examplesOpen ? "Hide examples" : "See examples"}
         </button>
       </div>
+      <Drawer
+        direction="right"
+        isOpen={examplesOpen}
+        onClose={() => setExamplesOpen(false)}
+        className="examples"
+      >
+        <div className="color-picker--examples">
+          <button
+            className="btn color-picker--close"
+            onClick={() => setExamplesOpen(false)}
+          >
+            Close
+          </button>
+          {examples.map((example, index) => {
+            return (
+              <div key={index} className="color-picker--example">
+                <Photo photo={example.photo} />
+                <div className="flex flex-wrap gap-6">
+                  {example.colors?.map((option, index) => {
+                    return <Swatch key={option.hex} data={option} />;
+                  })}
+                </div>
+                <button
+                  className="color-picker--add-colors"
+                  onClick={() => handleExampleClicked(example.colors)}
+                >
+                  Use colors
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      </Drawer>
+
     </>
   );
 });
