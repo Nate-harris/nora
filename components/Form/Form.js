@@ -53,12 +53,8 @@ const Page = ({ page, data }) => {
     case 1:
       return <NamePage data={data} />;
     case 2:
-      return <ColorPage data={data} />;
-    case 3:
-      return <FramePage data={data} />;
-    case 4:
       return <ShippingPage data={data} />;
-    case 5:
+    case 3:
       return <OrderSummary data={data} />;
     default:
       return null;
@@ -66,17 +62,6 @@ const Page = ({ page, data }) => {
 };
 
 export default observer(({ data, step }) => {
-  const { formStep } = useUIStore();
-  const {
-    formData,
-    updateLetterPrice,
-    updateLetterMinimum,
-    updateColorMinimum,
-    updateColorMaximum,
-  } = useDataStore();
-
-  const router = useRouter();
-
   const isSmall = useIsSmall();
 
   let formScreen = null;
