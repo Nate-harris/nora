@@ -22,7 +22,7 @@ const StatusBar = observer(({ step, hasInformation }) => {
   const steps = [
     { label: "Name", completed: isNameCompleted, disabled: !isNameCompleted },
     {
-      label: "Shipping",
+      label: "Upgrade",
       completed: isShippingCompleted,
       disabled: !isShippingCompleted,
     },
