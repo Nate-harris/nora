@@ -79,15 +79,16 @@ export default observer(({ name, scale, onClick }) => {
   const LETTER_HEIGHT = 288.25;
   const PADDING = 17;
   // small breakpoint from tailwind https://tailwindcss.com/docs/responsive-design
-  const LETTER_SPACING = 3;
+  const LETTER_SPACING = 20;
   const LETTER_SCALE = 0.445;
+  const STROKE = 8.4;
 
   const getBoxWidth = (name) => {
     if (name.length === 0) return 300;
     return (
       PADDING * 2 +
       LETTER_SCALE *
-        (LETTER_WIDTH * name.length + LETTER_SPACING * (name.length - 1))
+      (LETTER_WIDTH * name.length + LETTER_SPACING * (name.length - 1))
     );
   };
 
@@ -106,18 +107,17 @@ export default observer(({ name, scale, onClick }) => {
             console.error("No letter data found for", letter);
           }
           const scale = `scale(${LETTER_SCALE})`;
-          const translate = `translate(${
-            PADDING / LETTER_SCALE + i * LETTER_SPACING + i * LETTER_WIDTH
-          } ${PADDING / LETTER_SCALE})`;
+          const translate = `translate(${PADDING / LETTER_SCALE + i * LETTER_SPACING + i * LETTER_WIDTH
+            } ${PADDING / LETTER_SCALE})`;
 
           const hole = (
             <mask id={`${letter}_${i}`} key={`${letter}-${i}`}>
               <rect
                 fill="white"
-                x="0"
-                y="0"
-                width={LETTER_WIDTH}
-                height={LETTER_HEIGHT}
+                x={-PADDING}
+                y={-PADDING}
+                width={LETTER_WIDTH + PADDING * 2}
+                height={LETTER_HEIGHT + PADDING * 2}
                 key={`${letter}-${i}-op-def`}
               />
               {letterData.holes.map((h, j) => (
@@ -136,29 +136,45 @@ export default observer(({ name, scale, onClick }) => {
               <path
                 d={p.d}
                 stroke="currentColor"
-                stroke-width={10.4}
+                strokeWidth={STROKE}
                 mask={`url(#${letter}_${i})`}
                 transform={`${scale} ${translate}`}
               />
             );
           });
+          const strokes = letterData.holes.map((h, i) => {
+            return (
+              <circle
+                r={h.r}
+                cx={h.cx}
+                cy={h.cy}
+                fill="none"
+                stroke="black"
+                strokeWidth={STROKE}
+                key={`${letter}-${i}-stroke`}
+                transform={`${scale} ${translate}`}
+              />
+            )
+          });
           return {
             hole,
             paths,
+            strokes
           };
         })
         .reduce(
           (m, e) => ({
             holes: [...m.holes, e.hole],
-            paths: [...m.paths, ...e.paths].map((p, i) => ({
+            paths: [...m.paths, ...e.paths.map((p, i) => ({
               ...p,
               props: {
                 ...p.props,
                 fill: colors.length ? colors[i % colors.length].hex : "#fff",
               },
-            })),
+            }))],
+            strokes: [...m.strokes, e.strokes]
           }),
-          { holes: [], paths: [] }
+          { holes: [], paths: [], strokes: [] }
         )
     );
   }, [svgSrc, colors.length, name]);
@@ -185,6 +201,7 @@ export default observer(({ name, scale, onClick }) => {
       </mask>
       {svgData && svgData.holes}
       {svgData && svgData.paths}
+      {svgData && svgData.strokes}
       {name.length > 0 && (
         <motion.g
           className="blinky-line"
