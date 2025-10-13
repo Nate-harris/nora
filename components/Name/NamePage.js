@@ -16,8 +16,6 @@ import definedLetters from "./definedLetters";
 import Swatch from "../Color/Swatch";
 import SwatchCount from "../Color/SwatchCount";
 
-
-
 const variants = {
   in: {
     opacity: 1,
@@ -33,7 +31,6 @@ export default observer(({ data }) => {
   const {
     color: { colors, examples },
   } = data;
-
 
   const inputRef = useRef();
   const scale = useMotionValue(1);
@@ -76,7 +73,6 @@ export default observer(({ data }) => {
         console.log("TODO: notify user of unsupported character");
       }
       e.target.value = name;
-      console.log("Name changed to:", name);
     },
     [name]
   );
@@ -111,7 +107,6 @@ export default observer(({ data }) => {
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            console.log(inputRef.current);
             inputRef.current.focus();
           }}
           name={name}
@@ -163,7 +158,6 @@ export default observer(({ data }) => {
           })}
         </div>
       </Drawer>
-
     </>
   );
 });
