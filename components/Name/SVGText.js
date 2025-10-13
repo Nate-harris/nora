@@ -88,7 +88,6 @@ export default observer(({ name, scale, onClick }) => {
             return (
               <path
                 d={p.d}
-                key={`path-${i}`}
                 stroke="black"
                 strokeWidth={STROKE}
                 mask={`url(#${letter}_${i})`}
@@ -123,6 +122,7 @@ export default observer(({ name, scale, onClick }) => {
               ...p,
               props: {
                 ...p.props,
+                key: `path-${i}`,
                 fill: colors.length ? colors[i % colors.length].hex : "#fff",
               },
             })),
