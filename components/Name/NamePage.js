@@ -108,7 +108,6 @@ export default observer(({ data }) => {
             e.preventDefault();
             e.stopPropagation();
             inputRef.current.focus();
-            console.log(inputRef.current.value);
           }}
           name={name}
         ></SVGText>
