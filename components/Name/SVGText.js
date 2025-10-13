@@ -7,26 +7,12 @@ import { useEffect, useRef, useState } from "react";
 import { use } from "react";
 import definedLetters from "./definedLetters";
 
-const borderWidthFromWindowWidth = (windowWidth) =>
-  windowWidth > 640 ? 12 : 24;
-
 export default observer(({ name, scale, onClick }) => {
   const { colors } = useDataStore();
   const r = useRef();
   const [svgSrc, setSvgSrc] = useState(null);
   const [svgData, setSvgData] = useState(null);
-  const [borderWidth, setBorderWidth] = useState(
-    borderWidthFromWindowWidth(window.screen.width)
-  );
-
-  // sets the border width based on the window width
-  useEffect(() => {
-    const updateSize = () => {
-      setBorderWidth(borderWidthFromWindowWidth(window.innerWidth));
-    };
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
+  const borderWidth = 12;
 
   // fetches the letters json file from public/SVG/letters/letters.json
   useEffect(() => {
@@ -36,7 +22,6 @@ export default observer(({ name, scale, onClick }) => {
         setSvgSrc(json.letters);
       });
   }, []);
-
 
   if (name.length === 0) {
     name = "NAME";
@@ -55,7 +40,7 @@ export default observer(({ name, scale, onClick }) => {
     return (
       PADDING * 2 +
       LETTER_SCALE *
-      (LETTER_WIDTH * name.length + LETTER_SPACING * (name.length - 1))
+        (LETTER_WIDTH * name.length + LETTER_SPACING * (name.length - 1))
     );
   };
 
@@ -74,8 +59,9 @@ export default observer(({ name, scale, onClick }) => {
             console.error("No letter data found for", letter);
           }
           const scale = `scale(${LETTER_SCALE})`;
-          const translate = `translate(${PADDING / LETTER_SCALE + i * LETTER_SPACING + i * LETTER_WIDTH
-            } ${PADDING / LETTER_SCALE})`;
+          const translate = `translate(${
+            PADDING / LETTER_SCALE + i * LETTER_SPACING + i * LETTER_WIDTH
+          } ${PADDING / LETTER_SCALE})`;
 
           const hole = (
             <mask id={`${letter}_${i}`} key={`${letter}-${i}`}>
@@ -98,10 +84,11 @@ export default observer(({ name, scale, onClick }) => {
               ))}
             </mask>
           );
-          const paths = letterData.paths.map((p) => {
+          const paths = letterData.paths.map((p, i) => {
             return (
               <path
                 d={p.d}
+                key={`path-${i}`}
                 stroke="black"
                 strokeWidth={STROKE}
                 mask={`url(#${letter}_${i})`}
@@ -121,12 +108,12 @@ export default observer(({ name, scale, onClick }) => {
                 key={`${letter}-${i}-stroke`}
                 transform={`${scale} ${translate}`}
               />
-            )
+            );
           });
           return {
             hole,
             paths,
-            strokes
+            strokes,
           };
         })
         .reduce(
@@ -139,7 +126,7 @@ export default observer(({ name, scale, onClick }) => {
                 fill: colors.length ? colors[i % colors.length].hex : "#fff",
               },
             })),
-            strokes: [...m.strokes, e.strokes]
+            strokes: [...m.strokes, e.strokes],
           }),
           { holes: [], paths: [], strokes: [] }
         )
@@ -155,11 +142,49 @@ export default observer(({ name, scale, onClick }) => {
   return (
     <>
       <div>
-        <img id="left" src="/frame_side.png" style={{ position: "absolute", height: height + 2 * borderWidth, width: leftrightwidth, top: 0 }}></img>
-        <img id="right" src="/frame_side.png" style={{ position: "absolute", height: height + 2 * borderWidth, right: 0, width: leftrightwidth, transform: "rotate(180deg)" }}></img >
-        <img id="top" src="/frame-top.jpeg" style={{ left: borderWidth - frame_join_offset - 2, position: "absolute", height: leftrightwidth, width: getBoxWidth(name) + 2 * frame_join_offset + 2 }}></img >
-        <img id="bottom" src="/frame-top.jpeg" style={{ left: borderWidth - frame_join_offset - 1, position: "absolute", height: leftrightwidth, width: getBoxWidth(name) + 2 * frame_join_offset + 2, bottom: 0 }}></img >
-      </div >
+        <img
+          id="left"
+          src="/frame_side.png"
+          style={{
+            position: "absolute",
+            height: height + 2 * borderWidth,
+            width: leftrightwidth,
+            top: 0,
+          }}
+        ></img>
+        <img
+          id="right"
+          src="/frame_side.png"
+          style={{
+            position: "absolute",
+            height: height + 2 * borderWidth,
+            right: 0,
+            width: leftrightwidth,
+            transform: "rotate(180deg)",
+          }}
+        ></img>
+        <img
+          id="top"
+          src="/frame-top.jpeg"
+          style={{
+            left: borderWidth - frame_join_offset - 2,
+            position: "absolute",
+            height: leftrightwidth,
+            width: getBoxWidth(name) + 2 * frame_join_offset + 2,
+          }}
+        ></img>
+        <img
+          id="bottom"
+          src="/frame-top.jpeg"
+          style={{
+            left: borderWidth - frame_join_offset - 1,
+            position: "absolute",
+            height: leftrightwidth,
+            width: getBoxWidth(name) + 2 * frame_join_offset + 2,
+            bottom: 0,
+          }}
+        ></img>
+      </div>
       <svg
         tabIndex={-1}
         width={getBoxWidth(name)}
@@ -170,20 +195,17 @@ export default observer(({ name, scale, onClick }) => {
           borderWidth: `${borderWidth}px`,
           height,
           paddingBottom: 0,
-          background: "url(\"/oak_BG.jpeg\")",
+          background: 'url("/oak_BG.jpeg")',
         }}
         onClick={onClick}
       >
-        <mask id="test">
-          <circle cx="50" cy="50" r="50" />
-        </mask>
         {svgData && svgData.holes}
         {svgData && svgData.paths}
         {svgData && svgData.strokes}
         {name.length > 0 && (
           <motion.g
             className="blinky-line"
-            stroke="black"
+            stroke="white"
             strokeWidth={2}
             animate={{ opacity: [0.3, 1, 0.3] }}
             transition={{ duration: 1, repeat: Infinity }}
@@ -196,6 +218,7 @@ export default observer(({ name, scale, onClick }) => {
             ></line>
           </motion.g>
         )}
-      </svg></>
+      </svg>
+    </>
   );
 });
