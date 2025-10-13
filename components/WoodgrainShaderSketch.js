@@ -10,7 +10,9 @@ const Sketch = dynamic(() => import("react-p5").then((mod) => mod.default), {
 });
 
 const getRefValue = (val, fallback) =>
-  val && typeof val === "object" && "current" in val ? val.current : val ?? fallback;
+  val && typeof val === "object" && "current" in val
+    ? val.current
+    : val ?? fallback;
 
 const WoodgrainShaderSketch = ({
   className,

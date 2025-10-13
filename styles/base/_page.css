@@ -5,6 +5,16 @@ html {
   }
 }
 
+main {
+  overflow: clip;
+}
+
+.p5Canvas {
+  z-index: -11;
+  position: fixed;
+  top:0;
+}
+
 body {
   @apply flex flex-col;
 }
