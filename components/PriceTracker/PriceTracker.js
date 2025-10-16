@@ -81,14 +81,11 @@ const PriceTracker = observer(({ step }) => {
     formData,
     name,
     colors,
-    frame,
     shipping,
     letterPrice,
-    framePrice,
     shippingPrice,
     isNameCompleted,
     isColorCompleted,
-    isFrameCompleted,
     isShippingCompleted,
     totalPrice,
     minNumLetters,
@@ -200,23 +197,22 @@ const PriceTracker = observer(({ step }) => {
                     </span>
                   </div>
                 )}
-                {isFrameCompleted && (
-                  <div className="price-tracker--row">
-                    <span className="price-tracker--row--label">
-                      <img
-                        className="min-w-[120px]"
-                        src={imageUrlFor(frame.image).width(120)}
-                        alt="Nora frame"
-                      />
-                    </span>
-                    <span className="price-tracker--row--value">
-                      {formatCurrencyString({
-                        value: framePrice,
-                        currency: "USD",
-                      })}
-                    </span>
-                  </div>
-                )}
+
+                <div className="price-tracker--row">
+                  <span className="price-tracker--row--label">
+                    <img
+                      className="min-w-[120px]"
+                      src="/OAK-frame.jpg"
+                      alt="Nora frame"
+                    />
+                  </span>
+                  <span className="price-tracker--row--value">
+                    {formatCurrencyString({
+                      value: 0,
+                      currency: "USD",
+                    })}
+                  </span>
+                </div>
                 {isShippingCompleted && (
                   <div className="price-tracker--row">
                     <span className="price-tracker--row--label">

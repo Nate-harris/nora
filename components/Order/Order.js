@@ -60,13 +60,11 @@ const Order = observer(({ data }) => {
     setFormData,
     name,
     colors,
-    frame,
     shipping,
     additionalInfo,
     minNumLetters,
     minNumColors,
     isColorCompleted,
-    isFrameCompleted,
     isShippingCompleted,
   } = useDataStore();
   const { introInfoModalActive, showIntroInfoModal, hideIntroInfoModal } =
@@ -91,7 +89,6 @@ const Order = observer(({ data }) => {
         JSON.stringify({
           name,
           colors,
-          frame,
           shipping,
           additionalInfo,
         }),
@@ -102,15 +99,7 @@ const Order = observer(({ data }) => {
         }
       );
     }
-  }, [
-    router.isReady,
-    setCookie,
-    name,
-    colors,
-    frame,
-    shipping,
-    additionalInfo,
-  ]);
+  }, [router.isReady, setCookie, name, colors, shipping, additionalInfo]);
 
   /*
    * On initial mount, set the query state to 0
@@ -137,10 +126,9 @@ const Order = observer(({ data }) => {
         if (
           cookie.nora.name.length >= minNumLetters &&
           cookie.nora.colors.length >= minNumColors &&
-          cookie.nora.frame !== null &&
           cookie.nora.shipping !== null
         ) {
-          router.push(`/order?step=5`, undefined, { shallow: true });
+          router.push(`/order?step=3`, undefined, { shallow: true });
         } else {
           router.push(`/order?step=1`, undefined, { shallow: true });
         }
