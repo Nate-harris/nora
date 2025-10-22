@@ -7,6 +7,17 @@ import { useEffect, useRef, useState } from "react";
 import { use } from "react";
 import definedLetters from "./definedLetters";
 
+const getLetterData = (svgSource, letter) => {
+  if (letter === "&") {
+    letter = "ampersand";
+  }
+  const letterData = svgSource[letter];
+  if (!letterData) {
+    console.error("No letter data found for", nameLetter);
+  }
+  return letterData;
+};
+
 export default observer(({ name, scale, onClick }) => {
   const { colors } = useDataStore();
   const r = useRef();
@@ -50,28 +61,25 @@ export default observer(({ name, scale, onClick }) => {
       name
         .split("")
         .map((l) => l.toUpperCase())
-        .map((letter, i) => {
-          if (letter === "&") {
-            letter = "ampersand";
-          }
-          const letterData = svgSrc[letter];
-          if (!letterData) {
-            console.error("No letter data found for", letter);
-          }
+        .map((nameLetter, i) => {
+          const letterData = getLetterData(svgSrc, nameLetter);
           const scale = `scale(${LETTER_SCALE})`;
           const translate = `translate(${
             PADDING / LETTER_SCALE + i * LETTER_SPACING + i * LETTER_WIDTH
           } ${PADDING / LETTER_SCALE})`;
 
           const hole = (
-            <mask id={`${letter}_${i}`} key={`${letter}-${i}`}>
+            <mask
+              id={`${nameLetter}_mask_${i}`}
+              key={`${nameLetter}-mask-${i}`}
+            >
               <rect
                 fill="white"
                 x={-PADDING}
                 y={-PADDING}
                 width={LETTER_WIDTH + PADDING * 2}
                 height={LETTER_HEIGHT + PADDING * 2}
-                key={`${letter}-${i}-op-def`}
+                key={`${nameLetter}-mask-op-def-${i}`}
               />
               {letterData.holes.map((h, j) => (
                 <circle
@@ -79,18 +87,19 @@ export default observer(({ name, scale, onClick }) => {
                   cy={h.cy}
                   r={h.r}
                   fill="black"
-                  key={`${letter}-${j}`}
+                  key={`${nameLetter}-hole-${i}-${j}`}
                 />
               ))}
             </mask>
           );
-          const paths = letterData.paths.map((p, i) => {
+          const paths = letterData.paths.map((p, j) => {
             return (
               <path
                 d={p.d}
                 stroke="black"
                 strokeWidth={STROKE}
-                mask={`url(#${letter}_${i})`}
+                mask={`url(#${nameLetter}_mask_${i})`}
+                key={`path-${nameLetter}-${i}-${j}`}
                 transform={`${scale} ${translate}`}
               />
             );
@@ -104,7 +113,7 @@ export default observer(({ name, scale, onClick }) => {
                 fill="none"
                 stroke="black"
                 strokeWidth={STROKE}
-                key={`${letter}-${i}-stroke`}
+                key={`${nameLetter}-${i}-stroke`}
                 transform={`${scale} ${translate}`}
               />
             );
@@ -131,7 +140,7 @@ export default observer(({ name, scale, onClick }) => {
           { holes: [], paths: [], strokes: [] }
         )
     );
-  }, [svgSrc, colors.length, name]);
+  }, [svgSrc, colors.length, name, name.length]);
 
   const lineX = getBoxWidth(name) - PADDING / 2;
 
