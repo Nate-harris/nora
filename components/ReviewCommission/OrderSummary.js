@@ -42,7 +42,6 @@ export default observer(({ data }) => {
   const { status } = router.query;
   const {
     name,
-    frame,
     colors,
     shipping,
     additionalInfo,
@@ -71,9 +70,8 @@ export default observer(({ data }) => {
     const colorsFormatString = colors
       .map((color) => `${color.title.toLowerCase()}`)
       .join(", ");
-    const frameFormatString = frame.type.toLowerCase();
 
-    let description = `In ${colorsFormatString}. With a ${frameFormatString} frame. Arriving in ${shipping}.`;
+    let description = `In ${colorsFormatString}. With a red oak frame. Arriving in ${shipping}.`;
 
     if (additionalInfo.length > 0) {
       description += ` With added note: "${additionalInfo}".`;
@@ -86,7 +84,7 @@ export default observer(({ data }) => {
       quantity: 1,
       metadata: {
         Name: name,
-        Frame: frame.type,
+        Frame: "Red Oak",
         Colors: colors
           .map((color) => `${color.title}: ${color.hex}`)
           .join(", "),
@@ -158,11 +156,9 @@ export default observer(({ data }) => {
 
         <div className="order-summary--row">
           Will have a
-          {frame && (
-            <div className="order-summary--frame">
-              <Photo photo={frame.image} width={160} alt={frame.name} />
-            </div>
-          )}
+          <div className="order-summary--frame">
+            <img src="/OAK-frame.jpg" width={160} alt="Red Oak Frame" />
+          </div>
         </div>
         <div className="order-summary--row">
           {additionalInfo.length > 0
