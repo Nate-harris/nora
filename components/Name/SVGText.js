@@ -4,8 +4,6 @@ import { motion } from "framer-motion";
 import { observer } from "mobx-react-lite";
 import { useDataStore } from "../../providers/RootStoreProvider";
 import { useEffect, useRef, useState } from "react";
-import { use } from "react";
-import definedLetters from "./definedLetters";
 
 const getLetterData = (svgSource, letter) => {
   if (letter === "&") {
