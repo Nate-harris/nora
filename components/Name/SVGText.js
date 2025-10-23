@@ -23,6 +23,7 @@ export default observer(({ name, scale, onClick }) => {
   const r = useRef();
   const [svgSrc, setSvgSrc] = useState(null);
   const [svgData, setSvgData] = useState(null);
+  const [letterScale, setLetterScale] = useState(0.445);
   const borderWidth = 12;
 
   // fetches the letters json file from public/SVG/letters/letters.json
@@ -43,14 +44,13 @@ export default observer(({ name, scale, onClick }) => {
   const PADDING = 8;
   // small breakpoint from tailwind https://tailwindcss.com/docs/responsive-design
   const LETTER_SPACING = 5;
-  const LETTER_SCALE = 0.445;
   const STROKE = 4;
 
   const getBoxWidth = (name) => {
     if (name.length === 0) return 300;
     return (
       PADDING * 2 +
-      LETTER_SCALE *
+      letterScale *
         (LETTER_WIDTH * name.length + LETTER_SPACING * (name.length - 1))
     );
   };
@@ -63,10 +63,12 @@ export default observer(({ name, scale, onClick }) => {
         .map((l) => l.toUpperCase())
         .map((nameLetter, i) => {
           const letterData = getLetterData(svgSrc, nameLetter);
-          const scale = `scale(${LETTER_SCALE})`;
+          const scale = `scale(${letterScale})`;
+          // we need to offset the letters by the padding amt, which should be
+          // constant -- so we divide by letterScale
           const translate = `translate(${
-            PADDING / LETTER_SCALE + i * LETTER_SPACING + i * LETTER_WIDTH
-          } ${PADDING / LETTER_SCALE})`;
+            PADDING / letterScale + i * LETTER_SPACING + i * LETTER_WIDTH
+          } ${PADDING / letterScale})`;
 
           const hole = (
             <mask
@@ -144,7 +146,7 @@ export default observer(({ name, scale, onClick }) => {
 
   const lineX = getBoxWidth(name) - PADDING / 2;
 
-  const height = LETTER_HEIGHT * LETTER_SCALE + PADDING * 2;
+  const height = LETTER_HEIGHT * letterScale + PADDING * 2;
   const frame_join_offset = 7;
   const leftrightwidth = 14;
 
@@ -216,14 +218,14 @@ export default observer(({ name, scale, onClick }) => {
             className="blinky-line"
             stroke="white"
             strokeWidth={2}
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 1, repeat: Infinity }}
+            animate={{ opacity: [0.3, 1, 0.0] }}
+            transition={{ duration: 0.6, repeat: Infinity }}
           >
             <line
               x1={lineX}
               y1={PADDING}
               x2={lineX}
-              y2={LETTER_HEIGHT * LETTER_SCALE + PADDING}
+              y2={LETTER_HEIGHT * letterScale + PADDING}
             ></line>
           </motion.g>
         )}
