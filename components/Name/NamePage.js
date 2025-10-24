@@ -8,13 +8,15 @@ import SVGText from "@/components/Name/SVGText";
 import Drawer from "@/components/drawer";
 import Photo from "../Photo";
 import { useEffect, useRef, useState } from "react";
-import useWindowSize from "../../utils/useWindowSize";
 import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
 import { useIsSmall } from "../../utils/useMediaQueries";
 import { useCallback } from "react";
 import definedLetters from "./definedLetters";
 import Swatch from "../Color/Swatch";
 import SwatchCount from "../Color/SwatchCount";
+import { useWindowSize } from "@/utils/helpers";
+import { toast } from "react-toastify";
+import { useTheme } from "next-themes";
 
 const variants = {
   in: {
@@ -31,6 +33,7 @@ export default observer(({ data }) => {
   const {
     color: { colors, examples },
   } = data;
+  const { theme } = useTheme();
 
   const inputRef = useRef();
   const scale = useMotionValue(1);
@@ -63,15 +66,43 @@ export default observer(({ data }) => {
 
   const handleChange = useCallback(
     (e) => {
-      let lastCharAdded = e.target.value.slice(-1);
-      const name = definedLetters.includes(lastCharAdded.toUpperCase())
+      if (e.target.value == "") {
+        setName("");
+        return;
+      }
+      const lastCharAdded = e.target.value.slice(-1);
+      const lastCharacterIsValid = definedLetters.includes(
+        lastCharAdded.toUpperCase()
+      );
+      if (!lastCharacterIsValid) {
+        console.log(lastCharAdded);
+        toast.warn("Sorry, A-Z and the '&' only", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          theme,
+        });
+      }
+      const name = lastCharacterIsValid
         ? e.target.value.toUpperCase()
         : e.target.value.slice(0, -1).toUpperCase();
+
+      if (name.length > 8) {
+        toast.warn("We can only make puzzles up to 8 characters long.", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          theme,
+        });
+        const trimmed = name.slice(0, 8);
+        setName(trimmed);
+        e.target.value = trimmed;
+        return;
+      }
       setName(name);
 
-      if (name.length < e.target.value.length) {
-        console.log("TODO: notify user of unsupported character");
-      }
       e.target.value = name;
     },
     [name]
