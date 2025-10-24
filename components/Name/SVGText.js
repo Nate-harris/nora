@@ -221,6 +221,7 @@ export default observer(({ name, scale, onClick }) => {
           height,
           paddingBottom: 0,
           background: 'url("/oak_BG.jpeg")',
+          borderColor: "#a06c47",
         }}
         onClick={onClick}
       >
