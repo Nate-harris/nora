@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import { observer } from "mobx-react-lite";
 import { useDataStore } from "../../providers/RootStoreProvider";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useWindowSize } from "@/utils/helpers";
 
 const getLetterData = (svgSource, letter) => {
   if (letter === "&") {
@@ -22,6 +23,8 @@ export default observer(({ name, scale, onClick }) => {
   const [svgSrc, setSvgSrc] = useState(null);
   const [svgData, setSvgData] = useState(null);
   const [letterScale, setLetterScale] = useState(0.445);
+  const windowSize = useWindowSize();
+
   const borderWidth = 12;
 
   // fetches the letters json file from public/SVG/letters/letters.json
@@ -43,15 +46,29 @@ export default observer(({ name, scale, onClick }) => {
   // small breakpoint from tailwind https://tailwindcss.com/docs/responsive-design
   const LETTER_SPACING = 5;
   const STROKE = 4;
+  const MIN_BOX_PADDING = 50;
+  const MAX_BOX_PADDING = 100;
+  const MAX_SCALE = 0.6;
 
-  const getBoxWidth = (name) => {
-    if (name.length === 0) return 300;
-    return (
-      PADDING * 2 +
-      letterScale *
-        (LETTER_WIDTH * name.length + LETTER_SPACING * (name.length - 1))
+  const x = LETTER_WIDTH * name.length + LETTER_SPACING * (name.length - 1);
+  // cbw = c + L * x
+  const calculatedBoxWidth = PADDING * 2 + letterScale * x;
+
+  const isTooWide = calculatedBoxWidth > windowSize.width - MIN_BOX_PADDING;
+  const isTooSmall = calculatedBoxWidth < windowSize.width - MAX_BOX_PADDING;
+
+  if (isTooWide || isTooSmall) {
+    // algebra, solve for L above
+    const avgBoxPadding = (MIN_BOX_PADDING + MAX_BOX_PADDING) / 2;
+    const newScale = Math.min(
+      (windowSize.width - avgBoxPadding - PADDING * 2) / x,
+      MAX_SCALE
     );
-  };
+
+    if (Math.abs(newScale - letterScale) > 0.01) {
+      setLetterScale(newScale);
+    }
+  }
 
   useEffect(() => {
     if (!svgSrc) return;
@@ -140,12 +157,12 @@ export default observer(({ name, scale, onClick }) => {
           { holes: [], paths: [], strokes: [] }
         )
     );
-  }, [svgSrc, colors.length, name, name.length]);
+  }, [svgSrc, colors.length, name, name.length, letterScale]);
 
-  const lineX = getBoxWidth(name) - PADDING / 2;
+  const lineX = calculatedBoxWidth - PADDING / 2;
 
   const height = LETTER_HEIGHT * letterScale + PADDING * 2;
-  const frame_join_offset = 7;
+  const frame_join_offset = 7 * letterScale;
   const leftrightwidth = 14;
 
   return (
@@ -178,8 +195,8 @@ export default observer(({ name, scale, onClick }) => {
           style={{
             left: borderWidth - frame_join_offset - 2,
             position: "absolute",
-            height: leftrightwidth,
-            width: getBoxWidth(name) + 2 * frame_join_offset + 2,
+            height: leftrightwidth + frame_join_offset,
+            width: calculatedBoxWidth + 2 * frame_join_offset + 2,
           }}
         ></img>
         <img
@@ -189,18 +206,17 @@ export default observer(({ name, scale, onClick }) => {
             left: borderWidth - frame_join_offset - 1,
             position: "absolute",
             height: leftrightwidth,
-            width: getBoxWidth(name) + 2 * frame_join_offset + 2,
+            width: calculatedBoxWidth + 2 * frame_join_offset + 2,
             bottom: 0,
           }}
         ></img>
       </div>
       <svg
         tabIndex={-1}
-        width={getBoxWidth(name)}
+        width={calculatedBoxWidth}
         className="letters"
         ref={r}
         style={{
-          ...scale,
           borderWidth: `${borderWidth}px`,
           height,
           paddingBottom: 0,
