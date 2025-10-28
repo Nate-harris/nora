@@ -43,7 +43,6 @@ export default observer(({ name, onClick }) => {
   const LETTER_WIDTH = 162.25;
   const LETTER_HEIGHT = 288.25;
   const PADDING = 8;
-  // small breakpoint from tailwind https://tailwindcss.com/docs/responsive-design
   const LETTER_SPACING = 5;
   const STROKE = 4;
   const MIN_BOX_PADDING = 50;
@@ -104,6 +103,7 @@ export default observer(({ name, onClick }) => {
                   cy={h.cy}
                   r={h.r}
                   fill="black"
+                  // small breakpoint from tailwind https://tailwindcss.com/docs/responsive-design
                   key={`${nameLetter}-hole-${i}-${j}`}
                 />
               ))}
@@ -173,8 +173,8 @@ export default observer(({ name, onClick }) => {
     : calculatedBoxWidth - PADDING / 2;
 
   const height = LETTER_HEIGHT * letterScale + PADDING * 2;
-  const frame_join_offset = 7 * letterScale;
-  const leftrightwidth = 14;
+  const isSm = windowSize.width <= 640;
+  const frame_join_offset = isSm ? 18 * letterScale : 12 * letterScale;
 
   return (
     <>
@@ -185,8 +185,9 @@ export default observer(({ name, onClick }) => {
           style={{
             position: "absolute",
             height: height + 2 * borderWidth,
-            width: leftrightwidth,
+            width: borderWidth,
             top: 0,
+            left: isSm ? 2 : 0,
           }}
         ></img>
         <img
@@ -195,8 +196,8 @@ export default observer(({ name, onClick }) => {
           style={{
             position: "absolute",
             height: height + 2 * borderWidth,
-            right: 0,
-            width: leftrightwidth,
+            right: isSm ? 3 : 0,
+            width: isSm ? borderWidth * 1 : borderWidth,
             transform: "rotate(180deg)",
           }}
         ></img>
@@ -206,7 +207,7 @@ export default observer(({ name, onClick }) => {
           style={{
             left: borderWidth - frame_join_offset - 2,
             position: "absolute",
-            height: leftrightwidth + frame_join_offset,
+            height: borderWidth + frame_join_offset,
             width: calculatedBoxWidth + 2 * frame_join_offset + 2,
           }}
         ></img>
@@ -216,7 +217,7 @@ export default observer(({ name, onClick }) => {
           style={{
             left: borderWidth - frame_join_offset - 1,
             position: "absolute",
-            height: leftrightwidth,
+            height: borderWidth + frame_join_offset,
             width: calculatedBoxWidth + 2 * frame_join_offset + 2,
             bottom: 0,
           }}
