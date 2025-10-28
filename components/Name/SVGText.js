@@ -36,7 +36,8 @@ export default observer(({ name, scale, onClick }) => {
       });
   }, []);
 
-  if (name.length === 0) {
+  const usingPlaceholder = name.length === 0;
+  if (usingPlaceholder) {
     name = "NAME";
   }
 
@@ -144,22 +145,33 @@ export default observer(({ name, scale, onClick }) => {
         .reduce(
           (m, e) => ({
             holes: [...m.holes, e.hole],
+            // we want the colors to sequence over all blocks, not just one
+            // letter, and each path needs its own key
             paths: [...m.paths, ...e.paths].map((p, i) => ({
               ...p,
               props: {
                 ...p.props,
+                opacity: usingPlaceholder ? 0.2 : 1,
                 key: `path-${i}`,
                 fill: colors.length ? colors[i % colors.length].hex : "#fff",
               },
             })),
-            strokes: [...m.strokes, e.strokes],
+            strokes: [...m.strokes, ...e.strokes].map((h) => ({
+              ...h,
+              props: {
+                ...h.props,
+                opacity: usingPlaceholder ? 0.2 : 1,
+              },
+            })),
           }),
           { holes: [], paths: [], strokes: [] }
         )
     );
   }, [svgSrc, colors.length, name, name.length, letterScale]);
 
-  const lineX = calculatedBoxWidth - PADDING / 2;
+  const lineX = usingPlaceholder
+    ? calculatedBoxWidth / 2
+    : calculatedBoxWidth - PADDING / 2;
 
   const height = LETTER_HEIGHT * letterScale + PADDING * 2;
   const frame_join_offset = 7 * letterScale;
