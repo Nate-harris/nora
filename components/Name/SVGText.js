@@ -121,7 +121,7 @@ export default observer(({ name, onClick }) => {
               />
             );
           });
-          const strokes = letterData.holes.map((h, i) => {
+          const strokes = letterData.holes.map((h, j) => {
             return (
               <circle
                 r={h.r}
@@ -130,7 +130,7 @@ export default observer(({ name, onClick }) => {
                 fill="none"
                 stroke="black"
                 strokeWidth={STROKE}
-                key={`${nameLetter}-${i}-stroke`}
+                key={`${nameLetter}-${i}-${j}-stroke`}
                 transform={`${scale} ${translate}`}
               />
             );
