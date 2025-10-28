@@ -1,13 +1,11 @@
 .menu {
   @apply fixed inset-0 z-10 flex justify-center items-center overflow-hidden;
   &--overlay {
-    @apply move-bg sm:animate-none absolute inset-0 -z-1;
+    @apply move-bg absolute inset-0 -z-1;
 
-    @media (max-width: 768px) {
-      background-image: url("/squiggle.svg");
-      background-size: 500px 150px;
-      background-repeat: repeat;
-    }
+    background-image: url("/squiggle.svg");
+    background-size: 500px 150px;
+    background-repeat: repeat;
   }
   &--container {
     @apply flex flex-col gap-y-48;
