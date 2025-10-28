@@ -17,9 +17,8 @@ const getLetterData = (svgSource, letter) => {
   return letterData;
 };
 
-export default observer(({ name, scale, onClick }) => {
+export default observer(({ name, onClick }) => {
   const { colors } = useDataStore();
-  const r = useRef();
   const [svgSrc, setSvgSrc] = useState(null);
   const [svgData, setSvgData] = useState(null);
   const [letterScale, setLetterScale] = useState(0.445);
@@ -227,7 +226,6 @@ export default observer(({ name, scale, onClick }) => {
         tabIndex={-1}
         width={calculatedBoxWidth}
         className="letters"
-        ref={r}
         style={{
           borderWidth: `${borderWidth}px`,
           height,
