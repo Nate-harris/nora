@@ -133,7 +133,7 @@ export default observer(({ data }) => {
   return (
     <>
       <div className="xl-input">
-        <input ref={inputRef} onChange={handleChange}></input>
+        <input ref={inputRef} onChange={handleChange} value={name}></input>
         <SVGText
           onClick={(e) => {
             e.preventDefault();
