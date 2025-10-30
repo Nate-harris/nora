@@ -3,15 +3,27 @@
 import { motion } from "framer-motion";
 import { observer } from "mobx-react-lite";
 import { useDataStore } from "../../providers/RootStoreProvider";
-import { useEffect, useRef, useState } from "react";
-import { use } from "react";
-import definedLetters from "./definedLetters";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useWindowSize } from "@/utils/helpers";
 
-export default observer(({ name, scale, onClick }) => {
+const getLetterData = (svgSource, letter) => {
+  if (letter === "&") {
+    letter = "ampersand";
+  }
+  const letterData = svgSource[letter];
+  if (!letterData) {
+    console.error("No letter data found for", nameLetter);
+  }
+  return letterData;
+};
+
+export default observer(({ name, onClick }) => {
   const { colors } = useDataStore();
-  const r = useRef();
   const [svgSrc, setSvgSrc] = useState(null);
   const [svgData, setSvgData] = useState(null);
+  const [letterScale, setLetterScale] = useState(0.445);
+  const windowSize = useWindowSize();
+
   const borderWidth = 12;
 
   // fetches the letters json file from public/SVG/letters/letters.json
@@ -23,26 +35,39 @@ export default observer(({ name, scale, onClick }) => {
       });
   }, []);
 
-  if (name.length === 0) {
+  const usingPlaceholder = name.length === 0;
+  if (usingPlaceholder) {
     name = "NAME";
   }
 
   const LETTER_WIDTH = 162.25;
   const LETTER_HEIGHT = 288.25;
   const PADDING = 8;
-  // small breakpoint from tailwind https://tailwindcss.com/docs/responsive-design
   const LETTER_SPACING = 5;
-  const LETTER_SCALE = 0.445;
   const STROKE = 4;
+  const MIN_BOX_PADDING = 50;
+  const MAX_BOX_PADDING = 100;
+  const MAX_SCALE = 0.6;
 
-  const getBoxWidth = (name) => {
-    if (name.length === 0) return 300;
-    return (
-      PADDING * 2 +
-      LETTER_SCALE *
-        (LETTER_WIDTH * name.length + LETTER_SPACING * (name.length - 1))
+  const x = LETTER_WIDTH * name.length + LETTER_SPACING * (name.length - 1);
+  // cbw = c + L * x
+  const calculatedBoxWidth = PADDING * 2 + letterScale * x;
+
+  const isTooWide = calculatedBoxWidth > windowSize.width - MIN_BOX_PADDING;
+  const isTooSmall = calculatedBoxWidth < windowSize.width - MAX_BOX_PADDING;
+
+  if (isTooWide || isTooSmall) {
+    // algebra, solve for L above
+    const avgBoxPadding = (MIN_BOX_PADDING + MAX_BOX_PADDING) / 2;
+    const newScale = Math.min(
+      (windowSize.width - avgBoxPadding - PADDING * 2) / x,
+      MAX_SCALE
     );
-  };
+
+    if (Math.abs(newScale - letterScale) > 0.01) {
+      setLetterScale(newScale);
+    }
+  }
 
   useEffect(() => {
     if (!svgSrc) return;
@@ -50,28 +75,27 @@ export default observer(({ name, scale, onClick }) => {
       name
         .split("")
         .map((l) => l.toUpperCase())
-        .map((letter, i) => {
-          if (letter === "&") {
-            letter = "ampersand";
-          }
-          const letterData = svgSrc[letter];
-          if (!letterData) {
-            console.error("No letter data found for", letter);
-          }
-          const scale = `scale(${LETTER_SCALE})`;
+        .map((nameLetter, i) => {
+          const letterData = getLetterData(svgSrc, nameLetter);
+          const scale = `scale(${letterScale})`;
+          // we need to offset the letters by the padding amt, which should be
+          // constant -- so we divide by letterScale
           const translate = `translate(${
-            PADDING / LETTER_SCALE + i * LETTER_SPACING + i * LETTER_WIDTH
-          } ${PADDING / LETTER_SCALE})`;
+            PADDING / letterScale + i * LETTER_SPACING + i * LETTER_WIDTH
+          } ${PADDING / letterScale})`;
 
           const hole = (
-            <mask id={`${letter}_${i}`} key={`${letter}-${i}`}>
+            <mask
+              id={`${nameLetter}_mask_${i}`}
+              key={`${nameLetter}-mask-${i}`}
+            >
               <rect
                 fill="white"
                 x={-PADDING}
                 y={-PADDING}
                 width={LETTER_WIDTH + PADDING * 2}
                 height={LETTER_HEIGHT + PADDING * 2}
-                key={`${letter}-${i}-op-def`}
+                key={`${nameLetter}-mask-op-def-${i}`}
               />
               {letterData.holes.map((h, j) => (
                 <circle
@@ -79,23 +103,25 @@ export default observer(({ name, scale, onClick }) => {
                   cy={h.cy}
                   r={h.r}
                   fill="black"
-                  key={`${letter}-${j}`}
+                  // small breakpoint from tailwind https://tailwindcss.com/docs/responsive-design
+                  key={`${nameLetter}-hole-${i}-${j}`}
                 />
               ))}
             </mask>
           );
-          const paths = letterData.paths.map((p, i) => {
+          const paths = letterData.paths.map((p, j) => {
             return (
               <path
                 d={p.d}
                 stroke="black"
                 strokeWidth={STROKE}
-                mask={`url(#${letter}_${i})`}
+                mask={`url(#${nameLetter}_mask_${i})`}
+                key={`path-${nameLetter}-${i}-${j}`}
                 transform={`${scale} ${translate}`}
               />
             );
           });
-          const strokes = letterData.holes.map((h, i) => {
+          const strokes = letterData.holes.map((h, j) => {
             return (
               <circle
                 r={h.r}
@@ -104,7 +130,7 @@ export default observer(({ name, scale, onClick }) => {
                 fill="none"
                 stroke="black"
                 strokeWidth={STROKE}
-                key={`${letter}-${i}-stroke`}
+                key={`${nameLetter}-${i}-${j}-stroke`}
                 transform={`${scale} ${translate}`}
               />
             );
@@ -118,26 +144,37 @@ export default observer(({ name, scale, onClick }) => {
         .reduce(
           (m, e) => ({
             holes: [...m.holes, e.hole],
+            // we want the colors to sequence over all blocks, not just one
+            // letter, and each path needs its own key
             paths: [...m.paths, ...e.paths].map((p, i) => ({
               ...p,
               props: {
                 ...p.props,
+                opacity: usingPlaceholder ? 0.2 : 1,
                 key: `path-${i}`,
                 fill: colors.length ? colors[i % colors.length].hex : "#fff",
               },
             })),
-            strokes: [...m.strokes, e.strokes],
+            strokes: [...m.strokes, ...e.strokes].map((h) => ({
+              ...h,
+              props: {
+                ...h.props,
+                opacity: usingPlaceholder ? 0.2 : 1,
+              },
+            })),
           }),
           { holes: [], paths: [], strokes: [] }
         )
     );
-  }, [svgSrc, colors.length, name]);
+  }, [svgSrc, colors.length, name, name.length, letterScale]);
 
-  const lineX = getBoxWidth(name) - PADDING / 2;
+  const lineX = usingPlaceholder
+    ? calculatedBoxWidth / 2
+    : calculatedBoxWidth - PADDING / 2;
 
-  const height = LETTER_HEIGHT * LETTER_SCALE + PADDING * 2;
-  const frame_join_offset = 7;
-  const leftrightwidth = 14;
+  const height = LETTER_HEIGHT * letterScale + PADDING * 2;
+  const isSm = windowSize.width <= 640;
+  const frame_join_offset = isSm ? 18 * letterScale : 12 * letterScale;
 
   return (
     <>
@@ -148,8 +185,9 @@ export default observer(({ name, scale, onClick }) => {
           style={{
             position: "absolute",
             height: height + 2 * borderWidth,
-            width: leftrightwidth,
+            width: borderWidth,
             top: 0,
+            left: isSm ? 2 : 0,
           }}
         ></img>
         <img
@@ -158,8 +196,8 @@ export default observer(({ name, scale, onClick }) => {
           style={{
             position: "absolute",
             height: height + 2 * borderWidth,
-            right: 0,
-            width: leftrightwidth,
+            right: isSm ? 3 : 0,
+            width: isSm ? borderWidth * 1 : borderWidth,
             transform: "rotate(180deg)",
           }}
         ></img>
@@ -169,8 +207,8 @@ export default observer(({ name, scale, onClick }) => {
           style={{
             left: borderWidth - frame_join_offset - 2,
             position: "absolute",
-            height: leftrightwidth,
-            width: getBoxWidth(name) + 2 * frame_join_offset + 2,
+            height: borderWidth + frame_join_offset,
+            width: calculatedBoxWidth + 2 * frame_join_offset + 2,
           }}
         ></img>
         <img
@@ -179,23 +217,22 @@ export default observer(({ name, scale, onClick }) => {
           style={{
             left: borderWidth - frame_join_offset - 1,
             position: "absolute",
-            height: leftrightwidth,
-            width: getBoxWidth(name) + 2 * frame_join_offset + 2,
+            height: borderWidth + frame_join_offset,
+            width: calculatedBoxWidth + 2 * frame_join_offset + 2,
             bottom: 0,
           }}
         ></img>
       </div>
       <svg
         tabIndex={-1}
-        width={getBoxWidth(name)}
+        width={calculatedBoxWidth}
         className="letters"
-        ref={r}
         style={{
-          ...scale,
           borderWidth: `${borderWidth}px`,
           height,
           paddingBottom: 0,
           background: 'url("/oak_BG.jpeg")',
+          borderColor: "#a06c47",
         }}
         onClick={onClick}
       >
@@ -207,14 +244,14 @@ export default observer(({ name, scale, onClick }) => {
             className="blinky-line"
             stroke="white"
             strokeWidth={2}
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 1, repeat: Infinity }}
+            animate={{ opacity: [0.3, 1, 0.0] }}
+            transition={{ duration: 0.6, repeat: Infinity }}
           >
             <line
               x1={lineX}
               y1={PADDING}
               x2={lineX}
-              y2={LETTER_HEIGHT * LETTER_SCALE + PADDING}
+              y2={LETTER_HEIGHT * letterScale + PADDING}
             ></line>
           </motion.g>
         )}

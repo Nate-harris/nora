@@ -13,6 +13,7 @@ main {
   z-index: -11;
   position: fixed;
   top:0;
+  opacity: .3;
 }
 
 body {
