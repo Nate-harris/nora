@@ -54,12 +54,20 @@ const useSettings = ({ minNumLetters, minNumColors, maxNumColors, price }) => {
 };
 
 const Order = observer(({ data }) => {
-  const modalContent = data?.modalContent?.filter(
-    (block) =>
-      !block.children?.some((child) =>
-        child.text?.toLowerCase().includes("standard or premium")
-      )
-  );
+  const modalContent = data?.modalContent
+    ?.filter(
+      (block) =>
+        !block.children?.some((child) =>
+          child.text?.toLowerCase().includes("standard or premium")
+        )
+    )
+    .map((block) => ({
+      ...block,
+      children: block.children?.map((child) => ({
+        ...child,
+        text: child.text?.replace("1-2 weeks", "2 weeks"),
+      })),
+    }));
   const [cookie, setCookie, removeCookie] = useCookies(["nora"]);
   const {
     formData,
