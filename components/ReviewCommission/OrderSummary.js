@@ -43,7 +43,6 @@ export default observer(({ data }) => {
   const {
     name,
     colors,
-    shipping,
     additionalInfo,
     setAdditionalInfo,
     totalPrice,
@@ -71,7 +70,7 @@ export default observer(({ data }) => {
       .map((color) => `${color.title.toLowerCase()}`)
       .join(", ");
 
-    let description = `In ${colorsFormatString}. With a red oak frame. Arriving in ${shipping}.`;
+    let description = `In ${colorsFormatString}. With a red oak frame.`;
 
     if (additionalInfo.length > 0) {
       description += ` With added note: "${additionalInfo}".`;
@@ -88,7 +87,7 @@ export default observer(({ data }) => {
         Colors: colors
           .map((color) => `${color.title}: ${color.hex}`)
           .join(", "),
-        Shipping: shipping,
+        "Puzzle Type": "STANDARD",
         Note: additionalInfo,
       },
     };
@@ -148,23 +147,25 @@ export default observer(({ data }) => {
         </div>
 
         <div className="order-summary--row">
-          Will be
+          Will cost
+          <span className="order-summary--price">
+            {formatCurrencyString({
+              value: totalPrice,
+              currency: "USD",
+            })}
+          </span>
+        </div>
+
+        <div className="order-summary--row">
+          Will have these colors
           <div className="order-summary--palette">
             <Palette colors={colors} width={200} />
           </div>
         </div>
 
         <div className="order-summary--row">
-          Will have a
-          <div className="order-summary--frame">
-            <img src="/OAK-frame.jpg" width={160} alt="Red Oak Frame" />
-          </div>
-        </div>
-        <div className="order-summary--row">
-          {additionalInfo.length > 0
-            ? "Will get to you in"
-            : "And will get to you in"}{" "}
-          <span className="order-summary--shipping">{shipping}</span>
+          And will ship free in
+          <span className="order-summary--delivery">2 weeks</span>
         </div>
         {additionalInfo.length > 0 && (
           <div className="order-summary--row">

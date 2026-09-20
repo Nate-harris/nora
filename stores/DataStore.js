@@ -12,7 +12,7 @@ class DataStore {
     frame: null,
     palette: null,
     colors: [],
-    shipping: null,
+    shipping: "STANDARD",
     additionalInfo: "",
     price: 0,
     id: "commission",
@@ -29,7 +29,7 @@ class DataStore {
     this.formData.id = id;
   }
   @action.bound setFormData(data) {
-    this.formData = { ...this.formData, ...data };
+    this.formData = { ...this.formData, ...data, shipping: "STANDARD" };
   }
 
   @action.bound setName(name) {

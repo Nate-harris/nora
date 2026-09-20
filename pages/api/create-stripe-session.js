@@ -50,8 +50,8 @@ export default async function handler(req, res) {
           },
         },
       ],
-      success_url: "https://norapuzzle.com/order?status=success&step=5",
-      cancel_url: "https://norapuzzle.com/order?status=cancel&step=5",
+      success_url: "https://norapuzzle.com/order?status=success&step=2",
+      cancel_url: "https://norapuzzle.com/order?status=cancel&step=2",
       metadata: item.metadata,
     });
 

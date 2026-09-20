@@ -2,27 +2,10 @@ import { observer } from "mobx-react-lite";
 
 import NamePage from "@/components/Name/NamePage";
 import ColorPage from "@/components/Color/ColorPage";
-import FramePage from "@/components/Frame/FramePage";
-import ShippingPage from "@/components/Shipping/ShippingPage";
-
-import { useEffect } from "react";
-import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
-
-import { useWindowSize } from "../../utils/helpers";
-import dynamic from "next/dynamic";
-import { useTheme } from "next-themes";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  FRAMER_TRANSITION_FASTEASE,
-  swipeAnim,
-} from "../../lib/framer/animations";
+import { swipeAnim } from "../../lib/framer/animations";
 import { useIsSmall } from "../../utils/useMediaQueries";
-import MobileDescription from "./MobileDescription";
-import TopDrawer from "./TopDrawer";
-import TypingTutorial from "./TypingTutorial";
-import Description from "./Description";
 import OrderSummary from "@/components/ReviewCommission/OrderSummary";
-import { useRouter } from "next/router";
 
 const variants = {
   initial: {
@@ -53,8 +36,6 @@ const Page = ({ page, data }) => {
     case 1:
       return <NamePage data={data} />;
     case 2:
-      return <ShippingPage data={data} />;
-    case 3:
       return <OrderSummary data={data} />;
     default:
       return null;
@@ -63,8 +44,6 @@ const Page = ({ page, data }) => {
 
 export default observer(({ data, step }) => {
   const isSmall = useIsSmall();
-
-  let formScreen = null;
 
   return (
     <>

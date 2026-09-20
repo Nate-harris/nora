@@ -9,18 +9,12 @@ const useIsNextButtonDisabled = (step) => {
   const {
     isNameCompleted,
     isColorCompleted,
-    isFrameCompleted,
-    isShippingCompleted,
   } = useDataStore();
   switch (step) {
     case 1:
       return !isNameCompleted || !isColorCompleted;
-    case 2:
-      return !isColorCompleted;
-    case 3:
-      return !isFrameCompleted;
-    case 4:
-      return !isShippingCompleted;
+    default:
+      return false;
   }
 };
 

@@ -81,12 +81,9 @@ const PriceTracker = observer(({ step }) => {
     formData,
     name,
     colors,
-    shipping,
     letterPrice,
-    shippingPrice,
     isNameCompleted,
     isColorCompleted,
-    isShippingCompleted,
     totalPrice,
     minNumLetters,
   } = useDataStore();
@@ -213,19 +210,6 @@ const PriceTracker = observer(({ step }) => {
                     })}
                   </span>
                 </div>
-                {isShippingCompleted && (
-                  <div className="price-tracker--row">
-                    <span className="price-tracker--row--label">
-                      {shipping}
-                    </span>
-                    <span className="price-tracker--row--value">
-                      {formatCurrencyString({
-                        value: shippingPrice,
-                        currency: "USD",
-                      })}
-                    </span>
-                  </div>
-                )}
               </div>
             </motion.div>
           </div>

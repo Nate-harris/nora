@@ -9,12 +9,7 @@ import Item from "@/components/StatusBar/Item";
 import Information from "@/components/StatusBar/Information";
 
 const StatusBar = observer(({ step, hasInformation }) => {
-  const {
-    isNameCompleted,
-    isColorCompleted,
-    isFrameCompleted,
-    isShippingCompleted,
-  } = useDataStore();
+  const { isNameCompleted, isColorCompleted } = useDataStore();
 
   const offset = useMotionValue(0);
   const isSmall = useIsSmall();
@@ -22,17 +17,8 @@ const StatusBar = observer(({ step, hasInformation }) => {
   const steps = [
     { label: "Name", completed: isNameCompleted, disabled: !isNameCompleted },
     {
-      label: "Upgrade",
-      completed: isShippingCompleted,
-      disabled: !isShippingCompleted,
-    },
-    {
       label: "Review",
-      completed:
-        isNameCompleted &&
-        isColorCompleted &&
-        isFrameCompleted &&
-        isShippingCompleted,
+      completed: isNameCompleted && isColorCompleted,
       disabled: true,
     },
   ];
