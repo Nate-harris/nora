@@ -147,17 +147,25 @@ export default observer(({ data }) => {
         </div>
 
         <div className="order-summary--row">
-          Will be
+          Will cost
+          <span className="order-summary--price">
+            {formatCurrencyString({
+              value: totalPrice,
+              currency: "USD",
+            })}
+          </span>
+        </div>
+
+        <div className="order-summary--row">
+          Will have these colors
           <div className="order-summary--palette">
             <Palette colors={colors} width={200} />
           </div>
         </div>
 
         <div className="order-summary--row">
-          Will have a
-          <div className="order-summary--frame">
-            <img src="/OAK-frame.jpg" width={160} alt="Red Oak Frame" />
-          </div>
+          And will ship free in
+          <span className="order-summary--delivery">2 weeks</span>
         </div>
         {additionalInfo.length > 0 && (
           <div className="order-summary--row">
