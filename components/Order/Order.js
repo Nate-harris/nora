@@ -27,7 +27,7 @@ const WoodgrainShaderSketch = dynamic(
   { loading: () => "", ssr: false }
 );
 
-export const FORM_SCREENS = 4;
+export const FORM_SCREENS = 1;
 
 const useSettings = ({ minNumLetters, minNumColors, maxNumColors, price }) => {
   const {
@@ -54,6 +54,12 @@ const useSettings = ({ minNumLetters, minNumColors, maxNumColors, price }) => {
 };
 
 const Order = observer(({ data }) => {
+  const modalContent = data?.modalContent?.filter(
+    (block) =>
+      !block.children?.some((child) =>
+        child.text?.toLowerCase().includes("standard or premium")
+      )
+  );
   const [cookie, setCookie, removeCookie] = useCookies(["nora"]);
   const {
     formData,
@@ -125,10 +131,9 @@ const Order = observer(({ data }) => {
         setFormData(cookie.nora);
         if (
           cookie.nora.name.length >= minNumLetters &&
-          cookie.nora.colors.length >= minNumColors &&
-          cookie.nora.shipping !== null
+          cookie.nora.colors.length >= minNumColors
         ) {
-          router.push(`/order?step=3`, undefined, { shallow: true });
+          router.push(`/order?step=2`, undefined, { shallow: true });
         } else {
           router.push(`/order?step=1`, undefined, { shallow: true });
         }
@@ -169,9 +174,6 @@ const Order = observer(({ data }) => {
   switch (parseInt(step)) {
     case 1:
       description = data.name.description;
-      break;
-    case 2:
-      description = data.shipping.description;
       break;
   }
 
@@ -233,7 +235,7 @@ const Order = observer(({ data }) => {
 
           <StatusBar
             step={parseInt(step)}
-            hasInformation={data?.modalContent}
+            hasInformation={modalContent}
           />
         </>
       )}
@@ -247,13 +249,13 @@ const Order = observer(({ data }) => {
         color={{ current: theme === "dark" ? "#000" : "#fff" }}
         alpha={{ current: theme === "dark" ? 0.5 : 0.2 }}
       />
-      {data?.modalContent && (
+      {modalContent && (
         <Modal
           isOpen={introInfoModalActive}
           onClose={() => hideIntroInfoModal()}
         >
           <div className="max-w-md flex flex-col">
-            <BlockContent blocks={data.modalContent} />
+            <BlockContent blocks={modalContent} />
             <button
               className="btn is-white modal--toggle"
               onClick={() => hideIntroInfoModal()}
