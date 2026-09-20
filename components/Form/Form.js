@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import NamePage from "@/components/Name/NamePage";
 import ColorPage from "@/components/Color/ColorPage";
 import { AnimatePresence, motion } from "framer-motion";
+import { swipeAnim } from "../../lib/framer/animations";
 import { useIsSmall } from "../../utils/useMediaQueries";
 import OrderSummary from "@/components/ReviewCommission/OrderSummary";
 
