@@ -17,6 +17,7 @@ import SwatchCount from "../Color/SwatchCount";
 import { useWindowSize } from "@/utils/helpers";
 import { toast } from "react-toastify";
 import { useTheme } from "next-themes";
+import { MAX_NAME_LENGTH } from "../../lib/pricing";
 
 const variants = {
   in: {
@@ -28,8 +29,6 @@ const variants = {
     transition: FRAMER_TRANSITION_FASTEASE,
   },
 };
-
-const MAX_NAME_LENGTH = 7;
 
 export default observer(({ data }) => {
   const {
