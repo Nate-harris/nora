@@ -1,4 +1,5 @@
 import { action, computed, makeObservable, observable } from "mobx";
+import { calculateNamePrice } from "../lib/pricing";
 
 class DataStore {
   constructor(rootStore) {
@@ -89,10 +90,13 @@ class DataStore {
 
   @computed get totalPrice() {
     return (
-      this.formData.name.length * this.letterPrice +
+      calculateNamePrice(this.formData.name.length) +
       this.framePrice +
       this.shippingPrice
     );
+  }
+  @computed get namePrice() {
+    return calculateNamePrice(this.formData.name.length);
   }
   @action.bound updateLetterMinimum(min) {
     this.minNumLetters = min;
