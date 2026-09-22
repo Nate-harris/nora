@@ -21,6 +21,10 @@ import MobileDescription from "../Form/MobileDescription";
 import Description from "../Form/Description";
 import Balancer from "react-wrap-balancer";
 import TypingTutorial from "../Form/TypingTutorial";
+import {
+  ADDITIONAL_LETTER_PRICE,
+  MAX_NAME_LENGTH,
+} from "../../lib/pricing";
 
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
@@ -28,7 +32,6 @@ const WoodgrainShaderSketch = dynamic(
 );
 
 export const FORM_SCREENS = 1;
-const MAX_NAME_LENGTH = 7;
 
 const replaceBlockText = (blocks, replacements) =>
   blocks?.map((block) => ({
@@ -109,7 +112,7 @@ const Order = observer(({ data }) => {
   useSettings({
     minNumLetters: data?.name?.minNumLetters,
     maxNumLetters: MAX_NAME_LENGTH,
-    price: data?.name?.price,
+    price: ADDITIONAL_LETTER_PRICE,
     minNumColors: data?.color?.minNumColors,
     maxNumColors: data?.color?.maxNumColors,
   });
