@@ -17,6 +17,7 @@ import SwatchCount from "../Color/SwatchCount";
 import { useWindowSize } from "@/utils/helpers";
 import { toast } from "react-toastify";
 import { useTheme } from "next-themes";
+import { MAX_NAME_LENGTH } from "../../lib/pricing";
 
 const variants = {
   in: {
@@ -88,15 +89,18 @@ export default observer(({ data }) => {
         ? e.target.value.toUpperCase()
         : e.target.value.slice(0, -1).toUpperCase();
 
-      if (name.length > 8) {
-        toast.warn("We can only make puzzles up to 8 characters long.", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          theme,
-        });
-        const trimmed = name.slice(0, 8);
+      if (name.length > MAX_NAME_LENGTH) {
+        toast.warn(
+          `We can only make puzzles up to ${MAX_NAME_LENGTH} characters long.`,
+          {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            theme,
+          }
+        );
+        const trimmed = name.slice(0, MAX_NAME_LENGTH);
         setName(trimmed);
         e.target.value = trimmed;
         return;

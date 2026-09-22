@@ -21,6 +21,10 @@ import MobileDescription from "../Form/MobileDescription";
 import Description from "../Form/Description";
 import Balancer from "react-wrap-balancer";
 import TypingTutorial from "../Form/TypingTutorial";
+import {
+  ADDITIONAL_LETTER_PRICE,
+  MAX_NAME_LENGTH,
+} from "../../lib/pricing";
 
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
@@ -29,45 +33,66 @@ const WoodgrainShaderSketch = dynamic(
 
 export const FORM_SCREENS = 1;
 
-const useSettings = ({ minNumLetters, minNumColors, maxNumColors, price }) => {
+const replaceBlockText = (blocks, replacements) =>
+  blocks?.map((block) => ({
+    ...block,
+    children: block.children?.map((child) => ({
+      ...child,
+      text: replacements.reduce(
+        (text, [searchValue, replaceValue]) =>
+          text?.replace(searchValue, replaceValue),
+        child.text
+      ),
+    })),
+  }));
+
+const useSettings = ({
+  minNumLetters,
+  maxNumLetters,
+  minNumColors,
+  maxNumColors,
+  price,
+}) => {
   const {
     updateLetterPrice,
     updateLetterMinimum,
+    updateLetterMaximum,
     updateColorMinimum,
     updateColorMaximum,
   } = useDataStore();
   useEffect(() => {
     updateLetterMinimum(minNumLetters);
+    updateLetterMaximum(maxNumLetters);
     updateColorMinimum(minNumColors);
     updateColorMaximum(maxNumColors);
     updateLetterPrice(price);
   }, [
     maxNumColors,
+    maxNumLetters,
     minNumColors,
     minNumLetters,
     price,
     updateColorMaximum,
     updateColorMinimum,
     updateLetterMinimum,
+    updateLetterMaximum,
     updateLetterPrice,
   ]);
 };
 
 const Order = observer(({ data }) => {
-  const modalContent = data?.modalContent
-    ?.filter(
+  const modalContent = replaceBlockText(
+    data?.modalContent?.filter(
       (block) =>
         !block.children?.some((child) =>
           child.text?.toLowerCase().includes("standard or premium")
         )
-    )
-    .map((block) => ({
-      ...block,
-      children: block.children?.map((child) => ({
-        ...child,
-        text: child.text?.replace("1-2 weeks", "2 weeks"),
-      })),
-    }));
+    ),
+    [["1-2 weeks", "2 weeks"]]
+  );
+  const nameDescription = replaceBlockText(data?.name?.description, [
+    [/\b8 letters\b/gi, "7 letters"],
+  ]);
   const [cookie, setCookie, removeCookie] = useCookies(["nora"]);
   const {
     formData,
@@ -86,7 +111,8 @@ const Order = observer(({ data }) => {
 
   useSettings({
     minNumLetters: data?.name?.minNumLetters,
-    price: data?.name?.price,
+    maxNumLetters: MAX_NAME_LENGTH,
+    price: ADDITIONAL_LETTER_PRICE,
     minNumColors: data?.color?.minNumColors,
     maxNumColors: data?.color?.maxNumColors,
   });
@@ -136,7 +162,10 @@ const Order = observer(({ data }) => {
       }
 
       if (cookie.nora) {
-        setFormData(cookie.nora);
+        setFormData({
+          ...cookie.nora,
+          name: (cookie.nora.name || "").slice(0, MAX_NAME_LENGTH),
+        });
         if (
           cookie.nora.name.length >= minNumLetters &&
           cookie.nora.colors.length >= minNumColors
@@ -181,7 +210,7 @@ const Order = observer(({ data }) => {
   let description = null;
   switch (parseInt(step)) {
     case 1:
-      description = data.name.description;
+      description = nameDescription;
       break;
   }
 

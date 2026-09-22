@@ -19,6 +19,10 @@ import cx from "classnames";
 import { truncateString } from "../../studio/lib/helpers";
 import { useIsSmall } from "../../utils/useMediaQueries";
 import { FORM_SCREENS } from "../Order/Order";
+import {
+  BASE_PUZZLE_PRICE,
+  MIN_NAME_LENGTH,
+} from "../../lib/pricing";
 
 const variants = {
   active: {
@@ -85,8 +89,31 @@ const PriceTracker = observer(({ step }) => {
     isNameCompleted,
     isColorCompleted,
     totalPrice,
+    namePrice,
     minNumLetters,
   } = useDataStore();
+
+  const additionalLetterCount = Math.max(
+    formData.name.length - MIN_NAME_LENGTH,
+    0
+  );
+  const basePriceLabel = formatCurrencyString({
+    value: BASE_PUZZLE_PRICE,
+    currency: "USD",
+  });
+  const namePriceLabel = formatCurrencyString({
+    value: namePrice,
+    currency: "USD",
+  });
+  const pricingSummary =
+    additionalLetterCount > 0
+      ? `${MIN_NAME_LENGTH}-letter base (${basePriceLabel}) + ${additionalLetterCount} extra ${
+          additionalLetterCount === 1 ? "letter" : "letters"
+        } (${formatCurrencyString({
+          value: letterPrice,
+          currency: "USD",
+        })} each) ${namePriceLabel}`
+      : `${MIN_NAME_LENGTH}-letter puzzle ${namePriceLabel}`;
 
   const reviewRef = useRef();
   const reviewRect = useRect(reviewRef);
@@ -169,15 +196,7 @@ const PriceTracker = observer(({ step }) => {
                       {truncateString(name, 12)}
                     </span>
                     <span className="price-tracker--row--value">
-                      {`${
-                        formData.name.length
-                      } x letters (${formatCurrencyString({
-                        value: letterPrice,
-                        currency: "USD",
-                      })} each) ${formatCurrencyString({
-                        value: name.length * letterPrice,
-                        currency: "USD",
-                      })}`}
+                      {pricingSummary}
                     </span>
                   </div>
                 )}
