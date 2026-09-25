@@ -21,10 +21,7 @@ import MobileDescription from "../Form/MobileDescription";
 import Description from "../Form/Description";
 import Balancer from "react-wrap-balancer";
 import TypingTutorial from "../Form/TypingTutorial";
-import {
-  ADDITIONAL_LETTER_PRICE,
-  MAX_NAME_LENGTH,
-} from "../../lib/pricing";
+import { MAX_NAME_LENGTH } from "../../lib/pricing";
 
 const WoodgrainShaderSketch = dynamic(
   () => import("../WoodgrainShaderSketch"),
@@ -51,10 +48,8 @@ const useSettings = ({
   maxNumLetters,
   minNumColors,
   maxNumColors,
-  price,
 }) => {
   const {
-    updateLetterPrice,
     updateLetterMinimum,
     updateLetterMaximum,
     updateColorMinimum,
@@ -65,18 +60,15 @@ const useSettings = ({
     updateLetterMaximum(maxNumLetters);
     updateColorMinimum(minNumColors);
     updateColorMaximum(maxNumColors);
-    updateLetterPrice(price);
   }, [
     maxNumColors,
     maxNumLetters,
     minNumColors,
     minNumLetters,
-    price,
     updateColorMaximum,
     updateColorMinimum,
     updateLetterMinimum,
     updateLetterMaximum,
-    updateLetterPrice,
   ]);
 };
 
@@ -112,7 +104,6 @@ const Order = observer(({ data }) => {
   useSettings({
     minNumLetters: data?.name?.minNumLetters,
     maxNumLetters: MAX_NAME_LENGTH,
-    price: ADDITIONAL_LETTER_PRICE,
     minNumColors: data?.color?.minNumColors,
     maxNumColors: data?.color?.maxNumColors,
   });
