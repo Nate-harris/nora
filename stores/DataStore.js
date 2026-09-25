@@ -18,7 +18,6 @@ class DataStore {
     price: 0,
     id: "commission",
   };
-  @observable letterPrice = 0;
   @observable framePrice = 0;
   @observable shippingPrice = 0;
 
@@ -110,10 +109,6 @@ class DataStore {
   @action.bound updateColorMaximum(max) {
     this.maxNumColors = max;
   }
-  @action.bound updateLetterPrice(price) {
-    this.letterPrice = price;
-  }
-
   @action.bound updateFramePrice(price) {
     this.framePrice = price;
   }
