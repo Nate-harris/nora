@@ -13,6 +13,11 @@ import Drawer from "@/components/drawer";
 import { useState } from "react";
 import Photo from "../Photo";
 
+const REMOVED_COLORS = new Set(["light green", "warm grey", "warm gray", "turquoise"]);
+
+const isAvailableColor = (color) =>
+  color && !REMOVED_COLORS.has(color.title?.trim().toLowerCase().replace(/\s+/g, " "));
+
 const variants = {
   in: {
     opacity: 1,
@@ -26,8 +31,12 @@ const variants = {
 
 export default observer(({ data }) => {
   const {
-    color: { colors, examples },
+    color: { colors: allColors, examples: allExamples },
   } = data;
+  const colors = allColors?.filter(isAvailableColor);
+  const examples = (allExamples || []).filter((example) =>
+    example.colors?.every(isAvailableColor)
+  );
   const { formData, setPalette, clearColors, addColor, minNumColors } =
     useDataStore();
 
