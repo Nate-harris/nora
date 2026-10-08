@@ -19,6 +19,11 @@ import { toast } from "react-toastify";
 import { useTheme } from "next-themes";
 import { MAX_NAME_LENGTH } from "../../lib/pricing";
 
+const REMOVED_COLORS = new Set(["light green", "warm grey", "warm gray", "turquoise"]);
+
+const isAvailableColor = (color) =>
+  color && !REMOVED_COLORS.has(color.title?.trim().toLowerCase().replace(/\s+/g, " "));
+
 const variants = {
   in: {
     opacity: 1,
@@ -32,8 +37,12 @@ const variants = {
 
 export default observer(({ data }) => {
   const {
-    color: { colors, examples },
+    color: { colors: allColors, examples: allExamples },
   } = data;
+  const colors = allColors?.filter(isAvailableColor);
+  const examples = (allExamples || []).filter((example) =>
+    example.colors?.every(isAvailableColor)
+  );
   const { theme } = useTheme();
 
   const inputRef = useRef();
