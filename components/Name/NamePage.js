@@ -19,7 +19,7 @@ import { toast } from "react-toastify";
 import { useTheme } from "next-themes";
 import { MAX_NAME_LENGTH } from "../../lib/pricing";
 
-const REMOVED_COLORS = new Set(["light green", "warm grey", "warm gray", "turquoise"]);
+const REMOVED_COLORS = new Set(["light green", "warm grey", "warm gray"]);
 
 const isAvailableColor = (color) =>
   color && !REMOVED_COLORS.has(color.title?.trim().toLowerCase().replace(/\s+/g, " "));
