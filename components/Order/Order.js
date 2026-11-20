@@ -80,7 +80,10 @@ const Order = observer(({ data }) => {
           child.text?.toLowerCase().includes("standard or premium")
         )
     ),
-    [["1-2 weeks", "2 weeks"]]
+    [
+      [/\b1-2 weeks\b/gi, "3 weeks"],
+      [/\b2 weeks\b/gi, "3 weeks"],
+    ]
   );
   const nameDescription = replaceBlockText(data?.name?.description, [
     [/\b8 letters\b/gi, "7 letters"],
