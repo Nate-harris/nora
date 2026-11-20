@@ -13,7 +13,7 @@ import Drawer from "@/components/drawer";
 import { useState } from "react";
 import Photo from "../Photo";
 
-const REMOVED_COLORS = new Set(["light green", "warm grey", "warm gray", "turquoise"]);
+const REMOVED_COLORS = new Set(["light green", "warm grey", "warm gray"]);
 
 const isAvailableColor = (color) =>
   color && !REMOVED_COLORS.has(color.title?.trim().toLowerCase().replace(/\s+/g, " "));
