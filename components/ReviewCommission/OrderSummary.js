@@ -165,7 +165,7 @@ export default observer(({ data }) => {
 
         <div className="order-summary--row">
           And will ship free in
-          <span className="order-summary--delivery">2 weeks</span>
+          <span className="order-summary--delivery">3 weeks</span>
         </div>
         {additionalInfo.length > 0 && (
           <div className="order-summary--row">
