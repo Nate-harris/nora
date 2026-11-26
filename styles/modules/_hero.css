@@ -33,6 +33,28 @@
     }
   }
 
+  &--carousel {
+    @apply z-1 relative w-full h-full bg-brown;
+    grid-area: 1/-1;
+
+    &.is-fixed {
+      @apply fixed inset-0;
+    }
+  }
+
+  &--carousel-slide {
+    @apply absolute inset-0 block opacity-0;
+    transition: opacity 1.1s ease-in-out;
+
+    &.is-active {
+      @apply opacity-100;
+    }
+
+    img {
+      @apply w-full h-full object-cover;
+    }
+  }
+
   &--overlay {
     @apply z-2 flex flex-col;
     grid-area: 1/-1;
