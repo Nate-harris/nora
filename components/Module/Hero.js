@@ -1,10 +1,9 @@
 import React from "react";
 
 import BlockContent from "@/components/BlockContent";
-import VideoLoop from "@/components/VimeoLoop";
+import HeroCarousel from "@/components/Module/HeroCarousel";
 import Photo from "@/components/Photo";
-import cx from "classnames";
-import { m, useInView } from "framer-motion";
+import { m } from "framer-motion";
 import { useIsSmall } from "@/utils/useMediaQueries";
 
 const fadeAnim = {
@@ -30,15 +29,7 @@ const fadeAnim = {
 };
 
 const Hero = ({ data = {} }) => {
-  const {
-    content,
-    bgType,
-    isFixed,
-    photos,
-    video,
-    mobileVideo,
-    videoPlaceholder,
-  } = data;
+  const { content, bgType, isFixed, photos } = data;
   const isSmall = useIsSmall();
   return (
     <section className="hero">
@@ -57,21 +48,7 @@ const Hero = ({ data = {} }) => {
         </div>
       )}
 
-      {bgType === "video" && (
-        <>
-          <div className={cx("hero--bg is-desktop", isFixed && "is-fixed")}>
-            <VideoLoop title={video.title} id={video.id} />
-          </div>
-          <div className={cx("hero--bg is-mobile", isFixed && "is-fixed")}>
-            <VideoLoop title={mobileVideo.title} id={mobileVideo.id} />
-          </div>
-          <div
-            className={cx("hero--video-placeholder ", isFixed && "is-fixed")}
-          >
-            <Photo photo={videoPlaceholder} layout="fill" />
-          </div>
-        </>
-      )}
+      {bgType === "video" && <HeroCarousel isFixed={isFixed} />}
 
       {bgType === "photo" && (
         <>
