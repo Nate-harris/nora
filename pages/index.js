@@ -7,6 +7,7 @@ import * as queries from "../lib/sanity/queries";
 
 const Home = ({ data }) => {
   const { site, page } = data;
+  const hero = page?.modules?.find((module) => module?._type === "hero");
 
   if (!page) {
     return (
@@ -19,9 +20,7 @@ const Home = ({ data }) => {
 
   return (
     <Layout site={site} page={page}>
-      {page.modules?.map((module, key) => {
-        return <Module key={key} index={key} data={module} />;
-      })}
+      {hero && <Module index={0} data={hero} />}
     </Layout>
   );
 };
