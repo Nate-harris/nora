@@ -217,7 +217,9 @@ const Menu = observer(({ items, hasFocus = true, onClick, ...rest }) => {
                 variants={listItemVariants}
                 className="menu--item"
               >
-                {item.title}
+                {item.title?.trim().toLowerCase() === "gallery"
+                  ? "Archive"
+                  : item.title}
               </motion.li>
             </CustomLink>
           );
