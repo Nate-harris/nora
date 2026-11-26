@@ -1,9 +1,9 @@
 .gift-message {
-  @apply w-full max-w-2xl flex flex-col items-center justify-center text-center gap-28 px-16;
+  @apply w-full max-w-4xl flex flex-col items-center justify-center text-center gap-28 px-16;
 
   &--header {
     h1 {
-      @apply font-delaGothicOne uppercase text-32 sm:text-48 leading-100 mb-12;
+      @apply font-delaGothicOne uppercase text-32 sm:text-48 leading-100 mb-12 sm:whitespace-nowrap;
     }
 
     p {
