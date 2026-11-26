@@ -1,5 +1,5 @@
 .description {
-  @apply hidden fixed top-0 inset-x-0 sm:flex my-32 mb-24 sm:mb-64 text-64 text-pageText rounded-3xl justify-center text-center sm:text-left items-center;
+  @apply hidden fixed top-0 inset-x-0 sm:flex my-32 mb-24 sm:mb-64 text-64 text-pageText rounded-3xl justify-center text-center items-center;
   p {
     @apply text-12 mb-0 max-w-md;
   }

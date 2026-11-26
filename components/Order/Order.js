@@ -28,7 +28,7 @@ const WoodgrainShaderSketch = dynamic(
   { loading: () => "", ssr: false }
 );
 
-export const FORM_SCREENS = 1;
+export const FORM_SCREENS = 2;
 
 const replaceBlockText = (blocks, replacements) =>
   blocks?.map((block) => ({
@@ -95,7 +95,8 @@ const Order = observer(({ data }) => {
     name,
     colors,
     shipping,
-    additionalInfo,
+    isGift,
+    giftMessage,
     minNumLetters,
     minNumColors,
     isColorCompleted,
@@ -124,7 +125,8 @@ const Order = observer(({ data }) => {
           name,
           colors,
           shipping,
-          additionalInfo,
+          isGift,
+          giftMessage,
         }),
         {
           path: "/",
@@ -133,7 +135,7 @@ const Order = observer(({ data }) => {
         }
       );
     }
-  }, [router.isReady, setCookie, name, colors, shipping, additionalInfo]);
+  }, [router.isReady, setCookie, name, colors, shipping, isGift, giftMessage]);
 
   /*
    * On initial mount, set the query state to 0

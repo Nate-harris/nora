@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { swipeAnim } from "../../lib/framer/animations";
 import { useIsSmall } from "../../utils/useMediaQueries";
 import OrderSummary from "@/components/ReviewCommission/OrderSummary";
+import GiftMessagePage from "@/components/GiftMessage/GiftMessagePage";
 
 const variants = {
   initial: {
@@ -36,6 +37,8 @@ const Page = ({ page, data }) => {
     case 1:
       return <NamePage data={data} />;
     case 2:
+      return <GiftMessagePage />;
+    case 3:
       return <OrderSummary data={data} />;
     default:
       return null;

@@ -142,7 +142,7 @@ const PriceTracker = observer(({ step }) => {
                 <span className="price-tracker--label">Total</span>
                 <motion.span
                   className="price-tracker--name"
-                  animate={{ width: step === 5 ? 0 : "auto" }}
+                  animate={{ width: step === FORM_SCREENS + 1 ? 0 : "auto" }}
                   transition={{
                     ...FRAMER_TRANSITION_EASEOUT,
                     delay: 1.6,
