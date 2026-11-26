@@ -1,5 +1,5 @@
 .order-summary {
-  @apply text-12 md:text-12 leading-200 md:leading-100 text-center flex flex-col gap-24 md:gap-24 pt-24 md:pt-0 px-48 md:pb-48;
+  @apply text-12 md:text-12 leading-200 md:leading-100 text-center flex flex-col justify-center gap-24 md:gap-24 px-48;
 
   &--name {
     @apply text-32 md:text-44 leading-80 font-delaGothicOne uppercase mx-12 mb-4;
@@ -19,6 +19,9 @@
   }
   &--row {
     @apply flex flex-col sm:flex-col gap-12 items-center justify-center sm:pt-12;
+  }
+  &--gift {
+    @apply font-bold;
   }
   &--additional-info {
     @apply max-w-lg;

@@ -1,50 +1,11 @@
 import { observer } from "mobx-react-lite";
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import cx from "classnames";
-import { useDataStore, useUIStore } from "../../providers/RootStoreProvider";
-import { useRect } from "@reach/rect";
-import { useState, useRef, useEffect } from "react";
-import { useIsSmall } from "../../utils/useMediaQueries";
-import Item from "@/components/StatusBar/Item";
 import Information from "@/components/StatusBar/Information";
 
-const StatusBar = observer(({ step, hasInformation }) => {
-  const { isNameCompleted, isColorCompleted } = useDataStore();
-
-  const offset = useMotionValue(0);
-  const isSmall = useIsSmall();
-
-  const steps = [
-    { label: "Name", completed: isNameCompleted, disabled: !isNameCompleted },
-    {
-      label: "Review",
-      completed: isNameCompleted && isColorCompleted,
-      disabled: true,
-    },
-  ];
-
-  useEffect(() => {
-    offset.set(-1 * step * 50);
-  }, [step, offset]);
-
+const StatusBar = observer(({ hasInformation }) => {
   return (
     <div className={"status-bar--container"}>
-      <div className={cx("status-bar--inner")}>
+      <div className="status-bar--inner">
         {hasInformation && <Information label={"How this works"} />}
-        <motion.ul style={{ x: isSmall ? offset : 0 }}>
-          {steps.map((item, index) => {
-            return (
-              <Item
-                key={index}
-                index={index}
-                label={item.label}
-                completed={item.completed}
-                disabled={item.disabled}
-                active={index + 1 === step}
-              />
-            );
-          })}
-        </motion.ul>
       </div>
     </div>
   );

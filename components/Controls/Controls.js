@@ -9,10 +9,14 @@ const useIsNextButtonDisabled = (step) => {
   const {
     isNameCompleted,
     isColorCompleted,
+    isGift,
+    giftMessage,
   } = useDataStore();
   switch (step) {
     case 1:
       return !isNameCompleted || !isColorCompleted;
+    case 2:
+      return isGift === null || (isGift && giftMessage.trim().length === 0);
     default:
       return false;
   }

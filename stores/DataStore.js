@@ -15,6 +15,8 @@ class DataStore {
     colors: [],
     shipping: "STANDARD",
     additionalInfo: "",
+    isGift: null,
+    giftMessage: "",
     price: 0,
     id: "commission",
   };
@@ -47,6 +49,13 @@ class DataStore {
   @action.bound setAdditionalInfo(note) {
     this.formData.additionalInfo = note;
   }
+  @action.bound setIsGift(isGift) {
+    this.formData.isGift = isGift;
+    if (!isGift) this.formData.giftMessage = "";
+  }
+  @action.bound setGiftMessage(message) {
+    this.formData.giftMessage = message;
+  }
   @action.bound addColor(color) {
     this.formData.colors.push(color);
   }
@@ -72,6 +81,12 @@ class DataStore {
   }
   @computed get additionalInfo() {
     return this.formData.additionalInfo;
+  }
+  @computed get isGift() {
+    return this.formData.isGift;
+  }
+  @computed get giftMessage() {
+    return this.formData.giftMessage;
   }
 
   @computed get isNameCompleted() {

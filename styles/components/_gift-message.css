@@ -1,0 +1,29 @@
+.gift-message {
+  @apply w-full max-w-4xl flex flex-col items-center justify-center text-center gap-28 px-16;
+
+  &--header {
+    h1 {
+      @apply font-delaGothicOne uppercase text-32 sm:text-48 leading-100 mb-12 sm:whitespace-nowrap;
+    }
+
+    p {
+      @apply uppercase text-14 sm:text-16 mb-0;
+    }
+  }
+
+  &--choices {
+    @apply flex gap-20 sm:gap-28;
+  }
+
+  &--choice {
+    @apply min-w-[7rem] sm:min-w-[9rem] py-12;
+  }
+
+  &--input[type="text"] {
+    @apply w-full max-w-xl border-2 rounded-lg px-16 py-12 text-14 uppercase;
+
+    &::placeholder {
+      color: hsla(var(--pageText-hsl), 0.55);
+    }
+  }
+}
