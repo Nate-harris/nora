@@ -35,6 +35,23 @@ const variants = {
   },
 };
 
+const puzzlePreviewVariants = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+    scale: 0.985,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
+
 export default observer(({ data }) => {
   const {
     color: { colors: allColors, examples: allExamples },
@@ -145,7 +162,12 @@ export default observer(({ data }) => {
 
   return (
     <>
-      <div className="xl-input">
+      <motion.div
+        className="xl-input"
+        initial="hidden"
+        animate={introInfoModalActive ? "hidden" : "visible"}
+        variants={puzzlePreviewVariants}
+      >
         <input ref={inputRef} onChange={handleChange} value={name}></input>
         <SVGText
           onClick={(e) => {
@@ -155,7 +177,7 @@ export default observer(({ data }) => {
           }}
           name={name}
         ></SVGText>
-      </div>
+      </motion.div>
       <SwatchCount />
       <div className="color-picker--swatches">
         <div className="color-picker--swatches-inner">
