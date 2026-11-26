@@ -56,7 +56,9 @@ const VisibleMenu = observer(({ data = {}, isHome }) => {
             )}
             link={{ ...item, title: null }}
           >
-            {item.title}
+            {item.title?.trim().toLowerCase() === "gallery"
+              ? "Archive"
+              : item.title}
           </CustomLink>
         );
       })}
