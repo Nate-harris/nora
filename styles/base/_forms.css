@@ -20,6 +20,11 @@
   @apply relative text-left;
   &.is-order-form {
     @apply overflow-hidden sm:overflow-visible pb-172 sm:pb-0 min-h-screen w-screen flex flex-col justify-center items-center pt-136 px-16;
+
+    &.is-centered-screen {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   }
   &--group {
     @apply grid gap-y-8 grid-cols-1 sm:grid-cols-2;

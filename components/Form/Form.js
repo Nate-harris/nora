@@ -53,7 +53,9 @@ export default observer(({ data, step }) => {
       <AnimatePresence mode="wait">
         <motion.form
           key={step}
-          className="control is-order-form"
+          className={`control is-order-form ${
+            step > 1 ? "is-centered-screen" : ""
+          }`}
           initial={"hide"}
           animate={"show"}
           exit={"hide"}
